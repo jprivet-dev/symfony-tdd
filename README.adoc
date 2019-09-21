@@ -1,0 +1,17 @@
+:toc: macro
+:toc-title: Sommaire
+:toclevels: 3
+:numbered:
+
+:BACK_TO_TOP_TARGET: top-target
+:BACK_TO_TOP_LABEL: ⬆ Retour au sommaire
+:BACK_TO_TOP: <<{BACK_TO_TOP_TARGET},{BACK_TO_TOP_LABEL}>>
+
+[#{BACK_TO_TOP_TARGET}]
+= Symfony & TDD
+
+toc::[]
+
+== Ressources
+
+{BACK_TO_TOP}

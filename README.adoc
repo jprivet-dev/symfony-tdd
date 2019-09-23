@@ -16,13 +16,15 @@ toc::[]
 
 === Lancer des tests
 
-Avec le fichier `Makefile` :
+==== Avec le fichier `Makefile` :
 
 ```sh
 $ make tests
 ```
 
-Avec le fichier d'alias `.bash_aliases` :
+{BACK_TO_TOP}
+
+==== Avec le fichier d'alias `.bash_aliases` :
 
 ```sh
 $ . .bash_aliases
@@ -30,11 +32,19 @@ $ tests
 $ t
 ```
 
+
 Avec les alias vous pouvez ajouter des paramètres à la commande :
 
 ```sh
 $ t path/to/my/fileTest.php
 ```
+{BACK_TO_TOP}
+
+==== Dans PHPStorm
+
+WIP
+
+{BACK_TO_TOP}
 
 == Activer les alias du projet avec `.bash_aliases`
 
@@ -55,6 +65,8 @@ Symfony 4.3.4 (env: dev, debug: true)
 $ composer --version
 Composer version 1.8.6 2019-06-11 15:03:05
 ```
+
+{BACK_TO_TOP}
 
 == Ressources
 

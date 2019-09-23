@@ -1,8 +1,9 @@
 SHELL=/bin/bash
 
 DC = docker-compose
-EXEC_PHP = $(DC) exec app php
-PHPUNIT = $(EXEC_PHP) ./vendor/bin/simple-phpunit
+APP = $(DC) exec app
+PHP = $(APP) php
+PHPUNIT = $(APP) ./bin/phpunit
 
 .PHONY: start
 start: ## Docker : builds, (re)creates, starts, and attaches to containers for a service.

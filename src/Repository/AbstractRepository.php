@@ -2,7 +2,10 @@
 
 namespace App\Repository;
 
-abstract class AbstractServiceEntityRepository extends ServiceEntityRepository
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
+
+abstract class AbstractRepository extends ServiceEntityRepository
 {
     /**
      * AbstractServiceEntityRepository constructor.

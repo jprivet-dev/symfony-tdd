@@ -1,6 +1,8 @@
 SHELL=/bin/bash
 
 DC = docker-compose
+EXEC_PHP = $(DC) exec app php
+PHPUNIT = $(EXEC_PHP) ./vendor/bin/simple-phpunit
 
 .PHONY: start
 start: ## Docker : builds, (re)creates, starts, and attaches to containers for a service.
@@ -13,3 +15,7 @@ build: ##
 .PHONY: stop
 stop: ## Docker : stops running containers without removing them
 	$(DC) stop
+
+.PHONY: tests
+tests: ## PHPUnit: launch unit & fonctionnal tests
+	$(PHPUNIT)

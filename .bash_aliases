@@ -10,4 +10,7 @@ alias composer="app composer"
 alias tests="app ./bin/phpunit"
 alias t="tests"
 
+alias ut="make unit-tests"
+alias ft="make functional-tests"
+
 alias chownfix="docker-compose run --rm app chown -R $(id -u):$(id -g) ."

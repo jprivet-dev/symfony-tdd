@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Unit;
+namespace App\Tests\Unit\Repository;
 
 use App\Repository\AbstractRepository;
 use App\Util\RepositoryUtilInterface;

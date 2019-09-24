@@ -6,15 +6,13 @@ use App\Util\RepositoryUtilInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
-abstract class AbstractRepository extends ServiceEntityRepository
+abstract class AbstractRepository extends ServiceEntityRepository implements AbstractRepositoryInterface
 {
     private $repositoryUtil;
     private $entityClass;
 
     /**
-     * AbstractRepository constructor.
-     * @param ManagerRegistry $registry
-     * @param RepositoryUtilInterface $repositoryUtil
+     * {@inheritdoc}
      */
     public function __construct(ManagerRegistry $registry, RepositoryUtilInterface $repositoryUtil)
     {
@@ -25,7 +23,7 @@ abstract class AbstractRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getTheEntityClassAttachedToTheCurrentRepositoryClass(): string
     {
@@ -36,7 +34,7 @@ abstract class AbstractRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getEntityClass(): string
     {
@@ -44,7 +42,7 @@ abstract class AbstractRepository extends ServiceEntityRepository
     }
 
     /**
-     * Used for functional tests
+     * {@inheritdoc}
      */
     public function tearDown(): void
     {

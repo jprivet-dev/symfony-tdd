@@ -68,6 +68,10 @@ Composer version 1.8.6 2019-06-11 15:03:05
 
 {BACK_TO_TOP}
 
+== Comment tester un classe abstraite
+
+{BACK_TO_TOP}
+
 == Ressources
 
 {BACK_TO_TOP}

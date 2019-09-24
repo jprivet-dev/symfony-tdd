@@ -17,19 +17,13 @@ class AbstractRepositoryTest extends TestCase
     const ENTITY_CLASS_DOES_NOT_EXIST = '__NO_ENTITY__';
 
     private $abstractRepository;
+    private $repositoryUtil;
+    private $registry;
 
     protected function setUp()
     {
-        $registry = $this->prophesizeRegistry();
-        $repositoryUtil = $this->prophesizeRepositoryUtil();
-
-        $this->abstractRepository = $this->getMockForAbstractClass(
-            AbstractRepository::class,
-            [
-                $registry->reveal(),
-                $repositoryUtil->reveal(),
-            ]
-        );
+        $this->registry = $this->prophesizeRegistry();
+        $this->repositoryUtil = $this->prophesizeRepositoryUtil();
     }
 
     private function prophesizeRegistry()
@@ -52,16 +46,25 @@ class AbstractRepositoryTest extends TestCase
     private function prophesizeRepositoryUtil()
     {
         $repositoryUtil = $this->prophesize(RepositoryUtilInterface::class);
-        $repositoryUtil
-            ->convertRepositoryClassIntoEntityClass(Argument::any())
-            ->willReturn(self::ENTITY_CLASS_EXISTS);
-
         return $repositoryUtil;
     }
 
     public function test_getEntityClass()
     {
+        $this->repositoryUtil
+            ->convertRepositoryClassIntoEntityClass(Argument::any())
+            ->willReturn(self::ENTITY_CLASS_EXISTS);
+
+        $this->abstractRepository = $this->getMockForAbstractClass(
+            AbstractRepository::class,
+            [
+                $this->registry->reveal(),
+                $this->repositoryUtil->reveal(),
+            ]
+        );
+
         $entityClass = $this->abstractRepository->getEntityClass();
+        
         $this->assertSame(self::ENTITY_CLASS_EXISTS, $entityClass);
     }
 }

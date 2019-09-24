@@ -5,8 +5,8 @@ namespace App\Tests\Unit;
 use App\Repository\AbstractRepository;
 use App\Util\RepositoryUtilInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 
@@ -16,17 +16,8 @@ class AbstractRepositoryTest extends TestCase
 
     protected function setUp()
     {
-        $repositoryUtil = $this->prophesize(RepositoryUtilInterface::class);
-        $repositoryUtil
-            ->convertRepositoryClassIntoEntityClass(Argument::any())
-            ->willReturn('__ENTITY_CLASS__');
-
-        $manager = $this->prophesize(EntityManagerInterface::class);
-
-        $registry = $this->prophesize(ManagerRegistry::class);
-        $registry
-            ->getManagerForClass(Argument::any())
-            ->willReturn($manager->reveal());
+        $registry = $this->prophesizeRegistry();
+        $repositoryUtil = $this->prophesizeRepositoryUtil();
 
         $this->abstractRepository = $this->getMockForAbstractClass(
             AbstractRepository::class,
@@ -35,6 +26,33 @@ class AbstractRepositoryTest extends TestCase
                 $repositoryUtil->reveal(),
             ]
         );
+    }
+
+    private function prophesizeRegistry()
+    {
+        $classMetadata = $this->prophesize(ClassMetadata::class);
+
+        $manager = $this->prophesize(EntityManagerInterface::class);
+        $manager
+            ->getClassMetadata(Argument::any())
+            ->willReturn($classMetadata->reveal());
+
+        $registry = $this->prophesize(ManagerRegistry::class);
+        $registry
+            ->getManagerForClass(Argument::any())
+            ->willReturn($manager->reveal());
+
+        return $registry;
+    }
+
+    private function prophesizeRepositoryUtil()
+    {
+        $repositoryUtil = $this->prophesize(RepositoryUtilInterface::class);
+        $repositoryUtil
+            ->convertRepositoryClassIntoEntityClass(Argument::any())
+            ->willReturn('__ENTITY_CLASS__');
+
+        return $repositoryUtil;
     }
 
     public function test_convertRepositoryClassIntoEntityClass()

@@ -57,14 +57,9 @@ class AbstractRepositoryTest extends TestCase
         return $repositoryUtil;
     }
 
-    public function test_convertRepositoryClassIntoEntityClass()
+    public function test_getEntityClass()
     {
-        $this->markTestIncomplete();
-    }
-
-    public function test_getTheEntityClassAttachedToTheCurrentRepositoryClass()
-    {
-        $entityClass = $this->abstractRepository->getTheEntityClassAttachedToTheCurrentRepositoryClass();
+        $entityClass = $this->abstractRepository->getEntityClass();
         $this->assertSame(self::ENTITY_CLASS, $entityClass);
     }
 }

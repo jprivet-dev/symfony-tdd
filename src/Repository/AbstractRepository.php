@@ -2,44 +2,35 @@
 
 namespace App\Repository;
 
+use App\Util\RepositoryUtilInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 abstract class AbstractRepository extends ServiceEntityRepository
 {
+    private $repositoryUtil;
+
     /**
      * AbstractServiceEntityRepository constructor.
      *
      * @param ManagerRegistry $registry
      */
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, RepositoryUtilInterface $repositoryUtil)
     {
-        parent::__construct($registry, $this->getTheEntityClassAttachedToTheRepositoryClass());
+        $this->repositoryUtil = $repositoryUtil;
+
+        $entityClass = $this->getTheEntityClassAttachedToTheCurrentRepositoryClass();
+        parent::__construct($registry, $entityClass);
     }
 
     /**
      * @return string
      */
-    public function getTheEntityClassAttachedToTheRepositoryClass(): string
+    public function getTheEntityClassAttachedToTheCurrentRepositoryClass(): string
     {
         $repositoryClass = get_class($this);
 
-        return $this->convertRepositoryClassIntoEntityClass($repositoryClass);
-    }
-
-    /**
-     * @param string $repositoryClass
-     * @return string
-     */
-    public function convertRepositoryClassIntoEntityClass(string $repositoryClass): string
-    {
-        $entityClass = str_replace(
-            ['\\Repository\\', 'Repository'],
-            ['\\Entity\\', ''],
-            $repositoryClass
-        );
-
-        return $entityClass;
+        return $this->repositoryUtil->convertRepositoryClassIntoEntityClass($repositoryClass);
     }
 
     /**

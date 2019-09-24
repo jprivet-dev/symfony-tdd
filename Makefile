@@ -3,7 +3,8 @@ SHELL=/bin/bash
 DC = docker-compose
 APP = $(DC) exec app
 PHP = $(APP) php
-PHPUNIT = $(APP) ./bin/phpunit
+#PHPUNIT = $(APP) ./bin/phpunit
+PHPUNIT = $(APP) ./vendor/bin/simple-phpunit
 ARTEFACTS = var/artefacts
 
 .PHONY: start

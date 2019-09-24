@@ -16,7 +16,33 @@ toc::[]
 
 {BACK_TO_TOP}
 
-== Principes autour des tests
+== Cloner et installer le projet
+
+{BACK_TO_TOP}
+
+=== Activer tous les alias du projet avec `.bash_aliases`
+
+En chargeant le fichier des alias `.bash_aliases`, vous pouvez avoir un accès direct aux éléments de votre docker :
+
+```sh
+$ . .bash_aliases
+
+$ php --version
+PHP 7.2.22 (cli) (built: Sep  3 2019 08:57:25) ( NTS )
+Copyright (c) 1997-2018 The PHP Group
+Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
+    with Zend OPcache v7.2.22, Copyright (c) 1999-2018, by Zend Technologies
+
+$ sf --version
+Symfony 4.3.4 (env: dev, debug: true)
+
+$ composer --version
+Composer version 1.8.6 2019-06-11 15:03:05
+```
+
+{BACK_TO_TOP}
+
+== Principes autour des tests automatiques
 
 {BACK_TO_TOP}
 
@@ -48,7 +74,6 @@ $ tests
 $ t
 ```
 
-
 Avec les alias vous pouvez ajouter des paramètres à la commande :
 
 ```sh
@@ -58,11 +83,55 @@ $ t path/to/my/fileTest.php
 
 ==== Dans PHPStorm
 
-WIP
-
 {BACK_TO_TOP}
 
 === Pourquoi écrire des tests est aussi long ?
+
+{BACK_TO_TOP}
+
+== Guide général pour le développement et la qualité de code
+
+Qu'on se rassure, personne n'est parfait et n'importe quel développeur écrit du code "pas très clean" à un moment ou à un autre.
+Après tout, chaque développeur cherche à faire fonctionner ses applications... et parfois à n'importe quel prix !
+
+Pourquoi tendre vers une qualité de code ? Pour éviter au maximum le code legacy.
+
+Qu'est-ce qu'un code legacy ? Un code difficile à modifier et à maintenir, dont on a peu de connaissances fonctionnelles et techniques,
+dont on perd la compréhension.
+
+*Michael Feathers* fournit une définition dans son ouvrage *Working Effectively with Legacy Code* :
+_To me, legacy code is simply code without tests_.
+
+{BACK_TO_TOP}
+
+=== Bonnes pratiques de développement
+
+==== Les principes STUPID
+
+**Les principes STUPID** : reconnaître facilement les mauvaises pratiques pour mieux les corriger et les éviter dans les prochaines applications.
+
+|===
+| S | Singleton                 | Instance unique
+| T | Tight Coupling            | Couplage fort
+| U | Untestability             | Incapacité à tester le code
+| P | Premature Optimization    | Optimisations prématurées
+| I | Indescriptive Naming      | Nommage indéchiffrable
+| D | Duplication               | Duplications
+|===
+
+{BACK_TO_TOP}
+
+==== Les principes SOLID
+
+**Les principes SOLID** : cinq bonnes pratiques orientées objet à appliquer au code afin d'en simplifier la maintenance, la testabilité et les évolutions futures.
+
+|===
+| S | Single Responsibility Principle   | *Principe de responsabilité unique* : une classe, méthode ou fonction ne doit avoir qu'une seule responsabilité.
+| O | Open/Closed Principle             | *Principe ouvert / fermé* : une classe doit être ouverte à l'extension, mais fermée à la modification.
+| L | Liskov Substitution Principle     | *Principe de substitution de Liskov* : soit G, un sous-type de T, peut remplacer T sans modifier la cohérence du programme.
+| I | Interface Segregation Principle   | *Principe de ségrégation d'interfaces* : utiliser plusieurs interfaces spécifiques pour chaque client qu'une seule interface générale
+| D | Dependency Inversion Principle    | *Principe d'inversion de dépendance* : dépendre des abstractions et non des implémentations.
+|===
 
 {BACK_TO_TOP}
 
@@ -73,28 +142,6 @@ WIP
 {BACK_TO_TOP}
 
 === Tests : suivre la couverture de code dans son IDE
-
-{BACK_TO_TOP}
-
-== Activer les alias du projet avec `.bash_aliases`
-
-En chargeant le fichier des alias `.bash_aliases`, vous pouvez avoir un accès direct aux éléments de votre docker :
-
-```sh
-$ . .bash_aliases
-
-$ php --version
-PHP 7.2.22 (cli) (built: Sep  3 2019 08:57:25) ( NTS )
-Copyright (c) 1997-2018 The PHP Group
-Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
-    with Zend OPcache v7.2.22, Copyright (c) 1999-2018, by Zend Technologies
-
-$ sf --version
-Symfony 4.3.4 (env: dev, debug: true)
-
-$ composer --version
-Composer version 1.8.6 2019-06-11 15:03:05
-```
 
 {BACK_TO_TOP}
 
@@ -117,5 +164,42 @@ Composer version 1.8.6 2019-06-11 15:03:05
 {BACK_TO_TOP}
 
 == Ressources
+
+=== Bonnes pratiques de développement (SOLID & Cie)
+
+. https://event.afup.org/la-parole-est-aux-speakers-vladyslav-riabchenko/
+. https://speakerdeck.com/mykiwi/outils-pour-ameliorer-la-vie-des-developpeurs-symfony
+. https://williamdurand.fr/2013/07/30/from-stupid-to-solid-code/
+. https://afsy.fr/avent/2013/02-principes-stupid-solid-poo
+. http://fabien.potencier.org/symfony4-best-practices.html
+. https://fr.slideshare.net/RomainKuzniak/design-applicatif-avec-symfony-zoom-sur-la-clean-architecture-symfony-live
+. Reprendre le contrôle de son code legacy avec classe : https://www.youtube.com/watch?v=HndEmsMJ8ZI
+. https://afsy.fr/avent/2017/07-decoupler-form-et-votre-modele
+
+=== TDD & Tests
+
+. [Mémo] Forum PHP 2017 - Écrire des tests pour le long terme (Charles Desneuf) : https://gist.github.com/jprivet-dev/6d8e8f3a439936816726c5f36e146e4d
+. https://symfony.com/doc/3.4/testing.html
+. https://github.com/liip/LiipFunctionalTestBundle
+
+=== Composants pour Symfony
+
+. https://symfony.com/doc/3.4/components/dotenv.html
+. A la decouverte du Workflow - Gregoire Pineau - PHP Tour Montpellier 2018 : https://youtu.be/9-jQf7CL7X4
+
+=== Doctrine
+
+. http://ocramius.github.io/doctrine-best-practices
+. SymfonyLive Paris 2016 - André Tapia - Aller plus loin avec Doctrine2
+.. Vidéo : https://www.youtube.com/watch?v=X-Srb9b-8xE
+.. Mémo : https://gist.github.com/jprivet-dev/d0c9929378921f642703f2c96fbee0a3
+. SymfonyLive Paris 2018 - Ne soyez plus l’esclave de Doctrine - Grégoire Paris & Maxime Veber + https://www.youtube.com/watch?v=KJ3uCPqNdPE
+
+=== Makefile
+
+. https://blog.theodo.fr/2018/05/why-you-need-a-makefile-on-your-project/
+. https://github.com/mykiwi/symfony-bootstrapped/blob/master/Makefile
+. https://github.com/Elao/symfony-standard/blob/master/Makefile
+. https://github.com/Elao/tricot/blob/master/Makefile
 
 {BACK_TO_TOP}

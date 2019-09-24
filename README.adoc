@@ -12,9 +12,25 @@
 
 toc::[]
 
-== Les tests automatiques
+== Présentation
 
-=== Lancer des tests
+{BACK_TO_TOP}
+
+== Principes autour des tests
+
+{BACK_TO_TOP}
+
+=== Pourquoi écrire des tests ?
+
+{BACK_TO_TOP}
+
+=== Comment écrire des tests ?
+
+{BACK_TO_TOP}
+
+=== Comment exécuter des tests ?
+
+{BACK_TO_TOP}
 
 ==== Avec le fichier `Makefile` :
 
@@ -46,6 +62,20 @@ WIP
 
 {BACK_TO_TOP}
 
+=== Pourquoi écrire des tests est aussi long ?
+
+{BACK_TO_TOP}
+
+== Configurer son PHPStorm
+
+=== Les modules indispensables
+
+{BACK_TO_TOP}
+
+=== Tests : suivre la couverture de code dans son IDE
+
+{BACK_TO_TOP}
+
 == Activer les alias du projet avec `.bash_aliases`
 
 En chargeant le fichier des alias `.bash_aliases`, vous pouvez avoir un accès direct aux éléments de votre docker :
@@ -68,7 +98,21 @@ Composer version 1.8.6 2019-06-11 15:03:05
 
 {BACK_TO_TOP}
 
-== Comment tester un classe abstraite
+== Tips
+
+=== Comment tester un classe abstraite ?
+
+{BACK_TO_TOP}
+
+=== Comment créer et tester un validator ?
+
+{BACK_TO_TOP}
+
+=== Comment créer et tester un customType ?
+
+{BACK_TO_TOP}
+
+=== Ne plus injecter l'entityManager
 
 {BACK_TO_TOP}
 

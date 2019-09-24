@@ -7,7 +7,8 @@ alias php="app php"
 alias sf="app bin/console"
 alias composer="app composer"
 
-alias tests="app ./bin/phpunit"
+#alias tests="app ./bin/phpunit"
+alias tests="app ./vendor/bin/simple-phpunit"
 alias t="tests"
 
 alias ut="make unit-tests"

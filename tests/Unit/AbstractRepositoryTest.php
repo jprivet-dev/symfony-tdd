@@ -12,6 +12,7 @@ use Prophecy\Argument;
 
 class AbstractRepositoryTest extends TestCase
 {
+    const ENTITY_CLASS = 'ENTITY_CLASS';
     private $abstractRepository;
 
     protected function setUp()
@@ -50,7 +51,7 @@ class AbstractRepositoryTest extends TestCase
         $repositoryUtil = $this->prophesize(RepositoryUtilInterface::class);
         $repositoryUtil
             ->convertRepositoryClassIntoEntityClass(Argument::any())
-            ->willReturn('__ENTITY_CLASS__');
+            ->willReturn(self::ENTITY_CLASS);
 
         return $repositoryUtil;
     }
@@ -58,5 +59,11 @@ class AbstractRepositoryTest extends TestCase
     public function test_convertRepositoryClassIntoEntityClass()
     {
         $this->markTestIncomplete();
+    }
+
+    public function test_getTheEntityClassAttachedToTheCurrentRepositoryClass()
+    {
+        $entityClass = $this->abstractRepository->getTheEntityClassAttachedToTheCurrentRepositoryClass();
+        $this->assertSame(self::ENTITY_CLASS, $entityClass);
     }
 }

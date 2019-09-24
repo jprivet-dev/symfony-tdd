@@ -2,6 +2,7 @@
 
 namespace App\Tests\Unit\Repository;
 
+use App\Exception\EntityDoesNotExistException;
 use App\Repository\AbstractRepository;
 use App\Tests\Shared\Dummy\DummyEntity;
 use App\Util\RepositoryUtilInterface;
@@ -64,7 +65,24 @@ class AbstractRepositoryTest extends TestCase
         );
 
         $entityClass = $this->abstractRepository->getEntityClass();
-        
+
         $this->assertSame(self::ENTITY_CLASS_EXISTS, $entityClass);
+    }
+
+    public function test_getEntityClass_returns_an_exception_if_attached_entity_class_does_not_exist()
+    {
+        $this->repositoryUtil
+            ->convertRepositoryClassIntoEntityClass(Argument::any())
+            ->willReturn(self::ENTITY_CLASS_DOES_NOT_EXIST);
+
+        $this->expectException(EntityDoesNotExistException::class);
+
+        $this->abstractRepository = $this->getMockForAbstractClass(
+            AbstractRepository::class,
+            [
+                $this->registry->reveal(),
+                $this->repositoryUtil->reveal(),
+            ]
+        );
     }
 }

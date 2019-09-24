@@ -3,6 +3,7 @@
 namespace App\Tests\Unit\Repository;
 
 use App\Repository\AbstractRepository;
+use App\Tests\Shared\Dummy\DummyEntity;
 use App\Util\RepositoryUtilInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,7 +13,8 @@ use Prophecy\Argument;
 
 class AbstractRepositoryTest extends TestCase
 {
-    const ENTITY_CLASS = 'ENTITY_CLASS';
+    const ENTITY_CLASS_EXISTS = DummyEntity::class;
+    const ENTITY_CLASS_DOES_NOT_EXIST = '__NO_ENTITY__';
 
     private $abstractRepository;
 
@@ -52,7 +54,7 @@ class AbstractRepositoryTest extends TestCase
         $repositoryUtil = $this->prophesize(RepositoryUtilInterface::class);
         $repositoryUtil
             ->convertRepositoryClassIntoEntityClass(Argument::any())
-            ->willReturn(self::ENTITY_CLASS);
+            ->willReturn(self::ENTITY_CLASS_EXISTS);
 
         return $repositoryUtil;
     }
@@ -60,6 +62,6 @@ class AbstractRepositoryTest extends TestCase
     public function test_getEntityClass()
     {
         $entityClass = $this->abstractRepository->getEntityClass();
-        $this->assertSame(self::ENTITY_CLASS, $entityClass);
+        $this->assertSame(self::ENTITY_CLASS_EXISTS, $entityClass);
     }
 }

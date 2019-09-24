@@ -13,6 +13,7 @@ use Prophecy\Argument;
 class AbstractRepositoryTest extends TestCase
 {
     const ENTITY_CLASS = 'ENTITY_CLASS';
+
     private $abstractRepository;
 
     protected function setUp()

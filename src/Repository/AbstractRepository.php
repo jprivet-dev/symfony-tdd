@@ -11,9 +11,9 @@ abstract class AbstractRepository extends ServiceEntityRepository
     private $repositoryUtil;
 
     /**
-     * AbstractServiceEntityRepository constructor.
-     *
+     * AbstractRepository constructor.
      * @param ManagerRegistry $registry
+     * @param RepositoryUtilInterface $repositoryUtil
      */
     public function __construct(ManagerRegistry $registry, RepositoryUtilInterface $repositoryUtil)
     {
@@ -29,8 +29,9 @@ abstract class AbstractRepository extends ServiceEntityRepository
     public function getTheEntityClassAttachedToTheCurrentRepositoryClass(): string
     {
         $repositoryClass = get_class($this);
+        $entityClass = $this->repositoryUtil->convertRepositoryClassIntoEntityClass($repositoryClass);
 
-        return $this->repositoryUtil->convertRepositoryClassIntoEntityClass($repositoryClass);
+        return $entityClass;
     }
 
     /**

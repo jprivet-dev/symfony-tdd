@@ -29,7 +29,7 @@ coverage: ## PHPUnit: generate code coverage report in HTML format
 
 .PHONY: coverage-clover
 coverage-clover: ## PHPUnit: generate code clover style coverage report
-	$(PHPUNIT) --coverage-clover
+	$(PHPUNIT) --coverage-clover build/logs/clover.xml
 
 .PHONY: unit-tests
 unit-tests: ## PHPUnit: launch unit tests

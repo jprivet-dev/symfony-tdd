@@ -8,8 +8,8 @@
 :BACK_TO_TOP: <<{BACK_TO_TOP_TARGET},{BACK_TO_TOP_LABEL}>>
 
 |===
-| branch master | image:https://travis-ci.org/jprivet-dev/symfony-docker.svg?branch=master["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-docker"]
-| branch dev | image:https://travis-ci.org/jprivet-dev/symfony-docker.svg?branch=dev["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-docker"]
+| https://github.com/jprivet-dev/symfony-tdd[master] | image:https://travis-ci.org/jprivet-dev/symfony-docker.svg?branch=master["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-docker"]
+| https://github.com/jprivet-dev/symfony-tdd/tree/dev[dev] |image:https://travis-ci.org/jprivet-dev/symfony-docker.svg?branch=dev["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-docker"]
 |===
 
 [#{BACK_TO_TOP_TARGET}]

@@ -32,3 +32,6 @@ script:
   - curl http://localhost # Client
   - curl -k https://localhost # Client (HTTP/2)
   - docker-compose logs # Display logs if anything wrong
+
+after_success:
+  travis_retry docker-compose exec -T app php vendor/bin/php-coveralls

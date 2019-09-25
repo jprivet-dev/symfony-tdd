@@ -46,3 +46,7 @@ functional-tests: ## PHPUnit: launch functional tests with dump
 .PHONY: functional-tests-coverage
 functional-tests-coverage: ## PHPUnit: generate code coverage report in HTML format for functional tests
 	$(PHPUNIT) --testsuite functional --coverage-html $(ARTEFACTS)/phpunit/coverage
+
+.PHONY: coveralls
+coveralls: ## Coveralls
+	$(PHP) vendor/bin/php-coveralls -v --exclude-no-stmt

@@ -49,4 +49,4 @@ functional-tests-coverage: ## PHPUnit: generate code coverage report in HTML for
 
 .PHONY: coveralls
 coveralls: ## Coveralls
-	$(PHP) vendor/bin/php-coveralls -v --exclude-no-stmt
+	$(DC) exec -e TRAVIS="$TRAVIS" -e TRAVIS_JOB_ID="$TRAVIS_JOB_ID" -e COVERALLS_RUN_LOCALLY="$COVERALLS_RUN_LOCALLY" -e COVERALLS_REPO_TOKEN="$COVERALLS_REPO_TOKEN" app vendor/bin/php-coveralls -v --exclude-no-stmt

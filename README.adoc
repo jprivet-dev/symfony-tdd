@@ -48,13 +48,38 @@ Composer version 1.8.6 2019-06-11 15:03:05
 
 === Pourquoi écrire des tests ?
 
+==== Remplacer vos `F5` par des tests automatiques
+
+Un des objectifs des tests automatiques est de *remplacer l'usage du `F5`* pour tester vos implémentations.
+
+IMPORTANT: Les tests doivent être écrits pendant l'implémentation, et *JAMAIS, JAMAIS, JAMAIS après*.
+
+Se poser la question "quoi et comment tester ?" doit *se faire à chaud*, durant les phases de réflexion de vos implémentations.
+
+Les tests automatiques ne sont pas là que pour vérifier les valeurs de sortie de vos méthodes, ils orientent aussi les implémentations :
+
+. Ils permettent d'appliquer plus tôt les principes SOLID et le Service Layer Pattern
+. Ils permettent de repérer plus tôt les défauts de design de l'implémentation
+. Ils forcent à simplifier vos codes
+
+Ecrire les tests après l'implémentation vous obligent à relancer une nouvelle phase de réflexion.
+
+Cela vous demandera un nouvel effort pour retrouver les raisons de vos choix, et mécaniquement vous mettrez globalement plus de temps à écrire les tests :
+ces tests seront forcément plus difficiles à adapter à votre implémentation, et il y a de grandes chances que vous soyez obligés d'apporter de nouvelles modifications à vos codes déjà écrits.
+
+*Ainsi la règle est simple : plus d'une heure sans tests, c'est que c'est déjà trop tard !*
+
 {BACK_TO_TOP}
 
 === Comment écrire des tests ?
 
 {BACK_TO_TOP}
 
-=== Comment exécuter des tests ?
+=== Que faut-il tester ?
+
+{BACK_TO_TOP}
+
+=== Comment exécuter les tests de ce projet ?
 
 {BACK_TO_TOP}
 
@@ -85,7 +110,13 @@ $ t path/to/my/fileTest.php
 
 {BACK_TO_TOP}
 
-=== Pourquoi écrire des tests est aussi long ?
+=== Pourquoi écrire des tests est-il aussi long ?
+
+==== La gestion du temps dans le projet
+
+{BACK_TO_TOP}
+
+==== Est-ce vraiment aussi long que cela en à l'air ?
 
 {BACK_TO_TOP}
 

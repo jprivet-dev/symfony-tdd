@@ -35,4 +35,5 @@ script:
 
 after_success:
   travis_retry docker-compose exec -T app php vendor/bin/php-coveralls
+  travis_retry docker-compose exec -T app ./vendor/bin/simple-phpunit --coverage-clover build/logs/clover.xml
 

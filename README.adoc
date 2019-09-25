@@ -7,6 +7,11 @@
 :BACK_TO_TOP_LABEL: ⬆ Retour au sommaire
 :BACK_TO_TOP: <<{BACK_TO_TOP_TARGET},{BACK_TO_TOP_LABEL}>>
 
+|===
+| branch master | image:https://travis-ci.org/jprivet-dev/symfony-docker.svg?branch=master["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-docker"]
+| branch dev | image:https://travis-ci.org/jprivet-dev/symfony-docker.svg?branch=dev["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-docker"]
+|===
+
 [#{BACK_TO_TOP_TARGET}]
 = Symfony & TDD
 

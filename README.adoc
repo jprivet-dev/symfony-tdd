@@ -13,13 +13,13 @@
 
 | https://github.com/jprivet-dev/symfony-tdd[master]
 | image:https://travis-ci.org/jprivet-dev/symfony-docker.svg?branch=master["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-docker"]
-| image:https://api.codacy.com/project/badge/Grade/d83935eebccc4610870a0b52039914f3?branch=master["Codacy code quality", link="https://www.codacy.com/manual/jprivet-dev/symfony-tdd?utm_source=github.com&utm_medium=referral&utm_content=jprivet-dev/symfony-tdd&utm_campaign=Badge_Grade"]
 | image:https://coveralls.io/repos/github/jprivet-dev/symfony-tdd/badge.svg?branch=master["Coverage Status", link="https://coveralls.io/github/jprivet-dev/symfony-tdd?branch=master"]
+| image:https://api.codacy.com/project/badge/Grade/d83935eebccc4610870a0b52039914f3?branch=master["Codacy code quality", link="https://www.codacy.com/manual/jprivet-dev/symfony-tdd?utm_source=github.com&utm_medium=referral&utm_content=jprivet-dev/symfony-tdd&utm_campaign=Badge_Grade"]
 
 | https://github.com/jprivet-dev/symfony-tdd/tree/dev[dev]
 | image:https://travis-ci.org/jprivet-dev/symfony-docker.svg?branch=dev["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-docker"]
-| image:https://api.codacy.com/project/badge/Grade/d83935eebccc4610870a0b52039914f3?branch=dev["Codacy code quality", link="https://www.codacy.com/manual/jprivet-dev/symfony-tdd?utm_source=github.com&utm_medium=referral&utm_content=jprivet-dev/symfony-tdd&utm_campaign=Badge_Grade"]
 | image:https://coveralls.io/repos/github/jprivet-dev/symfony-tdd/badge.svg?branch=dev["Coverage Status", link="https://coveralls.io/github/jprivet-dev/symfony-tdd?branch=dev"]
+| image:https://api.codacy.com/project/badge/Grade/d83935eebccc4610870a0b52039914f3?branch=dev["Codacy code quality", link="https://www.codacy.com/manual/jprivet-dev/symfony-tdd?utm_source=github.com&utm_medium=referral&utm_content=jprivet-dev/symfony-tdd&utm_campaign=Badge_Grade"]
 |===
 
 = Symfony & TDD
@@ -72,9 +72,10 @@ Se poser la question "quoi et comment tester ?" doit *se faire à chaud*, durant
 
 Les tests automatiques ne sont pas là que pour vérifier les valeurs de sortie de vos méthodes, ils orientent aussi les implémentations :
 
-. Ils permettent d'appliquer plus tôt les principes SOLID et le Service Layer Pattern
+. Ils permettent d'appliquer plus tôt les principes SOLID
 . Ils permettent de repérer plus tôt les défauts de design de l'implémentation
 . Ils forcent à simplifier vos codes
+. Ils fournissent de la documentation
 
 Ecrire les tests après l'implémentation vous obligent à relancer une nouvelle phase de réflexion.
 

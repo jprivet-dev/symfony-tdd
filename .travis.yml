@@ -35,4 +35,4 @@ script:
 
 after_success:
   - docker-compose exec -T app ./vendor/bin/simple-phpunit --coverage-clover build/logs/clover.xml
-  - docker-compose exec -T -e TRAVIS="$TRAVIS" -e TRAVIS_JOB_ID="$TRAVIS_JOB_ID" -e COVERALLS_RUN_LOCALLY=0 -e COVERALLS_REPO_TOKEN="$COVERALLS_REPO_TOKEN" app vendor/bin/php-coveralls -v --exclude-no-stmt
+  - docker-compose exec -T -e TRAVIS="$TRAVIS" -e TRAVIS_JOB_ID="$TRAVIS_JOB_ID" -e COVERALLS_RUN_LOCALLY="$COVERALLS_RUN_LOCALLY" -e COVERALLS_REPO_TOKEN="$COVERALLS_REPO_TOKEN" -e CI_BRANCH="$TRAVIS_BRANCH" app vendor/bin/php-coveralls -v --exclude-no-stmt

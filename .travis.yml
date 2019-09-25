@@ -35,3 +35,4 @@ script:
 
 after_success:
   travis_retry docker-compose exec -T app php vendor/bin/php-coveralls
+

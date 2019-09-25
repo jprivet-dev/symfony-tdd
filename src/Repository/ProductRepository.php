@@ -2,6 +2,6 @@
 
 namespace App\Repository;
 
-class ProductRepository extends AbstractRepository
+class ProductRepository extends AbstractRepository implements ProductRepositoryInterface
 {
 }

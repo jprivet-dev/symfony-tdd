@@ -34,5 +34,5 @@ script:
   - docker-compose logs # Display logs if anything wrong
 
 after_success:
-  - docker-compose exec -T app ./vendor/bin/simple-phpunit -c phpunit.xml.dist
-  - docker-compose exec -T app php vendor/bin/php-coveralls
+  - docker-compose exec -T app ./vendor/bin/simple-phpunit --coverage-clover build/logs/clover.xml
+  - docker-compose exec -T app php vendor/bin/php-coveralls -v --exclude-no-stmt

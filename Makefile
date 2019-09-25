@@ -23,6 +23,10 @@ stop: ## Docker : stops running containers without removing them
 tests: ## PHPUnit: launch unit & fonctionnal tests
 	$(PHPUNIT)
 
+.PHONY: coverage
+coverage: ## PHPUnit: generate code coverage report in HTML format
+	$(PHPUNIT) --coverage-html $(ARTEFACTS)/phpunit/coverage
+
 .PHONY: unit-tests
 unit-tests: ## PHPUnit: launch unit tests
 	$(PHPUNIT) --testsuite unit

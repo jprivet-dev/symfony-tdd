@@ -1,0 +1,45 @@
+version: '3.4'
+
+services:
+  app:
+    build:
+      context: .
+      target: symfony_docker_php
+      args:
+        SYMFONY_VERSION: ${SYMFONY_VERSION:-}
+        STABILITY: ${STABILITY:-stable}
+    volumes:
+      # Comment out the next line in production
+      - ./:/srv/app:rw,cached
+      # If you develop on Linux, comment out the following volumes to just use bind-mounted project directory from host
+      - /srv/app/var/
+      - /srv/app/var/cache/
+      - /srv/app/var/logs/
+      - /srv/app/var/sessions/
+    environment:
+      - SYMFONY_VERSION
+
+  nginx:
+    build:
+      context: .
+      target: symfony_docker_nginx
+    depends_on:
+      - app
+    volumes:
+      # Comment out the next line in production
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./public:/srv/app/public:ro
+    ports:
+      - '80:80'
+
+  # This HTTP/2 proxy is not secure: it should only be used in dev
+  h2-proxy:
+    build:
+      context: .
+      target: symfony_docker_h2-proxy
+    depends_on:
+      - nginx
+    volumes:
+      - ./docker/h2-proxy/default.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - '443:443'

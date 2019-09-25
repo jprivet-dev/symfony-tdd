@@ -4,7 +4,7 @@ namespace App\Service;
 
 use App\Repository\ProductRepositoryInterface;
 
-class ProducService implements ProducServiceInterface
+class ProductService implements ProductServiceInterface
 {
     private $productRepository;
 

@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-interface ProducServiceInterface
+interface ProductServiceInterface
 {
     function checkAll();
 }

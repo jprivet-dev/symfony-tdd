@@ -9,15 +9,17 @@
 
 [#{BACK_TO_TOP_TARGET}]
 |===
-| Branch 2+| Status
+| Branch 3+| Status
 
 | https://github.com/jprivet-dev/symfony-tdd[master]
 | image:https://travis-ci.org/jprivet-dev/symfony-docker.svg?branch=master["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-docker"]
 | image:https://api.codacy.com/project/badge/Grade/c1106f693dde442a943f9815c33a2f7d["Codacy code quality", link="https://www.codacy.com/manual/jprivet-dev/symfony-tdd?utm_source=github.com&utm_medium=referral&utm_content=jprivet-dev/symfony-tdd&utm_campaign=Badge_Grade"]
+| image:https://coveralls.io/repos/github/jprivet-dev/symfony-tdd/badge.svg?branch=master["Coverage Status", link="https://coveralls.io/github/jprivet-dev/symfony-tdd?branch=master"]
 
 | https://github.com/jprivet-dev/symfony-tdd/tree/dev[dev]
 | image:https://travis-ci.org/jprivet-dev/symfony-docker.svg?branch=dev["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-docker"]
 |
+| image:https://coveralls.io/repos/github/jprivet-dev/symfony-tdd/badge.svg?branch=dev["Coverage Status", link="https://coveralls.io/github/jprivet-dev/symfony-tdd?branch=dev"]
 |===
 
 = Symfony & TDD

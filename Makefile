@@ -27,6 +27,10 @@ tests: ## PHPUnit: launch unit & fonctionnal tests
 coverage: ## PHPUnit: generate code coverage report in HTML format
 	$(PHPUNIT) --coverage-html $(ARTEFACTS)/phpunit/coverage
 
+.PHONY: coverage-clover
+coverage-clover: ## PHPUnit: generate code clover style coverage report
+	$(PHPUNIT) --coverage-clover
+
 .PHONY: unit-tests
 unit-tests: ## PHPUnit: launch unit tests
 	$(PHPUNIT) --testsuite unit

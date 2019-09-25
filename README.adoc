@@ -8,8 +8,10 @@
 :BACK_TO_TOP: <<{BACK_TO_TOP_TARGET},{BACK_TO_TOP_LABEL}>>
 
 |===
-| https://github.com/jprivet-dev/symfony-tdd[master] | image:https://travis-ci.org/jprivet-dev/symfony-docker.svg?branch=master["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-docker"]
-| https://github.com/jprivet-dev/symfony-tdd/tree/dev[dev] |image:https://travis-ci.org/jprivet-dev/symfony-docker.svg?branch=dev["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-docker"]
+
+| https://github.com/jprivet-dev/symfony-tdd[master] | image:https://travis-ci.org/jprivet-dev/symfony-docker.svg?branch=master["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-docker"] | image:https://api.codacy.com/project/badge/Grade/c1106f693dde442a943f9815c33a2f7d["Codacy code quality", link="https://www.codacy.com/manual/jprivet-dev/symfony-tdd?utm_source=github.com&utm_medium=referral&utm_content=jprivet-dev/symfony-tdd&utm_campaign=Badge_Grade"]
+
+| https://github.com/jprivet-dev/symfony-tdd/tree/dev[dev] | image:https://travis-ci.org/jprivet-dev/symfony-docker.svg?branch=dev["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-docker"] |
 |===
 
 [#{BACK_TO_TOP_TARGET}]

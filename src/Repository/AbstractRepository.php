@@ -10,8 +10,10 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Abs
 {
     public function __construct(ManagerRegistry $registry)
     {
-        $repositoryClass = get_class($this);
-        parent::__construct($registry, $this->getTheEntityClassAttachedToTheRepositoryClass($repositoryClass));
+        parent::__construct(
+            $registry,
+            $this->getTheEntityClassAttachedToTheRepositoryClass(get_class($this))
+        );
     }
 
     /**
@@ -38,24 +40,5 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Abs
             ['Entity\\', ''],
             $repositoryClass
         );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getEntityClass(): string
-    {
-        return $this->_entityName;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function closeEntityManager(): void
-    {
-        if ($this->_em) {
-            $this->_em->close();
-            $this->_em = null; // avoid memory leaks
-        }
     }
 }

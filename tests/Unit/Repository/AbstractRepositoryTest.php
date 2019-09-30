@@ -25,6 +25,18 @@ class AbstractRepositoryTest extends TestCase
         $this->getAbstracRepositoryWithRealRepositoryClassWithoutEntity();
     }
 
+    public function test_convertRepositoryClassIntoEntityClass()
+    {
+        $abstractRepository = $this->getAbstracRepositoryWithRealRepositoryClassWithEntity();
+
+        $repositoryClass = 'My\\Path\\To\\Repository\\DummyRepository.php';
+        $expectedEntityClass = 'My\\Path\\To\\Entity\\Dummy.php';
+
+        $entityClass = $abstractRepository->convertRepositoryClassIntoEntityClass($repositoryClass);
+
+        $this->assertSame($expectedEntityClass, $entityClass);
+    }
+
     /*
      * PRIVATE
      */

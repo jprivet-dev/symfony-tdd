@@ -3,17 +3,22 @@
 namespace App\Repository;
 
 use App\Exception\EntityDoesNotExistException;
+use App\Util\ClassUtilInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 abstract class AbstractRepository extends ServiceEntityRepository implements AbstractRepositoryInterface
 {
     /**
-     * {@inheritdoc}
+     * @var ClassUtilInterface
      */
-    public function __construct(ManagerRegistry $registry)
+    private $classUtil;
+
+    public function __construct(ManagerRegistry $registry, ClassUtilInterface $classUtil)
     {
-        $repositoryClass = get_class($this);
+        $this->classUtil = $classUtil;
+        $repositoryClass = $this->classUtil->get($this);
+
         parent::__construct($registry, $this->getTheEntityClassAttachedToTheRepositoryClass($repositoryClass));
     }
 
@@ -24,11 +29,11 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Abs
     {
         $entityClass = $this->convertRepositoryClassIntoEntityClass($repositoryClass);
 
-        if (class_exists($entityClass)) {
-            return $entityClass;
+        if (!$this->classUtil->exists($entityClass)) {
+            throw new EntityDoesNotExistException($entityClass);
         }
 
-        throw new EntityDoesNotExistException($entityClass);
+        return $entityClass;
     }
 
     /**

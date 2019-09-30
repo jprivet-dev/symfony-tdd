@@ -51,7 +51,9 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Abs
      */
     public function closeEntityManager(): void
     {
-        $this->_em->close();
-        $this->_em = null; // avoid memory leaks
+        if ($this->_em) {
+            $this->_em->close();
+            $this->_em = null; // avoid memory leaks
+        }
     }
 }

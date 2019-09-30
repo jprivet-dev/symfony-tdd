@@ -15,7 +15,7 @@ interface AbstractRepositoryInterface
     function getEntityClass(): string;
 
     /**
-     * Used for functional tests
+     * Very practical for functional tests
      */
-    function tearDown(): void;
+    function closeEntityManager(): void;
 }

@@ -5,6 +5,9 @@ namespace App\Tests\Unit\Repository;
 use App\Exception\EntityDoesNotExistException;
 use App\Repository\AbstractRepository;
 use App\Tests\Shared\Dummy\DummyEntity;
+use App\Tests\Shared\Models\Entity\Dummy;
+use App\Tests\Shared\Models\Repository\DummyRepository;
+use App\Tests\Shared\Models\Repository\DummyWithoutEntityRepository;
 use App\Util\RepositoryUtilInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,8 +17,10 @@ use Prophecy\Argument;
 
 class AbstractRepositoryTest extends TestCase
 {
-    const ENTITY_CLASS_EXISTS = DummyEntity::class;
-    const ENTITY_CLASS_DOES_NOT_EXIST = '__NO_ENTITY__';
+    const ENTITY = Dummy::class;
+    const REPOSITORY_WITH_ENTITY = DummyRepository::class;
+
+    const REPOSITORY_WITHOUT_ENTITY = DummyWithoutEntityRepository::class;
 
     private function prophesizeRegistry(string $entityClass)
     {
@@ -34,29 +39,10 @@ class AbstractRepositoryTest extends TestCase
         return $registry;
     }
 
-    private function prophesizeRepositoryUtil(string $entityClass)
+    private function getAbstracRepository(string $repositoryClass)
     {
-        $repositoryUtil = $this->prophesize(RepositoryUtilInterface::class);
-
-        $repositoryUtil
-            ->convertRepositoryClassIntoEntityClass(Argument::any())
-            ->willReturn($entityClass);
-
-        return $repositoryUtil;
-    }
-
-    private function getAbstracRepository(string $entityClass)
-    {
-        $registry = $this->prophesizeRegistry($entityClass);
-        $repositoryUtil = $this->prophesizeRepositoryUtil($entityClass);
-
-        return $this->getMockForAbstractClass(
-            AbstractRepository::class,
-            [
-                $registry->reveal(),
-                $repositoryUtil->reveal(),
-            ]
-        );
+        $registry = $this->prophesizeRegistry();
+        return new $repositoryClass($registry->reveal());
     }
 
     public function test_getEntityClass()

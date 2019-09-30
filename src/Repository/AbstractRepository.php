@@ -10,7 +10,6 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 abstract class AbstractRepository extends ServiceEntityRepository implements AbstractRepositoryInterface
 {
     private $repositoryUtil;
-    private $entityClass;
 
     /**
      * {@inheritdoc}
@@ -18,9 +17,9 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Abs
     public function __construct(ManagerRegistry $registry, RepositoryUtilInterface $repositoryUtil)
     {
         $this->repositoryUtil = $repositoryUtil;
-        $this->entityClass = $this->getTheEntityClassAttachedToTheCurrentRepositoryClass();
+        $entityClass = $this->getTheEntityClassAttachedToTheCurrentRepositoryClass();
 
-        parent::__construct($registry, $this->entityClass);
+        parent::__construct($registry, $entityClass);
     }
 
     /**
@@ -43,7 +42,7 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Abs
      */
     public function getEntityClass(): string
     {
-        return $this->entityClass;
+        return $this->_entityName;
     }
 
     /**

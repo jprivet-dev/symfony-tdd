@@ -34,8 +34,8 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Abs
     public function convertRepositoryClassIntoEntityClass(string $repositoryClass): string
     {
         return str_replace(
-            ['\\Repository\\', 'Repository'],
-            ['\\Entity\\', ''],
+            ['Repository\\', 'Repository'],
+            ['Entity\\', ''],
             $repositoryClass
         );
     }

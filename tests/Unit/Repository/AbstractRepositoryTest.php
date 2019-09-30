@@ -61,6 +61,8 @@ class AbstractRepositoryTest extends TestCase
         $repositoryUtil
             ->convertRepositoryClassIntoEntityClass(Argument::any())
             ->willReturn($entityClass);
+
+        return $repositoryUtil;
     }
 
     private function getAbstracRepository(string $entityClass)

@@ -63,7 +63,7 @@ class AbstractRepositoryTest extends TestCase
             ->willReturn($entityClass);
     }
 
-    private function getTestAbstracRepository(string $entityClass)
+    private function getAbstracRepository(string $entityClass)
     {
         $registry = $this->prophesizeRegistry($entityClass);
         $repositoryUtil = $this->prophesizeRepositoryUtil($entityClass);
@@ -79,7 +79,7 @@ class AbstractRepositoryTest extends TestCase
 
     public function test_getEntityClass()
     {
-        $abstractRepository = $this->getTestAbstracRepository(self::ENTITY_CLASS_EXISTS);
+        $abstractRepository = $this->getAbstracRepository(self::ENTITY_CLASS_EXISTS);
         $entityClass = $abstractRepository->getEntityClass();
         $this->assertSame(self::ENTITY_CLASS_EXISTS, $entityClass);
     }
@@ -87,6 +87,6 @@ class AbstractRepositoryTest extends TestCase
     public function test_getEntityClass_returns_an_exception_if_attached_entity_class_does_not_exist()
     {
         $this->expectException(EntityDoesNotExistException::class);
-        $this->getTestAbstracRepository(self::ENTITY_CLASS_DOES_NOT_EXIST);
+        $this->getAbstracRepository(self::ENTITY_CLASS_DOES_NOT_EXIST);
     }
 }

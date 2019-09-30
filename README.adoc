@@ -28,9 +28,13 @@ toc::[]
 
 == Présentation
 
+(WIP)
+
 {BACK_TO_TOP}
 
 == Cloner et installer le projet
+
+(WIP)
 
 {BACK_TO_TOP}
 
@@ -88,13 +92,19 @@ ces tests seront forcément plus difficiles à adapter à votre implémentation,
 
 === Comment écrire des tests ?
 
+(WIP)
+
 {BACK_TO_TOP}
 
 === Que faut-il tester ?
 
+(WIP)
+
 {BACK_TO_TOP}
 
 === Comment exécuter les tests de ce projet ?
+
+(WIP)
 
 {BACK_TO_TOP}
 
@@ -123,15 +133,21 @@ $ t path/to/my/fileTest.php
 
 ==== Dans PHPStorm
 
+(WIP)
+
 {BACK_TO_TOP}
 
 === Pourquoi écrire des tests est-il aussi long ?
 
 ==== La gestion du temps dans le projet
 
+(WIP)
+
 {BACK_TO_TOP}
 
 ==== Est-ce vraiment aussi long que cela en à l'air ?
+
+(WIP)
 
 {BACK_TO_TOP}
 
@@ -185,9 +201,13 @@ _To me, legacy code is simply code without tests_.
 
 === Les modules indispensables
 
+(WIP)
+
 {BACK_TO_TOP}
 
 === Tests : suivre la couverture de code dans son IDE
+
+(WIP)
 
 {BACK_TO_TOP}
 
@@ -195,17 +215,25 @@ _To me, legacy code is simply code without tests_.
 
 === Comment tester un classe abstraite ?
 
+(WIP)
+
 {BACK_TO_TOP}
 
 === Comment créer et tester un validator ?
+
+(WIP)
 
 {BACK_TO_TOP}
 
 === Comment créer et tester un customType ?
 
+(WIP)
+
 {BACK_TO_TOP}
 
 === Ne plus injecter l'entityManager
+
+(WIP)
 
 {BACK_TO_TOP}
 

@@ -17,38 +17,18 @@ class AbstractRepositoryTest extends TestCase
     const ENTITY_CLASS_EXISTS = DummyEntity::class;
     const ENTITY_CLASS_DOES_NOT_EXIST = '__NO_ENTITY__';
 
-    protected function setUp()
-    {
-    }
-
     private function prophesizeRegistry(string $entityClass)
     {
-        $classMetadata = $this->prophesize(ClassMetadata::class);
-
-        /*
-         * Value of `$classMetadata->name` is used for `$class->name`.
-         *
-         * @see vendor/doctrine/orm/lib/Doctrine/ORM/EntityRepository.php
-         *
-         * ```php
-         *  public function __construct(EntityManagerInterface $em, Mapping\ClassMetadata $class)
-         *  {
-         *      $this->_entityName = $class->name; // <-- here
-         *      $this->_em         = $em;
-         *      $this->_class      = $class;
-         *  }
-         * ```
-         */
-        $classMetadata->name = $entityClass;
+        $classMetadata = new ClassMetadata($entityClass);
 
         $manager = $this->prophesize(EntityManagerInterface::class);
         $manager
-            ->getClassMetadata(Argument::any())
-            ->willReturn($classMetadata->reveal());
+            ->getClassMetadata($entityClass)
+            ->willReturn($classMetadata);
 
         $registry = $this->prophesize(ManagerRegistry::class);
         $registry
-            ->getManagerForClass(Argument::any())
+            ->getManagerForClass($entityClass)
             ->willReturn($manager->reveal());
 
         return $registry;

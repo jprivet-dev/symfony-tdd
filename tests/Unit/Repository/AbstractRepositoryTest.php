@@ -19,35 +19,33 @@ class AbstractRepositoryTest extends TestCase
 
     private $abstractRepository;
     private $repositoryUtil;
+    private $manager;
     private $registry;
 
     protected function setUp()
     {
-        $this->registry = $this->prophesizeRegistry();
-        $this->repositoryUtil = $this->prophesizeRepositoryUtil();
+        $this->prophesizeRegistry();
+        $this->prophesizeRepositoryUtil();
     }
 
     private function prophesizeRegistry()
     {
         $classMetadata = $this->prophesize(ClassMetadata::class);
 
-        $manager = $this->prophesize(EntityManagerInterface::class);
-        $manager
+        $this->manager = $this->prophesize(EntityManagerInterface::class);
+        $this->manager
             ->getClassMetadata(Argument::any())
             ->willReturn($classMetadata->reveal());
 
-        $registry = $this->prophesize(ManagerRegistry::class);
-        $registry
+        $this->registry = $this->prophesize(ManagerRegistry::class);
+        $this->registry
             ->getManagerForClass(Argument::any())
-            ->willReturn($manager->reveal());
-
-        return $registry;
+            ->willReturn($this->manager->reveal());
     }
 
     private function prophesizeRepositoryUtil()
     {
-        $repositoryUtil = $this->prophesize(RepositoryUtilInterface::class);
-        return $repositoryUtil;
+        $this->repositoryUtil = $this->prophesize(RepositoryUtilInterface::class);
     }
 
     public function test_getEntityClass()

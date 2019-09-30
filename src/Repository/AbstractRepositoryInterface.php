@@ -14,14 +14,4 @@ interface AbstractRepositoryInterface
      * @return string
      */
     function convertRepositoryClassIntoEntityClass(string $repositoryClass): string;
-
-    /**
-     * @return string
-     */
-    function getEntityClass(): string;
-
-    /**
-     * Very practical for functional tests
-     */
-    function closeEntityManager(): void;
 }

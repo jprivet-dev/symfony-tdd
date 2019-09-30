@@ -49,7 +49,7 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Abs
     /**
      * {@inheritdoc}
      */
-    public function tearDown(): void
+    public function closeEntityManager(): void
     {
         $this->_em->close();
         $this->_em = null; // avoid memory leaks

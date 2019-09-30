@@ -17,9 +17,7 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Abs
     public function __construct(ManagerRegistry $registry, RepositoryUtilInterface $repositoryUtil)
     {
         $this->repositoryUtil = $repositoryUtil;
-        $entityClass = $this->getTheEntityClassAttachedToTheCurrentRepositoryClass();
-
-        parent::__construct($registry, $entityClass);
+        parent::__construct($registry, $this->getTheEntityClassAttachedToTheCurrentRepositoryClass());
     }
 
     /**

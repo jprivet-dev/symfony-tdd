@@ -12,22 +12,23 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Abs
     {
         parent::__construct(
             $registry,
-            $this->getTheEntityClassAttachedToTheRepositoryClass(\get_class($this))
+            $this->getEntityClass()
         );
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getTheEntityClassAttachedToTheRepositoryClass(string $repositoryClass): string
+    public function getEntityClass(): string
     {
+        $repositoryClass = \get_class($this);
         $entityClass = $this->convertRepositoryClassIntoEntityClass($repositoryClass);
 
-        if (!\class_exists($entityClass)) {
-            throw new EntityDoesNotExistException($entityClass);
+        if (\class_exists($entityClass)) {
+            return $entityClass;
         }
 
-        return $entityClass;
+        throw new EntityDoesNotExistException($entityClass);
     }
 
     /**

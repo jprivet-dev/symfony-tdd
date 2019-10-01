@@ -10,5 +10,5 @@ interface FibonacciUtilInterface
      * @param int $n
      * @return int
      */
-    function rank(int $n): int;
+    public function rank(int $n): int;
 }

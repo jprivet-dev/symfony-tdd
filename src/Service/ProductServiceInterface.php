@@ -4,5 +4,5 @@ namespace App\Service;
 
 interface ProductServiceInterface
 {
-    function checkAll();
+    public function checkAll();
 }

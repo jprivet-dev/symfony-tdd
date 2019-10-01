@@ -14,13 +14,13 @@ class ReferenceValidatorTest extends ConstraintValidatorTestCase
         return new ReferenceValidator();
     }
 
-    public function test_string_is_valid()
+    public function testStringIsValid()
     {
         $this->validator->validate('Abc123', new Reference());
         $this->assertNoViolation();
     }
 
-    public function test_expects_string_compatible_type()
+    public function testExpectsStringCompatibleType()
     {
         $this->expectException(UnexpectedValueException::class);
         $this->validator->validate(new \stdClass(), new Reference());

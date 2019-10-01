@@ -13,13 +13,13 @@ use Symfony\Bridge\Doctrine\ManagerRegistry;
 
 class AbstractRepositoryTest extends TestCase
 {
-    public function test_repository_class_with_entity()
+    public function testRepositoryClassWithEntity()
     {
         $abstractRepository = $this->getAbstracRepositoryWithRealRepositoryClassWithEntity();
         $this->assertSame(Dummy::class, $abstractRepository->getClassName());
     }
 
-    public function test_convertRepositoryClassIntoEntityClass()
+    public function testConvertRepositoryClassIntoEntityClass()
     {
         $abstractRepository = $this->getAbstracRepositoryWithRealRepositoryClassWithEntity();
 
@@ -31,7 +31,7 @@ class AbstractRepositoryTest extends TestCase
         $this->assertSame($expectedEntityClass, $entityClass);
     }
 
-    public function test_repository_class_without_entity()
+    public function testRepositoryClassWithoutEntity()
     {
         $this->expectException(EntityDoesNotExistException::class);
         $this->getAbstracRepositoryWithRealRepositoryClassWithoutEntity();

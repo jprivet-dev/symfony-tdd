@@ -38,6 +38,6 @@ class FibonacciVersion04Util implements FibonacciUtilInterface
                 return 144;
             default:
                 return 0;
-        };
+        }
     }
 }

@@ -8,7 +8,6 @@
 
 namespace App\Tests\Shared\Dummy;
 
-
 class DummyEntity
 {
 

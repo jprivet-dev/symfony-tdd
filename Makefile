@@ -5,6 +5,8 @@ APP = $(DC) exec app
 PHP = $(APP) php
 #PHPUNIT = $(APP) ./bin/phpunit
 PHPUNIT = $(APP) ./vendor/bin/simple-phpunit
+CODESNIFFER = $(PHP) ./vendor/bin/phpcs
+CODESNIFFER_FIX = $(PHP) ./vendor/bin/phpcbf
 ARTEFACTS = var/artefacts
 
 .PHONY: start
@@ -46,3 +48,11 @@ functional-tests: ## PHPUnit: launch functional tests with dump
 .PHONY: functional-tests-coverage
 functional-tests-coverage: ## PHPUnit: generate code coverage report in HTML format for functional tests
 	$(PHPUNIT) --testsuite functional --coverage-html $(ARTEFACTS)/phpunit/coverage
+
+.PHONY: codesniffer
+codesniffer:
+	$(CODESNIFFER) -n
+
+.PHONY: codesniffer-fix
+codesniffer-fix:
+	$(CODESNIFFER_FIX)

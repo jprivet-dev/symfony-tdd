@@ -201,6 +201,18 @@ _To me, legacy code is simply code without tests_.
 
 === Les modules indispensables
 
+==== Symfony Plugin
+
+https://plugins.jetbrains.com/plugin/7219-symfony-support
+
+==== PHP Code Sniffer
+
+https://www.jetbrains.com/help/phpstorm/using-php-code-sniffer.html
+
+==== Camel Case
+
+https://plugins.jetbrains.com/plugin/7160-camelcase/
+
 (WIP)
 
 {BACK_TO_TOP}

@@ -99,8 +99,14 @@
     "ocramius/proxy-manager": {
         "version": "2.2.3"
     },
+    "pdepend/pdepend": {
+        "version": "2.5.2"
+    },
     "php-coveralls/php-coveralls": {
         "version": "v2.1.0"
+    },
+    "phpmd/phpmd": {
+        "version": "2.7.0"
     },
     "psr/cache": {
         "version": "1.0.1"

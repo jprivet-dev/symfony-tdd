@@ -7,7 +7,7 @@ interface AbstractRepositoryInterface
     /**
      * @return string
      */
-    function getTheEntityClassAttachedToTheRepositoryClass(string $repositoryClass): string;
+    function getEntityClass(): string;
 
     /**
      * @param string $repositoryClass

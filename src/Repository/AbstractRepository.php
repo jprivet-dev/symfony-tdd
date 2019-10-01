@@ -12,7 +12,7 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Abs
     {
         parent::__construct(
             $registry,
-            $this->getTheEntityClassAttachedToTheRepositoryClass(get_class($this))
+            $this->getTheEntityClassAttachedToTheRepositoryClass(\get_class($this))
         );
     }
 
@@ -23,7 +23,7 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Abs
     {
         $entityClass = $this->convertRepositoryClassIntoEntityClass($repositoryClass);
 
-        if (!class_exists($entityClass)) {
+        if (!\class_exists($entityClass)) {
             throw new EntityDoesNotExistException($entityClass);
         }
 

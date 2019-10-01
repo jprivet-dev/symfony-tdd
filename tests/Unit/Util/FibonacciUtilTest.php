@@ -26,7 +26,7 @@ class FibonacciUtilTest extends TestCase
     /**
      * @dataProvider termProvider
      */
-    public function test_FibonacciVersion01Util(int $n, int $expectedTerm)
+    public function test_all_versions(int $n, int $expectedTerm)
     {
         $this->assertSame($expectedTerm, $this->fibonacciVersion01Util->rank($n));
         $this->assertSame($expectedTerm, $this->fibonacciVersion02Util->rank($n));

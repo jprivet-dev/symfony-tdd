@@ -7,6 +7,7 @@ PHP = $(APP) php
 PHPUNIT = $(APP) ./vendor/bin/simple-phpunit
 CODESNIFFER = $(PHP) ./vendor/bin/phpcs
 CODESNIFFER_FIX = $(PHP) ./vendor/bin/phpcbf
+MESSDETECTOR = $(PHP) ./vendor/bin/phpmd
 ARTEFACTS = var/artefacts
 
 .PHONY: start
@@ -56,3 +57,8 @@ codesniffer:
 .PHONY: codesniffer-fix
 codesniffer-fix:
 	$(CODESNIFFER_FIX)
+
+.PHONY: messdetector
+messdetector:
+	$(MESSDETECTOR) ./src
+

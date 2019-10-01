@@ -2,25 +2,25 @@
 
 namespace App\Tests\Unit\Util;
 
-use App\Util\FibonacciVersion01Util;
-use App\Util\FibonacciVersion02Util;
-use App\Util\FibonacciVersion03Util;
-use App\Util\FibonacciVersion04Util;
+use App\Util\Fibonacci01Util;
+use App\Util\Fibonacci02Util;
+use App\Util\Fibonacci03Util;
+use App\Util\Fibonacci04Util;
 use PHPUnit\Framework\TestCase;
 
 class FibonacciUtilTest extends TestCase
 {
-    private $fibonacciVersion01Util;
-    private $fibonacciVersion02Util;
-    private $fibonacciVersion03Util;
-    private $fibonacciVersion04Util;
+    private $fibonacci01Util;
+    private $fibonacci02Util;
+    private $fibonacci03Util;
+    private $fibonacci04Util;
 
     protected function setUp()
     {
-        $this->fibonacciVersion01Util = new FibonacciVersion01Util();
-        $this->fibonacciVersion02Util = new FibonacciVersion02Util();
-        $this->fibonacciVersion03Util = new FibonacciVersion03Util();
-        $this->fibonacciVersion04Util = new FibonacciVersion04Util();
+        $this->fibonacci01Util = new Fibonacci01Util();
+        $this->fibonacci02Util = new Fibonacci02Util();
+        $this->fibonacci03Util = new Fibonacci03Util();
+        $this->fibonacci04Util = new Fibonacci04Util();
     }
 
     /**
@@ -28,10 +28,10 @@ class FibonacciUtilTest extends TestCase
      */
     public function test_all_versions(int $n, int $expectedTerm)
     {
-        $this->assertSame($expectedTerm, $this->fibonacciVersion01Util->rank($n));
-        $this->assertSame($expectedTerm, $this->fibonacciVersion02Util->rank($n));
-        $this->assertSame($expectedTerm, $this->fibonacciVersion03Util->rank($n));
-        $this->assertSame($expectedTerm, $this->fibonacciVersion04Util->rank($n));
+        $this->assertSame($expectedTerm, $this->fibonacci01Util->rank($n));
+        $this->assertSame($expectedTerm, $this->fibonacci02Util->rank($n));
+        $this->assertSame($expectedTerm, $this->fibonacci03Util->rank($n));
+        $this->assertSame($expectedTerm, $this->fibonacci04Util->rank($n));
     }
 
     public function termProvider()

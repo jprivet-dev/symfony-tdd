@@ -2,7 +2,7 @@
 
 namespace App\Util;
 
-class FibonacciV03Util implements FibonacciUtilInterface
+class Fibonacci03Util implements FibonacciUtilInterface
 {
     /**
      * {@inheritdoc}

@@ -28,6 +28,8 @@ toc::[]
 
 == Présentation
 
+Ce repo est un terrain de jeu sur lequel je teste et valide des concepts de développement et de testing que je rencontre.
+
 (WIP)
 
 {BACK_TO_TOP}
@@ -197,7 +199,7 @@ _To me, legacy code is simply code without tests_.
 
 {BACK_TO_TOP}
 
-== Configurer son PHPStorm
+== Configurer son PHPStorm (2018.2)
 
 === Les modules indispensables
 
@@ -205,21 +207,85 @@ _To me, legacy code is simply code without tests_.
 
 https://plugins.jetbrains.com/plugin/7219-symfony-support
 
+Après installation, activer le plugin pour le projet en cours :
+
+. Aller dans *File > Settings > Languages & Frameworks > PHP > Symfony*
+. Cliquer sur *Enable Plugin for this Project (change need restart)*
+
 ==== PHP Code Sniffer
 
 https://www.jetbrains.com/help/phpstorm/using-php-code-sniffer.html
+
+*PHP Code Sniffer* est déjà installé dans ce projet. Pour activer l'analyse du code :
+
+. Aller dans *File > Settings > Languages & Frameworks > PHP > Code Sniffer*
+. Dans le bloc *Development environment*, choisir un interpréteur dans la liste *Configuration*
+. Aller ensuite dans *File > Settings > Editor > Inspections*
+. Cocher la case devant *PHP > Quality tools > PHP Code Sniffer validation*
 
 ==== Camel Case
 
 https://plugins.jetbrains.com/plugin/7160-camelcase/
 
+Il suffit d'installer le plugin. Vous pourrez ensuite switcher entre les différents types avec le raccourci `Sup` + `Alt` + `U`
+
 (WIP)
 
 {BACK_TO_TOP}
 
-=== Tests : suivre la couverture de code dans son IDE
+=== PHP Unit : suivre la couverture de code dans son IDE
 
-(WIP)
+==== Ressources
+
+. https://www.jetbrains.com/help/idea/docker.html
+. https://www.jetbrains.com/help/phpstorm/configuring-local-interpreter.html
+. https://www.jetbrains.com/help/phpstorm/configuring-remote-interpreters.html
+. https://www.jetbrains.com/help/phpstorm/using-phpunit-framework.html
+. https://blog.eleven-labs.com/fr/debug-run-phpunit-tests-using-docker-remote-interpreters-with-phpstorm/
+
+==== Configurer Docker
+
+Ajouter un nouveau *daemon* :
+
+. Aller dans *File > Settings > Build, Execution, Deployment > Docker*
+. Cliquer sur le bouton `+`
+. Le nouvel interpréteur *Docker* s'ajoute à la liste : on peut voir *Connect to Docker daemon with* configuré sur *Unix socket*, avec message le *Connection successful*
+
+Configurer *Docker* :
+
+. Aller dans *File > Settings > Build, Execution, Deployment > Docker > Tools*
+. Dans *Docker Machine executable* apparaît automatiquement *docker*, avec *19.03.2* à droite
+. Dans *Docker Compose executable* apparaît automatiquement */usr/local/bin/docker-compose*
+
+Configurer l'interpréteur *PHP* :
+
+. Aller dans *File > Settings > Languages & Frameworks > PHP*
+. A droite de *CLI Interpreter*, cliquer sur le bouton `...`
+. Dans le nouveau panneau *CLI Interpreters* qui s'affiche, cliquer sur le bouton `+`
+. Dans la fenêtre *Select CLI Interpreter*, choisir *From Docker, Vagrant, VM, ...*
+. Dans le nouveau panneau *Configure Remote PHP Interpreter*, cliquer sur *Docker*. Des données s'affichent automatiquement :
+.. *Server*: *Docker*
+.. *Image name*: *symfony-tdd_app:latest*
+.. *PHP interpreter path*: php
+. Dans le panneau *Configure Remote PHP Interpreter*, Cliquer sur le bouton`OK`
+. Dans le panneau *CLI Interpreters* *symfony-tdd_app:latest* s'ajoute à la liste
+. Cliquer sur le bouton `OK`
+. Dans le panneau *Settings* apparaît automatiquement *symfony-tdd_app:latest* comme *CLI interpreter* et *PHP Storm* renseigne le *Path mappings* et le *Docker container*
+. Cliquer sur le bouton `OK` pour valider le tout
+
+{BACK_TO_TOP}
+
+==== Configurer *PHPUnit*
+
+. Aller dans *File > Settings > Languages & Frameworks > PHP > Test Frameworks*
+. Cliquer sur le bouton `+`, et choisir *PHPUnit by Remote Interpreter*
+. Dans le panneau *PHPUnit by Remote Interpreter*, choisir *symfony-tdd_app:latest*
+. Cliquer sur le bouton `OK`
+. *Interpreter: symfony-tdd_app:latest* d'ajoute à la liste
+. Renseigner dans *Path to script*: */opt/project/vendor/bin/simple-phpunit*
+. En cliquant sur le bouton de raffraichissement, apparaîtra juste en dessous *PHPUnit version: 7.5.16*
+. Cocher *Default configuration file* et indiquer le chemin suivant : */opt/project/phpunit.xml.dist*
+. Cliquer sur le bouton `OK` pour valider le tout
 
 {BACK_TO_TOP}
 

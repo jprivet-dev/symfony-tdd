@@ -6,7 +6,7 @@ use App\Util\Fibonacci01Util;
 use App\Util\Fibonacci02Util;
 use App\Util\Fibonacci03Util;
 use App\Util\Fibonacci04Util;
-use PHPUnit\Framework\TestCase;
+use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
 class FibonacciUtilTest extends TestCase
 {
@@ -15,7 +15,7 @@ class FibonacciUtilTest extends TestCase
     private $fibonacci03Util;
     private $fibonacci04Util;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->fibonacci01Util = new Fibonacci01Util();
         $this->fibonacci02Util = new Fibonacci02Util();

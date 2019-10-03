@@ -233,7 +233,7 @@ Il suffit d'installer le plugin. Vous pourrez ensuite switcher entre les différ
 
 {BACK_TO_TOP}
 
-=== PHP Unit : suivre la couverture de code dans son IDE
+=== *PHPUnit* : suivre la couverture de code *PHPStorm*
 
 ==== Ressources
 
@@ -243,13 +243,13 @@ Il suffit d'installer le plugin. Vous pourrez ensuite switcher entre les différ
 . https://www.jetbrains.com/help/phpstorm/using-phpunit-framework.html
 . https://blog.eleven-labs.com/fr/debug-run-phpunit-tests-using-docker-remote-interpreters-with-phpstorm/
 
-==== Configurer Docker
+==== Configurer *Docker*
 
 Ajouter un nouveau *daemon* :
 
 . Aller dans *File > Settings > Build, Execution, Deployment > Docker*
 . Cliquer sur le bouton `+`
-. Le nouvel interpréteur *Docker* s'ajoute à la liste : on peut voir *Connect to Docker daemon with* configuré sur *Unix socket*, avec message le *Connection successful*
+. Le nouvel interpréteur *Docker* s'ajoute à la liste : on peut voir *Connect to Docker daemon with* configuré sur *Unix socket*, avec le message *Connection successful*
 
 Configurer *Docker* :
 
@@ -267,10 +267,10 @@ Configurer l'interpréteur *PHP* :
 .. *Server*: *Docker*
 .. *Image name*: *symfony-tdd_app:latest*
 .. *PHP interpreter path*: php
-. Dans le panneau *Configure Remote PHP Interpreter*, Cliquer sur le bouton`OK`
+. Dans le panneau *Configure Remote PHP Interpreter*, Cliquer sur le bouton `OK`
 . Dans le panneau *CLI Interpreters* *symfony-tdd_app:latest* s'ajoute à la liste
 . Cliquer sur le bouton `OK`
-. Dans le panneau *Settings* apparaît automatiquement *symfony-tdd_app:latest* comme *CLI interpreter* et *PHP Storm* renseigne le *Path mappings* et le *Docker container*
+. Dans le panneau *Settings* apparaît automatiquement *symfony-tdd_app:latest* comme *CLI interpreter* et *PHPStorm* renseigne le *Path mappings* et le *Docker container*
 . Cliquer sur le bouton `OK` pour valider le tout
 
 {BACK_TO_TOP}

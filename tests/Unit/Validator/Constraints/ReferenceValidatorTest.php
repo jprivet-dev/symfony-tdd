@@ -16,20 +16,20 @@ class ReferenceValidatorTest extends ConstraintValidatorTestCase
         return new ReferenceValidator();
     }
 
-    public function testReturnsAnExceptionIfConstraintIsNotAnInstanceOfReference()
+    public function testInvalidConstraint()
     {
         $this->expectException(UnexpectedTypeException::class);
         $constraint = $this->getMockForAbstractClass(Constraint::class);
         $this->validator->validate('abc123', $constraint);
     }
 
-    public function testReturnsAnExceptionIfValueIsNotAString()
+    public function testInvalidValue()
     {
         $this->expectException(UnexpectedValueException::class);
         $this->validator->validate(123, new Reference());
     }
 
-    public function testNoActionIfValueIsNullOrEmpty()
+    public function testValidValueIsNullOrEmpty()
     {
         $this->validator->validate(null, new Reference());
         $this->assertNoViolation();
@@ -38,13 +38,13 @@ class ReferenceValidatorTest extends ConstraintValidatorTestCase
         $this->assertNoViolation();
     }
 
-    public function testStringIsValid()
+    public function testValidString()
     {
         $this->validator->validate('abc123', new Reference());
         $this->assertNoViolation();
     }
 
-    public function testStringIsInvalid()
+    public function testInvalidString()
     {
         $reference = new Reference([
             'message' => 'myMessage',
@@ -55,11 +55,5 @@ class ReferenceValidatorTest extends ConstraintValidatorTestCase
         $this->buildViolation('myMessage')
             ->setParameter('{{ string }}', 'abc_123')
             ->assertRaised();
-    }
-
-    public function testExpectsStringCompatibleType()
-    {
-        $this->expectException(UnexpectedValueException::class);
-        $this->validator->validate(new \stdClass(), new Reference());
     }
 }

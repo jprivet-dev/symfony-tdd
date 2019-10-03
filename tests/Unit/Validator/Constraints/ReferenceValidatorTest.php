@@ -20,6 +20,19 @@ class ReferenceValidatorTest extends ConstraintValidatorTestCase
         $this->assertNoViolation();
     }
 
+    public function testStringIsInvalid()
+    {
+        $reference = new Reference([
+            'message' => 'myMessage',
+        ]);
+
+        $this->validator->validate('Abc_123', $reference);
+
+        $this->buildViolation('myMessage')
+            ->setParameter('{{ string }}', 'Abc_123')
+            ->assertRaised();
+    }
+
     public function testExpectsStringCompatibleType()
     {
         $this->expectException(UnexpectedValueException::class);

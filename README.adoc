@@ -287,6 +287,17 @@ Configurer l'interpréteur *PHP* :
 . Cocher *Default configuration file* et indiquer le chemin suivant : */opt/project/phpunit.xml.dist*
 . Cliquer sur le bouton `OK` pour valider le tout
 
+==== Bien activer *Prophesize*
+
+En  lançant votre test, vous pourriez avoir l'erreur suivante :
+
+```sh
+Error : Class 'Prophecy\Prophet' not found
+```
+
+Dans la documentation (https://symfony.com/doc/current/components/phpunit_bridge.html#modified-phpunit-script)
+il est indiqué qu'il faut renseigner la variable d'environnement `SYMFONY_PHPUNIT_REMOVE`.
+
 {BACK_TO_TOP}
 
 == Tips

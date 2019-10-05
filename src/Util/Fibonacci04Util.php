@@ -13,7 +13,6 @@ class Fibonacci04Util implements FibonacciUtilInterface
 
         switch ($n) {
             case 1:
-                return 1;
             case 2:
                 return 1;
             case 3:

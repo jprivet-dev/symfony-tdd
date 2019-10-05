@@ -14,7 +14,7 @@ alias tests="php bin/phpunit"
 alias tests-coverage='tests --coverage-html var/artefacts/phpunit/coverage'
 alias open-coverage="gvfs-open var/artefacts/phpunit/coverage"
 alias t="tests"
-alias tc='tests-coverave'
+alias tc='tests-coverage'
 
 alias ut="make unit-tests"
 alias ft="make functional-tests"

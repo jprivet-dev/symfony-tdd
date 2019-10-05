@@ -11,7 +11,10 @@ alias cc="sf cache:clear"
 
 #alias tests="app ./bin/phpunit"
 alias tests="php bin/phpunit"
+alias tests-coverave='tests --coverage-html var/artefacts/phpunit/coverage'
+alias open-coverate="gvfs-open var/artefacts/phpunit/coverage"
 alias t="tests"
+alias tc='tests-coverave'
 
 alias ut="make unit-tests"
 alias ft="make functional-tests"

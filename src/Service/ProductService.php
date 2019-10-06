@@ -31,4 +31,11 @@ class ProductService implements ProductServiceInterface
         $constraint = new Reference();
         return $this->validator->validate($reference, $constraint);
     }
+
+    public function legacyValidateReference(string $reference): ?ConstraintViolationListInterface
+    {
+        @trigger_error(sprintf('Using the "%s::legacyValidateReference" method is deprecated since App version 1.0, use "validateReference" instead.', __CLASS__), E_USER_DEPRECATED);
+        $constraint = new Reference();
+        return $this->validator->validate($reference, $constraint);
+    }
 }

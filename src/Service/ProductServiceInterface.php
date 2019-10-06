@@ -13,4 +13,10 @@ interface ProductServiceInterface
      * @return null|ConstraintViolationListInterface
      */
     public function validateReference(string $reference): ?ConstraintViolationListInterface;
+
+    /**
+     * @param string $reference
+     * @return null|ConstraintViolationListInterface
+     */
+    public function legacyValidateReference(string $reference): ?ConstraintViolationListInterface;
 }

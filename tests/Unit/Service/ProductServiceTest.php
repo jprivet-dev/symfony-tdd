@@ -36,4 +36,15 @@ class ProductServiceTest extends TestCase
 
         $this->productService->validateReference($fakeReference);
     }
+
+    public function testDeprecatedValidateReference()
+    {
+        $fakeReference = '__FAKE_REFERENCE__';
+
+        $this->validator
+            ->validate($fakeReference, Argument::type(Reference::class))
+            ->shouldBeCalledTimes(1);
+
+        $this->productService->legacyValidateReference($fakeReference);
+    }
 }

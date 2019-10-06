@@ -37,7 +37,11 @@ class ProductServiceTest extends TestCase
         $this->productService->validateReference($fakeReference);
     }
 
-    public function testDeprecatedValidateReference()
+    /**
+     * @expectedDeprecation Using `App\Service\ProductService::legacyValidateReference()` method is deprecated since App version 1.0, use `App\Service\ProductService::validateReference()` instead.
+     * @group legacy
+     */
+    public function testLegacyValidateReference()
     {
         $fakeReference = '__FAKE_REFERENCE__';
 

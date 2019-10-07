@@ -1,0 +1,25 @@
+:toc: macro
+:toc-title: Sommaire
+:toclevels: 3
+:numbered:
+
+:BACK_TO_TOP_TARGET: top-target
+:BACK_TO_TOP_LABEL: ⬆ Retour au sommaire
+:BACK_TO_TOP: <<{BACK_TO_TOP_TARGET},{BACK_TO_TOP_LABEL}>>
+
+[#{BACK_TO_TOP_TARGET}]
+= Symfony 4 & TDD
+
+|===
+| Branch 3+| Status
+
+| https://github.com/jprivet-dev/symfony-tdd[master]
+| image:https://travis-ci.org/jprivet-dev/symfony-tdd.svg?branch=master["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-tdd"]
+| image:https://coveralls.io/repos/github/jprivet-dev/symfony-tdd/badge.svg?branch=master["Coverage Status", link="https://coveralls.io/github/jprivet-dev/symfony-tdd?branch=master"]
+| image:https://api.codacy.com/project/badge/Grade/d83935eebccc4610870a0b52039914f3?branch=master["Codacy code quality", link="https://www.codacy.com/manual/jprivet-dev/symfony-tdd?utm_source=github.com&utm_medium=referral&utm_content=jprivet-dev/symfony-tdd&utm_campaign=Badge_Grade"]
+
+| https://github.com/jprivet-dev/symfony-tdd/tree/dev[dev]
+| image:https://travis-ci.org/jprivet-dev/symfony-tdd.svg?branch=dev["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-tdd"]
+| image:https://coveralls.io/repos/github/jprivet-dev/symfony-tdd/badge.svg?branch=dev["Coverage Status", link="https://coveralls.io/github/jprivet-dev/symfony-tdd?branch=dev"]
+| image:https://api.codacy.com/project/badge/Grade/d83935eebccc4610870a0b52039914f3?branch=dev["Codacy code quality", link="https://www.codacy.com/manual/jprivet-dev/symfony-tdd?utm_source=github.com&utm_medium=referral&utm_content=jprivet-dev/symfony-tdd&utm_campaign=Badge_Grade"]
+|===

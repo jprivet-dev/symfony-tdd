@@ -1,4 +1,13 @@
 {
+    "clue/stdio-react": {
+        "version": "v2.3.0"
+    },
+    "clue/term-react": {
+        "version": "v1.2.0"
+    },
+    "clue/utf8-react": {
+        "version": "v1.1.0"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -78,6 +87,9 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
+    "evenement/evenement": {
+        "version": "v3.0.1"
+    },
     "guzzlehttp/guzzle": {
         "version": "6.3.3"
     },
@@ -89,6 +101,9 @@
     },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
+    },
+    "jolicode/jolinotif": {
+        "version": "v2.0.2"
     },
     "nikic/php-parser": {
         "version": "v4.2.4"
@@ -122,6 +137,15 @@
     },
     "ralouphie/getallheaders": {
         "version": "3.0.3"
+    },
+    "react/event-loop": {
+        "version": "v1.1.0"
+    },
+    "react/stream": {
+        "version": "v1.1.0"
+    },
+    "spatie/phpunit-watcher": {
+        "version": "1.12.0"
     },
     "squizlabs/php_codesniffer": {
         "version": "3.0",
@@ -270,6 +294,9 @@
     "symfony/polyfill-php73": {
         "version": "v1.12.0"
     },
+    "symfony/process": {
+        "version": "v4.3.4"
+    },
     "symfony/profiler-pack": {
         "version": "v1.0.4"
     },
@@ -355,6 +382,9 @@
     },
     "twig/twig": {
         "version": "v2.11.3"
+    },
+    "yosymfony/resource-watcher": {
+        "version": "v1.3.0"
     },
     "zendframework/zend-code": {
         "version": "3.3.2"

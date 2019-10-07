@@ -5,4 +5,4 @@ watch:
   fileMask: '*.php'
 phpunit:
   binaryPath: bin/phpunit
-  arguments: '--stop-on-failure'
+  arguments: ' --stop-on-error --stop-on-failure --stop-on-warning'

@@ -11,6 +11,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ProductServiceTest extends TestCase
 {
+    const FAKE_REFERENCE = '__FAKE_REFERENCE__';
+
     private $productRepository;
     private $validator;
     private $productService;
@@ -28,13 +30,11 @@ class ProductServiceTest extends TestCase
 
     public function testValidateReference()
     {
-        $fakeReference = '__FAKE_REFERENCE__';
-
         $this->validator
-            ->validate($fakeReference, Argument::type(Reference::class))
+            ->validate(self::FAKE_REFERENCE, Argument::type(Reference::class))
             ->shouldBeCalledTimes(1);
 
-        $this->productService->validateReference($fakeReference);
+        $this->productService->validateReference(self::FAKE_REFERENCE);
     }
 
     /**
@@ -43,12 +43,18 @@ class ProductServiceTest extends TestCase
      */
     public function testLegacyValidateReference()
     {
-        $fakeReference = '__FAKE_REFERENCE__';
+        $this->productService->legacyValidateReference(self::FAKE_REFERENCE);
+    }
 
+    /**
+     * Allows to display the legacy deprecation notice in the terminal for the demo
+     */
+    public function testLegacyValidateReferenceDisplayDeprecationNoticeInTerminal()
+    {
         $this->validator
-            ->validate($fakeReference, Argument::type(Reference::class))
+            ->validate(self::FAKE_REFERENCE, Argument::type(Reference::class))
             ->shouldBeCalledTimes(1);
 
-        $this->productService->legacyValidateReference($fakeReference);
+        $this->productService->legacyValidateReference(self::FAKE_REFERENCE);
     }
 }

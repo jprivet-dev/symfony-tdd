@@ -28,6 +28,16 @@ class ProductServiceTest extends TestCase
         );
     }
 
+    public function testCkeckAll()
+    {
+        $this->productRepository
+            ->findAll()
+            ->willReturn([]);
+
+        $this->productRepository->findAll()->shouldBeCalledTimes(1);
+        $this->productService->checkAll();
+    }
+
     public function testValidateReference()
     {
         $this->validator

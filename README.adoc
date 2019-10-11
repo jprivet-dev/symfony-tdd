@@ -8,7 +8,7 @@
 :BACK_TO_TOP: <<{BACK_TO_TOP_TARGET},{BACK_TO_TOP_LABEL}>>
 
 [#{BACK_TO_TOP_TARGET}]
-= Symfony 4 & TDD
+= Symfony 4 & TDD (Workshop)
 
 |===
 | Branch 3+| Status
@@ -23,3 +23,145 @@
 | image:https://coveralls.io/repos/github/jprivet-dev/symfony-tdd/badge.svg?branch=dev["Coverage Status", link="https://coveralls.io/github/jprivet-dev/symfony-tdd?branch=dev"]
 | image:https://api.codacy.com/project/badge/Grade/d83935eebccc4610870a0b52039914f3?branch=dev["Codacy code quality", link="https://www.codacy.com/manual/jprivet-dev/symfony-tdd?utm_source=github.com&utm_medium=referral&utm_content=jprivet-dev/symfony-tdd&utm_campaign=Badge_Grade"]
 |===
+
+toc::[]
+
+== Présentation
+
+Ce repo est mon atelier pour tester et partager des cas pratiques autour du *TDD* (Test-Driven Development) et du framework *Symfony*.
+
+J'ai démarré cet atelier "dockerisé" à partir du repo https://github.com/dunglas/symfony-docker de  https://dunglas.fr/[Kevin Dunglas].
+
+== Prérequis technique : avoir *Docker CE* et *Docker Compose* installés
+
+* https://docs.docker.com/install/
+* https://docs.docker.com/compose/install/
+
+{BACK_TO_TOP}
+
+== Démarrer avec le projet
+
+=== Récupérer le repo
+
+```sh
+$ git clone git@github.com:jprivet-dev/symfony-tdd.git
+```
+=== Démarrer le projet
+
+```sh
+$ cd symfony-tdd
+$ docker-compose up -d
+```
+=== Accéder au projet
+
+Aller sur https://localhost
+
+{BACK_TO_TOP}
+
+== Jouer avec les tests automatiques & *PHPUnit*
+
+=== Lancer les tests avec *PHPUnit*
+
+Le projet utilise le *PHPUnit Bridge* de *Symfony* (https://symfony.com/doc/current/testing.html) :
+
+```sh
+$ docker-compose exec app ./vendor/bin/simple-phpunit
+```
+
+=== *PHPUnit Watcher* : relancer automatiquement les tests après modification d'un fichier `.php`
+
+Le projet utilise ce _watcher_ très pratique (https://github.com/spatie/phpunit-watcher) :
+
+```sh
+$ docker-compose exec app ./vendor/bin/phpunit-watcher watch
+```
+
+{BACK_TO_TOP}
+
+== Sujets traités
+
+=== La nomenclature des titres
+
+|===
+|(#) LOREM  | Déjà testé chez un client : à intégrer et à documenter
+|(?) LOREM  | Sujet à approfondir, à intégrer et à documenter
+|LOREM      | Sujet intégré et documenté
+|===
+
+=== (#) Ne plus injecter *l'entity manager*
+
+{BACK_TO_TOP}
+
+=== (#) Créer et tester un *repository*
+
+{BACK_TO_TOP}
+
+=== (?) La performance avec *Doctrine*
+
+{BACK_TO_TOP}
+
+=== (#) Créer et tester une *classe abstraite*
+
+{BACK_TO_TOP}
+
+=== (?) Créer et tester un *trait*
+
+{BACK_TO_TOP}
+
+=== (#) Créer et tester un *validator*
+
+{BACK_TO_TOP}
+
+=== (#) Créer et tester un *custom type*
+
+{BACK_TO_TOP}
+
+=== (#) Créer et tester une *fonction Twig*
+
+{BACK_TO_TOP}
+
+=== (#) Créer un *smoke testing*
+
+{BACK_TO_TOP}
+
+=== (#) Créer, dispatcher et tester un *event*
+
+{BACK_TO_TOP}
+
+=== (#) Mocker le *temps*
+
+{BACK_TO_TOP}
+
+=== (?) Créer et tester un *composant Vue.js*
+
+{BACK_TO_TOP}
+
+=== (#) Créer et tester une *commande Symfony*
+
+{BACK_TO_TOP}
+
+=== (#) Créer et tester une *requête ajax*
+
+{BACK_TO_TOP}
+
+=== (?) Travailler avec des *collections d'objets typés*
+
+{BACK_TO_TOP}
+
+=== (#) Travailler avec le *workflow component*
+
+{BACK_TO_TOP}
+
+=== (#) Travailler avec le *process bundle*
+
+{BACK_TO_TOP}
+
+=== (?) Créer et tester des *éléments asynchrones PHP*
+
+{BACK_TO_TOP}
+
+== Licence
+
+`symfony-tdd` est publié sous licence *MIT*
+
+{BACK_TO_TOP}

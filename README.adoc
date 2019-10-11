@@ -83,7 +83,7 @@ $ docker-compose exec app ./vendor/bin/phpunit-watcher watch
 === La nomenclature des titres
 
 |===
-|(#) LOREM  | Déjà testé chez un client : à intégrer et à documenter
+|(#) LOREM  | Sujet déjà traité chez un client : à intégrer et à documenter
 |(?) LOREM  | Sujet à approfondir, à intégrer et à documenter
 |LOREM      | Sujet intégré et documenté
 |===
@@ -96,15 +96,7 @@ $ docker-compose exec app ./vendor/bin/phpunit-watcher watch
 
 {BACK_TO_TOP}
 
-=== (?) La performance avec *Doctrine*
-
-{BACK_TO_TOP}
-
 === (#) Créer et tester une *classe abstraite*
-
-{BACK_TO_TOP}
-
-=== (?) Créer et tester un *trait*
 
 {BACK_TO_TOP}
 
@@ -132,10 +124,6 @@ $ docker-compose exec app ./vendor/bin/phpunit-watcher watch
 
 {BACK_TO_TOP}
 
-=== (?) Créer et tester un *composant Vue.js*
-
-{BACK_TO_TOP}
-
 === (#) Créer et tester une *commande Symfony*
 
 {BACK_TO_TOP}
@@ -144,15 +132,27 @@ $ docker-compose exec app ./vendor/bin/phpunit-watcher watch
 
 {BACK_TO_TOP}
 
-=== (?) Travailler avec des *collections d'objets typés*
-
-{BACK_TO_TOP}
-
 === (#) Travailler avec le *workflow component*
 
 {BACK_TO_TOP}
 
 === (#) Travailler avec le *process bundle*
+
+{BACK_TO_TOP}
+
+=== (?) Travailler avec des *collections d'objets typés*
+
+{BACK_TO_TOP}
+
+=== (?) La performance avec *Doctrine*
+
+{BACK_TO_TOP}
+
+=== (?) Créer et tester un *trait*
+
+{BACK_TO_TOP}
+
+=== (?) Créer et tester un *composant Vue.js*
 
 {BACK_TO_TOP}
 

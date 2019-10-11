@@ -11,6 +11,7 @@ alias _PHPUNIT="_APP ./vendor/bin/simple-phpunit"
 
 alias reload=". .bash_aliases"
 
+alias php="_PHP"
 alias sf="_SYMFONY"
 alias cc="_SYMFONY cache:clear"
 alias composer="_COMPOSER"
@@ -20,7 +21,8 @@ alias tests-coverage='_PHPUNIT --coverage-html var/artefacts/phpunit/coverage'
 alias tests-watch="_PHP vendor/bin/phpunit-watcher watch"
 alias open-coverage="gvfs-open var/artefacts/phpunit/coverage"
 
-alias t="tests"
+alias t="tests --stop-on-error --stop-on-failure --stop-on-warning"
+alias tnostop="tests"
 alias tc='tests-coverage'
 alias tw='tests-watch'
 alias ut="make unit-tests"

@@ -17,7 +17,7 @@ class ProductServiceTest extends TestCase
     private $validator;
     private $productService;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->productRepository = $this->prophesize(ProductRepositoryInterface::class);
         $this->validator = $this->prophesize(ValidatorInterface::class);

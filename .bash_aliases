@@ -18,7 +18,7 @@ alias composer="_COMPOSER"
 
 alias tests="_PHPUNIT"
 alias tests-coverage='_PHPUNIT --coverage-html var/artefacts/phpunit/coverage'
-alias tests-watch="_PHP vendor/bin/phpunit-watcher watch"
+alias tests-watch="_PHP ./vendor/bin/phpunit-watcher watch"
 alias open-coverage="gvfs-open var/artefacts/phpunit/coverage"
 
 alias t="tests --stop-on-error --stop-on-failure --stop-on-warning"

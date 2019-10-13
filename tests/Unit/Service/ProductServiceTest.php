@@ -4,9 +4,9 @@ namespace App\Tests\Unit\Service;
 
 use App\Repository\ProductRepositoryInterface;
 use App\Service\ProductService;
+use App\Tests\TestCase;
 use App\Validator\Constraints\Reference;
 use Prophecy\Argument;
-use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ProductServiceTest extends TestCase

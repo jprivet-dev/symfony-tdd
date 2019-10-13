@@ -2,12 +2,12 @@
 
 namespace App\Tests\Unit\Validator\Constraints;
 
+use App\Tests\ConstraintValidatorTestCase;
 use App\Validator\Constraints\Reference;
 use App\Validator\Constraints\ReferenceValidator;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
-use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
 class ReferenceValidatorTest extends ConstraintValidatorTestCase
 {

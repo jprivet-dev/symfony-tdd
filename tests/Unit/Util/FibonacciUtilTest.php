@@ -2,11 +2,11 @@
 
 namespace App\Tests\Unit\Util;
 
+use App\Tests\TestCase;
 use App\Util\Fibonacci01Util;
 use App\Util\Fibonacci02Util;
 use App\Util\Fibonacci03Util;
 use App\Util\Fibonacci04Util;
-use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
 class FibonacciUtilTest extends TestCase
 {

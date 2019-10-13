@@ -8,8 +8,8 @@ use App\Tests\Shared\Models\Repository\DummyRepository;
 use App\Tests\Shared\Models\Repository\DummyWithoutEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use PHPUnit\Framework\TestCase;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
+use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
 class AbstractRepositoryDummyClassTest extends TestCase
 {

@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
 
-class AbstractRepositoryTest extends TestCase
+class AbstractRepositoryDummyClassTest extends TestCase
 {
     public function testRepositoryClassWithEntity()
     {

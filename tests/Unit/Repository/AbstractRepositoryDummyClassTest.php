@@ -6,10 +6,10 @@ use App\Exception\EntityDoesNotExistException;
 use App\Tests\Shared\Models\Entity\Dummy;
 use App\Tests\Shared\Models\Repository\DummyRepository;
 use App\Tests\Shared\Models\Repository\DummyWithoutEntityRepository;
+use App\Tests\TestCase;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
-use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
 class AbstractRepositoryDummyClassTest extends TestCase
 {

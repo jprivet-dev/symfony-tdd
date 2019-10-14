@@ -10,7 +10,7 @@ class AbstractClassExampleTest extends TestCase
     /**
      * @see https://phpunit.readthedocs.io/en/8.4/test-doubles.html#mocking-traits-and-abstract-classes
      */
-    public function testPrintOutWithMockForAbstractClassMethod()
+    public function testConcreteMethodWithMockForAbstractClassMethod()
     {
         $stub = $this->getMockForAbstractClass(AbstractClassExample::class);
 
@@ -25,7 +25,7 @@ class AbstractClassExampleTest extends TestCase
     /**
      * @see https://mnapoli.fr/anonymous-classes-in-tests/
      */
-    public function testPrintOutWithAnonymousClass()
+    public function testConcreteMethodWithAnonymousClass()
     {
         $class = new class() extends AbstractClassExample {
             protected function abstractMethod(): string
@@ -37,7 +37,7 @@ class AbstractClassExampleTest extends TestCase
         $this->assertSame('foo', $class->concreteMethod());
     }
 
-    public function testPrintOutWithDummyClass()
+    public function testConcreteMethodWithDummyClass()
     {
         $dummy = new Dummy();
         $this->assertSame('foo', $dummy->concreteMethod());

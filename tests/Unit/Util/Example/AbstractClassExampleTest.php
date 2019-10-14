@@ -13,9 +13,9 @@ class AbstractClassExampleTest extends TestCase
 
         $abstract
             ->expects($this->once())
-            ->method('getValue')
+            ->method('abstractMethod')
             ->willReturn('foo');
 
-        $this->assertSame('foo', $abstract->printOut());
+        $this->assertSame('foo', $abstract->concreteMethod());
     }
 }

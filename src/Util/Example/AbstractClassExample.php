@@ -8,11 +8,11 @@ namespace App\Util\Example;
 abstract class AbstractClassExample
 {
     // Force Extending class to define this method
-    abstract protected function getValue(): string;
+    abstract protected function abstractMethod(): string;
 
     // Common method
-    public function printOut(): string
+    public function concreteMethod(): string
     {
-        return $this->getValue();
+        return $this->abstractMethod();
     }
 }

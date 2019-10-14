@@ -2,7 +2,7 @@
 
 namespace App\Util\Example;
 
-/*
+/**
  * @see https://www.php.net/manual/en/language.oop5.abstract.php
  */
 abstract class AbstractClassExample

@@ -3,9 +3,10 @@
 namespace App\Tests\Unit\Repository;
 
 use App\Exception\EntityDoesNotExistException;
+use App\Repository\AbstractRepository;
 use App\Tests\Shared\Models\Entity\Dummy;
 use App\Tests\Shared\Models\Repository\DummyRepository;
-use App\Tests\Shared\Models\Repository\DummyWithoutEntityRepository;
+use App\Tests\Shared\Models\Repository\DummyRepositoryWithoutEntity;
 use App\Tests\TestCase;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
@@ -13,61 +14,56 @@ use Symfony\Bridge\Doctrine\ManagerRegistry;
 
 class AbstractRepositoryDummyClassTest extends TestCase
 {
-    public function testRepositoryClassWithEntity()
-    {
-        $abstractRepository = $this->getAbstracRepositoryWithRealRepositoryClassWithEntity();
-        $this->assertSame(Dummy::class, $abstractRepository->getClassName());
-    }
-
     public function testRepositoryIntoEntityClassConverter()
     {
-        $abstractRepository = $this->getAbstracRepositoryWithRealRepositoryClassWithEntity();
+        $abstract = $this->getMockBuilder(AbstractRepository::class)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
 
         $repositoryClass = 'My\\Path\\To\\Repository\\DummyRepository';
         $expectedEntityClass = 'My\\Path\\To\\Entity\\Dummy';
 
         $this->assertSame(
             $expectedEntityClass,
-            $abstractRepository->repositoryIntoEntityClassConverter($repositoryClass)
+            $abstract->repositoryIntoEntityClassConverter($repositoryClass)
         );
     }
 
+    /**
+     * @depends testRepositoryIntoEntityClassConverter
+     */
+    public function testRepositoryClassWithEntity()
+    {
+        $abstract = new DummyRepository($this->registry(Dummy::class));
+
+        $this->assertSame(
+            Dummy::class,
+            $abstract->getClassName()
+        );
+    }
+
+    /**
+     * @depends testRepositoryIntoEntityClassConverter
+     */
     public function testRepositoryClassWithoutEntity()
     {
         $this->expectException(EntityDoesNotExistException::class);
-        $this->getAbstracRepositoryWithRealRepositoryClassWithoutEntity();
+
+        new class($this->registry(null)) extends AbstractRepository
+        {
+        };
     }
 
-    /*
-     * PRIVATE
-     */
-
-    private function getAbstracRepositoryWithRealRepositoryClassWithEntity()
-    {
-        $registry = $this->prophesizeRegistry(Dummy::class);
-        return new DummyRepository($registry->reveal());
-    }
-
-    private function getAbstracRepositoryWithRealRepositoryClassWithoutEntity()
-    {
-        $registry = $this->prophesizeRegistry(null);
-        return new DummyWithoutEntityRepository($registry->reveal());
-    }
-
-    private function prophesizeRegistry(?string $entityClass)
+    private function registry(?string $entityClass): ManagerRegistry
     {
         $classMetadata = new ClassMetadata($entityClass);
 
         $manager = $this->prophesize(EntityManagerInterface::class);
-        $manager
-            ->getClassMetadata($entityClass)
-            ->willReturn($classMetadata);
+        $manager->getClassMetadata($entityClass)->willReturn($classMetadata);
 
         $registry = $this->prophesize(ManagerRegistry::class);
-        $registry
-            ->getManagerForClass($entityClass)
-            ->willReturn($manager->reveal());
+        $registry->getManagerForClass($entityClass)->willReturn($manager->reveal());
 
-        return $registry;
+        return $registry->reveal();
     }
 }

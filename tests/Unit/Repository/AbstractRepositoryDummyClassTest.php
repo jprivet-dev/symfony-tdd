@@ -19,16 +19,17 @@ class AbstractRepositoryDummyClassTest extends TestCase
         $this->assertSame(Dummy::class, $abstractRepository->getClassName());
     }
 
-    public function testConvertRepositoryClassIntoEntityClass()
+    public function testRepositoryIntoEntityClassConverter()
     {
         $abstractRepository = $this->getAbstracRepositoryWithRealRepositoryClassWithEntity();
 
         $repositoryClass = 'My\\Path\\To\\Repository\\DummyRepository';
         $expectedEntityClass = 'My\\Path\\To\\Entity\\Dummy';
 
-        $entityClass = $abstractRepository->convertRepositoryClassIntoEntityClass($repositoryClass);
-
-        $this->assertSame($expectedEntityClass, $entityClass);
+        $this->assertSame(
+            $expectedEntityClass,
+            $abstractRepository->repositoryIntoEntityClassConverter($repositoryClass)
+        );
     }
 
     public function testRepositoryClassWithoutEntity()

@@ -13,5 +13,5 @@ interface AbstractRepositoryInterface
      * @param string $repositoryClass
      * @return string
      */
-    public function convertRepositoryClassIntoEntityClass(string $repositoryClass): string;
+    public function repositoryIntoEntityClassConverter(string $repositoryClass): string;
 }

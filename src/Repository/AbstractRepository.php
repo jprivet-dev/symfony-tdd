@@ -8,6 +8,9 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 
 abstract class AbstractRepository extends ServiceEntityRepository implements AbstractRepositoryInterface
 {
+    const SEARCH = ['Repository\\', 'Repository'];
+    const REPLACE = ['Entity\\', ''];
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct(
@@ -21,8 +24,8 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Abs
      */
     public function getEntityClass(): string
     {
-        $repositoryClass = \get_class($this);
-        $entityClass = $this->convertRepositoryClassIntoEntityClass($repositoryClass);
+        $repositoryClass = $this->getRepositoryClass();
+        $entityClass = $this->repositoryIntoEntityClassConverter($repositoryClass);
 
         if (\class_exists($entityClass)) {
             return $entityClass;
@@ -34,12 +37,16 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Abs
     /**
      * {@inheritdoc}
      */
-    public function convertRepositoryClassIntoEntityClass(string $repositoryClass): string
+    public function getRepositoryClass(): string
     {
-        return str_replace(
-            ['Repository\\', 'Repository'],
-            ['Entity\\', ''],
-            $repositoryClass
-        );
+        return \get_class($this);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function repositoryIntoEntityClassConverter(string $repositoryClass): string
+    {
+        return str_replace(self::SEARCH, self::REPLACE, $repositoryClass);
     }
 }

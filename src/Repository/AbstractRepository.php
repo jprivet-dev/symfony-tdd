@@ -6,6 +6,28 @@ use App\Exception\EntityDoesNotExistException;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
+/**
+ * This abstract class is inspired by the "Inject a repository instead of an entity manager" article by Matthias Noback.
+ * It is able to find the entity (Dummy.php) attached to the injected repository (DummyRepository.php).
+ * Examples of trees:
+ *
+ * .
+ * `-- src
+ *      |-- Entity
+ *      |      `-- Dummy.php
+ *      `-- Repository
+ *             `-- DummyRepository.php
+ *
+ * .
+ * `-- src
+ *      `-- AppBundle
+ *              |-- Entity
+ *              |      `-- Dummy.php
+ *              `-- Repository
+ *                     `-- DummyRepository.php
+ *
+ * @see https://matthiasnoback.nl/2014/05/inject-a-repository-instead-of-an-entity-manager/
+ */
 abstract class AbstractRepository extends ServiceEntityRepository implements AbstractRepositoryInterface
 {
     const SEARCH = ['Repository\\', 'Repository'];

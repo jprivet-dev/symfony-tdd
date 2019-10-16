@@ -27,6 +27,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  *                     `-- DummyRepository.php
  *
  * @see https://matthiasnoback.nl/2014/05/inject-a-repository-instead-of-an-entity-manager/
+ * @see https://github.com/jprivet-dev/symfony-tdd
  */
 abstract class AbstractRepository extends ServiceEntityRepository implements AbstractRepositoryInterface
 {

@@ -146,7 +146,19 @@ Fichiers :
 
 {BACK_TO_TOP}
 
-=== (#) Créer et tester un *validator*
+=== (#) Créer et tester un *custom validator*
+
+Ressources :
+
+* https://symfony.com/doc/current/validation/custom_constraint.html
+* https://github.com/symfony/validator/blob/master/Test/ConstraintValidatorTestCase.php
+* https://github.com/symfony/validator/blob/master/Tests/Constraints/EmailValidatorTest.php
+
+Fichiers :
+
+* {uri-rel-file-base}src/Validator/Constraints/Reference.php[]
+* {uri-rel-file-base}src/Validator/Constraints/ReferenceValidator.php[]
+* {uri-rel-file-base}tests/Unit/Validator/Constraints/ReferenceValidatorTest.php[]
 
 {BACK_TO_TOP}
 

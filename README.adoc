@@ -107,7 +107,7 @@ $ docker-compose exec app ./vendor/bin/phpunit-watcher watch
 
 == Sujets traités
 
-=== Principes utilisés dans des projets "clients"
+=== Principes utilisés dans des projets *"clients"*
 
 ==== Ne plus injecter *l'entity manager*
 

@@ -107,15 +107,9 @@ $ docker-compose exec app ./vendor/bin/phpunit-watcher watch
 
 == Sujets traités
 
-=== La nomenclature des titres
+=== Principes utilisés dans des projets "clients"
 
-|===
-|(#) LOREM  | Sujet déjà traité chez un client : à intégrer et à documenter
-|(?) LOREM  | Sujet à approfondir, à intégrer et à documenter
-|LOREM      | Sujet intégré et documenté
-|===
-
-=== (#) Ne plus injecter *l'entity manager*
+==== Ne plus injecter *l'entity manager*
 
 Ressources :
 
@@ -128,11 +122,11 @@ Fichiers :
 
 {BACK_TO_TOP}
 
-=== (#) Créer et tester un *repository*
+==== Créer et tester un *repository*
 
 {BACK_TO_TOP}
 
-=== (#) Créer et tester une *classe abstraite*
+==== Créer et tester une *classe abstraite*
 
 Ressources :
 
@@ -146,7 +140,7 @@ Fichiers :
 
 {BACK_TO_TOP}
 
-=== (#) Créer et tester un *custom validator*
+==== Créer et tester un *custom validator*
 
 Ressources :
 
@@ -162,59 +156,61 @@ Fichiers :
 
 {BACK_TO_TOP}
 
-=== (#) Créer et tester un *custom type*
+==== Créer et tester un *custom type*
 
 {BACK_TO_TOP}
 
-=== (#) Créer et tester une *fonction Twig*
+==== Créer et tester une *fonction Twig*
 
 {BACK_TO_TOP}
 
-=== (#) Créer un *smoke testing*
+==== Créer un *smoke testing*
 
 {BACK_TO_TOP}
 
-=== (#) Créer, dispatcher et tester un *event*
+==== Créer, dispatcher et tester un *event*
 
 {BACK_TO_TOP}
 
-=== (#) Mocker le *temps*
+==== Mocker le *temps*
 
 {BACK_TO_TOP}
 
-=== (#) Créer et tester une *commande Symfony*
+==== Créer et tester une *commande Symfony*
 
 {BACK_TO_TOP}
 
-=== (#) Créer et tester une *requête ajax*
+==== Créer et tester une *requête ajax*
 
 {BACK_TO_TOP}
 
-=== (#) Travailler avec le *workflow component*
+==== Travailler avec le *workflow component*
 
 {BACK_TO_TOP}
 
-=== (#) Travailler avec le *process bundle*
+==== Travailler avec le *process bundle*
 
 {BACK_TO_TOP}
 
-=== (?) Travailler avec des *collections d'objets typés*
+=== R&D
+
+==== Travailler avec des *collections d'objets typés*
 
 {BACK_TO_TOP}
 
-=== (?) La performance avec *Doctrine*
+==== La performance avec *Doctrine*
 
 {BACK_TO_TOP}
 
-=== (?) Créer et tester un *trait*
+==== Créer et tester un *trait*
 
 {BACK_TO_TOP}
 
-=== (?) Créer et tester un *composant Vue.js*
+==== Créer et tester un *composant Vue.js*
 
 {BACK_TO_TOP}
 
-=== (?) Créer et tester des *éléments asynchrones PHP*
+==== Créer et tester des *éléments asynchrones PHP*
 
 {BACK_TO_TOP}
 

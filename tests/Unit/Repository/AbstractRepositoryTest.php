@@ -6,27 +6,46 @@ use App\Exception\EntityDoesNotExistException;
 use App\Repository\AbstractRepository;
 use App\Tests\Shared\Models\Entity\Dummy;
 use App\Tests\Shared\Models\Repository\DummyRepository;
-use App\Tests\Shared\Models\Repository\DummyRepositoryWithoutEntity;
 use App\Tests\TestCase;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
 
-class AbstractRepositoryDummyClassTest extends TestCase
+class AbstractRepositoryTest extends TestCase
 {
-    public function testRepositoryIntoEntityClassConverter()
+    /**
+     * @dataProvider classNameProvider
+     * @param string $repositoryClass
+     * @param string $expectedEntityClass
+     */
+    public function testRepositoryIntoEntityClassConverter(string $repositoryClass, string $expectedEntityClass)
     {
         $abstract = $this->getMockBuilder(AbstractRepository::class)
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
 
-        $repositoryClass = 'My\\Path\\To\\Repository\\DummyRepository';
-        $expectedEntityClass = 'My\\Path\\To\\Entity\\Dummy';
-
         $this->assertSame(
             $expectedEntityClass,
             $abstract->repositoryIntoEntityClassConverter($repositoryClass)
         );
+    }
+
+    public function classNameProvider()
+    {
+        return [
+            [
+                'DummyRepository',
+                'Dummy',
+            ],
+            [
+                'Repository\\DummyRepository',
+                'Entity\\Dummy',
+            ],
+            [
+                'My\\Class\\Name\\Repository\\DummyRepository',
+                'My\\Class\\Name\\Entity\\Dummy',
+            ]
+        ];
     }
 
     /**
@@ -49,12 +68,12 @@ class AbstractRepositoryDummyClassTest extends TestCase
     {
         $this->expectException(EntityDoesNotExistException::class);
 
-        new class($this->registry(null)) extends AbstractRepository
+        new class($this->registry()) extends AbstractRepository
         {
         };
     }
 
-    private function registry(?string $entityClass): ManagerRegistry
+    private function registry(?string $entityClass = null): ManagerRegistry
     {
         $classMetadata = new ClassMetadata($entityClass);
 

@@ -16,7 +16,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-// Variables:
+// variables:
 
 :uri-org: https://github.com/jprivet-dev
 :uri-repo: {uri-org}/symfony-tdd

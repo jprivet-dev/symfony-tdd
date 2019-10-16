@@ -1,7 +1,8 @@
 SHELL=/bin/bash
 
 DC = docker-compose
-APP = $(DC) exec app
+EXEC = $(DC) exec
+APP = $(EXEC) app
 PHP = $(APP) php
 #PHPUNIT = $(PHP) bin/phpunit
 PHPUNIT = $(APP) ./vendor/bin/simple-phpunit
@@ -9,6 +10,7 @@ CODESNIFFER = $(PHP) ./vendor/bin/phpcs
 CODESNIFFER_FIX = $(PHP) ./vendor/bin/phpcbf
 MESSDETECTOR = $(PHP) ./vendor/bin/phpmd
 ARTEFACTS = var/artefacts
+XDEBUG_INI = /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 .PHONY: start
 start: ## Docker : builds, (re)creates, starts, and attaches to containers for a service.
@@ -88,4 +90,14 @@ codesniffer-fix:
 .PHONY: messdetector
 messdetector:
 	$(MESSDETECTOR) ./src
+
+.PHONY: enable-xdebug
+enable-xdebug: ## Xdebug : enable the module
+	$(EXEC) --user 0 app sed -i.default "s/^;zend_extension=/zend_extension=/" $(XDEBUG_INI)
+	@echo -e '\033[1;42mXdebug ON\033[0m';
+
+.PHONY: disable-xdebug
+disable-xdebug: ## Xdebug : disable the module
+	$(EXEC) --user 0 app sed -i.default "s/^zend_extension=/;zend_extension=/" $(XDEBUG_INI)
+	@echo -e '\033[1;41mXdebug OFF\033[0m';
 

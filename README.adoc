@@ -134,6 +134,16 @@ Fichiers :
 
 === (#) Créer et tester une *classe abstraite*
 
+Ressources :
+
+* https://phpunit.readthedocs.io/en/8.4/test-doubles.html#mocking-traits-and-abstract-classes
+* https://mnapoli.fr/anonymous-classes-in-tests/
+
+Fichiers :
+
+* {uri-rel-file-base}src/Util/Example/AbstractClassExample.php[]
+* {uri-rel-file-base}tests/Unit/Util/Example/AbstractClassExampleTest.php[]
+
 {BACK_TO_TOP}
 
 === (#) Créer et tester un *validator*

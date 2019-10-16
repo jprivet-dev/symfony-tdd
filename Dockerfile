@@ -60,12 +60,12 @@ RUN set -eux \
     && apk add --no-cache --virtual .api-phpexts-rundeps $runDeps \
 	&& apk del .build-deps
 
-#ARG XDEBUG_VERSION=2.6.0
-#RUN set -eux; \
-#	apk add --no-cache --virtual .build-deps $PHPIZE_DEPS; \
-#	pecl install xdebug-$XDEBUG_VERSION; \
-#	docker-php-ext-enable xdebug; \
-#	apk del .build-deps
+ARG XDEBUG_VERSION=2.6.0
+RUN set -eux; \
+	apk add --no-cache --virtual .build-deps $PHPIZE_DEPS; \
+	pecl install xdebug-$XDEBUG_VERSION; \
+	docker-php-ext-enable xdebug; \
+	apk del .build-deps
 
 RUN ln -s $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini
 COPY docker/app/conf.d/symfony.ini $PHP_INI_DIR/conf.d/symfony.ini

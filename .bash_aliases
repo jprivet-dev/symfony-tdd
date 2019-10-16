@@ -11,6 +11,7 @@ alias _PHPUNIT="_APP ./vendor/bin/simple-phpunit"
 
 alias reload=". .bash_aliases"
 
+alias app="_APP"
 alias php="_PHP"
 alias sf="_SYMFONY"
 alias cc="_SYMFONY cache:clear"

@@ -3,6 +3,29 @@
 :toclevels: 3
 :numbered:
 
+ifndef::env-github[:icons: font]
+ifdef::env-github[]
+:status:
+:outfilesuffix: .adoc
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+
+:uri-org: https://github.com/jprivet-dev
+:uri-repo: {uri-org}/symfony-tdd
+
+:uri-rel-file-base: link:
+:uri-rel-tree-base: link:
+ifdef::env-site,env-yard[]
+:uri-rel-file-base: {uri-repo}/blob/master/
+:uri-rel-tree-base: {uri-repo}/tree/master/
+endif::[]
+
+:uri-license: {uri-rel-file-base}LICENSE
+
 :BACK_TO_TOP_TARGET: top-target
 :BACK_TO_TOP_LABEL: ⬆ Retour au sommaire
 :BACK_TO_TOP: <<{BACK_TO_TOP_TARGET},{BACK_TO_TOP_LABEL}>>
@@ -90,6 +113,15 @@ $ docker-compose exec app ./vendor/bin/phpunit-watcher watch
 
 === (#) Ne plus injecter *l'entity manager*
 
+Ressources :
+
+* https://matthiasnoback.nl/2014/05/inject-a-repository-instead-of-an-entity-manager/
+
+Fichiers :
+
+* {uri-rel-file-base}/src/Repository/AbstractRepository.php
+* {uri-rel-file-base}/tests/Unit/Repository/AbstractRepositoryTest.php
+
 {BACK_TO_TOP}
 
 === (#) Créer et tester un *repository*
@@ -162,6 +194,6 @@ $ docker-compose exec app ./vendor/bin/phpunit-watcher watch
 
 == Licence
 
-`symfony-tdd` est publié sous licence *MIT*
+`symfony-tdd` est publié sous {uri-license}[LICENSE] *MIT*.
 
 {BACK_TO_TOP}

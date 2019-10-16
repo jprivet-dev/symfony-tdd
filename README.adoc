@@ -1,3 +1,5 @@
+// settings:
+
 :toc: macro
 :toc-title: Sommaire
 :toclevels: 3
@@ -13,6 +15,8 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :warning-caption: :warning:
 endif::[]
+
+// Variables:
 
 :uri-org: https://github.com/jprivet-dev
 :uri-repo: {uri-org}/symfony-tdd
@@ -119,8 +123,8 @@ Ressources :
 
 Fichiers :
 
-* {uri-rel-file-base}/src/Repository/AbstractRepository.php
-* {uri-rel-file-base}/tests/Unit/Repository/AbstractRepositoryTest.php
+* {uri-rel-file-base}src/Repository/AbstractRepository.php[]
+* {uri-rel-file-base}tests/Unit/Repository/AbstractRepositoryTest.php[]
 
 {BACK_TO_TOP}
 

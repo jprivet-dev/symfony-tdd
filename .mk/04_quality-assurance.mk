@@ -29,5 +29,5 @@ qa.messdetector: ##
 	$(MESSDETECTOR) $(FOLDER_SRC)
 
 .PHONY: qa.security.check
-qa.security.check: ## PHP Quality Assurance: check security of your dependencies (https://security.symfony.com/)
+qa.security.check: ## Symfony security: check security of your dependencies. See https://security.symfony.com/
 	$(APP) ./vendor/bin/security-checker security:check

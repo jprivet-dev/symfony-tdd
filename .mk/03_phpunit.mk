@@ -6,12 +6,13 @@
 # Variables
 
 PHPUNIT = $(APP) ./vendor/bin/simple-phpunit
+PHPUNIT_WATCH = $(APP) ./vendor/bin/phpunit-watcher watch
 XDEBUG_INI = /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 # Commands
 
 .PHONY: phpunit.all
-phpunit.all: xdebug.off ## PHPUnit: launch all tests (unit, functional, ...)
+phpunit.all: ## PHPUnit: launch all tests (unit, functional, ...)
 	$(PHPUNIT)
 
 .PHONY: phpunit.coverage
@@ -37,6 +38,20 @@ phpunit.functional: xdebug.off ## PHPUnit: launch functional tests with dump
 .PHONY: phpunit.functional.coverage
 phpunit.functional.coverage: xdebug.on _build ## PHPUnit: generate code coverage report in HTML format for functional tests
 	$(PHPUNIT) --testsuite functional --coverage-html $(FOLDER_BUILD)/phpunit/coverage
+
+##
+
+.PHONY: phpunit.watch
+phpunit.watch: xdebug.off ## PHPUnit Watcher: rerun automatically tests whenever you change some code. See https://github.com/spatie/phpunit-watcher
+	$(PHPUNIT_WATCH)
+
+.PHONY: phpunit.watch.unit
+phpunit.watch.unit: xdebug.off ## PHPUnit Watcher: rerun only unit tests
+	$(PHPUNIT_WATCH) --testsuite unit
+
+.PHONY: phpunit.watch.functional
+phpunit.watch.functional: xdebug.off ## PHPUnit Watcher: rerun only functional tests
+	$(PHPUNIT_WATCH) --testsuite functional
 
 ##
 

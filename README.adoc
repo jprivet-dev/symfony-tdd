@@ -77,8 +77,23 @@ $ git clone git@github.com:jprivet-dev/symfony-tdd.git
 
 ```sh
 $ cd symfony-tdd
+$ make start
+...
+...
+...
+READY!
+Open http://localhost/
+```
+
+[TIP]
+====
+Si vous n'avais pas l'outil https://www.gnu.org/software/make/[GNU Make] disponible, démarrer avec la commande  suivante :
+
+```sh
 $ docker-compose up -d
 ```
+====
+
 === Accéder au projet
 
 Aller sur https://localhost
@@ -92,24 +107,121 @@ Aller sur https://localhost
 Le projet utilise le *PHPUnit Bridge* de *Symfony* (https://symfony.com/doc/current/testing.html) :
 
 ```sh
+$ make phpunit
+...
+...
+...
+Testing
+................................                                  32 / 32 (100%)
+
+Time: 483 ms, Memory: 30.00 MB
+
+OK (32 tests, 74 assertions)
+
+```
+
+[TIP]
+====
+Si vous n'avais pas l'outil https://www.gnu.org/software/make/[GNU Make] disponible, lancer les tests avec la commande  suivante :
+
+```sh
 $ docker-compose exec app ./vendor/bin/simple-phpunit
 ```
+====
+
+{BACK_TO_TOP}
 
 === *PHPUnit Watcher* : relancer automatiquement les tests après modification d'un fichier `.php`
 
 Le projet utilise ce _watcher_ très pratique (https://github.com/spatie/phpunit-watcher) :
 
 ```sh
+$ make phpunit.watch
+```
+
+[TIP]
+====
+Si vous n'avais pas l'outil https://www.gnu.org/software/make/[GNU Make] disponible, lancer le watcher avec la commande  suivante :
+
+```sh
 $ docker-compose exec app ./vendor/bin/phpunit-watcher watch
+```
+====
+
+{BACK_TO_TOP}
+
+=== *Xdebug* & Performance : activation et désactivation à chaud
+
+WARNING: *Xdebug* est nécessaire pour générer la couverture de code, mais *augmente considérablement (x10)* le temps d'exécution des tests.
+
+Exécution en *1.52 secondes* avec *Xdebug* :
+
+```sh
+docker-compose exec app ./vendor/bin/simple-phpunit
+stty: standard input
+PHPUnit 8.4.1 by Sebastian Bergmann and contributors.
+
+Testing
+................................                                  32 / 32 (100%)
+
+Time: 1.52 seconds, Memory: 24.00 MB
+
+OK (32 tests, 74 assertions)
+```
+
+Exécution en *153 ms* sans *Xdebug* :
+
+```sh
+docker-compose exec app ./vendor/bin/simple-phpunit
+stty: standard input
+PHPUnit 8.4.1 by Sebastian Bergmann and contributors.
+
+Error:         No code coverage driver is available
+
+Testing
+................................                                  32 / 32 (100%)
+
+Time: 153 ms, Memory: 18.00 MB
+
+OK (32 tests, 74 assertions)
+```
+
+[TIP]
+====
+*Xdebug* peut être activé et désactivé à chaud avec les commandes suivantes :
+
+```sh
+make xdebug.on
+make xdebug.off
+```
+====
+
+*Xdebug* est automatiquement désactivé pour les tests qui ne nécessitent pas de couverture de code et réactivé dans le cas contraire.
+
+Exemple de commandes avec *Xdebug désactivé automatiquement* :
+
+```sh
+make phpunit
+make phpunit.unit
+make phpunit.functional
+make phpunit.watch
+...
+```
+Exemple de commandes *avec Xdebug activé automatiquement* :
+
+```sh
+make phpunit.coverage
+make phpunit.coverage.clover
+make phpunit.unit.coverage
+make phpunit.functional.coverage
+...
 ```
 
 {BACK_TO_TOP}
 
 == Sujets traités
 
-=== Principes utilisés dans des projets *"clients"*
-
-==== Ne plus injecter *l'entity manager*
+=== Ne plus injecter *l'entity manager*
 
 Ressources :
 
@@ -122,11 +234,11 @@ Fichiers :
 
 {BACK_TO_TOP}
 
-==== Créer et tester un *repository*
+=== Créer et tester un *repository*
 
 {BACK_TO_TOP}
 
-==== Créer et tester une *classe abstraite*
+=== Créer et tester une *classe abstraite*
 
 Ressources :
 
@@ -140,7 +252,7 @@ Fichiers :
 
 {BACK_TO_TOP}
 
-==== Créer et tester un *custom validator*
+=== Créer et tester un *custom validator*
 
 Ressources :
 
@@ -156,61 +268,60 @@ Fichiers :
 
 {BACK_TO_TOP}
 
-==== Créer et tester un *custom type*
+=== Créer et tester un *custom type*
 
 {BACK_TO_TOP}
 
-==== Créer et tester une *fonction Twig*
+=== Créer et tester une *fonction Twig*
 
 {BACK_TO_TOP}
 
-==== Créer un *smoke testing*
+=== Créer un *smoke testing*
 
 {BACK_TO_TOP}
 
-==== Créer, dispatcher et tester un *event*
+=== Créer, dispatcher et tester un *event*
 
 {BACK_TO_TOP}
 
-==== Mocker le *temps*
+=== Mocker le *temps*
 
 {BACK_TO_TOP}
 
-==== Créer et tester une *commande Symfony*
+=== Créer et tester une *commande Symfony*
 
 {BACK_TO_TOP}
 
-==== Créer et tester une *requête ajax*
+=== Créer et tester une *requête ajax*
 
 {BACK_TO_TOP}
 
-==== Travailler avec le *workflow component*
+=== Travailler avec le *workflow component*
 
 {BACK_TO_TOP}
 
-==== Travailler avec le *process bundle*
+=== Travailler avec le *process bundle*
 
 {BACK_TO_TOP}
 
-=== R&D
 
-==== Travailler avec des *collections d'objets typés*
-
-{BACK_TO_TOP}
-
-==== La performance avec *Doctrine*
+=== Travailler avec des *collections d'objets typés*
 
 {BACK_TO_TOP}
 
-==== Créer et tester un *trait*
+=== La performance avec *Doctrine*
 
 {BACK_TO_TOP}
 
-==== Créer et tester un *composant Vue.js*
+=== Créer et tester un *trait*
 
 {BACK_TO_TOP}
 
-==== Créer et tester des *éléments asynchrones PHP*
+=== Créer et tester un *composant Vue.js*
+
+{BACK_TO_TOP}
+
+=== Créer et tester des *éléments asynchrones PHP*
 
 {BACK_TO_TOP}
 

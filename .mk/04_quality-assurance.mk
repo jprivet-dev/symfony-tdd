@@ -3,6 +3,10 @@
 ## -----------------
 ##
 
+CODESNIFFER = $(PHP) ./vendor/bin/phpcs
+CODESNIFFER_FIX = $(PHP) ./vendor/bin/phpcbf
+MESSDETECTOR = $(PHP) ./vendor/bin/phpmd
+
 .PHONY: codesniffer
 codesniffer: ##
 	$(CODESNIFFER) -n

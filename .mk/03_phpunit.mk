@@ -15,11 +15,11 @@ phpunit.all: xdebug.off ## PHPUnit: launch all tests (unit, functional, ...)
 	$(PHPUNIT)
 
 .PHONY: phpunit.coverage
-phpunit.coverage: xdebug.on ## PHPUnit: generate code coverage report in HTML format
-	$(PHPUNIT) --coverage-html $(BUILD_FOLDER)/phpunit/coverage
+phpunit.coverage: xdebug.on _build ## PHPUnit: generate code coverage report in HTML format
+	$(PHPUNIT) --coverage-html $(FOLDER_BUILD)/phpunit/coverage
 
 .PHONY: phpunit.coverage.clover
-phpunit.coverage.clover: xdebug.on ## PHPUnit: generate code clover style coverage report
+phpunit.coverage.clover: xdebug.on _build ## PHPUnit: generate code clover style coverage report
 	$(PHPUNIT) --coverage-clover build/logs/clover.xml
 
 .PHONY: phpunit.unit
@@ -27,16 +27,16 @@ phpunit.unit: ## PHPUnit: launch unit tests
 	$(PHPUNIT) --testsuite unit
 
 .PHONY: phpunit.unit.coverage
-phpunit.unit.coverage: xdebug.on ## PHPUnit: generate code coverage report in HTML format for unit tests
-	$(PHPUNIT) --testsuite unit --coverage-html $(BUILD_FOLDER)/phpunit/coverage
+phpunit.unit.coverage: xdebug.on _build ## PHPUnit: generate code coverage report in HTML format for unit tests
+	$(PHPUNIT) --testsuite unit --coverage-html $(FOLDER_BUILD)/phpunit/coverage
 
 .PHONY: phpunit.functional
 phpunit.functional: xdebug.off ## PHPUnit: launch functional tests with dump
 	$(PHPUNIT) --testsuite functional
 
 .PHONY: phpunit.functional.coverage
-phpunit.functional.coverage: xdebug.on ## PHPUnit: generate code coverage report in HTML format for functional tests
-	$(PHPUNIT) --testsuite functional --coverage-html $(BUILD_FOLDER)/phpunit/coverage
+phpunit.functional.coverage: xdebug.on _build ## PHPUnit: generate code coverage report in HTML format for functional tests
+	$(PHPUNIT) --testsuite functional --coverage-html $(FOLDER_BUILD)/phpunit/coverage
 
 ##
 

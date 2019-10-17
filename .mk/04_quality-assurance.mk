@@ -8,8 +8,13 @@
 CODESNIFFER = $(PHP) ./vendor/bin/phpcs
 CODESNIFFER_FIX = $(PHP) ./vendor/bin/phpcbf
 MESSDETECTOR = $(PHP) ./vendor/bin/phpmd
+QA = $(D) run --rm -v `pwd`:/project mykiwi/phaudit:7.2
 
 # Commands
+
+.PHONY: qa.phpmetrics
+qa.phpmetrics: _build ## PHPMetrics: provides tons of metric (Complexity / Volume / Object Oriented / Maintainability). See http://www.phpmetrics.org
+	$(QA) phpmetrics --report-html=$(FOLDER_BUILD)/phpmetrics $(FOLDER_SRC)
 
 .PHONY: qa.codesniffer
 qa.codesniffer: ##
@@ -21,7 +26,7 @@ qa.codesniffer.fix: ##
 
 .PHONY: qa.messdetector
 qa.messdetector: ##
-	$(MESSDETECTOR) ./src
+	$(MESSDETECTOR) $(FOLDER_SRC)
 
 .PHONY: qa.security.check
 qa.security.check: ## PHP Quality Assurance: check security of your dependencies (https://security.symfony.com/)

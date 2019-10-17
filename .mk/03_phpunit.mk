@@ -1,6 +1,6 @@
 ##
-## TESTS
-## -----
+## PHPUNIT
+## -------
 ##
 
 # Variables
@@ -10,32 +10,32 @@ XDEBUG_INI = /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 # Commands
 
-.PHONY: tests
-tests: xdebug.off ## PHPUnit: launch all tests (unit, functional, ...)
+.PHONY: phpunit.all
+phpunit.all: xdebug.off ## PHPUnit: launch all tests (unit, functional, ...)
 	$(PHPUNIT)
 
-.PHONY: tests.coverage
-tests.coverage: xdebug.on ## PHPUnit: generate code coverage report in HTML format
+.PHONY: phpunit.coverage
+phpunit.coverage: xdebug.on ## PHPUnit: generate code coverage report in HTML format
 	$(PHPUNIT) --coverage-html $(BUILD_FOLDER)/phpunit/coverage
 
-.PHONY: tests.coverage.clover
-tests.coverage.clover: xdebug.on ## PHPUnit: generate code clover style coverage report
+.PHONY: phpunit.coverage.clover
+phpunit.coverage.clover: xdebug.on ## PHPUnit: generate code clover style coverage report
 	$(PHPUNIT) --coverage-clover build/logs/clover.xml
 
-.PHONY: tests.unit
-tests.unit: ## PHPUnit: launch unit tests
+.PHONY: phpunit.unit
+phpunit.unit: ## PHPUnit: launch unit tests
 	$(PHPUNIT) --testsuite unit
 
-.PHONY: tests.unit.coverage
-tests.unit.coverage: xdebug.on ## PHPUnit: generate code coverage report in HTML format for unit tests
+.PHONY: phpunit.unit.coverage
+phpunit.unit.coverage: xdebug.on ## PHPUnit: generate code coverage report in HTML format for unit tests
 	$(PHPUNIT) --testsuite unit --coverage-html $(BUILD_FOLDER)/phpunit/coverage
 
-.PHONY: tests.functional
-tests.functional: xdebug.off ## PHPUnit: launch functional tests with dump
+.PHONY: phpunit.functional
+phpunit.functional: xdebug.off ## PHPUnit: launch functional tests with dump
 	$(PHPUNIT) --testsuite functional
 
-.PHONY: tests.functional.coverage
-tests.functional.coverage: xdebug.on ## PHPUnit: generate code coverage report in HTML format for functional tests
+.PHONY: phpunit.functional.coverage
+phpunit.functional.coverage: xdebug.on ## PHPUnit: generate code coverage report in HTML format for functional tests
 	$(PHPUNIT) --testsuite functional --coverage-html $(BUILD_FOLDER)/phpunit/coverage
 
 ##

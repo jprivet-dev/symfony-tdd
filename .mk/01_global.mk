@@ -6,3 +6,4 @@ APP = $(EXEC) $(APP_NAME)
 APP_ROOT = $(EXEC) --user 0 $(APP_NAME)
 PHP = $(APP) php
 BUILD_FOLDER = build
+LOCALHOST = http://localhost/

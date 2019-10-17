@@ -9,7 +9,7 @@ help:
 			target=command[2]; \
 			description=$$2; \
 			if (target && target!="##")\
-				printf "\033[32m%-25s \033[0m%s\n", target, description; \
+				printf "\033[32m%-30s \033[0m%s\n", target, description; \
 			else \
 				printf "\033[33m%s\n", description; \
 		}'

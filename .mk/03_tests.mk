@@ -3,40 +3,49 @@
 ## -----
 ##
 
+# Variables
+
+PHPUNIT = $(APP) ./vendor/bin/simple-phpunit
+XDEBUG_INI = /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
+# Commands
+
 .PHONY: tests
-tests: ## PHPUnit: launch unit & fonctionnal tests
+tests: xdebug.off ## PHPUnit: launch all tests (unit, functional, ...)
 	$(PHPUNIT)
 
-.PHONY: coverage
-coverage: ## PHPUnit: generate code coverage report in HTML format
-	$(PHPUNIT) --coverage-html $(ARTEFACTS)/phpunit/coverage
+.PHONY: tests.coverage
+tests.coverage: xdebug.on ## PHPUnit: generate code coverage report in HTML format
+	$(PHPUNIT) --coverage-html $(BUILD_FOLDER)/phpunit/coverage
 
-.PHONY: coverage-clover
-coverage-clover: ## PHPUnit: generate code clover style coverage report
+.PHONY: tests.coverage.clover
+tests.coverage.clover: xdebug.on ## PHPUnit: generate code clover style coverage report
 	$(PHPUNIT) --coverage-clover build/logs/clover.xml
 
-.PHONY: unit-tests
-unit-tests: ## PHPUnit: launch unit tests
+.PHONY: tests.unit
+tests.unit: ## PHPUnit: launch unit tests
 	$(PHPUNIT) --testsuite unit
 
-.PHONY: unit-tests-coverage
-unit-tests-coverage: ## PHPUnit: generate code coverage report in HTML format for unit tests
-	$(PHPUNIT) --testsuite unit --coverage-html $(ARTEFACTS)/phpunit/coverage
+.PHONY: tests.unit.coverage
+tests.unit.coverage: xdebug.on ## PHPUnit: generate code coverage report in HTML format for unit tests
+	$(PHPUNIT) --testsuite unit --coverage-html $(BUILD_FOLDER)/phpunit/coverage
 
-.PHONY: functional-tests
-functional-tests: ## PHPUnit: launch functional tests with dump
+.PHONY: tests.functional
+tests.functional: xdebug.off ## PHPUnit: launch functional tests with dump
 	$(PHPUNIT) --testsuite functional
 
-.PHONY: functional-tests-coverage
-functional-tests-coverage: ## PHPUnit: generate code coverage report in HTML format for functional tests
-	$(PHPUNIT) --testsuite functional --coverage-html $(ARTEFACTS)/phpunit/coverage
+.PHONY: tests.functional.coverage
+tests.functional.coverage: xdebug.on ## PHPUnit: generate code coverage report in HTML format for functional tests
+	$(PHPUNIT) --testsuite functional --coverage-html $(BUILD_FOLDER)/phpunit/coverage
 
-.PHONY: enable-xdebug
-enable-xdebug: ## Xdebug : enable the module
-	$(EXEC) --user 0 app sed -i.default "s/^;zend_extension=/zend_extension=/" $(XDEBUG_INI)
+##
+
+.PHONY: xdebug.on
+xdebug.on: ## Xdebug: enable the module
+	$(APP_ROOT) sed -i.default "s/^;zend_extension=/zend_extension=/" $(XDEBUG_INI)
 	@echo -e '\033[1;42mXdebug ON\033[0m';
 
-.PHONY: disable-xdebug
-disable-xdebug: ## Xdebug : disable the module
-	$(EXEC) --user 0 app sed -i.default "s/^zend_extension=/;zend_extension=/" $(XDEBUG_INI)
+.PHONY: xdebug.off
+xdebug.off: ## Xdebug: disable the module
+	$(APP_ROOT) sed -i.default "s/^zend_extension=/;zend_extension=/" $(XDEBUG_INI)
 	@echo -e '\033[1;41mXdebug OFF\033[0m';

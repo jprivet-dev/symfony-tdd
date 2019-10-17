@@ -3,18 +3,26 @@
 ## -----------------
 ##
 
+# Variables
+
 CODESNIFFER = $(PHP) ./vendor/bin/phpcs
 CODESNIFFER_FIX = $(PHP) ./vendor/bin/phpcbf
 MESSDETECTOR = $(PHP) ./vendor/bin/phpmd
 
-.PHONY: codesniffer
-codesniffer: ##
+# Commands
+
+.PHONY: qa.codesniffer
+qa.codesniffer: ##
 	$(CODESNIFFER) -n
 
-.PHONY: codesniffer-fix
-codesniffer-fix: ##
+.PHONY: qa.codesniffer.fix
+qa.codesniffer.fix: ##
 	$(CODESNIFFER_FIX)
 
-.PHONY: messdetector
-messdetector: ##
+.PHONY: qa.messdetector
+qa.messdetector: ##
 	$(MESSDETECTOR) ./src
+
+.PHONY: qa.security.check
+qa.security.check: ## PHP Quality Assurance: check security of your dependencies (https://security.symfony.com/)
+	$(APP) ./vendor/bin/security-checker security:check

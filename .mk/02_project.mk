@@ -10,7 +10,7 @@ start: docker.start _ready ## Start the project
 stop: docker.stop ## Stop the project
 
 .PHONY: tests
-tests: phpunit.all ## Launch all tests
+tests: phpunit ## Launch all tests
 
 #
 #	"PRIVATE"

@@ -11,8 +11,8 @@ XDEBUG_INI = /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 # Commands
 
-.PHONY: phpunit.all
-phpunit.all: ## PHPUnit: launch all tests (unit, functional, ...)
+.PHONY: phpunit
+phpunit: ## PHPUnit: launch all tests (unit, functional, ...)
 	$(PHPUNIT)
 
 .PHONY: phpunit.coverage

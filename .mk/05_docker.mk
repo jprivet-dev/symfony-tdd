@@ -10,11 +10,11 @@ DOCKER_NETWORK_DEFAULT_NAME = symfony-tdd_default
 # Commands
 
 .PHONY: docker.start
-docker.start: ## Docker: builds, (re)creates, starts, and attaches to containers for a service.
+docker.start: ## Docker: builds, (re)creates, starts, and attaches to containers for a service (detached mode)
 	$(DC) up -d --remove-orphans
 
 .PHONY: docker.build
-docker.build: ##
+docker.build: ## Docker: same `docker.start` command + build images before starting containers
 	$(DC) up --build -d
 
 .PHONY: docker.stop

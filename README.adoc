@@ -66,14 +66,14 @@ J'ai démarré cet atelier "dockerisé" à partir du repo https://github.com/dun
 
 {BACK_TO_TOP}
 
-== Démarrer avec le projet
+== Le projet
 
-=== Récupérer le repo
+=== Le récupérer
 
 ```sh
 $ git clone git@github.com:jprivet-dev/symfony-tdd.git
 ```
-=== Démarrer le projet
+=== Le démarrer
 
 ```sh
 $ cd symfony-tdd
@@ -87,24 +87,37 @@ Open http://localhost/
 
 [TIP]
 ====
-Si vous n'avais pas l'outil https://www.gnu.org/software/make/[GNU Make] disponible, démarrer avec la commande  suivante :
+Si vous n'avez pas l'outil https://www.gnu.org/software/make/[GNU Make] disponible, démarrer avec la commande  suivante :
 
 ```sh
 $ docker-compose up -d
 ```
 ====
 
-=== Accéder au projet
+=== Accéder au site
 
-Aller sur https://localhost
+Aller sur https://localhost.
 
 {BACK_TO_TOP}
 
-== Jouer avec les tests automatiques & *PHPUnit*
+== *Makefile* : les commandes disponibles de ce projet
 
-=== Lancer les tests avec *PHPUnit*
+Si vous avez l'outil https://www.gnu.org/software/make/[GNU Make] disponible sur votre poste,
+affichez toutes les commandes avec la ligne suivante :
 
-Le projet utilise le *PHPUnit Bridge* de *Symfony* (https://symfony.com/doc/current/testing.html) :
+```sh
+$ make
+```
+
+{BACK_TO_TOP}
+
+== *PHPUnit* : gérer les tests automatiques PHP
+
+=== Lancer les tests
+
+Le projet utilise le *PHPUnit Bridge* de *Symfony* (https://symfony.com/doc/current/testing.html).
+
+Lancez tous les tests avec la commande suivante :
 
 ```sh
 $ make phpunit
@@ -122,7 +135,7 @@ OK (32 tests, 74 assertions)
 
 [TIP]
 ====
-Si vous n'avais pas l'outil https://www.gnu.org/software/make/[GNU Make] disponible, lancer les tests avec la commande  suivante :
+Si vous n'avez pas l'outil https://www.gnu.org/software/make/[GNU Make] disponible, lancer les tests avec la commande  suivante :
 
 ```sh
 $ docker-compose exec app ./vendor/bin/simple-phpunit
@@ -131,9 +144,9 @@ $ docker-compose exec app ./vendor/bin/simple-phpunit
 
 {BACK_TO_TOP}
 
-=== *PHPUnit Watcher* : relancer automatiquement les tests après modification d'un fichier `.php`
+=== *PHPUnit Watcher* : relance automatiquement des tests après modification d'un fichier
 
-Le projet utilise ce _watcher_ très pratique (https://github.com/spatie/phpunit-watcher) :
+Le projet utilise *PHPUnit Watcher* (https://github.com/spatie/phpunit-watcher) que vous pouvez lancer avec la commande suivante :
 
 ```sh
 $ make phpunit.watch
@@ -141,7 +154,7 @@ $ make phpunit.watch
 
 [TIP]
 ====
-Si vous n'avais pas l'outil https://www.gnu.org/software/make/[GNU Make] disponible, lancer le watcher avec la commande  suivante :
+Si vous n'avez pas l'outil https://www.gnu.org/software/make/[GNU Make] disponible, lancer le watcher avec la commande  suivante :
 
 ```sh
 $ docker-compose exec app ./vendor/bin/phpunit-watcher watch
@@ -150,14 +163,14 @@ $ docker-compose exec app ./vendor/bin/phpunit-watcher watch
 
 {BACK_TO_TOP}
 
-=== *Xdebug* & Performance : activation et désactivation à chaud
+=== *Xdebug & Performance* : activation et désactivation à chaud du module
 
 WARNING: *Xdebug* est nécessaire pour générer la couverture de code, mais *augmente considérablement (x10)* le temps d'exécution des tests.
 
-Exécution en *1.52 secondes* avec *Xdebug* :
+Exécution *avec Xdebug* => *1.52 secondes* :
 
 ```sh
-docker-compose exec app ./vendor/bin/simple-phpunit
+$ docker-compose exec app ./vendor/bin/simple-phpunit
 stty: standard input
 PHPUnit 8.4.1 by Sebastian Bergmann and contributors.
 
@@ -169,10 +182,10 @@ Time: 1.52 seconds, Memory: 24.00 MB
 OK (32 tests, 74 assertions)
 ```
 
-Exécution en *153 ms* sans *Xdebug* :
+Exécution *sans Xdebug* => *153 ms* :
 
 ```sh
-docker-compose exec app ./vendor/bin/simple-phpunit
+$ docker-compose exec app ./vendor/bin/simple-phpunit
 stty: standard input
 PHPUnit 8.4.1 by Sebastian Bergmann and contributors.
 
@@ -191,8 +204,8 @@ OK (32 tests, 74 assertions)
 *Xdebug* peut être activé et désactivé à chaud avec les commandes suivantes :
 
 ```sh
-make xdebug.on
-make xdebug.off
+$ make xdebug.on
+$ make xdebug.off
 ```
 ====
 
@@ -201,19 +214,19 @@ make xdebug.off
 Exemple de commandes avec *Xdebug désactivé automatiquement* :
 
 ```sh
-make phpunit
-make phpunit.unit
-make phpunit.functional
-make phpunit.watch
+$ make phpunit
+$ make phpunit.unit
+$ make phpunit.functional
+$ make phpunit.watch
 ...
 ```
 Exemple de commandes *avec Xdebug activé automatiquement* :
 
 ```sh
-make phpunit.coverage
-make phpunit.coverage.clover
-make phpunit.unit.coverage
-make phpunit.functional.coverage
+$ make phpunit.coverage
+$ make phpunit.coverage.clover
+$ make phpunit.unit.coverage
+$ make phpunit.functional.coverage
 ...
 ```
 
@@ -221,13 +234,18 @@ make phpunit.functional.coverage
 
 == Sujets traités
 
-=== Ne plus injecter *l'entity manager*
+=== Injecter un *repository* au lieu de *l'entity manager*
 
-Ressources :
+==== Principe
+
+Au lieu d'injecter *l'entity manager* pour récupérer ensuite les *repositories* dont nous avons besoin,
+nous pouvons injecter directement les *repositories* concernés.
+
+==== Ressources
 
 * https://matthiasnoback.nl/2014/05/inject-a-repository-instead-of-an-entity-manager/
 
-Fichiers :
+==== Fichiers
 
 * {uri-rel-file-base}src/Repository/AbstractRepository.php[]
 * {uri-rel-file-base}tests/Unit/Repository/AbstractRepositoryTest.php[]
@@ -240,12 +258,16 @@ Fichiers :
 
 === Créer et tester une *classe abstraite*
 
-Ressources :
+==== Principe
+
+Le principe est de pouvoir tester unitairement les *méthodes concrètes* d'une classe abstraite.
+
+==== Ressources
 
 * https://phpunit.readthedocs.io/en/8.4/test-doubles.html#mocking-traits-and-abstract-classes
 * https://mnapoli.fr/anonymous-classes-in-tests/
 
-Fichiers :
+==== Fichiers
 
 * {uri-rel-file-base}src/Util/Example/AbstractClassExample.php[]
 * {uri-rel-file-base}tests/Unit/Util/Example/AbstractClassExampleTest.php[]
@@ -254,13 +276,18 @@ Fichiers :
 
 === Créer et tester un *custom validator*
 
-Ressources :
+==== Principe
+
+Le principe est de gérer et de tester facilement tous les cas limites auxquels pourrait-être
+exposé notre *custom validator*.
+
+==== Ressources
 
 * https://symfony.com/doc/current/validation/custom_constraint.html
 * https://github.com/symfony/validator/blob/master/Test/ConstraintValidatorTestCase.php
 * https://github.com/symfony/validator/blob/master/Tests/Constraints/EmailValidatorTest.php
 
-Fichiers :
+==== Fichiers
 
 * {uri-rel-file-base}src/Validator/Constraints/Reference.php[]
 * {uri-rel-file-base}src/Validator/Constraints/ReferenceValidator.php[]

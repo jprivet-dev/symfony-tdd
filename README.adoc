@@ -55,9 +55,9 @@ toc::[]
 
 == Présentation
 
-Ce repo est mon atelier pour tester et partager des cas pratiques autour du *TDD* (Test-Driven Development) et du framework *Symfony*.
+Ce dépôt *Git* est un atelier où je concentre, teste et partage des cas pratiques rencontrés (projets clients, R&D, ...) autour des *tests automatiques*, du *TDD* (Test-Driven Development) et du framework *Symfony*.
 
-J'ai démarré cet atelier "dockerisé" à partir du repo https://github.com/dunglas/symfony-docker de  https://dunglas.fr/[Kevin Dunglas].
+J'ai démarré cet atelier _dockerisé_ à partir du dépôt https://github.com/dunglas/symfony-docker de  https://dunglas.fr/[Kevin Dunglas].
 
 == Prérequis technique : avoir *Docker CE* et *Docker Compose* installés
 
@@ -109,11 +109,64 @@ affichez toutes les commandes avec la ligne suivante :
 $ make
 ```
 
+Vous retrouverez toutes les commandes suivantes :
+
+```
+PROJECT
+-------
+
+start                          Start the project
+stop                           Stop the project
+tests                          Launch all tests
+
+PHPUNIT
+-------
+
+phpunit                        PHPUnit: launch all tests (unit, functional, ...)
+phpunit.coverage               PHPUnit: generate code coverage report in HTML format
+phpunit.coverage.clover        PHPUnit: generate code clover style coverage report
+phpunit.unit                   PHPUnit: launch unit tests
+phpunit.unit.coverage          PHPUnit: generate code coverage report in HTML format for unit tests
+phpunit.functional             PHPUnit: launch functional tests with dump
+phpunit.functional.coverage    PHPUnit: generate code coverage report in HTML format for functional tests
+
+phpunit.watch                  PHPUnit Watcher: rerun automatically tests whenever you change some code. See https://github.com/spatie/phpunit-watcher
+phpunit.watch.unit             PHPUnit Watcher: rerun only unit tests
+phpunit.watch.functional       PHPUnit Watcher: rerun only functional tests
+
+xdebug.on                      Xdebug: enable the module
+xdebug.off                     Xdebug: disable the module
+
+QUALITY ASSURANCE - STATIC ANALYZERS
+------------------------------------
+
+qa.phpmetrics                  PHPMetrics: provides tons of metric (Complexity / Volume / Object Oriented / Maintainability). See http://www.phpmetrics.org
+qa.codesniffer                 PHP_CodeSniffer: tokenizes PHP, JavaScript and CSS files and detects violations... See https://github.com/squizlabs/PHP_CodeSniffer
+qa.codesniffer.diff            PHP_CodeSniffer: printing a diff report
+qa.codesniffer.fix             PHP_CodeSniffer: fixing errors automatically
+qa.messdetector                PHP Mess Detector: scans PHP source code and looks for potential problems... See http://phpmd.org/
+qa.security.check              Symfony security: check security of your dependencies. See https://security.symfony.com/
+
+DOCKER
+------
+
+docker.start                   Docker: builds, (re)creates, starts, and attaches to containers for a service (detached mode)
+docker.build                   Docker: same `docker.start` command + build images before starting containers
+docker.stop                    Docker: stops running containers without removing them
+
+docker.env                     Docker: show environment variables
+docker.ip                      Docker: get ip Gateway
+docker.containers              Docker: list containers
+docker.images                  Docker: list images
+docker.networks                Docker: list networks
+docker.logs                    Docker: show logs
+docker.sh                      Docker: sh access
+```
 {BACK_TO_TOP}
 
 == *PHPUnit* : gérer les tests automatiques PHP
 
-=== Lancer les tests
+=== Lancer les tests avec *PHPUnit*
 
 Le projet utilise le *PHPUnit Bridge* de *Symfony* (https://symfony.com/doc/current/testing.html).
 

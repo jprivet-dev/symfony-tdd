@@ -44,7 +44,8 @@ class AbstractClassExampleTest extends TestCase
     }
 }
 
-class Dummy extends AbstractClassExample {
+class Dummy extends AbstractClassExample
+{
     protected function abstractMethod(): string
     {
         return 'foo';

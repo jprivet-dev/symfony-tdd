@@ -15,8 +15,7 @@ class ProductService implements ProductServiceInterface
     public function __construct(
         ProductRepositoryInterface $productRepository,
         ValidatorInterface $validator
-    )
-    {
+    ) {
         $this->productRepository = $productRepository;
         $this->validator = $validator;
     }

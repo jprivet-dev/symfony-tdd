@@ -3,18 +3,24 @@
 ## -------
 ##
 
+# Variables
+
+SYMFONY = $(PHP) bin/console
+
+# Commands
+
 .PHONY: symfony.cc
-symfony.cc: ## Symfony : clear cache (current env)
+symfony.cc: ## Symfony: Clear cache (current env).
 	$(SYMFONY) cache:clear
 
 .PHONY: symfony.ccp
-symfony.ccp: ## Symfony : clear cache (prod)
+symfony.ccp: ## Symfony: Clear cache (prod).
 	$(SYMFONY) cache:clear --env=prod
 
 .PHONY: symfony.cchard
-symfony.cchard: ## Symfony : removes all in `var/cache` folder
+symfony.cchard: ## Symfony: Remove all in `var/cache` folder.
 	rm -rf var/cache/*
 
 .PHONY: symfony.routes
-symfony.routes: ## Symfony : displays current routes
+symfony.routes: ## Symfony: Display current routes.
 	$(SYMFONY) debug:router

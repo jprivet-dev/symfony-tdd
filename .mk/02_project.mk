@@ -4,19 +4,19 @@
 ##
 
 .PHONY: start
-start: docker.start _ready ## Start the project
+start: docker.start _ready ## Project: Start all.
 
 .PHONY: stop
-stop: docker.stop ## Stop the project
+stop: docker.stop ## Project: Stop all.
 
 .PHONY: tests
-tests: phpunit ## Launch all tests
+tests: phpunit ## Project: Launch all tests.
 
 .PHONY: cc
-cc: symfony.cc ## Clear all cache
+cc: symfony.cc ## Project: Clear all cache.
 
 .PHONY: chown.fix
-chown.fix: ## Editing permissions on Linux if you cannot edit some of the project files (set yourself as owner)
+chown.fix: ## Project: Editing permissions on Linux if you cannot edit some of the project files (set yourself as owner).
 	$(DC) run --rm $(APP_NAME) chown -R $$(id -u):$$(id -g) .
 
 #
@@ -24,11 +24,11 @@ chown.fix: ## Editing permissions on Linux if you cannot edit some of the projec
 #
 
 .PHONY: _build
-_build: # Create 'build' folder
+_build: # Create 'build' folder.
 	mkdir -p $(FOLDER_BUILD)
 
 .PHONY: _build.clean
-_build.clean: # Remove 'build' folder
+_build.clean: # Remove 'build' folder.
 	rm -rf $(FOLDER_BUILD)
 
 .PHONY: _ready

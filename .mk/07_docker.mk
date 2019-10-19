@@ -12,56 +12,56 @@ DOCKER_NETWORK_DEFAULT_NAME = symfony-tdd_default
 .PHONY: docker.start
 # --remove-orphans: Remove containers for services not defined in the Compose file.
 # -d: Detached mode: Run containers in the background, print new container names.
-docker.start: ## Docker: builds, (re)creates, starts, and attaches to containers for a service (detached mode). See https://docs.docker.com/compose/reference/up/
+docker.start: ## Docker: Build, (re)create, start, and attache to containers for a service (detached mode). @see https://docs.docker.com/compose/reference/up/.
 	$(DC) up --remove-orphans -d
 
 .PHONY: docker.build
 # --build: Build images before starting containers.
 # -d: Detached mode: Run containers in the background, print new container names.
-docker.build: ## Docker: same `docker.start` command + build images before starting containers (detached mode). See https://docs.docker.com/compose/reference/up/
+docker.build: ## Docker: Same `docker.start` command + build images before starting containers (detached mode). @see https://docs.docker.com/compose/reference/up/.
 	$(DC) up --build -d
 
 .PHONY: docker.stop
-docker.stop: ## Docker: stops running containers without removing them. See https://docs.docker.com/compose/reference/stop/
+docker.stop: ## Docker: Stop running containers without removing them. @see https://docs.docker.com/compose/reference/stop/.
 	$(DC) stop
 
 .PHONY: docker.down
 # --remove-orphans: Remove containers for services not defined in the Compose file.
-docker.down: ## Docker: stops containers and removes containers, networks, volumes, and images created by up. See https://docs.docker.com/compose/reference/down/
+docker.down: ## Docker: Stop containers and remove containers, networks, volumes, and images created by up. @see https://docs.docker.com/compose/reference/down/.
 	$(DC) down --remove-orphans
 
 ##
 
 .PHONY: docker.env
-docker.env: ## Docker: show environment variables
+docker.env: ## Docker: Show environment variables.
 	$(APP) env
 
 .PHONY: docker.ip
-docker.ip: ## Docker: get ip Gateway
+docker.ip: ## Docker: Get ip Gateway.
 	$(D) network inspect $(DOCKER_NETWORK_DEFAULT_NAME) | grep Gateway | grep -o -E '[0-9\.]+'
 
 .PHONY: docker.containers
-docker.containers: ## Docker: list containers
+docker.containers: ## Docker: List containers.
 	$(D) ps
 
 .PHONY: docker.images
-docker.images: ## Docker: list images
+docker.images: ## Docker: List images.
 	$(D) images
 
 .PHONY: docker.networks
-docker.networks: ## Docker: list networks
+docker.networks: ## Docker: list networks.
 	$(D) network ls
 
 .PHONY: docker.logs
-docker.logs: ## Docker: show logs
+docker.logs: ## Docker: Show logs.
 	$(DC) logs -f -t $(APP_NAME)
 
 .PHONY: docker.sh
-docker.sh: ## Docker: sh access
+docker.sh: ## Docker: sh access.
 	$(APP_ROOT) sh
 
 #.PHONY: docker.zsh
-#docker.zsh: ## Docker: zsh access
+#docker.zsh: ## Docker: zsh access.
 #	$(APP_ROOT) zsh
 
 

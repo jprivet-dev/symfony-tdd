@@ -10,16 +10,20 @@ DOCKER_NETWORK_DEFAULT_NAME = symfony-tdd_default
 # Commands
 
 .PHONY: docker.start
-docker.start: ## Docker: builds, (re)creates, starts, and attaches to containers for a service (detached mode)
-	$(DC) up -d --remove-orphans
+docker.start: ## Docker: builds, (re)creates, starts, and attaches to containers for a service (detached mode). See https://docs.docker.com/compose/reference/up/
+	$(DC) up --remove-orphans -d
 
 .PHONY: docker.build
-docker.build: ## Docker: same `docker.start` command + build images before starting containers
+docker.build: ## Docker: same `docker.start` command + build images before starting containers (detached mode). See https://docs.docker.com/compose/reference/up/
 	$(DC) up --build -d
 
 .PHONY: docker.stop
-docker.stop: ## Docker: stops running containers without removing them
+docker.stop: ## Docker: stops running containers without removing them. See https://docs.docker.com/compose/reference/stop/
 	$(DC) stop
+
+.PHONY: docker.down
+docker.down: ## Docker: stops containers and removes containers, networks, volumes, and images created by up. See https://docs.docker.com/compose/reference/down/
+	$(DC) down --remove-orphans
 
 ##
 
@@ -50,6 +54,14 @@ docker.logs: ## Docker: show logs
 .PHONY: docker.sh
 docker.sh: ## Docker: sh access
 	$(APP_ROOT) sh
+
+.PHONY: docker.sh
+docker.sh: ## Docker: sh access
+	$(APP_ROOT) sh
+
+#.PHONY: docker.zsh
+#docker.zsh: ## Docker: zsh access
+#	$(APP_ROOT) zsh
 
 
 

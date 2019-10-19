@@ -117,59 +117,74 @@ Vous retrouverez toutes les commandes suivantes :
 PROJECT
 -------
 
- start                          Start the project
- stop                           Stop the project
- tests                          Launch all tests
+ start                          Project: Start all (& install only if there have been changes).
+ stop                           Project: Stop all.
+
+ install                        Project: Install only if there have been changes.
+ tests                          Project: Launch all tests.
+ cc                             Project: Clear all cache.
+ chown.fix                      Project: Editing permissions on Linux if you cannot edit some of the project files (set yourself as owner).
+
+COMPOSER
+--------
+
+ composer.install               Composer: Read the composer.json/composer.lock file from the current directory, resolve the dependencies, and install them into vendor.
+ composer.install.prod          Composer: Idem `composer.install` without dev elements.
+ composer.install.check         Composer: Install only if there have been changes.
+ composer.update                Composer: Get the latest versions of the dependencies and update the composer.lock file.
+ composer.licenses              Composer: List the name, version and license of every package installed.
 
 SYMFONY
 -------
 
- symfony.cc                     Symfony : clear cache (current env)
- symfony.ccp                    Symfony : clear cache (prod)
- symfony.routes                 Symfony : displays current routes
+ symfony.cc                     Symfony: Clear cache (current env).
+ symfony.ccp                    Symfony: Clear cache (prod).
+ symfony.cchard                 Symfony: Remove all in `var/cache` folder.
+ symfony.routes                 Symfony: Display current routes.
 
 PHPUNIT
 -------
 
- phpunit                        PHPUnit: launch all tests (unit, functional, ...)
- phpunit.coverage               PHPUnit: generate code coverage report in HTML format
- phpunit.coverage.clover        PHPUnit: generate code clover style coverage report
- phpunit.unit                   PHPUnit: launch unit tests
- phpunit.unit.coverage          PHPUnit: generate code coverage report in HTML format for unit tests
- phpunit.functional             PHPUnit: launch functional tests with dump
- phpunit.functional.coverage    PHPUnit: generate code coverage report in HTML format for functional tests
+ phpunit                        PHPUnit: Launch all tests (unit, functional, ...).
+ phpunit.coverage               PHPUnit: Generate code coverage report in HTML format.
+ phpunit.coverage.clover        PHPUnit: Generate code clover style coverage report.
+ phpunit.unit                   PHPUnit: Launch unit tests
+ phpunit.unit.coverage          PHPUnit: Generate code coverage report in HTML format for unit tests.
+ phpunit.functional             PHPUnit: Launch functional tests with dump
+ phpunit.functional.coverage    PHPUnit: Generate code coverage report in HTML format for functional tests.
 
- phpunit.watch                  PHPUnit Watcher: rerun automatically tests whenever you change some code. See https://github.com/spatie/phpunit-watcher
- phpunit.watch.unit             PHPUnit Watcher: rerun only unit tests
- phpunit.watch.functional       PHPUnit Watcher: rerun only functional tests
+ phpunit.watch                  PHPUnit Watcher: Rerun automatically tests whenever you change some code. @see https://github.com/spatie/phpunit-watcher.
+ phpunit.watch.unit             PHPUnit Watcher: Rerun only unit tests.
+ phpunit.watch.functional       PHPUnit Watcher: Rerun only functional tests.
 
- xdebug.on                      Xdebug: enable the module
- xdebug.off                     Xdebug: disable the module
+ xdebug.on                      Xdebug: Enable the module.
+ xdebug.off                     Xdebug: Disable the module.
 
 QUALITY ASSURANCE - STATIC ANALYZERS
 ------------------------------------
 
- qa.phpmetrics                  PHPMetrics: provides tons of metric (Complexity / Volume / Object Oriented / Maintainability). See http://www.phpmetrics.org
- qa.codesniffer                 PHP_CodeSniffer: tokenizes PHP, JavaScript and CSS files and detects violations... See https://github.com/squizlabs/PHP_CodeSniffer
- qa.codesniffer.diff            PHP_CodeSniffer: printing a diff report
- qa.codesniffer.fix             PHP_CodeSniffer: fixing errors automatically
- qa.messdetector                PHP Mess Detector: scans PHP source code and looks for potential problems... See http://phpmd.org/
- qa.security.check              Symfony security: check security of your dependencies. See https://security.symfony.com/
+ qa.phpmetrics                  PHPMetrics: Provide tons of metric (Complexity / Volume / Object Oriented / Maintainability). @see http://www.phpmetrics.org.
+ qa.codesniffer                 PHP_CodeSniffer: Tokenize PHP, JavaScript and CSS files and detect violations... @see https://github.com/squizlabs/PHP_CodeSniffer.
+ qa.codesniffer.diff            PHP_CodeSniffer: Printing a diff report
+ qa.codesniffer.fix             PHP_CodeSniffer: Fixing errors automatically
+ qa.messdetector                PHP Mess Detector: Scan PHP source code and look for potential problems... @see http://phpmd.org/.
+ qa.security.check              Symfony security: Check security of your dependencies. @see https://security.symfony.com/.
 
 DOCKER
 ------
 
- docker.start                   Docker: builds, (re)creates, starts, and attaches to containers for a service (detached mode)
- docker.build                   Docker: same `docker.start` command + build images before starting containers
- docker.stop                    Docker: stops running containers without removing them
+ docker.start                   Docker: Build, (re)create, start, and attache to containers for a service (detached mode). @see https://docs.docker.com/compose/reference/up/.
+ docker.build                   Docker: Same `docker.start` command + build images before starting containers (detached mode). @see https://docs.docker.com/compose/reference/up/.
+ docker.stop                    Docker: Stop running containers without removing them. @see https://docs.docker.com/compose/reference/stop/.
+ docker.down                    Docker: Stop containers and remove containers, networks, volumes, and images created by up. @see https://docs.docker.com/compose/reference/down/.
 
- docker.env                     Docker: show environment variables
- docker.ip                      Docker: get ip Gateway
- docker.containers              Docker: list containers
- docker.images                  Docker: list images
- docker.networks                Docker: list networks
- docker.logs                    Docker: show logs
- docker.sh                      Docker: sh access
+ docker.env                     Docker: Show environment variables.
+ docker.ip                      Docker: Get ip Gateway.
+ docker.containers              Docker: List containers.
+ docker.images                  Docker: List images.
+ docker.networks                Docker: list networks.
+ docker.logs                    Docker: Show logs.
+ docker.sh                      Docker: sh access.
 ```
 
 {BACK_TO_TOP}

@@ -102,7 +102,7 @@ Aller sur https://localhost.
 
 == Le *Makefile* du projet
 
-=== Les commandes disponibles
+=== Les *commandes disponibles*
 
 Si vous avez l'outil https://www.gnu.org/software/make/[GNU Make] disponible sur votre poste,
 affichez toutes les commandes avec la ligne suivante :

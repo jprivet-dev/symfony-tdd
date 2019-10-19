@@ -4,7 +4,7 @@
 ##
 
 .PHONY: start
-start: docker.start _ready ## Project: Start all.
+start: docker.start _install.check _ready ## Project: Start all (& install only if there have been changes).
 
 .PHONY: stop
 stop: docker.stop ## Project: Stop all.
@@ -22,6 +22,9 @@ chown.fix: ## Project: Editing permissions on Linux if you cannot edit some of t
 #
 #	"PRIVATE"
 #
+
+.PHONY: _install.check
+_install.check: composer.install.check # Project: Install only the elements that have been modified.
 
 .PHONY: _build
 _build: # Create 'build' folder.

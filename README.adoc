@@ -61,8 +61,8 @@ J'ai démarré cet atelier _dockerisé_ à partir du dépôt https://github.com/
 
 == Prérequis technique : avoir *Docker CE* et *Docker Compose* installés
 
-* https://docs.docker.com/install/
-* https://docs.docker.com/compose/install/
+. https://docs.docker.com/install/
+. https://docs.docker.com/compose/install/
 
 {BACK_TO_TOP}
 
@@ -100,7 +100,9 @@ Aller sur https://localhost.
 
 {BACK_TO_TOP}
 
-== *Makefile* : les commandes disponibles de ce projet
+== Le *Makefile* du projet
+
+=== Les commandes disponibles
 
 Si vous avez l'outil https://www.gnu.org/software/make/[GNU Make] disponible sur votre poste,
 affichez toutes les commandes avec la ligne suivante :
@@ -169,6 +171,16 @@ DOCKER
  docker.logs                    Docker: show logs
  docker.sh                      Docker: sh access
 ```
+
+{BACK_TO_TOP}
+
+=== Ressources pour construire un fichier *Makefile*
+
+. https://blog.theodo.fr/2018/05/why-you-need-a-makefile-on-your-project/
+. https://github.com/mykiwi/symfony-bootstrapped/blob/master/Makefile
+. https://github.com/Elao/symfony-standard/blob/master/Makefile
+. https://github.com/Elao/tricot/blob/master/Makefile
+. https://github.com/cleverage/eav-manager-starter-kit/blob/master/Makefile
 
 {BACK_TO_TOP}
 
@@ -304,12 +316,12 @@ nous pouvons injecter directement les *repositories* concernés.
 
 ==== Ressources
 
-* https://matthiasnoback.nl/2014/05/inject-a-repository-instead-of-an-entity-manager/
+. https://matthiasnoback.nl/2014/05/inject-a-repository-instead-of-an-entity-manager/
 
 ==== Fichiers
 
-* {uri-rel-file-base}src/Repository/AbstractRepository.php[]
-* {uri-rel-file-base}tests/Unit/Repository/AbstractRepositoryTest.php[]
+. {uri-rel-file-base}src/Repository/AbstractRepository.php[]
+. {uri-rel-file-base}tests/Unit/Repository/AbstractRepositoryTest.php[]
 
 {BACK_TO_TOP}
 
@@ -325,13 +337,13 @@ Le principe est de pouvoir tester unitairement les *méthodes concrètes* d'une 
 
 ==== Ressources
 
-* https://phpunit.readthedocs.io/en/8.4/test-doubles.html#mocking-traits-and-abstract-classes
-* https://mnapoli.fr/anonymous-classes-in-tests/
+. https://phpunit.readthedocs.io/en/8.4/test-doubles.html#mocking-traits-and-abstract-classes
+. https://mnapoli.fr/anonymous-classes-in-tests/
 
 ==== Fichiers
 
-* {uri-rel-file-base}src/Util/Example/AbstractClassExample.php[]
-* {uri-rel-file-base}tests/Unit/Util/Example/AbstractClassExampleTest.php[]
+. {uri-rel-file-base}src/Util/Example/AbstractClassExample.php[]
+. {uri-rel-file-base}tests/Unit/Util/Example/AbstractClassExampleTest.php[]
 
 {BACK_TO_TOP}
 
@@ -344,15 +356,15 @@ exposé notre *custom validator*.
 
 ==== Ressources
 
-* https://symfony.com/doc/current/validation/custom_constraint.html
-* https://github.com/symfony/validator/blob/master/Test/ConstraintValidatorTestCase.php
-* https://github.com/symfony/validator/blob/master/Tests/Constraints/EmailValidatorTest.php
+. https://symfony.com/doc/current/validation/custom_constraint.html
+. https://github.com/symfony/validator/blob/master/Test/ConstraintValidatorTestCase.php
+. https://github.com/symfony/validator/blob/master/Tests/Constraints/EmailValidatorTest.php
 
 ==== Fichiers
 
-* {uri-rel-file-base}src/Validator/Constraints/Reference.php[]
-* {uri-rel-file-base}src/Validator/Constraints/ReferenceValidator.php[]
-* {uri-rel-file-base}tests/Unit/Validator/Constraints/ReferenceValidatorTest.php[]
+. {uri-rel-file-base}src/Validator/Constraints/Reference.php[]
+. {uri-rel-file-base}src/Validator/Constraints/ReferenceValidator.php[]
+. {uri-rel-file-base}tests/Unit/Validator/Constraints/ReferenceValidatorTest.php[]
 
 {BACK_TO_TOP}
 

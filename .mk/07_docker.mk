@@ -55,10 +55,6 @@ docker.logs: ## Docker: show logs
 docker.sh: ## Docker: sh access
 	$(APP_ROOT) sh
 
-.PHONY: docker.sh
-docker.sh: ## Docker: sh access
-	$(APP_ROOT) sh
-
 #.PHONY: docker.zsh
 #docker.zsh: ## Docker: zsh access
 #	$(APP_ROOT) zsh

@@ -16,7 +16,7 @@ tests: phpunit ## Launch all tests
 cc: symfony.cc ## Clear all cache
 
 .PHONY: chown.fix
-chown.fix: ## editing permissions on Linux if you cannot edit some of the project files (set yourself as owner)
+chown.fix: ## Editing permissions on Linux if you cannot edit some of the project files (set yourself as owner)
 	$(DC) run --rm $(APP_NAME) chown -R $$(id -u):$$(id -g) .
 
 #

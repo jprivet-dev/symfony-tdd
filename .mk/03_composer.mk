@@ -9,9 +9,23 @@ COMPOSER = $(APP) composer
 
 # Commands
 
+# This snippet will build the composer.lock file, running composer update, only if the composer.lock file does not exist.
+# Or if composer.json file has changed since the last time you built the composer.lock file.
+composer.lock: composer.json
+	$(MAKE) composer.update
+
+# This snippet will build the vendor directory, running composer install, only if the vendor directory does not exist.
+# Or if composer.lock file has changed since the last time you built the vendor directory.
+vendor: composer.lock
+	$(MAKE) composer.install
+
 .PHONY: composer.install
 composer.install: ## Composer: Read the composer.json/composer.lock file from the current directory, resolve the dependencies, and install them into vendor.
 	$(COMPOSER) install --verbose
+
+.PHONY: composer.install.prod
+composer.install.prod: ## Composer: Idem `composer.install` without dev elements.
+	$(COMPOSER) install --verbose --no-progress --no-interaction --prefer-dist --optimize-autoloader --no-dev
 
 .PHONY: composer.update
 # --lock: only update the lock file hash to suppress warning about the lock file being out of date

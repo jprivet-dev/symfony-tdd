@@ -21,7 +21,7 @@ phpunit.coverage: xdebug.on _build ## PHPUnit: generate code coverage report in 
 
 .PHONY: phpunit.coverage.clover
 phpunit.coverage.clover: xdebug.on _build ## PHPUnit: generate code clover style coverage report
-	$(PHPUNIT) --coverage-clover build/logs/clover.xml
+	$(PHPUNIT) --coverage-clover $(FOLDER_BUILD)/logs/clover.xml
 
 .PHONY: phpunit.unit
 phpunit.unit: ## PHPUnit: launch unit tests

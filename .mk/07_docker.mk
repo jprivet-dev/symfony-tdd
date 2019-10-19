@@ -10,10 +10,14 @@ DOCKER_NETWORK_DEFAULT_NAME = symfony-tdd_default
 # Commands
 
 .PHONY: docker.start
+# --remove-orphans: Remove containers for services not defined in the Compose file.
+# -d: Detached mode: Run containers in the background, print new container names.
 docker.start: ## Docker: builds, (re)creates, starts, and attaches to containers for a service (detached mode). See https://docs.docker.com/compose/reference/up/
 	$(DC) up --remove-orphans -d
 
 .PHONY: docker.build
+# --build: Build images before starting containers.
+# -d: Detached mode: Run containers in the background, print new container names.
 docker.build: ## Docker: same `docker.start` command + build images before starting containers (detached mode). See https://docs.docker.com/compose/reference/up/
 	$(DC) up --build -d
 
@@ -22,6 +26,7 @@ docker.stop: ## Docker: stops running containers without removing them. See http
 	$(DC) stop
 
 .PHONY: docker.down
+# --remove-orphans: Remove containers for services not defined in the Compose file.
 docker.down: ## Docker: stops containers and removes containers, networks, volumes, and images created by up. See https://docs.docker.com/compose/reference/down/
 	$(DC) down --remove-orphans
 

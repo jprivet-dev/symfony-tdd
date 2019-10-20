@@ -2,9 +2,10 @@ version: '3.4'
 
 services:
   app:
+    container_name: symfony_tdd_app_name
     build:
       context: .
-      target: symfony_docker_php
+      target: symfony_tdd_php
       args:
         SYMFONY_VERSION: ${SYMFONY_VERSION:-}
         STABILITY: ${STABILITY:-stable}
@@ -20,15 +21,17 @@ services:
       - SYMFONY_VERSION
 
   db:
+    container_name: symfony_tdd_db_name
     image: mysql:5.7
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root_password
-      MYSQL_DATABASE: symfony_tdd
-      MYSQL_USER: my_user
-      MYSQL_PASSWORD: my_user
+      MYSQL_DATABASE: symfony_tdd_db
+      MYSQL_USER: symfony
+      MYSQL_PASSWORD: password
 
   phpmyadmin:
+    container_name: symfony_tdd_phpmyadmin_name
     depends_on:
       - db
     image: phpmyadmin/phpmyadmin
@@ -40,9 +43,10 @@ services:
       MYSQL_ROOT_PASSWORD: root_password
 
   nginx:
+    container_name: symfony_tdd_nginx_name
     build:
       context: .
-      target: symfony_docker_nginx
+      target: symfony_tdd_nginx
     depends_on:
       - app
     volumes:
@@ -54,9 +58,10 @@ services:
 
   # This HTTP/2 proxy is not secure: it should only be used in dev
   h2-proxy:
+    container_name: symfony_tdd_h2_proxy_name
     build:
       context: .
-      target: symfony_docker_h2-proxy
+      target: symfony_tdd_h2-proxy
     depends_on:
       - nginx
     volumes:

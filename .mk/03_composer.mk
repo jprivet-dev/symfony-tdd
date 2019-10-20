@@ -17,8 +17,8 @@ composer.install: ## Composer: Read the composer.json/composer.lock file from th
 composer.install.prod: ## Composer: Idem `composer.install` without dev elements.
 	$(COMPOSER) install --verbose --no-progress --no-interaction --prefer-dist --optimize-autoloader --no-dev
 
-.PHONY: composer.install.check
-composer.install.check: vendor composer.lock ## Composer: Install only if there have been changes.
+.PHONY: composer.install.changes
+composer.install.changes: vendor composer.lock ## Composer: Install only if there have been changes.
 
 .PHONY: composer.update
 # --lock: only update the lock file hash to suppress warning about the lock file being out of date

@@ -334,6 +334,8 @@ $ make phpunit.functional.coverage
 . *[!]* En cours
 . *[x]* Fait
 
+{BACK_TO_TOP}
+
 === [x] Injecter un *repository* au lieu de *l'entity manager*
 
 Principe::
@@ -378,7 +380,7 @@ Fichiers d'exemples::
 
 Principe::
 
-Le principe est de gérer et de tester facilement tous les cas limites auxquels pourrait-être
+Le principe est de gérer et de tester facilement *tous les cas limites* auxquels pourrait-être
 exposé notre *custom validator*.
 
 Ressources::
@@ -407,8 +409,8 @@ Fichiers d'exemples::
 
 Principe::
 
-Le principe de ce premier niveau de test fonctionnel est d'appeler chaque page de l'application
-pour vérifier qu'aucune d'entre elles ne retournent d'erreur.
+Le principe de ce premier niveau de test fonctionnel est *d'appeler chaque page* de l'application
+pour vérifier *qu'aucune d'entre elles ne retournent d'erreur*.
 
 Ressources::
 

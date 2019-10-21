@@ -336,7 +336,7 @@ $ make phpunit.functional.coverage
 
 {BACK_TO_TOP}
 
-=== [!] Fibonacci : 4 implémentations pour 1 seul test unitaire
+=== [!] *Fibonacci* : 4 implémentations pour 1 seul test unitaire
 
 Principe::
 
@@ -347,7 +347,7 @@ Ce premier cas simple permet d'illustrer ce que permettent les tests automatique
 +
 Selon le développeur en charge de l'implémentation, de ses facilités, du temps qu'il lui ait imparti,
 des informations auxquelles il a accès...
-ce dernier peut garantir au client que son implémentation *répond bien au besoin dans le scope testé*,
+ce dernier peut garantir au client que son implémentation *répond bien aux besoins dans le scope testé*,
 et que la fonctionnalité *réagit bien dans les cas limites retenus*.
 
 Ressoures::
@@ -359,11 +359,11 @@ Ressoures::
 
 Fichiers d'exemples::
 
-. {uri-rel-file-base}src/Util/Fibonacci01Util.php
-. {uri-rel-file-base}src/Util/Fibonacci02Util.php
-. {uri-rel-file-base}src/Util/Fibonacci03Util.php
-. {uri-rel-file-base}src/Util/Fibonacci04Util.php
-. {uri-rel-file-base}tests/Unit/Util/FibonacciUtilTest.php
+. {uri-rel-file-base}src/Util/Fibonacci01Util.php[]
+. {uri-rel-file-base}src/Util/Fibonacci02Util.php[]
+. {uri-rel-file-base}src/Util/Fibonacci03Util.php[]
+. {uri-rel-file-base}src/Util/Fibonacci04Util.php[]
+. {uri-rel-file-base}tests/Unit/Util/FibonacciUtilTest.php[]
 
 {BACK_TO_TOP}
 

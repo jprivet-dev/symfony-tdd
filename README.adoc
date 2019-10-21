@@ -336,6 +336,37 @@ $ make phpunit.functional.coverage
 
 {BACK_TO_TOP}
 
+=== [!] Fibonacci : 4 implémentations pour 1 seul test unitaire
+
+Principe::
+
+Le principe est de montrer que *4 implémentations différentes* d'une même fonctionnalité peuvent passer
+correctement le *même test unitaire*.
++
+Ce premier cas simple permet d'illustrer ce que permettent les tests automatiques : *garantir le code*.
++
+Selon le développeur en charge de l'implémentation, de ses facilités, du temps qu'il lui ait imparti,
+des informations auxquelles il a accès...
+ce dernier peut garantir au client que son implémentation réponde bien au besoin,
+et que la fonctionnalité réagit bien aux cas limites auxquels elle pourrait être exposés.
+
+Ressoures::
+
+. https://rosettacode.org/wiki/Fibonacci_sequence#PHP
+. https://en.wikibooks.org/wiki/Algorithm_Implementation/Mathematics/Fibonacci_Number_Program#PHP
+. https://en.wikipedia.org/wiki/Fibonacci_number
+. http://www.codecodex.com/wiki/Calculate_the_Fibonacci_sequence#PHP
+
+Fichiers d'exemples::
+
+. {uri-rel-file-base}src/Util/Fibonacci01Util.php
+. {uri-rel-file-base}src/Util/Fibonacci02Util.php
+. {uri-rel-file-base}src/Util/Fibonacci03Util.php
+. {uri-rel-file-base}src/Util/Fibonacci04Util.php
+. {uri-rel-file-base}tests/Unit/Util/FibonacciUtilTest.php
+
+{BACK_TO_TOP}
+
 === [!] Injecter un *repository* au lieu de *l'entity manager*
 
 Principe::

@@ -347,8 +347,8 @@ Ce premier cas simple permet d'illustrer ce que permettent les tests automatique
 +
 Selon le développeur en charge de l'implémentation, de ses facilités, du temps qu'il lui ait imparti,
 des informations auxquelles il a accès...
-ce dernier peut garantir au client que son implémentation réponde bien au besoin,
-et que la fonctionnalité réagit bien aux cas limites auxquels elle pourrait être exposés.
+ce dernier peut garantir au client que son implémentation réponde bien au besoin dans le scope testé,
+et que la fonctionnalité réagit bien dans les cas limites retenus.
 
 Ressoures::
 

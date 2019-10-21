@@ -328,60 +328,60 @@ $ make phpunit.functional.coverage
 
 == Sujets traités
 
-=== Injecter un *repository* au lieu de *l'entity manager*
+=== [x] Injecter un *repository* au lieu de *l'entity manager*
 
-==== Principe
+Principe::
 
 Au lieu d'injecter *l'entity manager* pour récupérer ensuite les *repositories* dont nous avons besoin,
 nous pouvons injecter directement les *repositories* concernés.
 
-==== Ressources
+Ressources::
 
 . https://matthiasnoback.nl/2014/05/inject-a-repository-instead-of-an-entity-manager/
 
-==== Fichiers d'exemples
+Fichiers d'exemples::
 
 . {uri-rel-file-base}src/Repository/AbstractRepository.php[]
 . {uri-rel-file-base}tests/Unit/Repository/AbstractRepositoryTest.php[]
 
 {BACK_TO_TOP}
 
-=== Créer et tester un *repository*
+=== [ ] Créer et tester un *repository*
 
 {BACK_TO_TOP}
 
-=== Créer et tester une *classe abstraite*
+=== [x] Créer et tester une *classe abstraite*
 
-==== Principe
+Principe::
 
 Le principe est de pouvoir tester unitairement les *méthodes concrètes* d'une classe abstraite.
 
-==== Ressources
+Ressources::
 
 . https://phpunit.readthedocs.io/en/8.4/test-doubles.html#mocking-traits-and-abstract-classes
 . https://mnapoli.fr/anonymous-classes-in-tests/
 
-==== Fichiers d'exemples
+Fichiers d'exemples::
 
 . {uri-rel-file-base}src/Util/Example/AbstractClassExample.php[]
 . {uri-rel-file-base}tests/Unit/Util/Example/AbstractClassExampleTest.php[]
 
 {BACK_TO_TOP}
 
-=== Créer et tester un *custom validator*
+=== [!] Créer et tester un *custom validator*
 
-==== Principe
+Principe::
 
 Le principe est de gérer et de tester facilement tous les cas limites auxquels pourrait-être
 exposé notre *custom validator*.
 
-==== Ressources
+Ressources::
 
 . https://symfony.com/doc/current/validation/custom_constraint.html
 . https://github.com/symfony/validator/blob/master/Test/ConstraintValidatorTestCase.php
 . https://github.com/symfony/validator/blob/master/Tests/Constraints/EmailValidatorTest.php
 
-==== Fichiers d'exemples
+Fichiers d'exemples::
 
 . {uri-rel-file-base}src/Validator/Constraints/Reference.php[]
 . {uri-rel-file-base}src/Validator/Constraints/ReferenceValidator.php[]
@@ -389,73 +389,72 @@ exposé notre *custom validator*.
 
 {BACK_TO_TOP}
 
-=== Créer et tester un *custom type*
+=== [ ] Créer et tester un *custom type*
 
 {BACK_TO_TOP}
 
-=== Créer et tester une *fonction Twig*
+=== [ ] Créer et tester une *fonction Twig*
 
 {BACK_TO_TOP}
 
-=== Créer un *smoke testing*
+=== [!] Créer un *smoke testing*
 
-==== Principe
+Principe::
 
 Le principe de ce premier niveau de test fonctionnel est d'appeler chaque page de l'application
 pour vérifier qu'aucune d'entre elles ne retournent d'erreur.
 
-==== Ressources
+Ressources::
 
 . https://symfony.com/doc/current/best_practices.html
 
-==== Fichiers d'exemples
+Fichiers d'exemples::
 
 . {uri-rel-file-base}tests/Functional/SmokeTest.php
 
 {BACK_TO_TOP}
 
-=== Créer, dispatcher et tester un *event*
+=== [ ] Créer, dispatcher et tester un *event*
 
 {BACK_TO_TOP}
 
-=== Mocker le *temps*
+=== [ ] Mocker le *temps*
 
 {BACK_TO_TOP}
 
-=== Créer et tester une *commande Symfony*
+=== [ ] Créer et tester une *commande Symfony*
 
 {BACK_TO_TOP}
 
-=== Créer et tester une *requête ajax*
+=== [ ] Créer et tester une *requête ajax*
 
 {BACK_TO_TOP}
 
-=== Travailler avec le *workflow component*
+=== [ ] Travailler avec le *workflow component*
 
 {BACK_TO_TOP}
 
-=== Travailler avec le *process bundle*
+=== [ ] Travailler avec le *process bundle*
 
 {BACK_TO_TOP}
 
-
-=== Travailler avec des *collections d'objets typés*
-
-{BACK_TO_TOP}
-
-=== La performance avec *Doctrine*
+=== [ ] Travailler avec des *collections d'objets typés*
 
 {BACK_TO_TOP}
 
-=== Créer et tester un *trait*
+=== [ ] La performance avec *Doctrine*
 
 {BACK_TO_TOP}
 
-=== Créer et tester un *composant Vue.js*
+=== [ ] Créer et tester un *trait*
 
 {BACK_TO_TOP}
 
-=== Créer et tester des *éléments asynchrones PHP*
+=== [ ] Créer et tester un *composant Vue.js*
+
+{BACK_TO_TOP}
+
+=== [ ] Créer et tester des *éléments asynchrones PHP*
 
 {BACK_TO_TOP}
 

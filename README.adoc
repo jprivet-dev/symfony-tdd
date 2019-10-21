@@ -328,11 +328,17 @@ $ make phpunit.functional.coverage
 
 == Sujets traités
 
+=== Nomenclature
+
+. [ ] : A faire
+. [!] : En cours
+. [x] : Fait
+
 === [x] Injecter un *repository* au lieu de *l'entity manager*
 
 Principe::
 
-Au lieu d'injecter *l'entity manager* pour récupérer ensuite les *repositories* dont nous avons besoin,
+Au lieu d'injecter dans un premier temps *l'entity manager* pour récupérer dans un deuxième temps les *repositories* dont nous avons besoin,
 nous pouvons injecter directement les *repositories* concernés.
 
 Ressources::

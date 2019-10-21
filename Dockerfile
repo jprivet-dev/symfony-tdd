@@ -11,7 +11,7 @@ COPY docker/nginx/conf.d /etc/nginx/conf.d/
 COPY public /srv/app/public/
 
 ### H2 PROXY
-FROM alpine:latest AS symfony_tdd_h2-proxy-cert
+FROM alpine:latest AS symfony_tdd_h2_proxy_cert
 
 RUN apk add --no-cache openssl
 
@@ -23,10 +23,10 @@ RUN openssl req -new -passout pass:NotSecure -key server.key -out server.csr \
     -subj '/C=SS/ST=SS/L=Gotham City/O=Symfony/CN=localhost'
 RUN openssl x509 -req -sha256 -days 365 -in server.csr -signkey server.key -out server.crt
 
-FROM nginx:${NGINX_VERSION}-alpine AS symfony_tdd_h2-proxy
+FROM nginx:${NGINX_VERSION}-alpine AS symfony_tdd_h2_proxy
 
 RUN mkdir -p /etc/nginx/ssl/
-COPY --from=symfony_tdd_h2-proxy-cert server.key server.crt /etc/nginx/ssl/
+COPY --from=symfony_tdd_h2_proxy_cert server.key server.crt /etc/nginx/ssl/
 COPY ./docker/h2-proxy/default.conf /etc/nginx/conf.d/default.conf
 
 ### PHP

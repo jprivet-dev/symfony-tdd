@@ -130,7 +130,7 @@ COMPOSER
 
  composer.install               Composer: Read the composer.json/composer.lock file from the current directory, resolve the dependencies, and install them into vendor.
  composer.install.prod          Composer: Idem `composer.install` without dev elements.
- composer.install.check         Composer: Install only if there have been changes.
+ composer.install.changes       Composer: Install only if there have been changes.
  composer.update                Composer: Get the latest versions of the dependencies and update the composer.lock file.
  composer.licenses              Composer: List the name, version and license of every package installed.
 
@@ -174,15 +174,21 @@ DOCKER
 ------
 
  docker.start                   Docker: Build, (re)create, start, and attache to containers for a service (detached mode). @see https://docs.docker.com/compose/reference/up/.
+ docker.start.one               Docker: Stop all projects running containers & Start current project.
  docker.build                   Docker: Same `docker.start` command + build images before starting containers (detached mode). @see https://docs.docker.com/compose/reference/up/.
  docker.stop                    Docker: Stop running containers without removing them. @see https://docs.docker.com/compose/reference/stop/.
+ docker.stop.all                Docker: Stop all projects running containers without removing them. @see https://docs.docker.com/compose/reference/stop/.
  docker.down                    Docker: Stop containers and remove containers, networks, volumes, and images created by up. @see https://docs.docker.com/compose/reference/down/.
+ docker.remove                  Docker: Removes stopped service containers. @see https://docs.docker.com/compose/reference/rm/.
+ docker.remove.all              Docker: Removes all stopped service containers. @see https://docs.docker.com/compose/reference/rm/.
+ docker.list                    Docker: List containers. @see https://docs.docker.com/engine/reference/commandline/ps/.
+ docker.list.stopped            Docker: List all stopped containers.
 
  docker.env                     Docker: Show environment variables.
  docker.ip                      Docker: Get ip Gateway.
- docker.containers              Docker: List containers.
- docker.images                  Docker: List images.
- docker.networks                Docker: list networks.
+ docker.ip.all                  Docker: List all containers ip.
+ docker.images                  Docker: List images. @see https://docs.docker.com/engine/reference/commandline/images/.
+ docker.networks                Docker: list networks. @see https://docs.docker.com/engine/reference/commandline/network/.
  docker.logs                    Docker: Show logs.
  docker.sh                      Docker: sh access.
 ```

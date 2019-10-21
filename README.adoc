@@ -330,9 +330,9 @@ $ make phpunit.functional.coverage
 
 === Nomenclature
 
-. [ ] : A faire
-. [!] : En cours
-. [x] : Fait
+. *[ ]* A faire
+. *[!]* En cours
+. *[x]* Fait
 
 === [x] Injecter un *repository* au lieu de *l'entity manager*
 

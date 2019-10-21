@@ -442,6 +442,11 @@ exposé notre *custom validator*.
 
 == Autres ressources
 
+=== Symfony
+
+* https://symfony.com/doc/current/best_practices.html#infrastructure-related-configuration
+* https://github.com/symfony/demo
+
 === Docker
 
 * https://gist.github.com/bastman/5b57ddb3c11942094f8d0a97d461b430

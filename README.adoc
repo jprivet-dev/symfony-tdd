@@ -336,7 +336,7 @@ $ make phpunit.functional.coverage
 
 {BACK_TO_TOP}
 
-=== [x] Injecter un *repository* au lieu de *l'entity manager*
+=== [!] Injecter un *repository* au lieu de *l'entity manager*
 
 Principe::
 

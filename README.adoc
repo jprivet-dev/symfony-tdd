@@ -518,14 +518,17 @@ Autres informations::
 
 [TIP]
 ====
-*Docker* : Bien intégrer le binaire `chromedriver` avec une image `alpine`. +
-Voir https://github.com/symfony/panther#docker-integration
+*Docker* : Bien intégrer le binaire `chromedriver` avec une image `alpine`. Voir :
+
+. https://github.com/symfony/panther#docker-integration
 ====
 
 [WARNING]
 ====
-Panther ne permet pas de générer une couverture de code pour le moment. +
-Voir https://github.com/symfony/panther/issues/8.
+*Panther* ne permet pas de générer une *couverture de code* pour le moment. Voir :
+
+. https://github.com/symfony/panther/issues/8#issuecomment-401339969
+. https://github.com/symfony/panther/issues/8#issuecomment-477520050
 ====
 
 {BACK_TO_TOP}

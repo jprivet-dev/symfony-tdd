@@ -8,7 +8,7 @@ class NewsControllerTest extends WebTestCase
 {
     public function testNews()
     {
-        $client = static::createClient();
+        $client = static::createPantherClient();
         $crawler = $client->request('GET', '/news');
 
         $this->assertCount(2, $crawler->filter('h1'));

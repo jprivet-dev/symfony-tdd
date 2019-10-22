@@ -507,10 +507,24 @@ https://symfony.com/blog/introducing-symfony-panther-a-browser-testing-and-web-s
 Ressources::
 
 . https://symfony.com/blog/introducing-symfony-panther-a-browser-testing-and-web-scrapping-library-for-php
+. https://github.com/symfony/panther
 
 Fichiers d'exemples::
 
-.
+. {uri-rel-file-base}src/Controller/NewsController.php
+. {uri-rel-file-base}tests/Functional/NewsControllerTest.php
+
+[TIP]
+====
+*Docker* : Bien intégrer le binaire `chromedriver` avec une image `alpine`.
+Voir https://github.com/symfony/panther#docker-integration
+====
+
+[WARNING]
+====
+Panther ne permet pas de générer une couverture de code pour le moment.
+Voir https://github.com/symfony/panther/issues/8.
+====
 
 {BACK_TO_TOP}
 

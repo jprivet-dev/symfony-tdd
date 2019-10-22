@@ -4,7 +4,7 @@
 ##
 
 .PHONY: start
-start: docker.start.one install _ready ## Project: Start all (& install only if there have been changes).
+start: docker.start install _ready ## Project: Start all (& install only if there have been changes).
 
 .PHONY: stop
 stop: docker.stop ## Project: Stop all.

@@ -514,15 +514,17 @@ Fichiers d'exemples::
 . {uri-rel-file-base}src/Controller/NewsController.php
 . {uri-rel-file-base}tests/Functional/NewsControllerTest.php
 
+Autres informations::
+
 [TIP]
 ====
-*Docker* : Bien intégrer le binaire `chromedriver` avec une image `alpine`.
+*Docker* : Bien intégrer le binaire `chromedriver` avec une image `alpine`. +
 Voir https://github.com/symfony/panther#docker-integration
 ====
 
 [WARNING]
 ====
-Panther ne permet pas de générer une couverture de code pour le moment.
+Panther ne permet pas de générer une couverture de code pour le moment. +
 Voir https://github.com/symfony/panther/issues/8.
 ====
 

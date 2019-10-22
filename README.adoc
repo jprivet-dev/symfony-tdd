@@ -497,6 +497,23 @@ Fichiers d'exemples::
 
 {BACK_TO_TOP}
 
+=== [!] *Symfony Panther*: les bases
+
+Principe::
+
+L'idée est d'intégrer et d'étendre les codes en exemple sur la page
+https://symfony.com/blog/introducing-symfony-panther-a-browser-testing-and-web-scrapping-library-for-php[Symfony Panther: a Browser Testing and Web Scrapping Library for PHP]
+
+Ressources::
+
+. https://symfony.com/blog/introducing-symfony-panther-a-browser-testing-and-web-scrapping-library-for-php
+
+Fichiers d'exemples::
+
+.
+
+{BACK_TO_TOP}
+
 == Autres ressources
 
 === Symfony

@@ -90,6 +90,9 @@
     "evenement/evenement": {
         "version": "v3.0.1"
     },
+    "facebook/webdriver": {
+        "version": "1.7.1"
+    },
     "guzzlehttp/guzzle": {
         "version": "6.3.3"
     },
@@ -257,6 +260,12 @@
             "src/Kernel.php"
         ]
     },
+    "symfony/http-client": {
+        "version": "v4.3.5"
+    },
+    "symfony/http-client-contracts": {
+        "version": "v1.1.7"
+    },
     "symfony/http-foundation": {
         "version": "v4.3.4"
     },
@@ -277,6 +286,9 @@
     },
     "symfony/orm-pack": {
         "version": "v1.0.6"
+    },
+    "symfony/panther": {
+        "version": "v0.5.2"
     },
     "symfony/phpunit-bridge": {
         "version": "4.3",

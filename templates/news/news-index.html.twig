@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}News{% endblock %}
+
+{% block body %}
+    {% for item in collection %}
+        <article id="{{ item.slug }}">
+            <h1><a href="{{ path('news_item', {slug: item.slug}) }}">{{ item.title }}</a></h1>
+            {{ item.body }}
+        </article>
+    {% endfor %}
+{% endblock %}

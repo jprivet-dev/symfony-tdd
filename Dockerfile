@@ -60,12 +60,14 @@ RUN set -eux \
     && apk add --no-cache --virtual .api-phpexts-rundeps $runDeps \
 	&& apk del .build-deps
 
+###> Xdebug ###
 ARG XDEBUG_VERSION=2.6.0
 RUN set -eux; \
 	apk add --no-cache --virtual .build-deps $PHPIZE_DEPS; \
 	pecl install xdebug-$XDEBUG_VERSION; \
 	docker-php-ext-enable xdebug; \
 	apk del .build-deps
+###< Xdebug ###
 
 ###> Panther & Chrome ###
 ### @see https://github.com/symfony/panther#docker-integration

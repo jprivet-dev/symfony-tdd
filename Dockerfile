@@ -32,6 +32,12 @@ COPY ./docker/h2-proxy/default.conf /etc/nginx/conf.d/default.conf
 ### PHP
 FROM php:${PHP_VERSION}-fpm-alpine AS symfony_tdd_php
 
+# @see https://github.com/symfony/panther#docker-integration
+RUN apk add --no-cache \
+        chromium \
+        chromium-chromedriver
+ENV PANTHER_CHROME_DRIVER_BINARY /usr/lib/chromium/chromedriver
+
 RUN apk add --no-cache \
 		git \
 		icu-libs \

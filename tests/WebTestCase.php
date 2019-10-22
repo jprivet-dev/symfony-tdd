@@ -2,8 +2,8 @@
 
 namespace App\Tests;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as SymfonyWebTestCase;
+use Symfony\Component\Panther\PantherTestCase;
 
-abstract class WebTestCase extends SymfonyWebTestCase
+abstract class WebTestCase extends PantherTestCase
 {
 }

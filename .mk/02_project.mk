@@ -22,7 +22,7 @@ cc: symfony.cc ## Project: Clear all cache.
 
 .PHONY: chown.fix
 chown.fix: ## Project: Editing permissions on Linux if you cannot edit some of the project files (set yourself as owner).
-	$(DC) run --rm $(APP_NAME) chown -R $$(id -u):$$(id -g) .
+	$(DC) run --rm $(APP_SERVICE) chown -R $$(id -u):$$(id -g) .
 
 #
 #	"PRIVATE"

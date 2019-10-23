@@ -79,7 +79,7 @@ docker.networks: ## Docker: list networks. @see https://docs.docker.com/engine/r
 
 .PHONY: docker.logs
 docker.logs: ## Docker: Show logs.
-	$(DC) logs -f -t $(APP_NAME)
+	$(DC) logs -f -t $(APP_SERVICE)
 
 .PHONY: docker.sh
 docker.sh: ## Docker: sh access.

@@ -527,8 +527,8 @@ Autres informations::
 ====
 *Panther* ne permet pas de générer une *couverture de code* pour le moment. Voir :
 
-. https://github.com/symfony/panther/issues/8#issuecomment-401339969
-. https://github.com/symfony/panther/issues/8#issuecomment-477520050
+. https://github.com/symfony/panther/issues/8
+. https://github.com/jprivet-dev/symfony-tdd/issues/2
 ====
 
 {BACK_TO_TOP}

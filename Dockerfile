@@ -80,6 +80,10 @@ RUN apk add --no-cache \
         chromium-chromedriver
 ###< Panther & Chrome ###
 
+###> Database & PDO Connection ###
+RUN docker-php-ext-install pdo pdo_mysql
+###< Database & PDO Connection ###
+
 RUN ln -s $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini
 COPY docker/app/conf.d/symfony.ini $PHP_INI_DIR/conf.d/symfony.ini
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer

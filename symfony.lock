@@ -1,4 +1,21 @@
 {
+    "api-platform/api-pack": {
+        "version": "v1.2.0"
+    },
+    "api-platform/core": {
+        "version": "2.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.5",
+            "ref": "a93061567140e386f107be75340ac2aee3f86cbf"
+        },
+        "files": [
+            "config/packages/api_platform.yaml",
+            "config/routes/api_platform.yaml",
+            "src/Entity/.gitignore"
+        ]
+    },
     "clue/stdio-react": {
         "version": "v2.3.0"
     },
@@ -93,6 +110,9 @@
     "facebook/webdriver": {
         "version": "1.7.1"
     },
+    "fig/link-util": {
+        "version": "1.0.0"
+    },
     "guzzlehttp/guzzle": {
         "version": "6.3.3"
     },
@@ -107,6 +127,18 @@
     },
     "jolicode/jolinotif": {
         "version": "v2.0.2"
+    },
+    "nelmio/cors-bundle": {
+        "version": "1.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.5",
+            "ref": "6e1f64cc0f55362be49764634e8f14ce34a033c6"
+        },
+        "files": [
+            "config/packages/nelmio_cors.yaml"
+        ]
     },
     "nikic/php-parser": {
         "version": "v4.2.4"
@@ -123,6 +155,15 @@
     "php-coveralls/php-coveralls": {
         "version": "v2.1.0"
     },
+    "phpdocumentor/reflection-common": {
+        "version": "2.0.0"
+    },
+    "phpdocumentor/reflection-docblock": {
+        "version": "4.3.2"
+    },
+    "phpdocumentor/type-resolver": {
+        "version": "1.0.1"
+    },
     "phpmd/phpmd": {
         "version": "2.7.0"
     },
@@ -134,6 +175,9 @@
     },
     "psr/http-message": {
         "version": "1.0.1"
+    },
+    "psr/link": {
+        "version": "1.0.0"
     },
     "psr/log": {
         "version": "1.1.0"
@@ -173,6 +217,9 @@
         "files": [
             "phpcs.xml.dist"
         ]
+    },
+    "symfony/asset": {
+        "version": "v4.3.5"
     },
     "symfony/browser-kit": {
         "version": "v4.3.4"
@@ -223,6 +270,9 @@
     "symfony/event-dispatcher-contracts": {
         "version": "v1.1.5"
     },
+    "symfony/expression-language": {
+        "version": "v4.3.5"
+    },
     "symfony/filesystem": {
         "version": "v4.3.4"
     },
@@ -271,6 +321,9 @@
     },
     "symfony/http-kernel": {
         "version": "v4.3.4"
+    },
+    "symfony/inflector": {
+        "version": "v4.3.5"
     },
     "symfony/maker-bundle": {
         "version": "1.0",
@@ -324,6 +377,12 @@
     "symfony/profiler-pack": {
         "version": "v1.0.4"
     },
+    "symfony/property-access": {
+        "version": "v4.3.5"
+    },
+    "symfony/property-info": {
+        "version": "v4.3.5"
+    },
     "symfony/routing": {
         "version": "4.2",
         "recipe": {
@@ -338,6 +397,33 @@
             "config/packages/test/routing.yaml",
             "config/routes.yaml"
         ]
+    },
+    "symfony/security-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "e5a0228251d1dd2bca4c8ef918e14423c06db625"
+        },
+        "files": [
+            "config/packages/security.yaml"
+        ]
+    },
+    "symfony/security-core": {
+        "version": "v4.3.5"
+    },
+    "symfony/security-csrf": {
+        "version": "v4.3.5"
+    },
+    "symfony/security-guard": {
+        "version": "v4.3.5"
+    },
+    "symfony/security-http": {
+        "version": "v4.3.5"
+    },
+    "symfony/serializer": {
+        "version": "v4.3.5"
     },
     "symfony/service-contracts": {
         "version": "v1.1.6"
@@ -390,6 +476,9 @@
     "symfony/var-exporter": {
         "version": "v4.3.4"
     },
+    "symfony/web-link": {
+        "version": "v4.3.5"
+    },
     "symfony/web-profiler-bundle": {
         "version": "3.3",
         "recipe": {
@@ -412,6 +501,12 @@
     },
     "twig/twig": {
         "version": "v2.11.3"
+    },
+    "webmozart/assert": {
+        "version": "1.5.0"
+    },
+    "willdurand/negotiation": {
+        "version": "v2.3.1"
     },
     "yosymfony/resource-watcher": {
         "version": "v1.3.0"

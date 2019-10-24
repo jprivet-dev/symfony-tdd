@@ -539,6 +539,7 @@ Autres informations::
 
 * https://symfony.com/doc/current/best_practices.html#infrastructure-related-configuration
 * https://github.com/symfony/demo
+* http://fabien.potencier.org/symfony4-best-practices.html
 
 === Docker
 

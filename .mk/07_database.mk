@@ -5,11 +5,13 @@
 
 # Variables
 
+# env file data duplicated for the moment
 DATABASE_USER=root
 DATABASE_PASSWORD=rootpass
 DATABASE_HOST=db
 DATABASE_PORT=3306
 DATABASE_NAME=symfony_tdd
+DATABASE_DRIVER=pdo_mysql
 
 # Commands
 

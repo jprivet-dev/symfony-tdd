@@ -115,78 +115,80 @@ Vous retrouverez toutes les commandes suivantes :
 
 ```
 PROJECT
- start                          Project: Start all (& install only if there have been changes).
- stop                           Project: Stop all.
+  start                          Project: Start all (& install only if there have been changes).
+  stop                           Project: Stop all.
 
- install                        Project: Install only if there have been changes.
- tests                          Project: Launch all tests.
- cc                             Project: Clear all cache.
- chown.fix                      Project: Editing permissions on Linux. See https://github.com/dunglas/symfony-docker#editing-permissions-on-linux.
+  install                        Project: Install only if there have been changes.
+  tests                          Project: Launch all tests.
+  cc                             Project: Clear all cache.
+  chown.fix                      Project: Editing permissions on Linux. See https://github.com/dunglas/symfony-docker#editing-permissions-on-linux.
 
 COMPOSER
- composer.install               Composer: Read the composer.json/composer.lock file from the current directory, resolve the dependencies, and install them into vendor.
- composer.install.prod          Composer: Idem `composer.install` without dev elements.
- composer.install.changes       Composer: Install only if there have been changes.
- composer.update                Composer: Get the latest versions of the dependencies and update the composer.lock file.
- composer.licenses              Composer: List the name, version and license of every package installed.
+  composer.install               Composer: Read the composer.json/composer.lock file from the current directory, resolve the dependencies, and install them into vendor.
+  composer.install.prod          Composer: Idem `composer.install` without dev elements.
+  composer.install.changes       Composer: Install only if there have been changes.
+  composer.update                Composer: Get the latest versions of the dependencies and update the composer.lock file.
+  composer.licenses              Composer: List the name, version and license of every package installed.
 
 SYMFONY
- symfony.cc                     Symfony: Clear cache (current env).
- symfony.ccp                    Symfony: Clear cache (prod).
- symfony.cchard                 Symfony: Remove all in `var/cache` folder.
- symfony.routes                 Symfony: Display current routes.
+  symfony.cc                     Symfony: Clear cache (current env).
+  symfony.ccp                    Symfony: Clear cache (prod).
+  symfony.cchard                 Symfony: Remove all in `var/cache` folder.
+  symfony.routes                 Symfony: Display current routes.
 
 PHPUNIT
- phpunit                        PHPUnit: Launch all tests (unit, functional, ...).
- phpunit.coverage               PHPUnit: Generate code coverage report in HTML format.
- phpunit.coverage.clover        PHPUnit: Generate code clover style coverage report.
- phpunit.unit                   PHPUnit: Launch unit tests
- phpunit.unit.coverage          PHPUnit: Generate code coverage report in HTML format for unit tests.
- phpunit.functional             PHPUnit: Launch functional tests with dump
- phpunit.functional.coverage    PHPUnit: Generate code coverage report in HTML format for functional tests.
+  phpunit                        PHPUnit: Launch all tests (unit, functional, ...).
+  phpunit.coverage               PHPUnit: Generate code coverage report in HTML format.
+  phpunit.coverage.clover        PHPUnit: Generate code clover style coverage report.
+  phpunit.unit                   PHPUnit: Launch unit tests
+  phpunit.unit.coverage          PHPUnit: Generate code coverage report in HTML format for unit tests.
+  phpunit.functional             PHPUnit: Launch functional tests with dump
+  phpunit.functional.coverage    PHPUnit: Generate code coverage report in HTML format for functional tests.
 
- phpunit.watch                  PHPUnit Watcher: Rerun automatically tests whenever you change some code. @see https://github.com/spatie/phpunit-watcher.
- phpunit.watch.unit             PHPUnit Watcher: Rerun only unit tests.
- phpunit.watch.functional       PHPUnit Watcher: Rerun only functional tests.
+  phpunit.watch                  PHPUnit Watcher: Rerun automatically tests whenever you change some code. @see https://github.com/spatie/phpunit-watcher.
+  phpunit.watch.unit             PHPUnit Watcher: Rerun only unit tests.
+  phpunit.watch.functional       PHPUnit Watcher: Rerun only functional tests.
 
- xdebug.on                      Xdebug: Enable the module.
- xdebug.off                     Xdebug: Disable the module.
+XDEBUG
+  xdebug.on                      Xdebug: Enable the module.
+  xdebug.off                     Xdebug: Disable the module.
 
 QUALITY ASSURANCE - STATIC ANALYZERS
- qa.phpmetrics                  PHPMetrics: Provide tons of metric (Complexity / Volume / Object Oriented / Maintainability). @see http://www.phpmetrics.org.
- qa.codesniffer                 PHP_CodeSniffer: Tokenize PHP, JavaScript and CSS files and detect violations... @see https://github.com/squizlabs/PHP_CodeSniffer.
- qa.codesniffer.diff            PHP_CodeSniffer: Printing a diff report
- qa.codesniffer.fix             PHP_CodeSniffer: Fixing errors automatically
- qa.messdetector                PHP Mess Detector: Scan PHP source code and look for potential problems... @see http://phpmd.org/.
- qa.security.check              Symfony security: Check security of your dependencies. @see https://security.symfony.com/.
+  qa.phpmetrics                  PHPMetrics: Provide tons of metric (Complexity / Volume / Object Oriented / Maintainability). @see http://www.phpmetrics.org.
+  qa.codesniffer                 PHP_CodeSniffer: Tokenize PHP, JavaScript and CSS files and detect violations... @see https://github.com/squizlabs/PHP_CodeSniffer.
+  qa.codesniffer.diff            PHP_CodeSniffer: Printing a diff report
+  qa.codesniffer.fix             PHP_CodeSniffer: Fixing errors automatically
+  qa.messdetector                PHP Mess Detector: Scan PHP source code and look for potential problems... @see http://phpmd.org/.
+  qa.security.check              Symfony security: Check security of your dependencies. @see https://security.symfony.com/.
 
 DATABASE
- db.wait                        Database: Wait database...
- db.bash                        Database: Bash access (mysql> ...)
- db.create                      Database: Drop & create
+  db.wait                        Database: Wait database...
+  db.bash                        Database: Bash access (mysql> ...)
+  db.create                      Database: Drop & create
 
 DOCKER
- docker.start                   Docker: Build, (re)create, start, and attache to containers for a service (detached mode). @see https://docs.docker.com/compose/reference/up/.
- docker.start.one               Docker: Stop all projects running containers & Start current project.
- docker.build                   Docker: Same `docker.start` command + build images before starting containers (detached mode). @see https://docs.docker.com/compose/reference/up/.
- docker.stop                    Docker: Stop running containers without removing them. @see https://docs.docker.com/compose/reference/stop/.
- docker.stop.all                Docker: Stop all projects running containers without removing them. @see https://docs.docker.com/compose/reference/stop/.
- docker.down                    Docker: Stop containers and remove containers, networks, volumes, and images created by up. @see https://docs.docker.com/compose/reference/down/.
- docker.remove                  Docker: Removes stopped service containers. @see https://docs.docker.com/compose/reference/rm/.
- docker.remove.all              Docker: Removes all stopped service containers. @see https://docs.docker.com/compose/reference/rm/.
- docker.list                    Docker: List containers. @see https://docs.docker.com/engine/reference/commandline/ps/.
- docker.list.stopped            Docker: List all stopped containers.
+  docker.start                   Docker: Build, (re)create, start, and attache to containers for a service (detached mode). @see https://docs.docker.com/compose/reference/up/.
+  docker.start.one               Docker: Stop all projects running containers & Start current project.
+  docker.build                   Docker: Same `docker.start` command + build images before starting containers (detached mode). @see https://docs.docker.com/compose/reference/up/.
+  docker.stop                    Docker: Stop running containers without removing them. @see https://docs.docker.com/compose/reference/stop/.
+  docker.stop.all                Docker: Stop all projects running containers without removing them. @see https://docs.docker.com/compose/reference/stop/.
+  docker.down                    Docker: Stop containers and remove containers, networks, volumes, and images created by up. @see https://docs.docker.com/compose/reference/down/.
+  docker.remove                  Docker: Removes stopped service containers. @see https://docs.docker.com/compose/reference/rm/.
+  docker.remove.all              Docker: Removes all stopped service containers. @see https://docs.docker.com/compose/reference/rm/.
+  docker.list                    Docker: List containers. @see https://docs.docker.com/engine/reference/commandline/ps/.
+  docker.list.stopped            Docker: List all stopped containers.
 
- docker.env                     Docker: Show environment variables.
- docker.ip                      Docker: Get ip Gateway.
- docker.ip.all                  Docker: List all containers ip.
- docker.images                  Docker: List images. @see https://docs.docker.com/engine/reference/commandline/images/.
- docker.networks                Docker: list networks. @see https://docs.docker.com/engine/reference/commandline/network/.
- docker.logs                    Docker: Show logs.
+  docker.env                     Docker: Show environment variables.
+  docker.ip                      Docker: Get ip Gateway.
+  docker.ip.all                  Docker: List all containers ip.
+  docker.images                  Docker: List images. @see https://docs.docker.com/engine/reference/commandline/images/.
+  docker.networks                Docker: list networks. @see https://docs.docker.com/engine/reference/commandline/network/.
+  docker.logs                    Docker: Show logs.
 
- docker.app.sh                  Docker: app sh access.
- docker.db.bash                 Docker: db bash access (`db.bash` alias).
+  docker.app.sh                  Docker: app sh access.
+  docker.db.bash                 Docker: db bash access (`db.bash` alias).
 ```
+
 {BACK_TO_TOP}
 
 === Ressources pour construire un fichier *Makefile*

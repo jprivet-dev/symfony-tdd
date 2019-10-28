@@ -22,7 +22,7 @@ chown.fix: ## Project: Editing permissions on Linux. See https://github.com/dung
 	$(DOCKER_COMPOSE) run --rm $(SERVICE_APP) chown -R $$(id -u):$$(id -g) .
 
 #
-#	"PRIVATE"
+# "PRIVATE"
 #
 
 .PHONY: _build

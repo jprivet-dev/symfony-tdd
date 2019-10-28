@@ -2,11 +2,17 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     collectionOperations={"post", "get"},
+ *     itemOperations={"get"}
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
  */
 class Comment
@@ -20,11 +26,14 @@ class Comment
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Choice(choices={"week-601", "symfony-live-usa-2018"})
+     * @ApiFilter(SearchFilter::class)
      */
     private $news;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
      */
     private $body;
 

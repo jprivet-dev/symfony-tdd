@@ -3,6 +3,9 @@
         "@symfony/webpack-encore": "^0.28.0",
         "core-js": "^3.0.0",
         "regenerator-runtime": "^0.13.2",
+        "vue": "^2.6.10",
+        "vue-loader": "^14",
+        "vue-template-compiler": "^2.6.10",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",

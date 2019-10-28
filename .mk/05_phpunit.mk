@@ -1,7 +1,7 @@
 ## PHPUNIT
 
 .PHONY: phpunit
-phpunit: ## PHPUnit: Launch all tests (unit, functional, ...).
+phpunit: xdebug.off ## PHPUnit: Launch all tests (unit, functional, ...).
 	$(PHPUNIT)
 
 .PHONY: phpunit.coverage
@@ -21,7 +21,7 @@ phpunit.unit.coverage: xdebug.on _build ## PHPUnit: Generate code coverage repor
 	$(PHPUNIT) --testsuite unit --coverage-html $(PROJECT_BUILD)/phpunit/coverage
 
 .PHONY: phpunit.functional
-phpunit.functional: xdebug.off ## PHPUnit: Launch functional tests with dump
+phpunit.functional: xdebug.off ## PHPUnit: Launch functional tests
 	$(PHPUNIT) --testsuite functional
 
 .PHONY: phpunit.functional.coverage

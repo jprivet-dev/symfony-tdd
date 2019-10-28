@@ -41,15 +41,3 @@ phpunit.watch.unit: xdebug.off ## PHPUnit Watcher: Rerun only unit tests.
 .PHONY: phpunit.watch.functional
 phpunit.watch.functional: xdebug.off ## PHPUnit Watcher: Rerun only functional tests.
 	$(PHPUNIT_WATCH) --testsuite functional
-
-##
-
-.PHONY: xdebug.on
-xdebug.on: ## Xdebug: Enable the module.
-	$(EXEC_APP_ROOT) sed -i.default "s/^;zend_extension=/zend_extension=/" $(XDEBUG_INI)
-	@echo -e '\033[1;42mXdebug ON\033[0m';
-
-.PHONY: xdebug.off
-xdebug.off: ## Xdebug: Disable the module.
-	$(EXEC_APP_ROOT) sed -i.default "s/^zend_extension=/;zend_extension=/" $(XDEBUG_INI)
-	@echo -e '\033[1;41mXdebug OFF\033[0m';

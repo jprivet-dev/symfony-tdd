@@ -97,6 +97,7 @@ $ docker-compose up -d
 === Accéder au site
 
 . Site web : https://localhost.
+. API : https://localhost/api.
 . phpMyAdmin: http://localhost:8088 (user: root / pwd: rootpass).
 
 {BACK_TO_TOP}

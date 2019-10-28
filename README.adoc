@@ -87,7 +87,7 @@ Open http://localhost/
 
 [TIP]
 ====
-Si vous n'avez pas l'outil https://www.gnu.org/software/make/[GNU Make] disponible, démarrer avec la commande  suivante :
+Si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible, démarrer avec la commande  suivante :
 
 ```sh
 $ docker-compose up -d
@@ -104,7 +104,7 @@ Aller sur https://localhost.
 
 === Les *commandes disponibles*
 
-Si vous avez l'outil https://www.gnu.org/software/make/[GNU Make] disponible sur votre poste,
+Si vous avez un outil du type https://www.gnu.org/software/make/[GNU Make] disponible sur votre poste,
 affichez toutes les commandes avec la ligne suivante :
 
 ```sh
@@ -115,19 +115,15 @@ Vous retrouverez toutes les commandes suivantes :
 
 ```
 PROJECT
--------
-
  start                          Project: Start all (& install only if there have been changes).
  stop                           Project: Stop all.
 
  install                        Project: Install only if there have been changes.
  tests                          Project: Launch all tests.
  cc                             Project: Clear all cache.
- chown.fix                      Project: Editing permissions on Linux if you cannot edit some of the project files (set yourself as owner).
+ chown.fix                      Project: Editing permissions on Linux. See https://github.com/dunglas/symfony-docker#editing-permissions-on-linux.
 
 COMPOSER
---------
-
  composer.install               Composer: Read the composer.json/composer.lock file from the current directory, resolve the dependencies, and install them into vendor.
  composer.install.prod          Composer: Idem `composer.install` without dev elements.
  composer.install.changes       Composer: Install only if there have been changes.
@@ -135,16 +131,12 @@ COMPOSER
  composer.licenses              Composer: List the name, version and license of every package installed.
 
 SYMFONY
--------
-
  symfony.cc                     Symfony: Clear cache (current env).
  symfony.ccp                    Symfony: Clear cache (prod).
  symfony.cchard                 Symfony: Remove all in `var/cache` folder.
  symfony.routes                 Symfony: Display current routes.
 
 PHPUNIT
--------
-
  phpunit                        PHPUnit: Launch all tests (unit, functional, ...).
  phpunit.coverage               PHPUnit: Generate code coverage report in HTML format.
  phpunit.coverage.clover        PHPUnit: Generate code clover style coverage report.
@@ -161,8 +153,6 @@ PHPUNIT
  xdebug.off                     Xdebug: Disable the module.
 
 QUALITY ASSURANCE - STATIC ANALYZERS
-------------------------------------
-
  qa.phpmetrics                  PHPMetrics: Provide tons of metric (Complexity / Volume / Object Oriented / Maintainability). @see http://www.phpmetrics.org.
  qa.codesniffer                 PHP_CodeSniffer: Tokenize PHP, JavaScript and CSS files and detect violations... @see https://github.com/squizlabs/PHP_CodeSniffer.
  qa.codesniffer.diff            PHP_CodeSniffer: Printing a diff report
@@ -170,9 +160,12 @@ QUALITY ASSURANCE - STATIC ANALYZERS
  qa.messdetector                PHP Mess Detector: Scan PHP source code and look for potential problems... @see http://phpmd.org/.
  qa.security.check              Symfony security: Check security of your dependencies. @see https://security.symfony.com/.
 
-DOCKER
-------
+DATABASE
+ db.wait                        Database: Wait database...
+ db.bash                        Database: Bash access (mysql> ...)
+ db.create                      Database: Drop & create
 
+DOCKER
  docker.start                   Docker: Build, (re)create, start, and attache to containers for a service (detached mode). @see https://docs.docker.com/compose/reference/up/.
  docker.start.one               Docker: Stop all projects running containers & Start current project.
  docker.build                   Docker: Same `docker.start` command + build images before starting containers (detached mode). @see https://docs.docker.com/compose/reference/up/.
@@ -190,9 +183,10 @@ DOCKER
  docker.images                  Docker: List images. @see https://docs.docker.com/engine/reference/commandline/images/.
  docker.networks                Docker: list networks. @see https://docs.docker.com/engine/reference/commandline/network/.
  docker.logs                    Docker: Show logs.
- docker.sh                      Docker: sh access.
-```
 
+ docker.app.sh                  Docker: app sh access.
+ docker.db.bash                 Docker: db bash access (`db.bash` alias).
+```
 {BACK_TO_TOP}
 
 === Ressources pour construire un fichier *Makefile*
@@ -229,7 +223,7 @@ OK (32 tests, 74 assertions)
 
 [TIP]
 ====
-Si vous n'avez pas l'outil https://www.gnu.org/software/make/[GNU Make] disponible, lancer les tests avec la commande  suivante :
+Si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible, lancer les tests avec la commande  suivante :
 
 ```sh
 $ docker-compose exec app ./vendor/bin/simple-phpunit
@@ -248,7 +242,7 @@ $ make phpunit.watch
 
 [TIP]
 ====
-Si vous n'avez pas l'outil https://www.gnu.org/software/make/[GNU Make] disponible, lancer le watcher avec la commande  suivante :
+Si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible, lancer le watcher avec la commande  suivante :
 
 ```sh
 $ docker-compose exec app ./vendor/bin/phpunit-watcher watch

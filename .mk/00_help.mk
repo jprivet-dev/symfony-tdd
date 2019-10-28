@@ -16,7 +16,7 @@ help:
 				printf "\033[33m\n%s\n", description; \
 			# --- command + description --- \
 			else if (target!="" && description!="")\
-				printf "\033[32m %-30s \033[0m%s\n", target, description; \
+				printf "\033[32m  %-30s \033[0m%s\n", target, description; \
 			# --- print nothing --- \
 			else \
 				; \

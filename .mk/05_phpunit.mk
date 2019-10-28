@@ -13,7 +13,7 @@ phpunit.coverage.clover: xdebug.on _build ## PHPUnit: Generate code clover style
 	$(PHPUNIT) --coverage-clover $(PROJECT_BUILD)/logs/clover.xml
 
 .PHONY: phpunit.unit
-phpunit.unit: ## PHPUnit: Launch unit tests
+phpunit.unit: ## PHPUnit: Launch unit tests.
 	$(PHPUNIT) --testsuite unit
 
 .PHONY: phpunit.unit.coverage
@@ -21,7 +21,7 @@ phpunit.unit.coverage: xdebug.on _build ## PHPUnit: Generate code coverage repor
 	$(PHPUNIT) --testsuite unit --coverage-html $(PROJECT_BUILD)/phpunit/coverage
 
 .PHONY: phpunit.functional
-phpunit.functional: xdebug.off ## PHPUnit: Launch functional tests
+phpunit.functional: xdebug.off ## PHPUnit: Launch functional tests.
 	$(PHPUNIT) --testsuite functional
 
 .PHONY: phpunit.functional.coverage

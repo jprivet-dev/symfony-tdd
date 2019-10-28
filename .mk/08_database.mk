@@ -1,29 +1,29 @@
 ## DATABASE
 
 PHONY: db.create
-db.create: _db.wait ## Database: Creates the configured database & Executes the SQL needed to generate the database schema
+db.create: _db.wait ## Database: Creates the configured database & Executes the SQL needed to generate the database schema.
 	$(SYMFONY) doctrine:database:create --if-not-exists
 	$(SYMFONY) doctrine:schema:create
 
 PHONY: db.create.force
-db.create.force: _db.wait db.drop db.create ## Database: Drop & create
+db.create.force: _db.wait db.drop db.create ## Database: Drop & create.
 
 PHONY: db.drop
-db.drop: ## Database: Drop
+db.drop: ## Database: Drop.
 	$(SYMFONY) doctrine:database:drop --if-exists --force
 
 PHONY: db.validate
-db.validate: ## Database: Validate the mapping files
+db.validate: ## Database: Validate the mapping files.
 	$(SYMFONY) doctrine:schema:validate
 
 ##
 
 PHONY: db.entities
-db.entities: ## Database: List mapped entities
+db.entities: ## Database: List mapped entities.
 	$(SYMFONY) doctrine:mapping:info
 
 PHONY: db.bash
-db.bash: ## Database: Bash access (mysql> ...)
+db.bash: ## Database: Bash access (mysql> ...).
 	$(EXEC_DB) bash -c "mysql -u $(DATABASE_USER) -p$(DATABASE_PASSWORD) $(DATABASE_NAME)"
 
 #

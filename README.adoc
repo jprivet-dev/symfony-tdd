@@ -142,9 +142,9 @@ PHPUNIT
   phpunit                        PHPUnit: Launch all tests (unit, functional, ...).
   phpunit.coverage               PHPUnit: Generate code coverage report in HTML format.
   phpunit.coverage.clover        PHPUnit: Generate code clover style coverage report.
-  phpunit.unit                   PHPUnit: Launch unit tests
+  phpunit.unit                   PHPUnit: Launch unit tests.
   phpunit.unit.coverage          PHPUnit: Generate code coverage report in HTML format for unit tests.
-  phpunit.functional             PHPUnit: Launch functional tests with dump
+  phpunit.functional             PHPUnit: Launch functional tests.
   phpunit.functional.coverage    PHPUnit: Generate code coverage report in HTML format for functional tests.
 
   phpunit.watch                  PHPUnit Watcher: Rerun automatically tests whenever you change some code. @see https://github.com/spatie/phpunit-watcher.
@@ -164,9 +164,13 @@ QUALITY ASSURANCE - STATIC ANALYZERS
   qa.security.check              Symfony security: Check security of your dependencies. @see https://security.symfony.com/.
 
 DATABASE
-  db.wait                        Database: Wait database...
-  db.bash                        Database: Bash access (mysql> ...)
-  db.create                      Database: Drop & create
+  db.create                      Database: Creates the configured database & Executes the SQL needed to generate the database schema.
+  db.create.force                Database: Drop & create.
+  db.drop                        Database: Drop.
+  db.validate                    Database: Validate the mapping files.
+
+  db.entities                    Database: List mapped entities.
+  db.bash                        Database: Bash access (mysql> ...).
 
 DOCKER
   docker.start                   Docker: Build, (re)create, start, and attache to containers for a service (detached mode). @see https://docs.docker.com/compose/reference/up/.

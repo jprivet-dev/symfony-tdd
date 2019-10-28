@@ -1,7 +1,4 @@
-##
 ## DOCKER
-## ------
-##
 
 # Variables
 

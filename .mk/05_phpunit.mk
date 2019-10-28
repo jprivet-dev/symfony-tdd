@@ -1,7 +1,4 @@
-##
 ## PHPUNIT
-## -------
-##
 
 # Variables
 

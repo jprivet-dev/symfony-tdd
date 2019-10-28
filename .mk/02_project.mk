@@ -1,7 +1,4 @@
-##
 ## PROJECT
-## -------
-##
 
 .PHONY: start
 start: docker.start install _ready ## Project: Start all (& install only if there have been changes).

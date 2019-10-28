@@ -1,7 +1,4 @@
-##
 ## QUALITY ASSURANCE - STATIC ANALYZERS
-## ------------------------------------
-##
 
 # Variables
 

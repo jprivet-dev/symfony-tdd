@@ -1,7 +1,4 @@
-##
 ## COMPOSER
-## --------
-##
 
 # Variables
 

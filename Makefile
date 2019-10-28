@@ -1,5 +1,11 @@
 SHELL=/bin/bash
 
+
+# Inserting Symfony environment variables
+# @see https://www.gnu.org/software/make/manual/html_node/Environment.html
+# @see https://github.com/symfony/recipes/issues/18
+-include .env
+
 -include .mk/00_*
 -include .mk/01_*
 -include .mk/02_*

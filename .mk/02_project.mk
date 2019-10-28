@@ -19,7 +19,7 @@ cc: symfony.cc ## Project: Clear all cache.
 
 .PHONY: chown.fix
 chown.fix: ## Project: Editing permissions on Linux. See https://github.com/dunglas/symfony-docker#editing-permissions-on-linux.
-	$(DC) run --rm $(APP_SERVICE) chown -R $$(id -u):$$(id -g) .
+	$(DOCKER_COMPOSE) run --rm $(SERVICE_APP) chown -R $$(id -u):$$(id -g) .
 
 #
 #	"PRIVATE"
@@ -27,11 +27,11 @@ chown.fix: ## Project: Editing permissions on Linux. See https://github.com/dung
 
 .PHONY: _build
 _build: # Create 'build' folder.
-	mkdir -p $(FOLDER_BUILD)
+	mkdir -p $(PROJECT_BUILD)
 
 .PHONY: _build.clean
 _build.clean: # Remove 'build' folder.
-	rm -rf $(FOLDER_BUILD)
+	rm -rf $(PROJECT_BUILD)
 
 .PHONY: _ready
 _ready:

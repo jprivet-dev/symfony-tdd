@@ -1,11 +1,5 @@
 ## COMPOSER
 
-# Variables
-
-COMPOSER = $(APP) composer
-
-# Commands
-
 .PHONY: composer.install
 composer.install: ## Composer: Read the composer.json/composer.lock file from the current directory, resolve the dependencies, and install them into vendor.
 	$(COMPOSER) install --verbose

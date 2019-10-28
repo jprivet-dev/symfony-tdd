@@ -1,15 +1,36 @@
-APP_SERVICE = app
-DB_SERVICE = db
-
-D = docker
-DC = docker-compose
-EXEC = $(DC) exec
-APP = $(EXEC) $(APP_SERVICE)
-APP_ROOT = $(EXEC) --user 0 $(APP_SERVICE)
-PHP = $(APP) php
-DB = $(EXEC) $(DB_SERVICE)
-
-FOLDER_BUILD = build
-FOLDER_SRC = src
+PROJECT_BUILD = build
+PROJECT_SRC = src
 
 LOCALHOST = http://localhost/
+XDEBUG_INI = /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
+SERVICE_APP = app
+SERVICE_DB = db
+DOCKER_NETWORK_DEFAULT_NAME = symfony-tdd_default
+
+DOCKER = docker
+DOCKER_COMPOSE = docker-compose
+
+EXEC = $(DOCKER_COMPOSE) exec
+EXEC_APP = $(EXEC) $(SERVICE_APP)
+EXEC_APP_ROOT = $(EXEC) --user 0 $(SERVICE_APP)
+EXEC_DB = $(EXEC) $(SERVICE_DB)
+
+COMPOSER = $(EXEC_APP) composer
+PHP = $(EXEC_APP) php
+PHPUNIT = $(EXEC_APP) ./vendor/bin/simple-phpunit
+PHPUNIT_WATCH = $(EXEC_APP) ./vendor/bin/phpunit-watcher watch
+
+SYMFONY = $(PHP) bin/console
+
+CODESNIFFER = $(PHP) ./vendor/bin/phpcs
+CODESNIFFER_FIX = $(PHP) ./vendor/bin/phpcbf
+MESSDETECTOR = $(PHP) ./vendor/bin/phpmd
+QA = $(DOCKER) run --rm -v `pwd`:/project mykiwi/phaudit:7.2
+
+DATABASE_USER=root
+DATABASE_PASSWORD=rootpass
+DATABASE_HOST=db
+DATABASE_PORT=3306
+DATABASE_NAME=symfony_tdd
+DATABASE_DRIVER=pdo_mysql

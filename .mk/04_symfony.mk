@@ -1,11 +1,5 @@
 ## SYMFONY
 
-# Variables
-
-SYMFONY = $(PHP) bin/console
-
-# Commands
-
 .PHONY: symfony.cc
 symfony.cc: ## Symfony: Clear cache (current env).
 	$(SYMFONY) cache:clear

@@ -2,7 +2,7 @@
 
 .PHONY: help
 help:
-	@grep -E '(^[a-zA-Z_-.]+[^:]+:.*##.*?$$)|(^##)' $(MAKEFILE_LIST) \
+	@grep -E '(^[a-zA-Z_-.]+[^:]+:.*##[^#].*?$$)|(^##[^#])' $(MAKEFILE_LIST) \
 	| awk 'BEGIN {FS = "## "}; \
 		{ \
 			split($$1, command, ":"); \

@@ -21,7 +21,7 @@ tests: phpunit ## Project: Launch all tests.
 cc: symfony.cc ## Project: Clear all cache.
 
 .PHONY: chown.fix
-chown.fix: ## Project: Editing permissions on Linux if you cannot edit some of the project files (set yourself as owner).
+chown.fix: ## Project: Editing permissions on Linux. See https://github.com/dunglas/symfony-docker#editing-permissions-on-linux.
 	$(DC) run --rm $(APP_SERVICE) chown -R $$(id -u):$$(id -g) .
 
 #

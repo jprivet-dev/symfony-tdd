@@ -8,7 +8,7 @@ db.wait: ## Database: Wait database...
 
 PHONY: db.bash
 db.bash: ## Database: Bash access (mysql> ...)
-	$(EXEC_DB) bash -c "mysql -u ${DATABASE_USER} -p${DATABASE_PASSWORD} ${DATABASE_NAME}"
+	$(EXEC_DB) bash -c "mysql -u $(DATABASE_USER) -p$(DATABASE_PASSWORD) $(DATABASE_NAME)"
 
 PHONY: db.create
 db.create: db.wait ## Database: Drop & create

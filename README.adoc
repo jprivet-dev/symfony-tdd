@@ -82,7 +82,9 @@ $ make start
 ...
 ...
 READY!
-Open http://localhost/
+Website:    http://localhost
+API:        http://localhost/api
+phpMyAdmin: http://localhost:8088
 ```
 
 [TIP]
@@ -226,6 +228,8 @@ $ sf --version // Donne accès au symfony du container
 
 Symfony 4.3.5 (env: dev, debug: true)
 ```
+
+TIP: Les alias sont automatiquement chargés avec la commande `$ make start`.
 
 {BACK_TO_TOP}
 

@@ -106,8 +106,6 @@ $ docker-compose up -d
 
 == Le *Makefile* du projet
 
-=== Les *commandes disponibles*
-
 Si vous avez un outil du type https://www.gnu.org/software/make/[GNU Make] disponible sur votre poste,
 affichez toutes les commandes avec la ligne suivante :
 
@@ -202,13 +200,7 @@ DOCKER
 
 == Les *alias* du projet
 
-Charger les *alias* du projet :
-
-```sh
-$ . .bash_aliases
-```
-
-Le fichier {uri-rel-file-base}.bash_aliases[] propose quelques *alias* pour faciliter quelques commandes (`php`, `composer`, `yarn`, `sf`, ...) :
+Le fichier {uri-rel-file-base}.bash_aliases[] propose quelques *raccourcis* (`php`, `composer`, `yarn`, `sf`, ...) :
 
 ```sh
 $ php --version // Donne la version de PHP utilisé dans le container
@@ -230,7 +222,13 @@ $ sf --version // Donne accès au symfony du container
 Symfony 4.3.5 (env: dev, debug: true)
 ```
 
-TIP: Les alias sont automatiquement chargés avec la commande `$ make start`.
+Charger les *alias* du projet :
+
+```sh
+$ . .bash_aliases
+```
+
+TIP: Les *alias* sont automatiquement chargés avec la commande `$ make start`.
 
 {BACK_TO_TOP}
 

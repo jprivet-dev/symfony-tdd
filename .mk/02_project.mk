@@ -1,7 +1,7 @@
 ## PROJECT
 
 .PHONY: start
-start: docker.start install _ready ## Project: Start all (& install only if there have been changes).
+start: aliases docker.start install _ready ## Project: Start all (& install only if there have been changes).
 
 .PHONY: stop
 stop: docker.stop ## Project: Stop all.
@@ -21,6 +21,10 @@ cc: symfony.cc ## Project: Clear all cache.
 chown.fix: ## Project: Editing permissions on Linux. See https://github.com/dunglas/symfony-docker#editing-permissions-on-linux.
 	$(DOCKER_COMPOSE) run --rm $(SERVICE_APP) chown -R $$(id -u):$$(id -g) .
 
+.PHONY: aliases
+aliases: .bash_aliases ## Project: load aliases of project.
+	. .bash_aliases
+
 #
 # "PRIVATE"
 #
@@ -37,5 +41,7 @@ _build.clean: # Remove 'build' folder.
 _ready:
 	@echo -e "\033[1;42m"
 	@echo -e "READY!"
-	@echo -e "Open \e[4m$(LOCALHOST)\033[0m"
+	@echo -e "Website:    \e[4m$(URL_WEBSITE)\\033[24m"
+	@echo -e "API:        \e[4m$(URL_API)\\033[24m"
+	@echo -e "phpMyAdmin: \e[4m$(URL_PHPMYADMIN)\\033[24m\033[0m"
 	@echo

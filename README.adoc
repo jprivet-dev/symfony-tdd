@@ -126,6 +126,7 @@ PROJECT
   tests                          Project: Launch all tests.
   cc                             Project: Clear all cache.
   chown.fix                      Project: Editing permissions on Linux. See https://github.com/dunglas/symfony-docker#editing-permissions-on-linux.
+  aliases                        Project: load aliases of project.
 
 COMPOSER
   composer.install               Composer: Read the composer.json/composer.lock file from the current directory, resolve the dependencies, and install them into vendor.

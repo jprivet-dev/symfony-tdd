@@ -482,7 +482,7 @@ Ressources::
 
 Fichiers d'exemples::
 
-. {uri-rel-file-base}tests/Functional/SmokeTest.php
+. {uri-rel-file-base}tests/Functional/SmokeTest.php[]
 
 {BACK_TO_TOP}
 
@@ -544,8 +544,8 @@ Ressources::
 
 Fichiers d'exemples::
 
-. {uri-rel-file-base}src/Controller/NewsController.php
-. {uri-rel-file-base}tests/Functional/NewsControllerTest.php
+. {uri-rel-file-base}src/Controller/NewsController.php[]
+. {uri-rel-file-base}tests/Functional/NewsControllerTest.php[]
 
 Autres informations::
 
@@ -563,6 +563,24 @@ Autres informations::
 . https://github.com/symfony/panther/issues/8
 . https://github.com/jprivet-dev/symfony-tdd/issues/2
 ====
+
+{BACK_TO_TOP}
+
+== Tips
+
+=== [!] *Makefile* : Utiliser le fichier *.env* de Symfony
+
+{BACK_TO_TOP}
+
+=== [!] *Makefile* : *Script* d'attente de disponibilité de la BD pendant l'installation
+
+{BACK_TO_TOP}
+
+=== [ ] *Tests unitaires* : Utiliser les *yield*
+
+{BACK_TO_TOP}
+
+=== [ ] *Contrôleurs* : peut-on les *tester unitairement* ?
 
 {BACK_TO_TOP}
 

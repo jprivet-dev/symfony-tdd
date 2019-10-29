@@ -1,7 +1,10 @@
 PROJECT_BUILD = build
 PROJECT_SRC = src
 
-LOCALHOST = http://localhost/
+URL_WEBSITE = http://localhost
+URL_API = $(URL_WEBSITE)/api
+URL_PHPMYADMIN = $(URL_WEBSITE):8088
+
 XDEBUG_INI = /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 SERVICE_APP = app

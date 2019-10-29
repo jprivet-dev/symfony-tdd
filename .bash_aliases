@@ -16,7 +16,7 @@ alias app="_EXEC_APP"
 alias composer="_COMPOSER"
 alias yarn="_YARN"
 alias php="_PHP"
-alias sf="_SYMFONY"
+alias symfony="_SYMFONY"
 alias cc="_SYMFONY cache:clear"
 alias ccp="_SYMFONY cache:clear --env=prod"
 
@@ -26,6 +26,8 @@ alias tests-coverage='_PHPUNIT --coverage-html build/phpunit/coverage'
 alias tests-watch="_PHPUNIT_WATCH"
 alias open-coverage="gio open build/phpunit/coverage/index.html"
 
+alias m="make"
+alias sf="symfony"
 alias t="tests"
 alias tnostop="tests-no-stop"
 alias tc='tests-coverage; open-coverage'

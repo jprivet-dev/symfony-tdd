@@ -133,6 +133,12 @@ COMPOSER
   composer.update                Composer: Get the latest versions of the dependencies and update the composer.lock file.
   composer.licenses              Composer: List the name, version and license of every package installed.
 
+YARN
+  yarn.install                   Yarn: Install.
+  yarn.encore.compile            Webpack Encore: Compile assets once.
+  yarn.encore.watch              Webpack Encore: Recompile assets automatically when files change.
+  yarn.encore.deploy             Webpack Encore: On deploy, create a production build.
+
 SYMFONY
   symfony.cc                     Symfony: Clear cache (current env).
   symfony.ccp                    Symfony: Clear cache (prod).

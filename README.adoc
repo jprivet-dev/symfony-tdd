@@ -35,7 +35,7 @@ endif::[]
 :BACK_TO_TOP: <<{BACK_TO_TOP_TARGET},{BACK_TO_TOP_LABEL}>>
 
 [#{BACK_TO_TOP_TARGET}]
-= Symfony 4 & TDD (Workshop)
+= Symfony 4 & TDD (dockerized workshop)
 
 |===
 | Branch 3+| Status
@@ -197,13 +197,35 @@ DOCKER
 
 {BACK_TO_TOP}
 
-=== Ressources pour construire un fichier *Makefile*
+== Les *alias* du projet
 
-. https://blog.theodo.fr/2018/05/why-you-need-a-makefile-on-your-project/
-. https://github.com/mykiwi/symfony-bootstrapped/blob/master/Makefile
-. https://github.com/Elao/symfony-standard/blob/master/Makefile
-. https://github.com/Elao/tricot/blob/master/Makefile
-. https://github.com/cleverage/eav-manager-starter-kit/blob/master/Makefile
+Charger les *alias* du projet :
+
+```sh
+$ . .bash_aliases
+```
+
+Le fichier {uri-rel-file-base}.bash_aliases[] propose quelques *alias* pour faciliter quelques commandes (`php`, `composer`, `yarn`, `sf`, ...) :
+
+```sh
+$ php --version // Donne la version de PHP utilisé dans le container
+
+PHP 7.2.23 (cli) (built: Oct  5 2019 01:26:03) ( NTS )
+Copyright (c) 1997-2018 The PHP Group
+Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
+    with Zend OPcache v7.2.23, Copyright (c) 1999-2018, by Zend Technologies
+    with Xdebug v2.6.0, Copyright (c) 2002-2018, by Derick Rethans
+```
+
+```sh
+$ composer require --dev vue // Utilise le composer du container
+```
+
+```sh
+$ sf --version // Donne accès au symfony du container
+
+Symfony 4.3.5 (env: dev, debug: true)
+```
 
 {BACK_TO_TOP}
 
@@ -546,6 +568,14 @@ Autres informations::
 === Docker
 
 * https://gist.github.com/bastman/5b57ddb3c11942094f8d0a97d461b430
+
+=== Makefile
+
+. https://blog.theodo.fr/2018/05/why-you-need-a-makefile-on-your-project/
+. https://github.com/mykiwi/symfony-bootstrapped/blob/master/Makefile
+. https://github.com/Elao/symfony-standard/blob/master/Makefile
+. https://github.com/Elao/tricot/blob/master/Makefile
+. https://github.com/cleverage/eav-manager-starter-kit/blob/master/Makefile
 
 {BACK_TO_TOP}
 

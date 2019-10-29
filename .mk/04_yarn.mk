@@ -1,7 +1,7 @@
 ## YARN
 
 .PHONY: yarn.install
-yarn.install: package.json yarn.lock ## Yarn: install
+yarn.install: package.json yarn.lock ## Yarn: Install.
 	$(YARN) install
 
 .PHONY: yarn.encore.compile

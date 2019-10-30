@@ -55,12 +55,13 @@ docker.list.stopped: ## Docker: List all stopped containers.
 
 .PHONY: docker.remove
 # -v: Remove any anonymous volumes attached to containers.
-docker.remove: ## Docker: [PROMPT Y/n] Remove stopped service containers (only current project). | https://docs.docker.com/compose/reference/rm/
+docker.remove: ## Docker: [PROMPT Y/n] Stop & Remove service containers (only current project). | https://docs.docker.com/compose/reference/rm/
 	@while [ -z "$$CONTINUE" ]; do \
-		read -r -p "Remove stopped service containers (only current project)? [Y/n] " CONTINUE; \
+		read -r -p "Stop & Remove service containers (only current project)? [Y/n] " CONTINUE; \
 	done ; \
 	if [ $$CONTINUE == "Y" ]; \
 	then \
+		docker-compose stop; \
 		docker-compose rm -v; \
 		echo -e "\033[1;42mStopped service containers removed\033[0m"; \
 	else \

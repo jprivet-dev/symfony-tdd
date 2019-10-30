@@ -23,7 +23,11 @@ db.entities: ## Database: List mapped entities.
 	$(SYMFONY) doctrine:mapping:info
 
 PHONY: db.bash
-db.bash: ## Database: Bash access (mysql> ...).
+db.bash: ## Database: Bash access.
+	$(EXEC_DB) bash
+
+PHONY: db.mysql
+db.mysql: ## Database: MySQL access (mysql> ...).
 	$(EXEC_DB) bash -c "mysql -u $(DATABASE_USER) -p$(DATABASE_PASSWORD) $(DATABASE_NAME)"
 
 #

@@ -24,7 +24,7 @@ docker.stop: ## Docker: Stop running containers without removing them. | https:/
 
 .PHONY: docker.stop.all
 docker.stop.all: ## Docker: Stop all projects running containers without removing them. | https://docs.docker.com/compose/reference/stop/
-	$(DOCKER) stop $$($(DOCKER) ps -a -q)
+	docker stop $$(docker ps -a -q)
 
 .PHONY: docker.down
 # --remove-orphans: Remove containers for services not defined in the Compose file.
@@ -53,7 +53,7 @@ docker.remove.all: ## Docker: Remove all stopped service containers. | https://d
 	done ; \
 	if [ $$CONTINUE == "Y" ]; \
 	then \
-		$(DOCKER) rm -f $$($(DOCKER) ps -a -q); \
+		docker rm -f $$(docker ps -a -q); \
 		echo -e "\033[1;42mAll stopped service containers removed\033[0m"; \
 	else \
 		echo -e "\033[1;43mAction cancelled\033[0m"; \
@@ -62,13 +62,13 @@ docker.remove.all: ## Docker: Remove all stopped service containers. | https://d
 
 .PHONY: docker.list
 docker.list: ## Docker: List containers. | https://docs.docker.com/engine/reference/commandline/ps/
-	$(DOCKER) ps
+	docker ps
 
 .PHONY: docker.list.stopped
 # -a: Show all stopped containers (including those created by the run command)
 # -q: Only display IDs
 docker.list.stopped: ## Docker: List all stopped containers.
-	$(DOCKER) ps -a
+	docker ps -a
 
 ##
 
@@ -78,15 +78,15 @@ docker.env: ## Docker: Show environment variables.
 
 .PHONY: docker.ip
 docker.ip: ## Docker: Get ip Gateway.
-	$(DOCKER) network inspect $(DOCKER_NETWORK_DEFAULT_NAME) | grep Gateway | grep -o -E '[0-9\.]+'
+	docker network inspect $(DOCKER_NETWORK_DEFAULT_NAME) | grep Gateway | grep -o -E '[0-9\.]+'
 
 .PHONY: docker.ip.all
 docker.ip.all: ## Docker: List all containers ip.
-	$(DOCKER) inspect --format '{{ .Config.Hostname }} {{ .Name }} {{ .NetworkSettings.IPAddress }}' $$($(DOCKER) ps -a -q)
+	docker inspect --format '{{ .Config.Hostname }} {{ .Name }} {{ .NetworkSettings.IPAddress }}' $$(docker ps -a -q)
 
 .PHONY: docker.images
 docker.images: ## Docker: List images. | https://docs.docker.com/engine/reference/commandline/images/
-	$(DOCKER) images
+	docker images
 
 .PHONY: docker.images.remove.all
 docker.images.remove.all: ## Docker: Remove all unused images (for all projects!).
@@ -95,7 +95,7 @@ docker.images.remove.all: ## Docker: Remove all unused images (for all projects!
 	done ; \
 	if [ $$CONTINUE == "Y" ]; \
 	then \
-		$(DOCKER) rmi -f $$($(DOCKER) images -q); \
+		docker rmi -f $$(docker images -q); \
 		echo -e "\033[1;42mAll unused images removed\033[0m"; \
 	else \
 		echo -e "\033[1;43mAction cancelled\033[0m"; \
@@ -104,7 +104,7 @@ docker.images.remove.all: ## Docker: Remove all unused images (for all projects!
 
 .PHONY: docker.networks
 docker.networks: ## Docker: list networks. | https://docs.docker.com/engine/reference/commandline/network/
-	$(DOCKER) network ls
+	docker network ls
 
 .PHONY: docker.logs
 docker.logs: ## Docker: Show logs.
@@ -117,7 +117,7 @@ docker.clean: ## Docker: Remove unused data. | https://docs.docker.com/engine/re
 	done ; \
 	if [ $$CONTINUE == "Y" ]; \
 	then \
-		$(DOCKER) system prune --volumes; \
+		docker system prune --volumes; \
 		echo -e "\033[1;42mUnused data removed\033[0m"; \
 	else \
 		echo -e "\033[1;43mAction cancelled\033[0m"; \

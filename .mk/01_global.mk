@@ -11,8 +11,6 @@ SERVICE_APP = app
 SERVICE_DB = db
 DOCKER_NETWORK_DEFAULT_NAME = symfony-tdd_default
 
-DOCKER = docker
-
 EXEC = docker-compose exec
 EXEC_APP = $(EXEC) $(SERVICE_APP)
 EXEC_APP_ROOT = $(EXEC) --user 0 $(SERVICE_APP)
@@ -29,7 +27,7 @@ SYMFONY = $(PHP) bin/console
 CODESNIFFER = $(PHP) ./vendor/bin/phpcs
 CODESNIFFER_FIX = $(PHP) ./vendor/bin/phpcbf
 MESSDETECTOR = $(PHP) ./vendor/bin/phpmd
-QA = $(DOCKER) run --rm -v `pwd`:/project mykiwi/phaudit:7.2
+QA = docker run --rm -v `pwd`:/project mykiwi/phaudit:7.2
 
 DATABASE_USER=root
 DATABASE_PASSWORD=rootpass

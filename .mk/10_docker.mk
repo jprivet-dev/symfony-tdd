@@ -3,7 +3,7 @@
 .PHONY: docker.start
 # --remove-orphans: Remove containers for services not defined in the Compose file.
 # -d: Detached mode: Run containers in the background, print new container names.
-docker.start: ## Docker: Build, (re)create, start, and attache to containers for a service (detached mode). @see https://docs.docker.com/compose/reference/up/.
+docker.start: ## Docker: Build, (re)create, start, and attache to containers for a service (detached mode). | https://docs.docker.com/compose/reference/up/
 	$(DOCKER_COMPOSE) up --remove-orphans -d
 
 .PHONY: docker.start.one
@@ -12,32 +12,32 @@ docker.start.one: docker.stop.all docker.start ## Docker: Stop all projects runn
 .PHONY: docker.build
 # --build: Build images before starting containers.
 # -d: Detached mode: Run containers in the background, print new container names.
-docker.build: ## Docker: Same `docker.start` command + build images before starting containers (detached mode). @see https://docs.docker.com/compose/reference/up/.
+docker.build: ## Docker: Same `docker.start` command + build images before starting containers (detached mode). | https://docs.docker.com/compose/reference/up/
 	$(DOCKER_COMPOSE) up --build -d
 
 .PHONY: docker.stop
-docker.stop: ## Docker: Stop running containers without removing them. @see https://docs.docker.com/compose/reference/stop/.
+docker.stop: ## Docker: Stop running containers without removing them. | https://docs.docker.com/compose/reference/stop/
 	$(DOCKER_COMPOSE) stop
 
 .PHONY: docker.stop.all
-docker.stop.all: ## Docker: Stop all projects running containers without removing them. @see https://docs.docker.com/compose/reference/stop/.
+docker.stop.all: ## Docker: Stop all projects running containers without removing them. | https://docs.docker.com/compose/reference/stop/
 	$(DOCKER) stop $$($(DOCKER) ps -a -q)
 
 .PHONY: docker.down
 # --remove-orphans: Remove containers for services not defined in the Compose file.
-docker.down: ## Docker: Stop containers and remove containers, networks, volumes, and images created by up. @see https://docs.docker.com/compose/reference/down/.
+docker.down: ## Docker: Stop containers and remove containers, networks, volumes, and images created by up. | https://docs.docker.com/compose/reference/down/
 	$(DOCKER_COMPOSE) down --remove-orphans
 
 .PHONY: docker.remove
-docker.remove: ## Docker: Removes stopped service containers. @see https://docs.docker.com/compose/reference/rm/.
+docker.remove: ## Docker: Removes stopped service containers. | https://docs.docker.com/compose/reference/rm/
 	$(DOCKER_COMPOSE) rm
 
 .PHONY: docker.remove.all
-docker.remove.all: ## Docker: Removes all stopped service containers. @see https://docs.docker.com/compose/reference/rm/.
+docker.remove.all: ## Docker: Removes all stopped service containers. | https://docs.docker.com/compose/reference/rm/
 	$(DOCKER) rm -f $$($(DOCKER) ps -a -q)
 
 .PHONY: docker.list
-docker.list: ## Docker: List containers. @see https://docs.docker.com/engine/reference/commandline/ps/.
+docker.list: ## Docker: List containers. | https://docs.docker.com/engine/reference/commandline/ps/
 	$(DOCKER) ps
 
 .PHONY: docker.list.stopped
@@ -61,11 +61,11 @@ docker.ip.all: ## Docker: List all containers ip.
 	$(DOCKER) inspect --format '{{ .Config.Hostname }} {{ .Name }} {{ .NetworkSettings.IPAddress }}' $$($(DOCKER) ps -a -q)
 
 .PHONY: docker.images
-docker.images: ## Docker: List images. @see https://docs.docker.com/engine/reference/commandline/images/.
+docker.images: ## Docker: List images. | https://docs.docker.com/engine/reference/commandline/images/
 	$(DOCKER) images
 
 .PHONY: docker.networks
-docker.networks: ## Docker: list networks. @see https://docs.docker.com/engine/reference/commandline/network/.
+docker.networks: ## Docker: list networks. | https://docs.docker.com/engine/reference/commandline/network/
 	$(DOCKER) network ls
 
 .PHONY: docker.logs

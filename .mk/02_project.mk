@@ -1,7 +1,7 @@
 ## PROJECT
 
 .PHONY: start
-start: docker.start install _ready ## Project: Start the project & Install only if there have been changes.
+start: docker.start install _ready ## Project: Start the project & Install (only if there have been changes).
 
 .PHONY: start.one
 start.one: docker.stop.all start ## Project: Stop all containers & Execute `start` command.
@@ -12,7 +12,7 @@ stop: docker.stop ## Project: Stop the project.
 ##
 
 .PHONY: install
-install: composer.install yarn.install ## Project: Install only if there have been changes.
+install: composer.install yarn.install ## Project: Install (only if there have been changes).
 
 .PHONY: tests
 tests: phpunit ## Project: Launch all tests.
@@ -21,7 +21,7 @@ tests: phpunit ## Project: Launch all tests.
 cc: symfony.cc ## Project: Clear all cache.
 
 .PHONY: chown.fix
-chown.fix: ## Project: Editing permissions on Linux. See https://github.com/dunglas/symfony-docker#editing-permissions-on-linux.
+chown.fix: ## Project: Editing permissions on Linux. | https://github.com/dunglas/symfony-docker#editing-permissions-on-linux
 	$(DOCKER_COMPOSE) run --rm $(SERVICE_APP) chown -R $$(id -u):$$(id -g) .
 
 #

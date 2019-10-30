@@ -31,7 +31,7 @@ phpunit.functional.coverage: xdebug.on _build ## PHPUnit: Generate code coverage
 ##
 
 .PHONY: phpunit.watch
-phpunit.watch: xdebug.off ## PHPUnit Watcher: Rerun automatically tests whenever you change some code. @see https://github.com/spatie/phpunit-watcher.
+phpunit.watch: xdebug.off ## PHPUnit Watcher: Rerun automatically tests whenever you change some code. | https://github.com/spatie/phpunit-watcher
 	$(PHPUNIT_WATCH)
 
 .PHONY: phpunit.watch.unit

@@ -15,6 +15,9 @@ docker.start.one: docker.stop.all docker.start ## Docker: Stop all projects runn
 docker.build: ## Docker: Same `docker.start` command + build images before starting containers (detached mode). | https://docs.docker.com/compose/reference/up/
 	$(DOCKER_COMPOSE) up --build -d
 
+.PHONY: docker.build.force
+docker.build.force: docker.stop docker.remove docker.build ## Docker: Stop, remove & rebuild current containers.
+
 .PHONY: docker.stop
 docker.stop: ## Docker: Stop running containers without removing them. | https://docs.docker.com/compose/reference/stop/
 	$(DOCKER_COMPOSE) stop

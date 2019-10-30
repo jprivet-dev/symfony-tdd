@@ -3,13 +3,13 @@
 # This snippet will build the vendor directory, running composer install, only if the vendor directory does not exist.
 # Or if composer.lock & composer.lock file has changed since the last time you built the vendor directory.
 vendor: composer.json composer.lock
-	@echo -e "\033[1;42mComposer : changes identified > triggered installation\033[0m"
+	@echo -e "\033[1;43mComposer: changes identified > triggered installation\033[0m"
 	$(MAKE) composer.install
 
 # This snippet will build the composer.lock file, running composer update, only if the composer.lock file does not exist.
 # Or if composer.json file has changed since the last time you built the composer.lock file.
 composer.lock: composer.json
-	@echo -e "\033[1;42mComposer : changes identified > triggered update\033[0m"
+	@echo -e "\033[1;43mComposer: changes identified > triggered update\033[0m"
 	$(MAKE) composer.update
 
 .PHONY: composer.install

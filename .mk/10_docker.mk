@@ -80,15 +80,6 @@ docker.logs: ## Docker: Show logs.
 docker.clean: ## Docker: Remove unused data. | https://docs.docker.com/engine/reference/commandline/system_prune/
 	$(D) system prune --volumes
 
-##
-
-.PHONY: docker.app.sh
-docker.app.sh: ## Docker: app sh access.
-	$(EXEC_APP_ROOT) sh
-
-.PHONY: docker.db.bash
-docker.db.bash: db.bash ## Docker: db bash access (`db.bash` alias).
-
 #.PHONY: docker.zsh
 #docker.zsh: ## Docker: zsh access.
 #	$(EXEC_APP_ROOT) zsh

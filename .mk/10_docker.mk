@@ -33,12 +33,32 @@ docker.down: ## Docker: Stop containers and remove containers, networks, volumes
 
 .PHONY: docker.remove
 # -v: Remove any anonymous volumes attached to containers.
-docker.remove: ## Docker: Removes stopped service containers. | https://docs.docker.com/compose/reference/rm/
-	$(DOCKER_COMPOSE) rm -v
+docker.remove: ## Docker: Remove stopped service containers (only current project). | https://docs.docker.com/compose/reference/rm/
+	@while [ -z "$$CONTINUE" ]; do \
+		read -r -p "Remove stopped service containers (only current project)? [Y/n] " CONTINUE; \
+	done ; \
+	if [ $$CONTINUE == "Y" ]; \
+	then \
+		$(DOCKER_COMPOSE) rm -v; \
+		echo -e "\033[1;42mStopped service containers removed\033[0m"; \
+	else \
+		echo -e "\033[1;43mAction cancelled\033[0m"; \
+		exit 1; \
+	fi; \
 
 .PHONY: docker.remove.all
-docker.remove.all: ## Docker: Removes all stopped service containers. | https://docs.docker.com/compose/reference/rm/
-	$(DOCKER) rm -f $$($(DOCKER) ps -a -q)
+docker.remove.all: ## Docker: Remove all stopped service containers. | https://docs.docker.com/compose/reference/rm/
+	@while [ -z "$$CONTINUE" ]; do \
+		read -r -p "Remove all stopped service containers? [Y/n] " CONTINUE; \
+	done ; \
+	if [ $$CONTINUE == "Y" ]; \
+	then \
+		$(DOCKER) rm -f $$($(DOCKER) ps -a -q); \
+		echo -e "\033[1;42mAll stopped service containers removed\033[0m"; \
+	else \
+		echo -e "\033[1;43mAction cancelled\033[0m"; \
+		exit 1; \
+	fi; \
 
 .PHONY: docker.list
 docker.list: ## Docker: List containers. | https://docs.docker.com/engine/reference/commandline/ps/
@@ -79,6 +99,7 @@ docker.images.remove.all: ## Docker: Remove all unused images (for all projects!
 		echo -e "\033[1;42mAll unused images removed\033[0m"; \
 	else \
 		echo -e "\033[1;43mAction cancelled\033[0m"; \
+		exit 1; \
 	fi; \
 
 .PHONY: docker.networks

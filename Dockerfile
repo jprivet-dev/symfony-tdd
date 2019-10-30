@@ -115,3 +115,6 @@ ARG SYMFONY_VERSION=""
 ###< recipes ###
 
 COPY . .
+
+RUN mkdir -p var/cache var/logs var/sessions \
+    && chown -R www-data var

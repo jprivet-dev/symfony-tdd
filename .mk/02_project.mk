@@ -12,7 +12,7 @@ stop: docker.stop ## Project: Stop the project.
 ##
 
 .PHONY: install
-install: composer.install.changes yarn.install.changes ## Project: Install only if there have been changes.
+install: composer.install yarn.install ## Project: Install only if there have been changes.
 
 .PHONY: tests
 tests: phpunit ## Project: Launch all tests.

@@ -1,16 +1,24 @@
 ## PROJECT
 
 .PHONY: start
-start: docker.start install _ready ## Project: Start the current project & Install all (only if there have been changes).
+start: docker.start install _ready ## Project: Start the current project & Install all.
 
 .PHONY: start.one
-start.one: docker.stop.all start ## Project: Stop all containers & Execute `start` command.
+start.one: docker.start.one install _ready ## Project: Stop all containers, start the current project & Install all.
 
 .PHONY: stop
 stop: docker.stop ## Project: Stop the current project.
 
+##
+
 .PHONY: install
-install: composer.install yarn.install ## Project: Install all (only if there have been changes).
+install: dependencies data ## Project: Install all (dependencies, data, ...).
+
+.PHONY: dependencies
+dependencies: composer.install yarn.install ## Project: Install the dependencies (only if there have been changes).
+
+.PHONY: data
+data: db.create ## Project: Install the data (db).
 
 ##
 

@@ -28,7 +28,7 @@ db.bash: ## Database: Bash access.
 
 PHONY: db.mysql
 db.mysql: ## Database: MySQL access (mysql> ...).
-	$(EXEC_DB) bash -c "mysql -u $(DATABASE_USER) -p$(DATABASE_PASSWORD) $(DATABASE_NAME)"
+	$(EXEC_DB) bash -c "mysql -u $(DATABASE_USER) $(DATABASE_NAME)"
 
 #
 # "PRIVATE"

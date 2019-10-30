@@ -28,12 +28,34 @@ docker.stop.all: ## Docker: Stop all projects running containers without removin
 
 .PHONY: docker.down
 # --remove-orphans: Remove containers for services not defined in the Compose file.
-docker.down: ## Docker: Stop containers and remove containers, networks, volumes, and images created by up. | https://docs.docker.com/compose/reference/down/
-	docker-compose down --remove-orphans
+docker.down: ## Docker: [PROMPT Y/n] Stop containers and remove containers, networks, volumes, and images created by up. | https://docs.docker.com/compose/reference/down/
+	@while [ -z "$$CONTINUE" ]; do \
+		read -r -p "Stop containers and remove containers, networks, volumes, and images created by up? [Y/n] " CONTINUE; \
+	done ; \
+	if [ $$CONTINUE == "Y" ]; \
+	then \
+		docker-compose down --remove-orphans; \
+		echo -e "\033[1;42mContainers, networks, volumes, and images created by up removed\033[0m"; \
+	else \
+		echo -e "\033[1;43mAction cancelled\033[0m"; \
+		exit 1; \
+	fi; \
+
+##
+
+.PHONY: docker.list
+docker.list: ## Docker: List containers. | https://docs.docker.com/engine/reference/commandline/ps/
+	docker ps
+
+.PHONY: docker.list.stopped
+# -a: Show all stopped containers (including those created by the run command)
+# -q: Only display IDs
+docker.list.stopped: ## Docker: List all stopped containers.
+	docker ps -a
 
 .PHONY: docker.remove
 # -v: Remove any anonymous volumes attached to containers.
-docker.remove: ## Docker: Remove stopped service containers (only current project). | https://docs.docker.com/compose/reference/rm/
+docker.remove: ## Docker: [PROMPT Y/n] Remove stopped service containers (only current project). | https://docs.docker.com/compose/reference/rm/
 	@while [ -z "$$CONTINUE" ]; do \
 		read -r -p "Remove stopped service containers (only current project)? [Y/n] " CONTINUE; \
 	done ; \
@@ -47,7 +69,7 @@ docker.remove: ## Docker: Remove stopped service containers (only current projec
 	fi; \
 
 .PHONY: docker.remove.all
-docker.remove.all: ## Docker: Remove all stopped service containers. | https://docs.docker.com/compose/reference/rm/
+docker.remove.all: ## Docker: [PROMPT Y/n] Remove all stopped service containers. | https://docs.docker.com/compose/reference/rm/
 	@while [ -z "$$CONTINUE" ]; do \
 		read -r -p "Remove all stopped service containers? [Y/n] " CONTINUE; \
 	done ; \
@@ -60,15 +82,38 @@ docker.remove.all: ## Docker: Remove all stopped service containers. | https://d
 		exit 1; \
 	fi; \
 
-.PHONY: docker.list
-docker.list: ## Docker: List containers. | https://docs.docker.com/engine/reference/commandline/ps/
-	docker ps
+.PHONY: docker.images
+docker.images: ## Docker: List images. | https://docs.docker.com/engine/reference/commandline/images/
+	docker images
 
-.PHONY: docker.list.stopped
-# -a: Show all stopped containers (including those created by the run command)
-# -q: Only display IDs
-docker.list.stopped: ## Docker: List all stopped containers.
-	docker ps -a
+.PHONY: docker.images.remove.all
+docker.images.remove.all: ## Docker: [PROMPT Y/n] Remove all unused images (for all projects!).
+	@while [ -z "$$CONTINUE" ]; do \
+		read -r -p "Remove all unused images (for all projects!)? [Y/n] " CONTINUE; \
+	done ; \
+	if [ $$CONTINUE == "Y" ]; \
+	then \
+		docker rmi -f $$(docker images -q); \
+		echo -e "\033[1;42mAll unused images removed\033[0m"; \
+	else \
+		echo -e "\033[1;43mAction cancelled\033[0m"; \
+		exit 1; \
+	fi; \
+
+
+.PHONY: docker.clean
+docker.clean: ## Docker: [PROMPT Y/n] Remove unused data. | https://docs.docker.com/engine/reference/commandline/system_prune/
+	@while [ -z "$$CONTINUE" ]; do \
+		read -r -p "Remove unused data? [Y/n] " CONTINUE; \
+	done ; \
+	if [ $$CONTINUE == "Y" ]; \
+	then \
+		docker system prune --volumes; \
+		echo -e "\033[1;42mUnused data removed\033[0m"; \
+	else \
+		echo -e "\033[1;43mAction cancelled\033[0m"; \
+		exit 1; \
+	fi; \
 
 ##
 
@@ -84,24 +129,6 @@ docker.ip: ## Docker: Get ip Gateway.
 docker.ip.all: ## Docker: List all containers ip.
 	docker inspect --format '{{ .Config.Hostname }} {{ .Name }} {{ .NetworkSettings.IPAddress }}' $$(docker ps -a -q)
 
-.PHONY: docker.images
-docker.images: ## Docker: List images. | https://docs.docker.com/engine/reference/commandline/images/
-	docker images
-
-.PHONY: docker.images.remove.all
-docker.images.remove.all: ## Docker: Remove all unused images (for all projects!).
-	@while [ -z "$$CONTINUE" ]; do \
-		read -r -p "Remove all unused images (for all projects!)? [Y/n] " CONTINUE; \
-	done ; \
-	if [ $$CONTINUE == "Y" ]; \
-	then \
-		docker rmi -f $$(docker images -q); \
-		echo -e "\033[1;42mAll unused images removed\033[0m"; \
-	else \
-		echo -e "\033[1;43mAction cancelled\033[0m"; \
-		exit 1; \
-	fi; \
-
 .PHONY: docker.networks
 docker.networks: ## Docker: list networks. | https://docs.docker.com/engine/reference/commandline/network/
 	docker network ls
@@ -109,20 +136,6 @@ docker.networks: ## Docker: list networks. | https://docs.docker.com/engine/refe
 .PHONY: docker.logs
 docker.logs: ## Docker: Show logs.
 	docker-compose logs -f -t $(SERVICE_APP)
-
-.PHONY: docker.clean
-docker.clean: ## Docker: Remove unused data. | https://docs.docker.com/engine/reference/commandline/system_prune/
-	@while [ -z "$$CONTINUE" ]; do \
-		read -r -p "Remove unused data? [Y/n] " CONTINUE; \
-	done ; \
-	if [ $$CONTINUE == "Y" ]; \
-	then \
-		docker system prune --volumes; \
-		echo -e "\033[1;42mUnused data removed\033[0m"; \
-	else \
-		echo -e "\033[1;43mAction cancelled\033[0m"; \
-		exit 1; \
-	fi; \
 
 #.PHONY: docker.zsh
 #docker.zsh: ## Docker: zsh access.

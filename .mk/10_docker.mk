@@ -4,7 +4,7 @@
 # --remove-orphans: Remove containers for services not defined in the Compose file.
 # -d: Detached mode: Run containers in the background, print new container names.
 docker.start: ## Docker: Build, (re)create, start, and attache to containers for a service (detached mode). | https://docs.docker.com/compose/reference/up/
-	$(DOCKER_COMPOSE) up --remove-orphans -d
+	docker-compose up --remove-orphans -d
 
 .PHONY: docker.start.one
 docker.start.one: docker.stop.all docker.start ## Docker: Stop all projects running containers & Start current project.
@@ -13,14 +13,14 @@ docker.start.one: docker.stop.all docker.start ## Docker: Stop all projects runn
 # --build: Build images before starting containers.
 # -d: Detached mode: Run containers in the background, print new container names.
 docker.build: ## Docker: Same `docker.start` command + build images before starting containers (detached mode). | https://docs.docker.com/compose/reference/up/
-	$(DOCKER_COMPOSE) up --build -d
+	docker-compose up --build -d
 
 .PHONY: docker.build.force
 docker.build.force: docker.stop docker.remove docker.build ## Docker: Stop, remove & rebuild current containers.
 
 .PHONY: docker.stop
 docker.stop: ## Docker: Stop running containers without removing them. | https://docs.docker.com/compose/reference/stop/
-	$(DOCKER_COMPOSE) stop
+	docker-compose stop
 
 .PHONY: docker.stop.all
 docker.stop.all: ## Docker: Stop all projects running containers without removing them. | https://docs.docker.com/compose/reference/stop/
@@ -29,7 +29,7 @@ docker.stop.all: ## Docker: Stop all projects running containers without removin
 .PHONY: docker.down
 # --remove-orphans: Remove containers for services not defined in the Compose file.
 docker.down: ## Docker: Stop containers and remove containers, networks, volumes, and images created by up. | https://docs.docker.com/compose/reference/down/
-	$(DOCKER_COMPOSE) down --remove-orphans
+	docker-compose down --remove-orphans
 
 .PHONY: docker.remove
 # -v: Remove any anonymous volumes attached to containers.
@@ -39,7 +39,7 @@ docker.remove: ## Docker: Remove stopped service containers (only current projec
 	done ; \
 	if [ $$CONTINUE == "Y" ]; \
 	then \
-		$(DOCKER_COMPOSE) rm -v; \
+		docker-compose rm -v; \
 		echo -e "\033[1;42mStopped service containers removed\033[0m"; \
 	else \
 		echo -e "\033[1;43mAction cancelled\033[0m"; \
@@ -108,7 +108,7 @@ docker.networks: ## Docker: list networks. | https://docs.docker.com/engine/refe
 
 .PHONY: docker.logs
 docker.logs: ## Docker: Show logs.
-	$(DOCKER_COMPOSE) logs -f -t $(SERVICE_APP)
+	docker-compose logs -f -t $(SERVICE_APP)
 
 .PHONY: docker.clean
 docker.clean: ## Docker: Remove unused data. | https://docs.docker.com/engine/reference/commandline/system_prune/

@@ -53,7 +53,7 @@ clean: ## Project: Remove build, vendor & node_modules folders.
 
 .PHONY: chown.fix
 chown.fix: ## Project: Editing permissions on Linux. | https://github.com/dunglas/symfony-docker#editing-permissions-on-linux
-	$(DOCKER_COMPOSE) run --rm $(SERVICE_APP) chown -R $$(id -u):$$(id -g) .
+	docker-compose run --rm $(SERVICE_APP) chown -R $$(id -u):$$(id -g) .
 
 #
 # "PRIVATE"

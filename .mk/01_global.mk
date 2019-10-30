@@ -12,9 +12,8 @@ SERVICE_DB = db
 DOCKER_NETWORK_DEFAULT_NAME = symfony-tdd_default
 
 DOCKER = docker
-DOCKER_COMPOSE = docker-compose
 
-EXEC = $(DOCKER_COMPOSE) exec
+EXEC = docker-compose exec
 EXEC_APP = $(EXEC) $(SERVICE_APP)
 EXEC_APP_ROOT = $(EXEC) --user 0 $(SERVICE_APP)
 EXEC_DB = $(EXEC) $(SERVICE_DB)

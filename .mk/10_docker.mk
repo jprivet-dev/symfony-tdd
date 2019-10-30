@@ -68,6 +68,19 @@ docker.ip.all: ## Docker: List all containers ip.
 docker.images: ## Docker: List images. | https://docs.docker.com/engine/reference/commandline/images/
 	$(DOCKER) images
 
+.PHONY: docker.images.remove.all
+docker.images.remove.all: ## Docker: Remove all unused images (for all projects!).
+	@while [ -z "$$CONTINUE" ]; do \
+		read -r -p "Remove all unused images (for all projects!)? [Y/n] " CONTINUE; \
+	done ; \
+	if [ $$CONTINUE == "Y" ]; \
+	then \
+		$(DOCKER) rmi -f $$($(DOCKER) images -q); \
+		echo -e "\033[1;42mAll unused images removed\033[0m"; \
+	else \
+		echo -e "\033[1;43mAction cancelled\033[0m"; \
+	fi; \
+
 .PHONY: docker.networks
 docker.networks: ## Docker: list networks. | https://docs.docker.com/engine/reference/commandline/network/
 	$(DOCKER) network ls
@@ -78,7 +91,7 @@ docker.logs: ## Docker: Show logs.
 
 .PHONY: docker.clean
 docker.clean: ## Docker: Remove unused data. | https://docs.docker.com/engine/reference/commandline/system_prune/
-	$(D) system prune --volumes
+	$(DOCKER) system prune --volumes
 
 #.PHONY: docker.zsh
 #docker.zsh: ## Docker: zsh access.

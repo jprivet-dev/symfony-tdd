@@ -38,7 +38,7 @@ cc: symfony.cc ## Project: Clear all caches.
 ##
 
 .PHONY: clean
-clean: ## Project: Remove build, vendor & node_modules folders.
+clean: ## Project: [PROMPT Y/n] Remove build, vendor & node_modules folders.
 	@while [ -z "$$CONTINUE" ]; do \
 		read -r -p "Remove build, vendor & node_modules folders? [Y/n] " CONTINUE; \
 	done ; \

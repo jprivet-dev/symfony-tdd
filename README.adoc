@@ -112,24 +112,31 @@ Vous retrouverez toutes les commandes suivantes :
 
 ```
 PROJECT
-  start                          Project: Start all (& install only if there have been changes).
-  stop                           Project: Stop all.
+  start                          Project: Start the current project & Install all.
+  start.one                      Project: Stop all containers, start the current project & Install all.
+  stop                           Project: Stop the current project.
+  sh                             Project: app sh access.
 
-  install                        Project: Install only if there have been changes.
+  install                        Project: Install all (dependencies, data, ...).
+  dependencies                   Project: Install the dependencies (only if there have been changes).
+  data                           Project: Install the data (db).
+
+  check                          Project: Launch of install, security, db validate & tests
   tests                          Project: Launch all tests.
-  cc                             Project: Clear all cache.
-  chown.fix                      Project: Editing permissions on Linux. See https://github.com/dunglas/symfony-docker#editing-permissions-on-linux.
-  aliases                        Project: load aliases of project.
+  cc                             Project: Clear all caches.
+
+  clean                          Project: [PROMPT Y/n] Remove build, vendor & node_modules folders.
+  chown.fix                      Project: Editing permissions on Linux. | https://github.com/dunglas/symfony-docker#editing-permissions-on-linux
 
 COMPOSER
   composer.install               Composer: Read the composer.json/composer.lock file from the current directory, resolve the dependencies, and install them into vendor.
   composer.install.prod          Composer: Idem `composer.install` without dev elements.
-  composer.install.changes       Composer: Install only if there have been changes.
   composer.update                Composer: Get the latest versions of the dependencies and update the composer.lock file.
   composer.licenses              Composer: List the name, version and license of every package installed.
 
 YARN
-  yarn.install                   Yarn: Install.
+  yarn.install                   Yarn: Install all dependencies.
+  yarn.upgrade                   Yarn: Upgrade packages to their latest version based on the specified range.
   yarn.encore.compile            Webpack Encore: Compile assets once.
   yarn.encore.watch              Webpack Encore: Recompile assets automatically when files change.
   yarn.encore.deploy             Webpack Encore: On deploy, create a production build.
@@ -140,6 +147,8 @@ SYMFONY
   symfony.cchard                 Symfony: Remove all in `var/cache` folder.
   symfony.routes                 Symfony: Display current routes.
 
+  symfony.security.check         Symfony: Check security of your dependencies. | https://github.com/sensiolabs/security-checker
+
 PHPUNIT
   phpunit                        PHPUnit: Launch all tests (unit, functional, ...).
   phpunit.coverage               PHPUnit: Generate code coverage report in HTML format.
@@ -149,7 +158,7 @@ PHPUNIT
   phpunit.functional             PHPUnit: Launch functional tests.
   phpunit.functional.coverage    PHPUnit: Generate code coverage report in HTML format for functional tests.
 
-  phpunit.watch                  PHPUnit Watcher: Rerun automatically tests whenever you change some code. @see https://github.com/spatie/phpunit-watcher.
+  phpunit.watch                  PHPUnit Watcher: Rerun automatically tests whenever you change some code. | https://github.com/spatie/phpunit-watcher
   phpunit.watch.unit             PHPUnit Watcher: Rerun only unit tests.
   phpunit.watch.functional       PHPUnit Watcher: Rerun only functional tests.
 
@@ -158,12 +167,11 @@ XDEBUG
   xdebug.off                     Xdebug: Disable the module.
 
 QUALITY ASSURANCE - STATIC ANALYZERS
-  qa.phpmetrics                  PHPMetrics: Provide tons of metric (Complexity / Volume / Object Oriented / Maintainability). @see http://www.phpmetrics.org.
-  qa.codesniffer                 PHP_CodeSniffer: Tokenize PHP, JavaScript and CSS files and detect violations... @see https://github.com/squizlabs/PHP_CodeSniffer.
+  qa.phpmetrics                  PHPMetrics: Provide tons of metric (complexity / volume / object oriented / maintainability). | http://www.phpmetrics.org
+  qa.codesniffer                 PHP_CodeSniffer: Tokenize PHP, JavaScript and CSS files and detect violations... | https://github.com/squizlabs/PHP_CodeSniffer
   qa.codesniffer.diff            PHP_CodeSniffer: Printing a diff report
   qa.codesniffer.fix             PHP_CodeSniffer: Fixing errors automatically
-  qa.messdetector                PHP Mess Detector: Scan PHP source code and look for potential problems... @see http://phpmd.org/.
-  qa.security.check              Symfony security: Check security of your dependencies. @see https://security.symfony.com/.
+  qa.messdetector                PHP Mess Detector: Scan PHP source code and look for potential problems... | http://phpmd.org/
 
 DATABASE
   db.create                      Database: Creates the configured database & Executes the SQL needed to generate the database schema.
@@ -172,29 +180,31 @@ DATABASE
   db.validate                    Database: Validate the mapping files.
 
   db.entities                    Database: List mapped entities.
-  db.bash                        Database: Bash access (mysql> ...).
+  db.bash                        Database: Bash access.
+  db.mysql                       Database: MySQL access (mysql> ...).
 
 DOCKER
-  docker.start                   Docker: Build, (re)create, start, and attache to containers for a service (detached mode). @see https://docs.docker.com/compose/reference/up/.
+  docker.start                   Docker: Build, (re)create, start, and attache to containers for a service (detached mode). | https://docs.docker.com/compose/reference/up/
   docker.start.one               Docker: Stop all projects running containers & Start current project.
-  docker.build                   Docker: Same `docker.start` command + build images before starting containers (detached mode). @see https://docs.docker.com/compose/reference/up/.
-  docker.stop                    Docker: Stop running containers without removing them. @see https://docs.docker.com/compose/reference/stop/.
-  docker.stop.all                Docker: Stop all projects running containers without removing them. @see https://docs.docker.com/compose/reference/stop/.
-  docker.down                    Docker: Stop containers and remove containers, networks, volumes, and images created by up. @see https://docs.docker.com/compose/reference/down/.
-  docker.remove                  Docker: Removes stopped service containers. @see https://docs.docker.com/compose/reference/rm/.
-  docker.remove.all              Docker: Removes all stopped service containers. @see https://docs.docker.com/compose/reference/rm/.
-  docker.list                    Docker: List containers. @see https://docs.docker.com/engine/reference/commandline/ps/.
+  docker.build                   Docker: Same `docker.start` command + build images before starting containers (detached mode). | https://docs.docker.com/compose/reference/up/
+  docker.build.force             Docker: Stop, remove & rebuild current containers.
+  docker.stop                    Docker: Stop running containers without removing them. | https://docs.docker.com/compose/reference/stop/
+  docker.stop.all                Docker: Stop all projects running containers without removing them. | https://docs.docker.com/compose/reference/stop/
+  docker.down                    Docker: [PROMPT Y/n] Stop containers and remove containers, networks, volumes, and images created by up. | https://docs.docker.com/compose/reference/down/
+
+  docker.list                    Docker: List containers. | https://docs.docker.com/engine/reference/commandline/ps/
   docker.list.stopped            Docker: List all stopped containers.
+  docker.remove                  Docker: [PROMPT Y/n] Remove stopped service containers (only current project). | https://docs.docker.com/compose/reference/rm/
+  docker.remove.all              Docker: [PROMPT Y/n] Remove all stopped service containers. | https://docs.docker.com/compose/reference/rm/
+  docker.images                  Docker: List images. | https://docs.docker.com/engine/reference/commandline/images/
+  docker.images.remove.all       Docker: [PROMPT Y/n] Remove all unused images (for all projects!).
+  docker.clean                   Docker: [PROMPT Y/n] Remove unused data. | https://docs.docker.com/engine/reference/commandline/system_prune/
 
   docker.env                     Docker: Show environment variables.
   docker.ip                      Docker: Get ip Gateway.
   docker.ip.all                  Docker: List all containers ip.
-  docker.images                  Docker: List images. @see https://docs.docker.com/engine/reference/commandline/images/.
-  docker.networks                Docker: list networks. @see https://docs.docker.com/engine/reference/commandline/network/.
+  docker.networks                Docker: list networks. | https://docs.docker.com/engine/reference/commandline/network/
   docker.logs                    Docker: Show logs.
-
-  docker.app.sh                  Docker: app sh access.
-  docker.db.bash                 Docker: db bash access (`db.bash` alias).
 ```
 
 {BACK_TO_TOP}

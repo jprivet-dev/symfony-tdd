@@ -1,24 +1,27 @@
 ## PROJECT
 
 .PHONY: start
-start: docker.start install _ready ## Project: Start the project & Install (only if there have been changes).
+start: docker.start install _ready ## Project: Start the current project & Install all (only if there have been changes).
 
 .PHONY: start.one
 start.one: docker.stop.all start ## Project: Stop all containers & Execute `start` command.
 
 .PHONY: stop
-stop: docker.stop ## Project: Stop the project.
+stop: docker.stop ## Project: Stop the current project.
+
+.PHONY: install
+install: composer.install yarn.install ## Project: Install all (only if there have been changes).
 
 ##
 
-.PHONY: install
-install: composer.install yarn.install ## Project: Install (only if there have been changes).
+.PHONY: check
+check: install qa.security.check db.validate tests ## Launch of install, security, db-validate & tests
 
 .PHONY: tests
 tests: phpunit ## Project: Launch all tests.
 
 .PHONY: cc
-cc: symfony.cc ## Project: Clear all cache.
+cc: symfony.cc ## Project: Clear all caches.
 
 .PHONY: chown.fix
 chown.fix: ## Project: Editing permissions on Linux. | https://github.com/dunglas/symfony-docker#editing-permissions-on-linux

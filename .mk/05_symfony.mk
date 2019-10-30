@@ -15,3 +15,9 @@ symfony.cchard: ## Symfony: Remove all in `var/cache` folder.
 .PHONY: symfony.routes
 symfony.routes: ## Symfony: Display current routes.
 	$(SYMFONY) debug:router
+
+##
+
+.PHONY: symfony.security.check
+symfony.security.check: ## Symfony: Check security of your dependencies. | https://github.com/sensiolabs/security-checker
+	$(SYMFONY) security:check

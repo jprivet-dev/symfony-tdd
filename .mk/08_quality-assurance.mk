@@ -19,7 +19,3 @@ qa.codesniffer.fix: ## PHP_CodeSniffer: Fixing errors automatically
 .PHONY: qa.messdetector
 qa.messdetector: ## PHP Mess Detector: Scan PHP source code and look for potential problems... | http://phpmd.org/
 	$(MESSDETECTOR) $(PROJECT_SRC) text codesize,unusedcode,naming,design
-
-.PHONY: qa.security.check
-qa.security.check: ## Symfony security: Check security of your dependencies. | https://security.symfony.com/
-	$(EXEC_APP) ./vendor/bin/security-checker security:check

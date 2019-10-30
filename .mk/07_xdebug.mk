@@ -8,4 +8,4 @@ xdebug.on: ## Xdebug: Enable the module.
 .PHONY: xdebug.off
 xdebug.off: ## Xdebug: Disable the module.
 	$(EXEC_APP_ROOT) sed -i.default "s/^zend_extension=/;zend_extension=/" $(XDEBUG_INI)
-	@echo -e '\033[1;41mXdebug OFF\033[0m';
+	@echo -e '\033[1;43mXdebug OFF\033[0m';

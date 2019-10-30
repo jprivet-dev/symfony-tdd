@@ -76,6 +76,10 @@ docker.networks: ## Docker: list networks. | https://docs.docker.com/engine/refe
 docker.logs: ## Docker: Show logs.
 	$(DOCKER_COMPOSE) logs -f -t $(SERVICE_APP)
 
+.PHONY: docker.clear
+docker.clear: ## Docker: Remove unused data. | https://docs.docker.com/engine/reference/commandline/system_prune/
+	$(D) system prune --volumes
+
 ##
 
 .PHONY: docker.app.sh

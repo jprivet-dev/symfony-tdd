@@ -28,10 +28,3 @@ CODESNIFFER = $(PHP) ./vendor/bin/phpcs
 CODESNIFFER_FIX = $(PHP) ./vendor/bin/phpcbf
 MESSDETECTOR = $(PHP) ./vendor/bin/phpmd
 QA = docker run --rm -v `pwd`:/project mykiwi/phaudit:7.2
-
-DATABASE_USER=root
-DATABASE_PASSWORD=rootpass
-DATABASE_HOST=db
-DATABASE_PORT=3306
-DATABASE_NAME=symfony_tdd
-DATABASE_DRIVER=pdo_mysql

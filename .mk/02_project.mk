@@ -1,10 +1,13 @@
 ## PROJECT
 
 .PHONY: start
-start: aliases docker.start install _ready ## Project: Start all (& install only if there have been changes).
+start: docker.start install _ready ## Project: Start the project & Install only if there have been changes.
+
+.PHONY: start.one
+start.one: docker.stop.all start ## Project: Stop all containers & Execute `start` command.
 
 .PHONY: stop
-stop: docker.stop ## Project: Stop all.
+stop: docker.stop ## Project: Stop the project.
 
 ##
 
@@ -20,10 +23,6 @@ cc: symfony.cc ## Project: Clear all cache.
 .PHONY: chown.fix
 chown.fix: ## Project: Editing permissions on Linux. See https://github.com/dunglas/symfony-docker#editing-permissions-on-linux.
 	$(DOCKER_COMPOSE) run --rm $(SERVICE_APP) chown -R $$(id -u):$$(id -g) .
-
-.PHONY: aliases
-aliases: .bash_aliases ## Project: load aliases of project.
-	. .bash_aliases
 
 #
 # "PRIVATE"

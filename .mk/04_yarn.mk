@@ -4,9 +4,12 @@
 # Or if yarn.lock & yarn.lock file has changed since the last time you built the node_modules directory.
 node_modules: package.json yarn.lock
 ifeq (,$(wildcard ./yarn.lock))
-	@echo -e "\033[1;43mYarn: yarn.lock file does not exist > triggered install\033[0m"
-endif
+	@echo -e "\033[1;43mYarn: yarn.lock does not exist > triggered install\033[0m"
+else ifeq (,$(wildcard ./node_modules))
+	@echo -e "\033[1;43mYarn: node_module does not exist > triggered install\033[0m"
+else
 	@echo -e "\033[1;43mYarn: changes identified > triggered install\033[0m"
+endif
 	$(MAKE) yarn.install
 
 # This snippet will build the yarn.lock file, running yarn upgrade, only if the yarn.lock file does not exist.

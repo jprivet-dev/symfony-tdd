@@ -48,6 +48,7 @@ clean: ## Project: Remove build, vendor & node_modules folders.
 		echo -e "\033[1;42mbuild, vendor & node_modules removed\033[0m"; \
 	else \
 		echo -e "\033[1;43mAction cancelled\033[0m"; \
+		exit 1; \
 	fi; \
 
 .PHONY: chown.fix

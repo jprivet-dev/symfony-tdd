@@ -15,7 +15,7 @@ install: composer.install yarn.install ## Project: Install all (only if there ha
 ##
 
 .PHONY: check
-check: install symfony.security.check db.validate tests ## Launch of install, security, db-validate & tests
+check: install symfony.security.check db.validate tests ## Project: Launch of install, security, db validate & tests
 
 .PHONY: tests
 tests: phpunit ## Project: Launch all tests.

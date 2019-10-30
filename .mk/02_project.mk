@@ -23,6 +23,21 @@ tests: phpunit ## Project: Launch all tests.
 .PHONY: cc
 cc: symfony.cc ## Project: Clear all caches.
 
+##
+
+.PHONY: clean
+clean: ## Project: Remove build, vendor & node_modules folders.
+	@while [ -z "$$CONTINUE" ]; do \
+		read -r -p "Remove build, vendor & node_modules folders? [Y/n] " CONTINUE; \
+	done ; \
+	if [ $$CONTINUE == "Y" ]; \
+	then \
+		rm -rf build vendor node_modules; \
+		echo -e "\033[1;42mbuild, vendor & node_modules removed\033[0m"; \
+	else \
+		echo -e "\033[1;43mAction cancelled\033[0m"; \
+	fi; \
+
 .PHONY: chown.fix
 chown.fix: ## Project: Editing permissions on Linux. | https://github.com/dunglas/symfony-docker#editing-permissions-on-linux
 	$(DOCKER_COMPOSE) run --rm $(SERVICE_APP) chown -R $$(id -u):$$(id -g) .

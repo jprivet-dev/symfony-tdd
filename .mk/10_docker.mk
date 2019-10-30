@@ -29,8 +29,9 @@ docker.down: ## Docker: Stop containers and remove containers, networks, volumes
 	$(DOCKER_COMPOSE) down --remove-orphans
 
 .PHONY: docker.remove
+# -v: Remove any anonymous volumes attached to containers.
 docker.remove: ## Docker: Removes stopped service containers. | https://docs.docker.com/compose/reference/rm/
-	$(DOCKER_COMPOSE) rm
+	$(DOCKER_COMPOSE) rm -v
 
 .PHONY: docker.remove.all
 docker.remove.all: ## Docker: Removes all stopped service containers. | https://docs.docker.com/compose/reference/rm/

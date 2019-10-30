@@ -9,6 +9,10 @@ start.one: docker.start.one install _ready ## Project: Stop all containers, star
 .PHONY: stop
 stop: docker.stop ## Project: Stop the current project.
 
+.PHONY: sh
+sh: ## Project: app sh access.
+	$(EXEC_APP_ROOT) sh
+
 ##
 
 .PHONY: install

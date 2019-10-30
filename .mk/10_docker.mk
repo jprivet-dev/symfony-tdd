@@ -112,7 +112,17 @@ docker.logs: ## Docker: Show logs.
 
 .PHONY: docker.clean
 docker.clean: ## Docker: Remove unused data. | https://docs.docker.com/engine/reference/commandline/system_prune/
-	$(DOCKER) system prune --volumes
+	@while [ -z "$$CONTINUE" ]; do \
+		read -r -p "Remove unused data? [Y/n] " CONTINUE; \
+	done ; \
+	if [ $$CONTINUE == "Y" ]; \
+	then \
+		$(DOCKER) system prune --volumes; \
+		echo -e "\033[1;42mUnused data removed\033[0m"; \
+	else \
+		echo -e "\033[1;43mAction cancelled\033[0m"; \
+		exit 1; \
+	fi; \
 
 #.PHONY: docker.zsh
 #docker.zsh: ## Docker: zsh access.

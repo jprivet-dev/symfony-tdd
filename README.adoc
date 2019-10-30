@@ -234,7 +234,7 @@ Charger les *alias* du projet :
 $ . .bash_aliases
 ```
 
-TIP: Les *alias* sont automatiquement chargés avec la commande `$ make start`.
+IMPORTANT: Le fichier .{uri-rel-file-base}.bash_aliases[] ne peut être chargé automatiquement à la commande `start` du Makefile :(
 
 {BACK_TO_TOP}
 

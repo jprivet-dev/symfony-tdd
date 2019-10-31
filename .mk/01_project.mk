@@ -1,10 +1,10 @@
 ## PROJECT
 
 .PHONY: start
-start: docker.start _ready ## Project: Start the current project & Install all.
+start: docker.start ready ## Project: Start the current project.
 
 .PHONY: start.one
-start.one: docker.start.one _ready ## Project: Stop all containers, start the current project & Install all.
+start.one: docker.start.one ready ## Project: Stop all containers, start the current project.
 
 .PHONY: stop
 stop: docker.stop ## Project: Stop the current project.
@@ -16,7 +16,7 @@ sh: ## Project: app sh access.
 ##
 
 .PHONY: install
-install: docker.start dependencies data _ready ## Project: Install all (dependencies, data, ...).
+install: docker.start dependencies data ready ## Project: Install all (dependencies, data, ...).
 
 .PHONY: dependencies
 dependencies: composer.install yarn.install ## Project: Install the dependencies (only if there have been changes).
@@ -67,8 +67,8 @@ _build: # Create 'build' folder.
 _build.clean: # Remove 'build' folder.
 	rm -rf $(PROJECT_BUILD)
 
-.PHONY: _ready
-_ready:
+.PHONY: ready
+ready:
 	@echo -e "\033[1;42m"
 	@echo -e "READY!"
 	@echo -e "Website:    \e[4m$(URL_WEBSITE)\\033[24m"

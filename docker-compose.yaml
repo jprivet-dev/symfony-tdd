@@ -20,6 +20,15 @@ services:
     environment:
       - SYMFONY_VERSION
 
+  # https://hub.docker.com/_/mysql
+  # WARNING:
+  # Error at the very first execution of '$ docker-compose exec db bash -c "mysql -u root symfony_tdd_db"'
+  # ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)
+  # The second time the command is executed, everything works !
+  # SOLUTION :
+  # This error occurs when the initialization of MySQL is not complete.
+  # See 'No connections until MySQL init completes' on https://hub.docker.com/_/mysql
+  # The 'db.wait' Makefile command has been created to wait until MySQL is available before any action is taken.
   db:
     container_name: symfony_tdd_db_container
     image: mysql:5.7
@@ -27,10 +36,10 @@ services:
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
       MYSQL_ROOT_HOST: '%'
-      MYSQL_USER: symfony
-      MYSQL_PASSWORD: password
       MYSQL_DATABASE: symfony_tdd_db
 
+  # https://hub.docker.com/r/phpmyadmin/phpmyadmin/
+  # https://docs.phpmyadmin.net/en/latest/setup.html#installing-using-docker
   phpmyadmin:
     container_name: symfony_tdd_phpmyadmin_container
     image: phpmyadmin/phpmyadmin
@@ -38,7 +47,7 @@ services:
     depends_on:
       - db
     ports:
-      - 8088:80
+      - '8088:80'
     environment:
       PMA_HOST: db
       PMA_USER: root

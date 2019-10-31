@@ -84,10 +84,15 @@ phpMyAdmin: http://localhost:8088
 
 [TIP]
 ====
-Si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible, utiliser à la place de `$ make start` la ligne de commandes suivante :
+Si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible,
+utiliser à la place de `$ make start` les commandes suivantes :
 
 ```sh
 $ docker-compose up --remove-orphans -d
+$ docker-compose exec app composer install --verbose
+$ docker-compose exec app yarn install
+$ docker-compose exec app php bin/console doctrine:database:create --if-not-exists
+$ docker-compose exec app php bin/console doctrine:schema:create
 ```
 ====
 

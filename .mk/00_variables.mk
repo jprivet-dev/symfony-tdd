@@ -30,4 +30,4 @@ SYMFONY = $(PHP) bin/console
 CODESNIFFER = $(PHP) ./vendor/bin/phpcs
 CODESNIFFER_FIX = $(PHP) ./vendor/bin/phpcbf
 MESSDETECTOR = $(PHP) ./vendor/bin/phpmd
-QA = docker run --rm -v `pwd`:/project mykiwi/phaudit:7.2
+PHPMETRICS = docker run --rm -v `pwd`:/project mykiwi/phaudit:7.2 phpmetrics

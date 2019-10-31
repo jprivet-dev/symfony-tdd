@@ -613,6 +613,8 @@ $ docker system prune --volumes
 
 TIP: Retrouvez les commandes de suppression `docker.xxx` dans le fichier Makefile du projet.
 
+{BACK_TO_TOP}
+
 ==== *Astuce 2* : Changer le dossier de travail de *Docker*
 
 Pour une gestion à long terme, il est préférable *d'orienter Docker vers un espace de travail plus volumineux* sur votre machine,
@@ -673,6 +675,13 @@ $ sudo service docker start
 ```
 
 Au prochain `$ docker-compose up`, les éléments seront créés dans le nouveau dossier `/data/home/jprivet/docker`.
+
+{BACK_TO_TOP}
+
+==== Ressources
+
+. https://medium.com/developer-space/how-to-change-docker-data-folder-configuration-33d372669056
+. https://docs.docker.com/engine/reference/commandline/dockerd/
 
 {BACK_TO_TOP}
 

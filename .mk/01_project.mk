@@ -1,10 +1,10 @@
 ## PROJECT
 
 .PHONY: start
-start: docker.start install _ready ## Project: Start the current project & Install all.
+start: docker.start _ready ## Project: Start the current project & Install all.
 
 .PHONY: start.one
-start.one: docker.start.one install _ready ## Project: Stop all containers, start the current project & Install all.
+start.one: docker.start.one _ready ## Project: Stop all containers, start the current project & Install all.
 
 .PHONY: stop
 stop: docker.stop ## Project: Stop the current project.
@@ -16,7 +16,7 @@ sh: ## Project: app sh access.
 ##
 
 .PHONY: install
-install: dependencies data ## Project: Install all (dependencies, data, ...).
+install: docker.start dependencies data _ready ## Project: Install all (dependencies, data, ...).
 
 .PHONY: dependencies
 dependencies: composer.install yarn.install ## Project: Install the dependencies (only if there have been changes).

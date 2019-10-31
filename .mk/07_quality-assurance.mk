@@ -2,7 +2,7 @@
 
 .PHONY: qa.phpmetrics
 qa.phpmetrics: _build ## PHPMetrics: Provide tons of metric (complexity / volume / object oriented / maintainability). | http://www.phpmetrics.org
-	$(QA) phpmetrics --report-html=$(PROJECT_BUILD)/phpmetrics $(PROJECT_SRC)
+	$(PHPMETRICS) --report-html=$(PROJECT_BUILD)/phpmetrics $(PROJECT_SRC)
 
 .PHONY: qa.codesniffer
 qa.codesniffer: ## PHP_CodeSniffer: Tokenize PHP, JavaScript and CSS files and detect violations... | https://github.com/squizlabs/PHP_CodeSniffer

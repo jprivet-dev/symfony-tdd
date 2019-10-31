@@ -617,6 +617,7 @@ Autres informations::
 . https://github.com/Elao/symfony-standard/blob/master/Makefile
 . https://github.com/Elao/tricot/blob/master/Makefile
 . https://github.com/cleverage/eav-manager-starter-kit/blob/master/Makefile
+. https://github.com/torvalds/linux/blob/master/Makefile
 
 {BACK_TO_TOP}
 

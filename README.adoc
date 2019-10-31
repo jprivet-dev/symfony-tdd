@@ -90,7 +90,7 @@ phpMyAdmin: http://localhost:8088
 [TIP]
 ====
 Si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible,
-utiliser à la place de `$ make start` les commandes suivantes :
+utiliser à la place de `$ make install` les commandes suivantes :
 
 ```sh
 $ docker-compose up --remove-orphans -d

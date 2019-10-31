@@ -194,7 +194,7 @@ DOCKER
 
   docker.list                    Docker: List containers. | https://docs.docker.com/engine/reference/commandline/ps/
   docker.list.stopped            Docker: List all stopped containers.
-  docker.remove                  Docker: [PROMPT Y/n] Remove stopped service containers (only current project). | https://docs.docker.com/compose/reference/rm/
+  docker.remove                  Docker: [PROMPT Y/n] Stop & Remove service containers (only current project). | https://docs.docker.com/compose/reference/rm/
   docker.remove.all              Docker: [PROMPT Y/n] Remove all stopped service containers. | https://docs.docker.com/compose/reference/rm/
   docker.images                  Docker: List images. | https://docs.docker.com/engine/reference/commandline/images/
   docker.images.remove.all       Docker: [PROMPT Y/n] Remove all unused images (for all projects!).

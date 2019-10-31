@@ -16,7 +16,7 @@ docker.build: ## Docker: Same `docker.start` command + build images before start
 	docker-compose up --build -d
 
 .PHONY: docker.build.force
-docker.build.force: docker.stop docker.remove docker.build ## Docker: Stop, remove & rebuild current containers.
+docker.build.force: docker.remove docker.build ## Docker: Stop, remove & rebuild current containers.
 
 .PHONY: docker.stop
 docker.stop: ## Docker: Stop running containers without removing them. | https://docs.docker.com/compose/reference/stop/

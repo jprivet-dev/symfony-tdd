@@ -594,7 +594,80 @@ Autres informations::
 
 {BACK_TO_TOP}
 
-=== [ ] *Docker* : libérer la mémoire
+=== [!] *Docker* : libérer la mémoire
+
+On peut facilement *être saturé de plusieurs dizaines de Go* de données créées par Docker.
+
+==== *Astuce 1* : Supprimer les données non utilisées
+
+Dans un premier temps, il est possible de *supprimer tout ce qui n'est plus utilisé par Docker* :
+
+```sh
+$ docker system prune --volumes
+```
+
+TIP: Retrouvez les commandes de suppression `docker.xxx` dans le fichier Makefile du projet.
+
+==== *Astuce 2* : Changer le dossier de travail de *Docker*
+
+Pour une gestion à long terme, il est préférable *d'orienter Docker vers un espace de travail plus volumineux* sur votre machine,
+avec le fichier de configuration `daemon.json`.
+
+1) *Stopper Docker* :
+
+```sh
+$ sudo service docker stop
+```
+
+2) *Créer* le nouveau dossier de destination :
+
+```sh
+$ sudo mkdir /data/home/jprivet/docker
+```
+
+3) *Vérifier* si `daemon.json` existe :
+
+```sh
+$ ls /etc/docker
+key.json
+```
+
+4) Si `daemon.json` n'existe pas, *le créer* :
+
+```sh
+$ sudo touch /etc/docker/daemon.json
+```
+
+4 bis) *Injecter* l'option `"data-root": "/data/home/jprivet/docker"` dans le nouveau fichier `daemon.json` :
+
+```sh
+$ sudo -- sh -c "echo '{\"data-root\": \"/data/home/jprivet/docker\"}' >> /etc/docker/daemon.json"
+```
+
+[NOTE]
+====
+Si le fichier `daemon.json` existe déjà, *le modifier* directement :
+
+```sh
+$ sudo vim /etc/docker/daemon.json
+```
+====
+
+5) *Vérifier* le contenu du fichier `daemon.json` :
+
+```sh
+$ cat /etc/docker/daemon.json
+{"data-root": "/data/home/jprivet/docker"}
+
+```
+
+6) *Redémarrer Docker* :
+
+```sh
+$ sudo service docker start
+```
+
+Au prochain `$ docker-compose up`, les éléments seront créés dans le nouveau dossier `/data/home/jprivet/docker`.
 
 {BACK_TO_TOP}
 

@@ -68,11 +68,16 @@ J'ai démarré cet atelier _dockerisé_ à partir du dépôt https://github.com/
 
 == Installer le projet
 
+=== Cloner
 ```sh
 $ git clone git@github.com:jprivet-dev/symfony-tdd.git
+```
 
+=== Installer
+
+```sh
 $ cd symfony-tdd
-$ make start
+$ make install
 ...
 ...
 ...

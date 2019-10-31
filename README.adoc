@@ -112,7 +112,7 @@ $ docker-compose exec app php bin/console doctrine:schema:create
 == Le *Makefile* du projet
 
 Si vous avez un outil du type https://www.gnu.org/software/make/[GNU Make] disponible sur votre poste,
-affichez toutes les commandes avec la ligne suivante :
+vous pouvez acceder à toutes les commandes du fichier {uri-rel-file-base}Makefile[] :
 
 ```sh
 $ make
@@ -122,8 +122,8 @@ Vous retrouverez toutes les commandes suivantes :
 
 ```
 PROJECT
-  start                          Project: Start the current project & Install all.
-  start.one                      Project: Stop all containers, start the current project & Install all.
+  start                          Project: Start the current project.
+  start.one                      Project: Stop all containers, start the current project.
   stop                           Project: Stop the current project.
   sh                             Project: app sh access.
 
@@ -249,7 +249,7 @@ Charger les *alias* du projet :
 $ . .bash_aliases
 ```
 
-IMPORTANT: Le fichier .{uri-rel-file-base}.bash_aliases[] ne peut être chargé automatiquement à la commande `start` du Makefile :(
+IMPORTANT: Le fichier .{uri-rel-file-base}.bash_aliases[] ne peut être chargé automatiquement à la commande `start` du {uri-rel-file-base}Makefile[] :(
 
 {BACK_TO_TOP}
 
@@ -611,7 +611,7 @@ Dans un premier temps, il est possible de *supprimer tout ce qui n'est plus util
 $ docker system prune --volumes
 ```
 
-TIP: Retrouvez les commandes de suppression `docker.xxx` dans le fichier Makefile du projet.
+TIP: Retrouvez des commandes de suppression `docker.xxx` dans le fichier {uri-rel-file-base}Makefile[] du projet.
 
 {BACK_TO_TOP}
 

@@ -1,3 +1,6 @@
+USER_ID = $(shell id -u)
+GROUP_ID = $(shell id -g)
+
 PROJECT_BUILD = build
 PROJECT_SRC = src
 

@@ -59,6 +59,8 @@ Ce dépôt *Git*  fraîchement créé est un atelier où je concentre, teste et 
 
 J'ai démarré cet atelier _dockerisé_ à partir du dépôt https://github.com/dunglas/symfony-docker de  https://dunglas.fr/[Kevin Dunglas].
 
+{BACK_TO_TOP}
+
 == Prérequis technique : avoir *Docker CE* et *Docker Compose* installés
 
 . https://docs.docker.com/install/
@@ -69,9 +71,12 @@ J'ai démarré cet atelier _dockerisé_ à partir du dépôt https://github.com/
 == Installer le projet
 
 === Cloner
+
 ```sh
 $ git clone git@github.com:jprivet-dev/symfony-tdd.git
 ```
+
+{BACK_TO_TOP}
 
 === Installer
 
@@ -101,6 +106,8 @@ $ docker-compose exec app php bin/console doctrine:schema:create
 ```
 ====
 
+{BACK_TO_TOP}
+
 === Accéder au site
 
 . Site web : https://localhost.
@@ -118,7 +125,7 @@ vous pouvez acceder à toutes les commandes du fichier {uri-rel-file-base}Makefi
 $ make
 ```
 
-Vous retrouverez toutes les commandes suivantes :
+Liste des commandes disponibles :
 
 ```
 PROJECT
@@ -249,7 +256,7 @@ Charger les *alias* du projet :
 $ . .bash_aliases
 ```
 
-IMPORTANT: Le fichier .{uri-rel-file-base}.bash_aliases[] ne peut être chargé automatiquement à la commande `start` du {uri-rel-file-base}Makefile[] :(
+IMPORTANT: Le fichier {uri-rel-file-base}.bash_aliases[] ne peut être chargé automatiquement à la commande `start` du {uri-rel-file-base}Makefile[] :(
 
 {BACK_TO_TOP}
 

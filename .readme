@@ -1,19 +1,23 @@
 #!/usr/bin/env bash
 
-file='README.adoc'
+function sftdd_readme_update_makefile_help() {
+  file='README.adoc'
+  block_start='\/\/ >>> block_makefile'
+  block_end='\/\/ <<< block_makefile'
+  target='__MAKEFILE__'
+  code='```'
+  block_code=$code$target'\n'$code
 
-start='\/\/ >>> makefile'
-end='\/\/ <<< makefile'
+  sed -i -r "/^$block_start/,/^$block_end/c\\$block_start\n$block_code\n$block_end" $file
 
-tag='__MAKEFILE__'
-block='```\n'$tag'\n```\n'
+  makehelp="$(make help)"
+  # Remove colors | https://stackoverflow.com/questions/17998978/removing-colors-from-output
+  makehelp=$(echo "${makehelp}" | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g")
+  sed -i "/$target/r"<(echo "${makehelp}") $file
 
-makehelp="$(make help)"
-# Remove colors | https://stackoverflow.com/questions/17998978/removing-colors-from-output
-makehelp=$(echo "${makehelp}" | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g")
+  sed -i -r "s/$target//" $file
 
-sed -i -r "/^$start/,/^$end/c\\$start\n$block\n$end" $file
-sed -i "/$tag/r"<(echo "${makehelp}") $file
-sed -i -r "s/$tag//g" $file
+  echo -e '\033[1;42mReadme.adoc: makefile help updated!\033[0m'
+}
 
-echo -e '\033[1;42mReadme.adoc updated!\033[0m'
+sftdd_readme_update_makefile_help

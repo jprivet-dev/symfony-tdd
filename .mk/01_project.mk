@@ -16,10 +16,13 @@ sh: ## Project: app sh access.
 ##
 
 .PHONY: install
-install: docker.start dependencies data ready ## Project: Install all (dependencies, data, ...).
+install: docker.start dependencies assets data ready ## Project: Install all (dependencies, data, ...).
 
 .PHONY: dependencies
 dependencies: composer.install yarn.install ## Project: Install the dependencies (only if there have been changes).
+
+.PHONY: assets
+assets: yarn.encore.compile ## Project: Generate all assets (webpack Encore, ...)
 
 .PHONY: data
 data: db.create.force ## Project: Install the data (db).

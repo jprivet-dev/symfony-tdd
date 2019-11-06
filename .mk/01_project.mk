@@ -16,7 +16,7 @@ sh: ## Project: app sh access.
 ##
 
 .PHONY: install
-install: docker.start dependencies assets data ready ## Project: Install all (dependencies, data, ...).
+install: docker.start dependencies assets data ready ## Project: Install all (dependencies, data, assets, ...).
 
 .PHONY: dependencies
 dependencies: composer.install yarn.install ## Project: Install the dependencies (only if there have been changes).

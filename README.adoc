@@ -234,25 +234,46 @@ DOCKER
 
 Le fichier {uri-rel-file-base}.bash_aliases[] propose quelques *raccourcis* (`php`, `composer`, `yarn`, `sf`, ...) :
 
-```sh
-$ php --version // Donne la version de PHP utilisé dans le container
-
-PHP 7.2.23 (cli) (built: Oct  5 2019 01:26:03) ( NTS )
-Copyright (c) 1997-2018 The PHP Group
-Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
-    with Zend OPcache v7.2.23, Copyright (c) 1999-2018, by Zend Technologies
-    with Xdebug v2.6.0, Copyright (c) 2002-2018, by Derick Rethans
+// >>> block_aliases
 ```
 
-```sh
-$ composer require --dev vue // Utilise le composer du container
-```
+# $ . .bash_aliases # active aliases
+alias reload=". .bash_aliases"
 
-```sh
-$ sf --version // Donne accès au symfony du container
+alias _EXEC_APP="docker-compose exec app"
+alias _COMPOSER="_EXEC_APP composer"
+alias _YARN="_EXEC_APP yarn"
+alias _PHP="_EXEC_APP php"
+alias _PHPUNIT="_EXEC_APP ./vendor/bin/simple-phpunit"
+alias _PHPUNIT_WATCH="_EXEC_APP ./vendor/bin/phpunit-watcher watch"
+alias _SYMFONY="_PHP bin/console"
 
-Symfony 4.3.5 (env: dev, debug: true)
+alias app="_EXEC_APP"
+alias composer="_COMPOSER"
+alias yarn="_YARN"
+alias php="_PHP"
+alias symfony="_SYMFONY"
+alias cc="_SYMFONY cache:clear"
+alias ccp="_SYMFONY cache:clear --env=prod"
+
+alias tests="_PHPUNIT --stop-on-error --stop-on-failure --stop-on-warning"
+alias tests-no-stop="_PHPUNIT"
+alias tests-coverage='_PHPUNIT --coverage-html build/phpunit/coverage'
+alias tests-watch="_PHPUNIT_WATCH"
+alias open-coverage="gio open build/phpunit/coverage/index.html"
+
+alias m="make"
+alias sf="symfony"
+alias t="tests"
+alias tnostop="tests-no-stop"
+alias tc='tests-coverage; open-coverage'
+alias tw='tests-watch'
+alias ut="make unit-tests"
+alias ft="make functional-tests"
+
+alias chownfix="docker-compose run --rm app chown -R $(id -u):$(id -g) ."
 ```
+// <<< block_aliases
 
 Charger les *alias* du projet :
 

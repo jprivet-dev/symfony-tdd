@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 ###> aliases
-# $ . .bash_aliases # active aliases
 alias reload=". .bash_aliases"
 
 alias app="docker-compose exec app"

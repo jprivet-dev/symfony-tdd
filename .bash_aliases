@@ -4,26 +4,21 @@
 # $ . .bash_aliases # active aliases
 alias reload=". .bash_aliases"
 
-alias _EXEC_APP="docker-compose exec app"
-alias _COMPOSER="_EXEC_APP composer"
-alias _YARN="_EXEC_APP yarn"
-alias _PHP="_EXEC_APP php"
-alias _PHPUNIT="_EXEC_APP ./vendor/bin/simple-phpunit"
-alias _PHPUNIT_WATCH="_EXEC_APP ./vendor/bin/phpunit-watcher watch"
-alias _SYMFONY="_PHP bin/console"
+alias app="docker-compose exec app"
+alias composer="app composer"
+alias yarn="app yarn"
+alias php="app php"
+alias phpunit="app ./vendor/bin/simple-phpunit"
+alias phpunit-watch="app ./vendor/bin/phpunit-watcher watch"
+alias symfony="php bin/console"
 
-alias app="_EXEC_APP"
-alias composer="_COMPOSER"
-alias yarn="_YARN"
-alias php="_PHP"
-alias symfony="_SYMFONY"
-alias cc="_SYMFONY cache:clear"
-alias ccp="_SYMFONY cache:clear --env=prod"
+alias cc="symfony cache:clear"
+alias ccp="symfony cache:clear --env=prod"
 
-alias tests="_PHPUNIT --stop-on-error --stop-on-failure --stop-on-warning"
-alias tests-no-stop="_PHPUNIT"
-alias tests-coverage='_PHPUNIT --coverage-html build/phpunit/coverage'
-alias tests-watch="_PHPUNIT_WATCH"
+alias tests="phpunit --stop-on-error --stop-on-failure --stop-on-warning"
+alias tests-no-stop="phpunit"
+alias tests-coverage='phpunit --coverage-html build/phpunit/coverage'
+alias tests-watch="phpunit-watch"
 alias open-coverage="gio open build/phpunit/coverage/index.html"
 
 alias m="make"

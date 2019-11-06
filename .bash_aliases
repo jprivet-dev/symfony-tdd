@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
+###> aliases
 # $ . .bash_aliases # active aliases
 alias reload=". .bash_aliases"
 
-alias _DOCKER_COMPOSE="docker-compose"
-alias _EXEC_APP="_DOCKER_COMPOSE exec app"
+alias _EXEC_APP="docker-compose exec app"
 alias _COMPOSER="_EXEC_APP composer"
 alias _YARN="_EXEC_APP yarn"
 alias _PHP="_EXEC_APP php"
@@ -35,6 +35,7 @@ alias tw='tests-watch'
 alias ut="make unit-tests"
 alias ft="make functional-tests"
 
-alias chownfix="_DOCKER_COMPOSE run --rm app chown -R $(id -u):$(id -g) ."
+alias chownfix="docker-compose run --rm app chown -R $(id -u):$(id -g) ."
+###< aliases
 
 echo -e '\033[1;42msymfony-tdd: aliases loaded\033[0m'

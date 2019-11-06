@@ -22,7 +22,7 @@ install: docker.start dependencies data ready ## Project: Install all (dependenc
 dependencies: composer.install yarn.install ## Project: Install the dependencies (only if there have been changes).
 
 .PHONY: data
-data: db.create ## Project: Install the data (db).
+data: db.create.force ## Project: Install the data (db).
 
 ##
 

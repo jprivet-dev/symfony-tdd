@@ -11,6 +11,8 @@ yarn.upgrade: ## Yarn: Upgrade packages to their latest version based on the spe
 	$(YARN) upgrade
 
 .PHONY: yarn.encore.compile
+# Prevent "An exception has been thrown during the rendering of a template ("Asset manifest file "/srv/app/public/build/manifest.json" does not exist.")."
+# See https://stackoverflow.com/questions/51393459/symfony-error-an-exception-has-been-thrown-during-the-rendering-of-a-template
 yarn.encore.compile: ## Webpack Encore: Compile assets once.
 	$(YARN) encore dev
 

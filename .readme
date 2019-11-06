@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+file='README.adoc'
+
+start='\/\/ >>> makefile'
+end='\/\/ <<< makefile'
+
+tag='__MAKEFILE__'
+block='```\n'$tag'\n```\n'
+
+makehelp="$(make help)"
+# Remove colors | https://stackoverflow.com/questions/17998978/removing-colors-from-output
+makehelp=$(echo "${makehelp}" | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g")
+
+sed -i -r "/^$start/,/^$end/c\\$start\n$block\n$end" $file
+sed -i "/$tag/r"<(echo "${makehelp}") $file
+sed -i -r "s/$tag//g" $file
+
+echo -e '\033[1;42mReadme.adoc updated!\033[0m'

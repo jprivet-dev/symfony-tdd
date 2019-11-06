@@ -1,23 +1,47 @@
 #!/usr/bin/env bash
 
 function sftdd_readme_update_makefile_help() {
-  file='README.adoc'
-  block_start='\/\/ >>> block_makefile'
-  block_end='\/\/ <<< block_makefile'
+  readme_file='README.adoc'
+  readme_block_start='\/\/ >>> block_makefile'
+  readme_block_end='\/\/ <<< block_makefile'
   target='__MAKEFILE__'
   code='```'
   block_code=$code$target'\n'$code
 
-  sed -i -r "/^$block_start/,/^$block_end/c\\$block_start\n$block_code\n$block_end" $file
+  sed -i -r "/^$readme_block_start/,/^$readme_block_end/c\\$readme_block_start\n$block_code\n$readme_block_end" $readme_file
 
   makehelp="$(make help)"
   # Remove colors | https://stackoverflow.com/questions/17998978/removing-colors-from-output
   makehelp=$(echo "${makehelp}" | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g")
-  sed -i "/$target/r"<(echo "${makehelp}") $file
+  sed -i "/$target/r"<(echo "${makehelp}") $readme_file
 
-  sed -i -r "s/$target//" $file
+  sed -i -r "s/$target//" $readme_file
 
   echo -e '\033[1;42mReadme.adoc: makefile help updated!\033[0m'
 }
 
+function sftdd_readme_update_aliases() {
+  aliases_file='.bash_aliases'
+  aliases_block_start='###> aliases'
+  aliases_block_end='###< aliases'
+
+  aliases=$(sed -n "/^$aliases_block_start/,/^$aliases_block_end/p" $aliases_file)
+  aliases=$(echo "${aliases}" | sed -r "s/$aliases_block_start//")
+  aliases=$(echo "${aliases}" | sed -r "s/$aliases_block_end//")
+
+  readme_file='README.adoc'
+  readme_block_start='\/\/ >>> block_aliases'
+  readme_block_end='\/\/ <<< block_aliases'
+  target='__ALIASES__'
+  code='```'
+  block_code=$code$target'\n'$code
+
+  sed -i -r "/^$readme_block_start/,/^$readme_block_end/c\\$readme_block_start\n$block_code\n$readme_block_end" $readme_file
+  sed -i "/$target/r"<(echo "${aliases}") $readme_file
+  sed -i -r "s/$target//" $readme_file
+
+  echo -e '\033[1;42mReadme.adoc: aliases updated!\033[0m'
+}
+
 sftdd_readme_update_makefile_help
+sftdd_readme_update_aliases

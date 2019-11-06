@@ -127,8 +127,9 @@ $ make
 
 Liste des commandes disponibles :
 
-// >>> makefile
+// >>> block_makefile
 ```
+
 PROJECT
   start                          Project: Start the current project.
   start.one                      Project: Stop all containers, start the current project.
@@ -224,7 +225,7 @@ DOCKER
   docker.networks                Docker: list networks. | https://docs.docker.com/engine/reference/commandline/network/
   docker.logs                    Docker: Show logs.
 ```
-// <<< makefile
+// <<< block_makefile
 
 {BACK_TO_TOP}
 

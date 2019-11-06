@@ -136,8 +136,9 @@ PROJECT
   stop                           Project: Stop the current project.
   sh                             Project: app sh access.
 
-  install                        Project: Install all (dependencies, data, ...).
+  install                        Project: Install all (dependencies, data, assets, ...).
   dependencies                   Project: Install the dependencies (only if there have been changes).
+  assets                         Project: Generate all assets (webpack Encore, ...)
   data                           Project: Install the data (db).
 
   check                          Project: Launch of install, security, db validate & tests

@@ -237,7 +237,6 @@ Le fichier {uri-rel-file-base}.bash_aliases[] propose quelques *raccourcis* (`ph
 // >>> block_aliases
 ```
 
-# $ . .bash_aliases # active aliases
 alias reload=". .bash_aliases"
 
 alias app="docker-compose exec app"

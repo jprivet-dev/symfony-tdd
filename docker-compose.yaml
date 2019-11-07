@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   app:
-    container_name: symfony_tdd_app_container
+    container_name: symfony_tdd_app_service
     build:
       context: .
       target: symfony_tdd_php
@@ -30,7 +30,7 @@ services:
   # See 'No connections until MySQL init completes' on https://hub.docker.com/_/mysql
   # The 'db.wait' Makefile command has been created to wait until MySQL is available before any action is taken.
   db:
-    container_name: symfony_tdd_db_container
+    container_name: symfony_tdd_db_service
     image: mysql:5.7
     restart: always
     environment:
@@ -41,7 +41,7 @@ services:
   # https://hub.docker.com/r/phpmyadmin/phpmyadmin/
   # https://docs.phpmyadmin.net/en/latest/setup.html#installing-using-docker
   phpmyadmin:
-    container_name: symfony_tdd_phpmyadmin_container
+    container_name: symfony_tdd_phpmyadmin_service
     image: phpmyadmin/phpmyadmin
     restart: always
     depends_on:
@@ -54,7 +54,7 @@ services:
       PMA_PASSWORD: ''
 
   nginx:
-    container_name: symfony_tdd_nginx_container
+    container_name: symfony_tdd_nginx_service
     build:
       context: .
       target: symfony_tdd_nginx
@@ -69,7 +69,7 @@ services:
 
   # This HTTP/2 proxy is not secure: it should only be used in dev
   h2-proxy:
-    container_name: symfony_tdd_h2_proxy_container
+    container_name: symfony_tdd_h2_proxy_service
     build:
       context: .
       target: symfony_tdd_h2_proxy

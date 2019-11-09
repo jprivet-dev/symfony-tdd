@@ -26,6 +26,7 @@ script:
   - docker-compose build --pull
   - docker-compose up -d
   - sleep 30
+  - make install
   - docker-compose exec -T app composer req sensiolabs/security-checker
   - docker-compose exec -T app bin/console security:check
   - docker-compose run --no-deps -T app composer validate --no-check-publish

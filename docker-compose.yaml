@@ -72,7 +72,7 @@ services:
     container_name: symfony_tdd_h2_proxy_service
     build:
       context: .
-      target: symfony_tdd_h2_proxy
+      target: symfony_tdd_h2-proxy
     depends_on:
       - nginx
     volumes:

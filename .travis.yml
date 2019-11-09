@@ -26,9 +26,14 @@ script:
   - docker-compose build --pull
   - docker-compose up -d
   - sleep 30
+  - make install
   - docker-compose exec -T app composer req sensiolabs/security-checker
   - docker-compose exec -T app bin/console security:check
   - docker-compose run --no-deps -T app composer validate --no-check-publish
   - curl http://localhost # Client
   - curl -k https://localhost # Client (HTTP/2)
   - docker-compose logs # Display logs if anything wrong
+
+after_success:
+  - docker-compose exec -T app ./vendor/bin/simple-phpunit --coverage-clover build/logs/clover.xml
+  - docker-compose exec -T -e TRAVIS="$TRAVIS" -e TRAVIS_JOB_ID="$TRAVIS_JOB_ID" app vendor/bin/php-coveralls -v -n --exclude-no-stmt

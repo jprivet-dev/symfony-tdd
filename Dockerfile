@@ -5,13 +5,13 @@ ARG PHP_VERSION=7.2
 ARG NGINX_VERSION=1.15
 
 ### NGINX
-FROM nginx:${NGINX_VERSION}-alpine AS symfony_docker_nginx
+FROM nginx:${NGINX_VERSION}-alpine AS symfony_tdd_nginx
 
 COPY docker/nginx/conf.d /etc/nginx/conf.d/
 COPY public /srv/app/public/
 
 ### H2 PROXY
-FROM alpine:latest AS symfony_docker_h2-proxy-cert
+FROM alpine:latest AS symfony_tdd_h2-proxy-cert
 
 RUN apk add --no-cache openssl
 
@@ -23,14 +23,14 @@ RUN openssl req -new -passout pass:NotSecure -key server.key -out server.csr \
     -subj '/C=SS/ST=SS/L=Gotham City/O=Symfony/CN=localhost'
 RUN openssl x509 -req -sha256 -days 365 -in server.csr -signkey server.key -out server.crt
 
-FROM nginx:${NGINX_VERSION}-alpine AS symfony_docker_h2-proxy
+FROM nginx:${NGINX_VERSION}-alpine AS symfony_tdd_h2-proxy
 
 RUN mkdir -p /etc/nginx/ssl/
-COPY --from=symfony_docker_h2-proxy-cert server.key server.crt /etc/nginx/ssl/
+COPY --from=symfony_tdd_h2-proxy-cert server.key server.crt /etc/nginx/ssl/
 COPY ./docker/h2-proxy/default.conf /etc/nginx/conf.d/default.conf
 
 ### PHP
-FROM php:${PHP_VERSION}-fpm-alpine AS symfony_docker_php
+FROM php:${PHP_VERSION}-fpm-alpine AS symfony_tdd_php
 
 RUN apk add --no-cache \
 		git \
@@ -59,6 +59,34 @@ RUN set -eux \
     )" \
     && apk add --no-cache --virtual .api-phpexts-rundeps $runDeps \
 	&& apk del .build-deps
+
+###> Xdebug ###
+ARG XDEBUG_VERSION=2.6.0
+RUN set -eux; \
+	apk add --no-cache --virtual .build-deps $PHPIZE_DEPS; \
+	pecl install xdebug-$XDEBUG_VERSION; \
+	docker-php-ext-enable xdebug; \
+	apk del .build-deps
+###< Xdebug ###
+
+###> Panther & Chrome ###
+### @see https://github.com/symfony/panther#docker-integration
+ENV PANTHER_NO_SANDBOX 1
+ENV PANTHER_CHROME_DRIVER_BINARY /usr/lib/chromium/chromedriver
+RUN apk add --no-cache \
+        libzip-dev \
+        zlib-dev \
+        chromium \
+        chromium-chromedriver
+###< Panther & Chrome ###
+
+###> Database & PDO Connection ###
+RUN docker-php-ext-install pdo pdo_mysql
+###< Database & PDO Connection ###
+
+###> Yarn ###
+RUN apk add yarn
+###< Yarn ###
 
 RUN ln -s $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini
 COPY docker/app/conf.d/symfony.ini $PHP_INI_DIR/conf.d/symfony.ini

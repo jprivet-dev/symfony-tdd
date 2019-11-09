@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ item.title }}{% endblock %}
+
+{% block body %}
+    <h1>{{ item.title }}</h1>
+
+    {{ item.body }}
+
+    <div id="comments">
+        <comment-system news="{{ item.slug }}"></comment-system>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/js/comments.js') }}"></script>
+{% endblock %}

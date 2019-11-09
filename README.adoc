@@ -1,0 +1,741 @@
+// settings:
+
+:toc: macro
+:toc-title: Sommaire
+:toclevels: 3
+:numbered:
+
+ifndef::env-github[:icons: font]
+ifdef::env-github[]
+:status:
+:outfilesuffix: .adoc
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+
+// variables:
+
+:uri-org: https://github.com/jprivet-dev
+:uri-repo: {uri-org}/symfony-tdd
+
+:uri-rel-file-base: link:
+:uri-rel-tree-base: link:
+ifdef::env-site,env-yard[]
+:uri-rel-file-base: {uri-repo}/blob/master/
+:uri-rel-tree-base: {uri-repo}/tree/master/
+endif::[]
+
+:uri-license: {uri-rel-file-base}LICENSE
+
+:BACK_TO_TOP_TARGET: top-target
+:BACK_TO_TOP_LABEL: ⬆ Retour au sommaire
+:BACK_TO_TOP: <<{BACK_TO_TOP_TARGET},{BACK_TO_TOP_LABEL}>>
+
+[#{BACK_TO_TOP_TARGET}]
+= Symfony 4 & TDD (dockerized workshop)
+
+|===
+| Branch 3+| Status
+
+| https://github.com/jprivet-dev/symfony-tdd[master]
+| image:https://travis-ci.org/jprivet-dev/symfony-tdd.svg?branch=master["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-tdd"]
+| image:https://coveralls.io/repos/github/jprivet-dev/symfony-tdd/badge.svg?branch=master["Coverage Status", link="https://coveralls.io/github/jprivet-dev/symfony-tdd?branch=master"]
+| image:https://api.codacy.com/project/badge/Grade/d83935eebccc4610870a0b52039914f3?branch=master["Codacy code quality", link="https://www.codacy.com/manual/jprivet-dev/symfony-tdd?utm_source=github.com&utm_medium=referral&utm_content=jprivet-dev/symfony-tdd&utm_campaign=Badge_Grade"]
+
+| https://github.com/jprivet-dev/symfony-tdd/tree/dev[dev]
+| image:https://travis-ci.org/jprivet-dev/symfony-tdd.svg?branch=dev["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-tdd"]
+| image:https://coveralls.io/repos/github/jprivet-dev/symfony-tdd/badge.svg?branch=dev["Coverage Status", link="https://coveralls.io/github/jprivet-dev/symfony-tdd?branch=dev"]
+| image:https://api.codacy.com/project/badge/Grade/d83935eebccc4610870a0b52039914f3?branch=dev["Codacy code quality", link="https://www.codacy.com/manual/jprivet-dev/symfony-tdd?utm_source=github.com&utm_medium=referral&utm_content=jprivet-dev/symfony-tdd&utm_campaign=Badge_Grade"]
+|===
+
+toc::[]
+
+== Présentation
+
+Ce dépôt *Git*  fraîchement créé est un atelier où je concentre, teste et partage des cas pratiques rencontrés (projets clients, R&D, ...) autour des *tests automatiques*, du *TDD* (Test-Driven Development) et du framework *Symfony*.
+
+J'ai démarré cet atelier _dockerisé_ à partir du dépôt https://github.com/dunglas/symfony-docker de  https://dunglas.fr/[Kevin Dunglas].
+
+{BACK_TO_TOP}
+
+== Prérequis technique : avoir *Docker CE* et *Docker Compose* installés
+
+. https://docs.docker.com/install/
+. https://docs.docker.com/compose/install/
+
+{BACK_TO_TOP}
+
+== Installer le projet
+
+=== Cloner
+
+```sh
+$ git clone git@github.com:jprivet-dev/symfony-tdd.git
+```
+
+{BACK_TO_TOP}
+
+=== Installer
+
+```sh
+$ cd symfony-tdd
+$ make install
+...
+...
+...
+READY!
+Website:    http://localhost
+API:        http://localhost/api
+phpMyAdmin: http://localhost:8088
+```
+
+[TIP]
+====
+Si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible,
+utiliser à la place de `$ make install` les commandes suivantes :
+
+```sh
+$ docker-compose up --remove-orphans -d
+$ docker-compose exec app composer install --verbose
+$ docker-compose exec app yarn install
+$ docker-compose exec app php bin/console doctrine:database:create --if-not-exists
+$ docker-compose exec app php bin/console doctrine:schema:create
+```
+====
+
+{BACK_TO_TOP}
+
+=== Accéder au site
+
+. Site web : https://localhost
+. API : https://localhost/api
+. phpMyAdmin: http://localhost:8088
+
+{BACK_TO_TOP}
+
+== Le *Makefile* du projet
+
+Si vous avez un outil du type https://www.gnu.org/software/make/[GNU Make] disponible sur votre poste,
+vous pouvez acceder à toutes les commandes du fichier {uri-rel-file-base}Makefile[] :
+
+```sh
+$ make
+```
+
+Liste des commandes disponibles :
+
+// >>> block_makefile
+```
+
+PROJECT
+  start                          Project: Start the current project.
+  start.one                      Project: Stop all containers, start the current project.
+  stop                           Project: Stop the current project.
+  sh                             Project: app sh access.
+
+  install                        Project: Install all (dependencies, data, assets, ...).
+  dependencies                   Project: Install the dependencies (only if there have been changes).
+  assets                         Project: Generate all assets (webpack Encore, ...)
+  data                           Project: Install the data (db).
+
+  check                          Project: Launch of install, security, db validate & tests
+  tests                          Project: Launch all tests.
+  cc                             Project: Clear all caches.
+
+  clean                          Project: [PROMPT Y/n] Remove build, vendor & node_modules folders.
+  chown.fix                      Project: Editing permissions on Linux. | https://github.com/dunglas/symfony-docker#editing-permissions-on-linux
+
+COMPOSER
+  composer.install               Composer: Read the composer.json/composer.lock file from the current directory, resolve the dependencies, and install them into vendor.
+  composer.install.prod          Composer: Idem `composer.install` without dev elements.
+  composer.update                Composer: Get the latest versions of the dependencies and update the composer.lock file.
+  composer.licenses              Composer: List the name, version and license of every package installed.
+
+YARN
+  yarn.install                   Yarn: Install all dependencies.
+  yarn.upgrade                   Yarn: Upgrade packages to their latest version based on the specified range.
+  yarn.encore.compile            Webpack Encore: Compile assets once.
+  yarn.encore.watch              Webpack Encore: Recompile assets automatically when files change.
+  yarn.encore.deploy             Webpack Encore: On deploy, create a production build.
+
+SYMFONY
+  symfony.cc                     Symfony: Clear cache (current env).
+  symfony.ccp                    Symfony: Clear cache (prod).
+  symfony.cchard                 Symfony: Remove all in `var/cache` folder.
+  symfony.routes                 Symfony: Display current routes.
+
+  symfony.security.check         Symfony: Check security of your dependencies. | https://github.com/sensiolabs/security-checker
+
+PHPUNIT
+  phpunit                        PHPUnit: Launch all tests (unit, functional, ...).
+  phpunit.coverage               PHPUnit: Generate code coverage report in HTML format.
+  phpunit.coverage.clover        PHPUnit: Generate code clover style coverage report.
+  phpunit.unit                   PHPUnit: Launch unit tests.
+  phpunit.unit.coverage          PHPUnit: Generate code coverage report in HTML format for unit tests.
+  phpunit.functional             PHPUnit: Launch functional tests.
+  phpunit.functional.coverage    PHPUnit: Generate code coverage report in HTML format for functional tests.
+
+  phpunit.watch                  PHPUnit Watcher: Rerun automatically tests whenever you change some code. | https://github.com/spatie/phpunit-watcher
+  phpunit.watch.unit             PHPUnit Watcher: Rerun only unit tests.
+  phpunit.watch.functional       PHPUnit Watcher: Rerun only functional tests.
+
+XDEBUG
+  xdebug.on                      Xdebug: Enable the module.
+  xdebug.off                     Xdebug: Disable the module.
+
+QUALITY ASSURANCE - STATIC ANALYZERS
+  qa.phpmetrics                  PHPMetrics: Provide tons of metric (complexity / volume / object oriented / maintainability). | http://www.phpmetrics.org
+  qa.codesniffer                 PHP_CodeSniffer: Tokenize PHP, JavaScript and CSS files and detect violations... | https://github.com/squizlabs/PHP_CodeSniffer
+  qa.codesniffer.diff            PHP_CodeSniffer: Printing a diff report
+  qa.codesniffer.fix             PHP_CodeSniffer: Fixing errors automatically
+  qa.messdetector                PHP Mess Detector: Scan PHP source code and look for potential problems... | http://phpmd.org/
+
+DATABASE
+  db.create                      Database: Creates the configured database & Executes the SQL needed to generate the database schema.
+  db.create.force                Database: Drop & create.
+  db.drop                        Database: Drop.
+  db.validate                    Database: Validate the mapping files.
+
+  db.entities                    Database: List mapped entities.
+  db.bash                        Database: Bash access.
+  db.mysql                       Database: MySQL access (mysql> ...).
+
+DOCKER
+  docker.start                   Docker: Build, (re)create, start, and attache to containers for a service (detached mode). | https://docs.docker.com/compose/reference/up/
+  docker.start.one               Docker: Stop all projects running containers & Start current project.
+  docker.build                   Docker: Same `docker.start` command + build images before starting containers (detached mode). | https://docs.docker.com/compose/reference/up/
+  docker.build.force             Docker: Stop, remove & rebuild current containers.
+  docker.stop                    Docker: Stop running containers without removing them. | https://docs.docker.com/compose/reference/stop/
+  docker.stop.all                Docker: Stop all projects running containers without removing them. | https://docs.docker.com/compose/reference/stop/
+  docker.down                    Docker: [PROMPT Y/n] Stop containers and remove containers, networks, volumes, and images created by up. | https://docs.docker.com/compose/reference/down/
+
+  docker.list                    Docker: List containers. | https://docs.docker.com/engine/reference/commandline/ps/
+  docker.list.stopped            Docker: List all stopped containers.
+  docker.remove                  Docker: [PROMPT Y/n] Stop & Remove service containers (only current project). | https://docs.docker.com/compose/reference/rm/
+  docker.remove.all              Docker: [PROMPT Y/n] Remove all stopped service containers. | https://docs.docker.com/compose/reference/rm/
+  docker.images                  Docker: List images. | https://docs.docker.com/engine/reference/commandline/images/
+  docker.images.remove.all       Docker: [PROMPT Y/n] Remove all unused images (for all projects!).
+  docker.clean                   Docker: [PROMPT Y/n] Remove unused data. | https://docs.docker.com/engine/reference/commandline/system_prune/
+
+  docker.env                     Docker: Show environment variables.
+  docker.ip                      Docker: Get ip Gateway.
+  docker.ip.all                  Docker: List all containers ip.
+  docker.networks                Docker: list networks. | https://docs.docker.com/engine/reference/commandline/network/
+  docker.logs                    Docker: Show logs.
+```
+// <<< block_makefile
+
+{BACK_TO_TOP}
+
+== Les *alias* du projet
+
+Le fichier {uri-rel-file-base}.bash_aliases[] propose quelques *raccourcis* (`php`, `composer`, `yarn`, `sf`, ...) :
+
+// >>> block_aliases
+```
+
+alias reload=". .bash_aliases"
+
+alias app="docker-compose exec app"
+alias composer="app composer"
+alias yarn="app yarn"
+alias php="app php"
+alias phpunit="app ./vendor/bin/simple-phpunit"
+alias phpunit-watch="app ./vendor/bin/phpunit-watcher watch"
+alias symfony="php bin/console"
+
+alias cc="symfony cache:clear"
+alias ccp="symfony cache:clear --env=prod"
+
+alias tests="phpunit --stop-on-error --stop-on-failure --stop-on-warning"
+alias tests-no-stop="phpunit"
+alias tests-coverage='phpunit --coverage-html build/phpunit/coverage'
+alias tests-watch="phpunit-watch"
+alias open-coverage="gio open build/phpunit/coverage/index.html"
+
+alias m="make"
+alias sf="symfony"
+alias t="tests"
+alias tnostop="tests-no-stop"
+alias tc='tests-coverage; open-coverage'
+alias tw='tests-watch'
+alias ut="make unit-tests"
+alias ft="make functional-tests"
+
+alias chownfix="docker-compose run --rm app chown -R $(id -u):$(id -g) ."
+```
+// <<< block_aliases
+
+Charger les *alias* du projet :
+
+```sh
+$ . .bash_aliases
+```
+
+IMPORTANT: Le fichier {uri-rel-file-base}.bash_aliases[] ne peut être chargé automatiquement à la commande `start` du {uri-rel-file-base}Makefile[] :(
+
+{BACK_TO_TOP}
+
+== *PHPUnit* : gérer les tests automatiques PHP
+
+=== Lancer les tests avec *PHPUnit*
+
+Le projet utilise le *PHPUnit Bridge* de *Symfony* (https://symfony.com/doc/current/testing.html).
+
+Lancez tous les tests avec la commande suivante :
+
+```sh
+$ make phpunit
+...
+...
+...
+Testing
+................................                                  32 / 32 (100%)
+
+Time: 483 ms, Memory: 30.00 MB
+
+OK (32 tests, 74 assertions)
+
+```
+
+[TIP]
+====
+Si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible, lancer les tests avec la commande  suivante :
+
+```sh
+$ docker-compose exec app ./vendor/bin/simple-phpunit
+```
+====
+
+{BACK_TO_TOP}
+
+=== *PHPUnit Watcher* : relance automatiquement des tests après modification d'un fichier
+
+Le projet utilise *PHPUnit Watcher* (https://github.com/spatie/phpunit-watcher) que vous pouvez lancer avec la commande suivante :
+
+```sh
+$ make phpunit.watch
+```
+
+[TIP]
+====
+Si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible, lancer le watcher avec la commande  suivante :
+
+```sh
+$ docker-compose exec app ./vendor/bin/phpunit-watcher watch
+```
+====
+
+{BACK_TO_TOP}
+
+=== *Xdebug & Performance* : activation et désactivation à chaud du module
+
+WARNING: *Xdebug* est nécessaire pour générer la couverture de code, mais *augmente considérablement (x10)* le temps d'exécution des tests.
+
+Exécution *avec Xdebug* => *1.52 secondes* :
+
+```sh
+$ docker-compose exec app ./vendor/bin/simple-phpunit
+stty: standard input
+PHPUnit 8.4.1 by Sebastian Bergmann and contributors.
+
+Testing
+................................                                  32 / 32 (100%)
+
+Time: 1.52 seconds, Memory: 24.00 MB
+
+OK (32 tests, 74 assertions)
+```
+
+Exécution *sans Xdebug* => *153 ms* :
+
+```sh
+$ docker-compose exec app ./vendor/bin/simple-phpunit
+stty: standard input
+PHPUnit 8.4.1 by Sebastian Bergmann and contributors.
+
+Error:         No code coverage driver is available
+
+Testing
+................................                                  32 / 32 (100%)
+
+Time: 153 ms, Memory: 18.00 MB
+
+OK (32 tests, 74 assertions)
+```
+
+[TIP]
+====
+*Xdebug* peut être activé et désactivé à chaud avec les commandes suivantes :
+
+```sh
+$ make xdebug.on
+$ make xdebug.off
+```
+====
+
+*Xdebug* est automatiquement désactivé pour les tests qui ne nécessitent pas de couverture de code et réactivé dans le cas contraire.
+
+Exemple de commandes avec *Xdebug désactivé automatiquement* :
+
+```sh
+$ make phpunit
+$ make phpunit.unit
+$ make phpunit.functional
+$ make phpunit.watch
+...
+```
+Exemple de commandes *avec Xdebug activé automatiquement* :
+
+```sh
+$ make phpunit.coverage
+$ make phpunit.coverage.clover
+$ make phpunit.unit.coverage
+$ make phpunit.functional.coverage
+...
+```
+
+{BACK_TO_TOP}
+
+== Sujets traités
+
+=== Nomenclature
+
+. *[ ]* A faire
+. *[!]* En cours
+. *[x]* Fait
+
+{BACK_TO_TOP}
+
+=== [!] *Fibonacci* : 4 implémentations pour 1 seul test unitaire
+
+Principe::
+
+Le principe est de montrer que *4 implémentations différentes* d'une même fonctionnalité peuvent passer
+correctement le *même test unitaire*.
++
+Ce premier cas simple permet d'illustrer ce que permettent les tests automatiques : *garantir le code*.
++
+Selon le développeur en charge de l'implémentation, de ses facilités, du temps qu'il lui ait imparti,
+des informations auxquelles il a accès...
+ce dernier peut garantir au client que son implémentation *répond bien aux besoins dans le scope testé*,
+et que la fonctionnalité *réagit bien dans les cas limites retenus*.
+
+Ressoures::
+
+. https://rosettacode.org/wiki/Fibonacci_sequence#PHP
+. https://en.wikibooks.org/wiki/Algorithm_Implementation/Mathematics/Fibonacci_Number_Program#PHP
+. https://en.wikipedia.org/wiki/Fibonacci_number
+. http://www.codecodex.com/wiki/Calculate_the_Fibonacci_sequence#PHP
+
+Fichiers d'exemples::
+
+. {uri-rel-file-base}src/Util/Fibonacci01Util.php[]
+. {uri-rel-file-base}src/Util/Fibonacci02Util.php[]
+. {uri-rel-file-base}src/Util/Fibonacci03Util.php[]
+. {uri-rel-file-base}src/Util/Fibonacci04Util.php[]
+. {uri-rel-file-base}tests/Unit/Util/FibonacciUtilTest.php[]
+
+{BACK_TO_TOP}
+
+=== [!] Injecter un *repository* au lieu de *l'entity manager*
+
+Principe::
+
+Au lieu d'injecter dans un premier temps *l'entity manager* pour récupérer dans un deuxième temps les *repositories* dont nous avons besoin,
+nous pouvons injecter directement les *repositories* concernés.
+
+Ressources::
+
+. https://matthiasnoback.nl/2014/05/inject-a-repository-instead-of-an-entity-manager/
+
+Fichiers d'exemples::
+
+. {uri-rel-file-base}src/Repository/AbstractRepository.php[]
+. {uri-rel-file-base}tests/Unit/Repository/AbstractRepositoryTest.php[]
+
+{BACK_TO_TOP}
+
+=== [ ] Créer et tester un *repository*
+
+{BACK_TO_TOP}
+
+=== [x] Créer et tester une *classe abstraite*
+
+Principe::
+
+Le principe est de pouvoir tester unitairement les *méthodes concrètes* d'une classe abstraite.
+
+Ressources::
+
+. https://phpunit.readthedocs.io/en/8.4/test-doubles.html#mocking-traits-and-abstract-classes
+. https://mnapoli.fr/anonymous-classes-in-tests/
+
+Fichiers d'exemples::
+
+. {uri-rel-file-base}src/Util/Example/AbstractClassExample.php[]
+. {uri-rel-file-base}tests/Unit/Util/Example/AbstractClassExampleTest.php[]
+
+{BACK_TO_TOP}
+
+=== [!] Créer et tester un *custom validator*
+
+Principe::
+
+Le principe est de gérer et de tester facilement *tous les cas limites* auxquels pourrait-être
+exposé notre *custom validator*.
+
+Ressources::
+
+. https://symfony.com/doc/current/validation/custom_constraint.html
+. https://github.com/symfony/validator/blob/master/Test/ConstraintValidatorTestCase.php
+. https://github.com/symfony/validator/blob/master/Tests/Constraints/EmailValidatorTest.php
+
+Fichiers d'exemples::
+
+. {uri-rel-file-base}src/Validator/Constraints/Reference.php[]
+. {uri-rel-file-base}src/Validator/Constraints/ReferenceValidator.php[]
+. {uri-rel-file-base}tests/Unit/Validator/Constraints/ReferenceValidatorTest.php[]
+
+{BACK_TO_TOP}
+
+=== [ ] Créer et tester un *custom type*
+
+{BACK_TO_TOP}
+
+=== [ ] Créer et tester une *fonction Twig*
+
+{BACK_TO_TOP}
+
+=== [!] Créer un *smoke testing*
+
+Principe::
+
+Le principe de ce premier niveau de test fonctionnel est *d'appeler chaque page* de l'application
+pour vérifier *qu'aucune d'entre elles ne retournent d'erreur*.
+
+Ressources::
+
+. https://symfony.com/doc/current/best_practices.html
+
+Fichiers d'exemples::
+
+. {uri-rel-file-base}tests/Functional/SmokeTest.php[]
+
+{BACK_TO_TOP}
+
+=== [ ] Créer, dispatcher et tester un *event*
+
+{BACK_TO_TOP}
+
+=== [ ] Mocker le *temps*
+
+{BACK_TO_TOP}
+
+=== [ ] Créer et tester une *commande Symfony*
+
+{BACK_TO_TOP}
+
+=== [ ] Créer et tester une *requête ajax*
+
+{BACK_TO_TOP}
+
+=== [ ] Travailler avec le *workflow component*
+
+{BACK_TO_TOP}
+
+=== [ ] Travailler avec le *process bundle*
+
+{BACK_TO_TOP}
+
+=== [ ] Travailler avec des *collections d'objets typés*
+
+{BACK_TO_TOP}
+
+=== [ ] La performance avec *Doctrine*
+
+{BACK_TO_TOP}
+
+=== [ ] Créer et tester un *trait*
+
+{BACK_TO_TOP}
+
+=== [ ] Créer et tester un *composant Vue.js*
+
+{BACK_TO_TOP}
+
+=== [ ] Créer et tester des *éléments asynchrones PHP*
+
+{BACK_TO_TOP}
+
+=== [!] *Symfony Panther*: les bases
+
+Principe::
+
+L'idée est d'intégrer et d'étendre les codes en exemple sur la page
+https://symfony.com/blog/introducing-symfony-panther-a-browser-testing-and-web-scrapping-library-for-php[Symfony Panther: a Browser Testing and Web Scrapping Library for PHP]
+
+Ressources::
+
+. https://symfony.com/blog/introducing-symfony-panther-a-browser-testing-and-web-scrapping-library-for-php
+. https://github.com/symfony/panther
+
+Fichiers d'exemples::
+
+. {uri-rel-file-base}src/Controller/NewsController.php[]
+. {uri-rel-file-base}tests/Functional/NewsControllerTest.php[]
+
+Autres informations::
+
+[TIP]
+====
+*Docker* : Bien intégrer le binaire `chromedriver` avec une image `alpine`. Voir :
+
+. https://github.com/symfony/panther#docker-integration
+====
+
+[WARNING]
+====
+*Panther* ne permet pas de générer une *couverture de code* pour le moment. Voir :
+
+. https://github.com/symfony/panther/issues/8
+. https://github.com/jprivet-dev/symfony-tdd/issues/2
+====
+
+{BACK_TO_TOP}
+
+== Tips
+
+=== [!] *Makefile* : Utiliser le fichier *.env* de Symfony
+
+{BACK_TO_TOP}
+
+=== [!] *Makefile* : *Script* d'attente de disponibilité de la BD pendant l'installation
+
+{BACK_TO_TOP}
+
+=== [ ] *Tests unitaires* : Utiliser les *yield*
+
+{BACK_TO_TOP}
+
+=== [ ] *Contrôleurs* : peut-on les *tester unitairement* ?
+
+{BACK_TO_TOP}
+
+=== [!] *Docker* : libérer la mémoire
+
+On peut facilement *être saturé de plusieurs dizaines de Go* de données créées par Docker.
+
+==== *Astuce 1* : Supprimer les données non utilisées
+
+Dans un premier temps, il est possible de *supprimer tout ce qui n'est plus utilisé par Docker* :
+
+```sh
+$ docker system prune --volumes
+```
+
+TIP: Retrouvez des commandes de suppression `docker.xxx` dans le fichier {uri-rel-file-base}Makefile[] du projet.
+
+{BACK_TO_TOP}
+
+==== *Astuce 2* : Changer le dossier de travail de *Docker*
+
+Pour une gestion à long terme, il est préférable *d'orienter Docker vers un espace de travail plus volumineux* sur votre machine,
+avec le fichier de configuration `daemon.json`.
+
+1) *Stopper Docker* :
+
+```sh
+$ sudo service docker stop
+```
+
+2) *Créer* le nouveau dossier de destination :
+
+```sh
+$ sudo mkdir /data/home/jprivet/docker
+```
+
+3) *Vérifier* si `daemon.json` existe :
+
+```sh
+$ ls /etc/docker
+key.json
+```
+
+4) Si `daemon.json` n'existe pas, *le créer* :
+
+```sh
+$ sudo touch /etc/docker/daemon.json
+```
+
+4 bis) *Injecter* l'option `"data-root": "/data/home/jprivet/docker"` dans le nouveau fichier `daemon.json` :
+
+```sh
+$ sudo -- sh -c "echo '{\"data-root\": \"/data/home/jprivet/docker\"}' >> /etc/docker/daemon.json"
+```
+
+[NOTE]
+====
+Si le fichier `daemon.json` existe déjà, *le modifier* directement :
+
+```sh
+$ sudo vim /etc/docker/daemon.json
+```
+====
+
+5) *Vérifier* le contenu du fichier `daemon.json` :
+
+```sh
+$ cat /etc/docker/daemon.json
+{"data-root": "/data/home/jprivet/docker"}
+
+```
+
+6) *Redémarrer Docker* :
+
+```sh
+$ sudo service docker start
+```
+
+Au prochain `$ docker-compose up`, les éléments seront créés dans le nouveau dossier `/data/home/jprivet/docker`.
+
+{BACK_TO_TOP}
+
+==== Ressources
+
+. https://medium.com/developer-space/how-to-change-docker-data-folder-configuration-33d372669056
+. https://docs.docker.com/engine/reference/commandline/dockerd/
+
+{BACK_TO_TOP}
+
+== Autres ressources
+
+=== Symfony
+
+* https://symfony.com/doc/current/best_practices.html#infrastructure-related-configuration
+* https://github.com/symfony/demo
+* http://fabien.potencier.org/symfony4-best-practices.html
+
+=== Docker
+
+* https://gist.github.com/bastman/5b57ddb3c11942094f8d0a97d461b430
+
+=== Makefile
+
+. https://blog.theodo.fr/2018/05/why-you-need-a-makefile-on-your-project/
+. https://github.com/mykiwi/symfony-bootstrapped/blob/master/Makefile
+. https://github.com/Elao/symfony-standard/blob/master/Makefile
+. https://github.com/Elao/tricot/blob/master/Makefile
+. https://github.com/cleverage/eav-manager-starter-kit/blob/master/Makefile
+. https://github.com/torvalds/linux/blob/master/Makefile
+
+{BACK_TO_TOP}
+
+== Licence
+
+`symfony-tdd` est publié sous {uri-license}[LICENSE] *MIT*.
+
+{BACK_TO_TOP}

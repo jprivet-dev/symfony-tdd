@@ -1,0 +1,8 @@
+watch:
+  directories:
+    - src
+    - tests
+  fileMask: '*.php'
+phpunit:
+  binaryPath: ./vendor/bin/simple-phpunit
+  arguments: '--stop-on-error --stop-on-failure --stop-on-warning'

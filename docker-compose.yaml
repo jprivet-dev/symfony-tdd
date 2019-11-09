@@ -2,9 +2,10 @@ version: '3.4'
 
 services:
   app:
+    container_name: symfony_tdd_app_service
     build:
       context: .
-      target: symfony_docker_php
+      target: symfony_tdd_php
       args:
         SYMFONY_VERSION: ${SYMFONY_VERSION:-}
         STABILITY: ${STABILITY:-stable}
@@ -12,17 +13,51 @@ services:
       # Comment out the next line in production
       - ./:/srv/app:rw,cached
       # If you develop on Linux, comment out the following volumes to just use bind-mounted project directory from host
-      - /srv/app/var/
-      - /srv/app/var/cache/
-      - /srv/app/var/logs/
-      - /srv/app/var/sessions/
+      #- /srv/app/var/
+      #- /srv/app/var/cache/
+      #- /srv/app/var/logs/
+      #- /srv/app/var/sessions/
     environment:
       - SYMFONY_VERSION
 
+  # https://hub.docker.com/_/mysql
+  # WARNING:
+  # Error at the very first execution of '$ docker-compose exec db bash -c "mysql -u root symfony_tdd_db"'
+  # ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)
+  # The second time the command is executed, everything works !
+  # SOLUTION:
+  # This error occurs when the initialization of MySQL is not complete.
+  # See 'No connections until MySQL init completes' on https://hub.docker.com/_/mysql
+  # The 'db.wait' Makefile command has been created to wait until MySQL is available before any action is taken.
+  db:
+    container_name: symfony_tdd_db_service
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: symfony_tdd_db
+
+  # https://hub.docker.com/r/phpmyadmin/phpmyadmin/
+  # https://docs.phpmyadmin.net/en/latest/setup.html#installing-using-docker
+  phpmyadmin:
+    container_name: symfony_tdd_phpmyadmin_service
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - '8088:80'
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: ''
+
   nginx:
+    container_name: symfony_tdd_nginx_service
     build:
       context: .
-      target: symfony_docker_nginx
+      target: symfony_tdd_nginx
     depends_on:
       - app
     volumes:
@@ -34,9 +69,10 @@ services:
 
   # This HTTP/2 proxy is not secure: it should only be used in dev
   h2-proxy:
+    container_name: symfony_tdd_h2_proxy_service
     build:
       context: .
-      target: symfony_docker_h2-proxy
+      target: symfony_tdd_h2-proxy
     depends_on:
       - nginx
     volumes:

@@ -1,0 +1,378 @@
+:toc: macro
+:toc-title: Sommaire
+:toclevels: 3
+:numbered:
+
+:BACK_TO_TOP_TARGET: top-target
+:BACK_TO_TOP_LABEL: ⬆ Retour au sommaire
+:BACK_TO_TOP: <<{BACK_TO_TOP_TARGET},{BACK_TO_TOP_LABEL}>>
+
+[#{BACK_TO_TOP_TARGET}]
+= Symfony 4 & TDD
+
+|===
+| Branch 3+| Status
+
+| https://github.com/jprivet-dev/symfony-tdd[master]
+| image:https://travis-ci.org/jprivet-dev/symfony-tdd.svg?branch=master["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-tdd"]
+| image:https://coveralls.io/repos/github/jprivet-dev/symfony-tdd/badge.svg?branch=master["Coverage Status", link="https://coveralls.io/github/jprivet-dev/symfony-tdd?branch=master"]
+| image:https://api.codacy.com/project/badge/Grade/d83935eebccc4610870a0b52039914f3?branch=master["Codacy code quality", link="https://www.codacy.com/manual/jprivet-dev/symfony-tdd?utm_source=github.com&utm_medium=referral&utm_content=jprivet-dev/symfony-tdd&utm_campaign=Badge_Grade"]
+
+| https://github.com/jprivet-dev/symfony-tdd/tree/dev[dev]
+| image:https://travis-ci.org/jprivet-dev/symfony-tdd.svg?branch=dev["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-tdd"]
+| image:https://coveralls.io/repos/github/jprivet-dev/symfony-tdd/badge.svg?branch=dev["Coverage Status", link="https://coveralls.io/github/jprivet-dev/symfony-tdd?branch=dev"]
+| image:https://api.codacy.com/project/badge/Grade/d83935eebccc4610870a0b52039914f3?branch=dev["Codacy code quality", link="https://www.codacy.com/manual/jprivet-dev/symfony-tdd?utm_source=github.com&utm_medium=referral&utm_content=jprivet-dev/symfony-tdd&utm_campaign=Badge_Grade"]
+|===
+
+toc::[]
+
+== Présentation
+
+Ce repo est un terrain de jeu sur lequel je teste et valide des concepts de développement et de testing que je rencontre.
+
+(WIP)
+
+{BACK_TO_TOP}
+
+== Cloner et installer le projet
+
+(WIP)
+
+{BACK_TO_TOP}
+
+=== Activer tous les alias du projet avec `.bash_aliases`
+
+En chargeant le fichier des alias `.bash_aliases`, vous pouvez avoir un accès direct aux éléments de votre docker :
+
+```sh
+$ . .bash_aliases
+
+$ php --version
+PHP 7.2.22 (cli) (built: Sep  3 2019 08:57:25) ( NTS )
+Copyright (c) 1997-2018 The PHP Group
+Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
+    with Zend OPcache v7.2.22, Copyright (c) 1999-2018, by Zend Technologies
+
+$ sf --version
+Symfony 4.3.4 (env: dev, debug: true)
+
+$ composer --version
+Composer version 1.8.6 2019-06-11 15:03:05
+```
+
+{BACK_TO_TOP}
+
+== Principes autour des tests automatiques
+
+{BACK_TO_TOP}
+
+=== Pourquoi écrire des tests ?
+
+==== Remplacer vos `F5` par des tests automatiques
+
+Un des objectifs des tests automatiques est de *remplacer l'usage du `F5`* pour tester vos implémentations.
+
+IMPORTANT: Les tests doivent être écrits pendant l'implémentation, et *JAMAIS, JAMAIS, JAMAIS après*.
+
+Se poser la question "quoi et comment tester ?" doit *se faire à chaud*, durant les phases de réflexion de vos implémentations.
+
+Les tests automatiques ne sont pas là que pour vérifier les valeurs de sortie de vos méthodes, ils orientent aussi les implémentations :
+
+. Ils permettent d'appliquer plus tôt les principes SOLID
+. Ils permettent de repérer plus tôt les défauts de design de l'implémentation
+. Ils forcent à simplifier vos codes
+. Ils fournissent de la documentation
+
+Ecrire les tests après l'implémentation vous obligent à relancer une nouvelle phase de réflexion.
+
+Cela vous demandera un nouvel effort pour retrouver les raisons de vos choix, et mécaniquement vous mettrez globalement plus de temps à écrire les tests :
+ces tests seront forcément plus difficiles à adapter à votre implémentation, et il y a de grandes chances que vous soyez obligés d'apporter de nouvelles modifications à vos codes déjà écrits.
+
+*Ainsi la règle est simple : plus d'une heure sans tests, c'est que c'est déjà trop tard !*
+
+{BACK_TO_TOP}
+
+=== Comment écrire des tests ?
+
+(WIP)
+
+{BACK_TO_TOP}
+
+=== Que faut-il tester ?
+
+(WIP)
+
+{BACK_TO_TOP}
+
+=== Comment exécuter les tests de ce projet ?
+
+(WIP)
+
+{BACK_TO_TOP}
+
+==== Avec le fichier `Makefile` :
+
+```sh
+$ make tests
+```
+
+{BACK_TO_TOP}
+
+==== Avec le fichier d'alias `.bash_aliases` :
+
+```sh
+$ . .bash_aliases
+$ tests
+$ t
+```
+
+Avec les alias vous pouvez ajouter des paramètres à la commande :
+
+```sh
+$ t path/to/my/fileTest.php
+```
+{BACK_TO_TOP}
+
+==== Dans PHPStorm
+
+(WIP)
+
+{BACK_TO_TOP}
+
+=== Pourquoi écrire des tests est-il aussi long ?
+
+==== La gestion du temps dans le projet
+
+(WIP)
+
+{BACK_TO_TOP}
+
+==== Est-ce vraiment aussi long que cela en à l'air ?
+
+(WIP)
+
+{BACK_TO_TOP}
+
+== Guide général pour le développement et la qualité de code
+
+Qu'on se rassure, personne n'est parfait et n'importe quel développeur écrit du code "pas très clean" à un moment ou à un autre.
+Après tout, chaque développeur cherche à faire fonctionner ses applications... et parfois à n'importe quel prix !
+
+Pourquoi tendre vers une qualité de code ? Pour éviter au maximum le code legacy.
+
+Qu'est-ce qu'un code legacy ? Un code difficile à modifier et à maintenir, dont on a peu de connaissances fonctionnelles et techniques,
+dont on perd la compréhension.
+
+*Michael Feathers* fournit une définition dans son ouvrage *Working Effectively with Legacy Code* :
+_To me, legacy code is simply code without tests_.
+
+{BACK_TO_TOP}
+
+=== Bonnes pratiques de développement
+
+==== Les principes STUPID
+
+**Les principes STUPID** : reconnaître facilement les mauvaises pratiques pour mieux les corriger et les éviter dans les prochaines applications.
+
+|===
+| S | Singleton                 | Instance unique
+| T | Tight Coupling            | Couplage fort
+| U | Untestability             | Incapacité à tester le code
+| P | Premature Optimization    | Optimisations prématurées
+| I | Indescriptive Naming      | Nommage indéchiffrable
+| D | Duplication               | Duplications
+|===
+
+{BACK_TO_TOP}
+
+==== Les principes SOLID
+
+**Les principes SOLID** : cinq bonnes pratiques orientées objet à appliquer au code afin d'en simplifier la maintenance, la testabilité et les évolutions futures.
+
+|===
+| S | Single Responsibility Principle   | *Principe de responsabilité unique* : une classe, méthode ou fonction ne doit avoir qu'une seule responsabilité.
+| O | Open/Closed Principle             | *Principe ouvert / fermé* : une classe doit être ouverte à l'extension, mais fermée à la modification.
+| L | Liskov Substitution Principle     | *Principe de substitution de Liskov* : soit G, un sous-type de T, peut remplacer T sans modifier la cohérence du programme.
+| I | Interface Segregation Principle   | *Principe de ségrégation d'interfaces* : utiliser plusieurs interfaces spécifiques pour chaque client qu'une seule interface générale
+| D | Dependency Inversion Principle    | *Principe d'inversion de dépendance* : dépendre des abstractions et non des implémentations.
+|===
+
+{BACK_TO_TOP}
+
+== Configurer son PHPStorm (2018.2)
+
+=== Les modules indispensables
+
+==== Symfony Plugin
+
+https://plugins.jetbrains.com/plugin/7219-symfony-support
+
+Après installation, activer le plugin pour le projet en cours :
+
+. Aller dans *File > Settings > Languages & Frameworks > PHP > Symfony*
+. Cliquer sur *Enable Plugin for this Project (change need restart)*
+
+==== PHP Code Sniffer
+
+https://www.jetbrains.com/help/phpstorm/using-php-code-sniffer.html
+
+*PHP Code Sniffer* est déjà installé dans ce projet. Pour activer l'analyse du code :
+
+. Aller dans *File > Settings > Languages & Frameworks > PHP > Code Sniffer*
+. Dans le bloc *Development environment*, choisir un interpréteur dans la liste *Configuration*
+. Aller ensuite dans *File > Settings > Editor > Inspections*
+. Cocher la case devant *PHP > Quality tools > PHP Code Sniffer validation*
+
+==== Camel Case
+
+https://plugins.jetbrains.com/plugin/7160-camelcase/
+
+Il suffit d'installer le plugin. Vous pourrez ensuite switcher entre les différents types avec le raccourci `Sup` + `Alt` + `U`
+
+(WIP)
+
+{BACK_TO_TOP}
+
+=== *PHPUnit* : suivre la couverture de code *PHPStorm*
+
+==== Ressources
+
+. https://www.jetbrains.com/help/idea/docker.html
+. https://www.jetbrains.com/help/phpstorm/configuring-local-interpreter.html
+. https://www.jetbrains.com/help/phpstorm/configuring-remote-interpreters.html
+. https://www.jetbrains.com/help/phpstorm/using-phpunit-framework.html
+. https://blog.eleven-labs.com/fr/debug-run-phpunit-tests-using-docker-remote-interpreters-with-phpstorm/
+
+==== Configurer *Docker*
+
+Ajouter un nouveau *daemon* :
+
+. Aller dans *File > Settings > Build, Execution, Deployment > Docker*
+. Cliquer sur le bouton `+`
+. Le nouvel interpréteur *Docker* s'ajoute à la liste : on peut voir *Connect to Docker daemon with* configuré sur *Unix socket*, avec le message *Connection successful*
+
+Configurer *Docker* :
+
+. Aller dans *File > Settings > Build, Execution, Deployment > Docker > Tools*
+. Dans *Docker Machine executable* apparaît automatiquement *docker*, avec *19.03.2* à droite
+. Dans *Docker Compose executable* apparaît automatiquement */usr/local/bin/docker-compose*
+
+Configurer l'interpréteur *PHP* :
+
+. Aller dans *File > Settings > Languages & Frameworks > PHP*
+. A droite de *CLI Interpreter*, cliquer sur le bouton `...`
+. Dans le nouveau panneau *CLI Interpreters* qui s'affiche, cliquer sur le bouton `+`
+. Dans la fenêtre *Select CLI Interpreter*, choisir *From Docker, Vagrant, VM, ...*
+. Dans le nouveau panneau *Configure Remote PHP Interpreter*, cliquer sur *Docker*. Des données s'affichent automatiquement :
+.. *Server*: *Docker*
+.. *Image name*: *symfony-tdd_app:latest*
+.. *PHP interpreter path*: php
+. Dans le panneau *Configure Remote PHP Interpreter*, Cliquer sur le bouton `OK`
+. Dans le panneau *CLI Interpreters* *symfony-tdd_app:latest* s'ajoute à la liste
+. Cliquer sur le bouton `OK`
+. Dans le panneau *Settings* apparaît automatiquement *symfony-tdd_app:latest* comme *CLI interpreter* et *PHPStorm* renseigne le *Path mappings* et le *Docker container*
+. Cliquer sur le bouton `OK` pour valider le tout
+
+{BACK_TO_TOP}
+
+==== Configurer *PHPUnit*
+
+. Aller dans *File > Settings > Languages & Frameworks > PHP > Test Frameworks*
+. Cliquer sur le bouton `+`, et choisir *PHPUnit by Remote Interpreter*
+. Dans le panneau *PHPUnit by Remote Interpreter*, choisir *symfony-tdd_app:latest*
+. Cliquer sur le bouton `OK`
+. *Interpreter: symfony-tdd_app:latest* d'ajoute à la liste
+. Renseigner dans *Path to script*: */opt/project/vendor/bin/simple-phpunit*
+. En cliquant sur le bouton de raffraichissement, apparaîtra juste en dessous *PHPUnit version: 7.5.16*
+. Cocher *Default configuration file* et indiquer le chemin suivant : */opt/project/phpunit.xml.dist*
+. Cliquer sur le bouton `OK` pour valider le tout
+
+==== Bien activer *Prophesize*
+
+En  lançant votre test, vous pourriez avoir l'erreur suivante :
+
+```sh
+Error : Class 'Prophecy\Prophet' not found
+```
+
+Dans la documentation (https://symfony.com/doc/current/components/phpunit_bridge.html#modified-phpunit-script)
+il est indiqué qu'il faut renseigner la variable d'environnement `SYMFONY_PHPUNIT_REMOVE`.
+
+{BACK_TO_TOP}
+
+== Sujets traités
+
+=== Comment tester un classe abstraite ?
+
+(WIP)
+
+{BACK_TO_TOP}
+
+=== Comment créer et tester un validator ?
+
+(WIP)
+
+{BACK_TO_TOP}
+
+=== Comment créer et tester un customType ?
+
+(WIP)
+
+{BACK_TO_TOP}
+
+=== Ne plus injecter l'entityManager
+
+(WIP)
+
+{BACK_TO_TOP}
+
+== Tips
+
+=== Test fonctionnel : laisser PHPUnit intercepter les exceptions dans le terminal
+
+Voir https://symfony.com/doc/current/testing.html#reporting-exceptions :
+
+```php
+$client->catchExceptions(false);
+```
+
+== Ressources
+
+=== Bonnes pratiques de développement (SOLID & Cie)
+
+. https://event.afup.org/la-parole-est-aux-speakers-vladyslav-riabchenko/
+. https://speakerdeck.com/mykiwi/outils-pour-ameliorer-la-vie-des-developpeurs-symfony
+. https://williamdurand.fr/2013/07/30/from-stupid-to-solid-code/
+. https://afsy.fr/avent/2013/02-principes-stupid-solid-poo
+. http://fabien.potencier.org/symfony4-best-practices.html
+. https://fr.slideshare.net/RomainKuzniak/design-applicatif-avec-symfony-zoom-sur-la-clean-architecture-symfony-live
+. Reprendre le contrôle de son code legacy avec classe : https://www.youtube.com/watch?v=HndEmsMJ8ZI
+. https://afsy.fr/avent/2017/07-decoupler-form-et-votre-modele
+
+=== TDD & Tests
+
+. [Mémo] Forum PHP 2017 - Écrire des tests pour le long terme (Charles Desneuf) : https://gist.github.com/jprivet-dev/6d8e8f3a439936816726c5f36e146e4d
+. https://symfony.com/doc/3.4/testing.html
+. https://github.com/liip/LiipFunctionalTestBundle
+
+=== Composants pour Symfony
+
+. https://symfony.com/doc/3.4/components/dotenv.html
+. A la decouverte du Workflow - Gregoire Pineau - PHP Tour Montpellier 2018 : https://youtu.be/9-jQf7CL7X4
+
+=== Doctrine
+
+. http://ocramius.github.io/doctrine-best-practices
+. SymfonyLive Paris 2016 - André Tapia - Aller plus loin avec Doctrine2
+.. Vidéo : https://www.youtube.com/watch?v=X-Srb9b-8xE
+.. Mémo : https://gist.github.com/jprivet-dev/d0c9929378921f642703f2c96fbee0a3
+. SymfonyLive Paris 2018 - Ne soyez plus l’esclave de Doctrine - Grégoire Paris & Maxime Veber + https://www.youtube.com/watch?v=KJ3uCPqNdPE
+
+=== Makefile
+
+. https://blog.theodo.fr/2018/05/why-you-need-a-makefile-on-your-project/
+. https://github.com/mykiwi/symfony-bootstrapped/blob/master/Makefile
+. https://github.com/Elao/symfony-standard/blob/master/Makefile
+. https://github.com/Elao/tricot/blob/master/Makefile
+
+{BACK_TO_TOP}

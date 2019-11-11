@@ -141,7 +141,7 @@ PROJECT
   assets                         Project: Generate all assets (webpack Encore, ...)
   data                           Project: Install the data (db).
 
-  check                          Project: Launch of install, security, db validate & tests
+  check                          Project: Launch of install, composer, security, db validations & tests
   tests                          Project: Launch all tests.
   cc                             Project: Clear all caches.
 
@@ -153,6 +153,7 @@ COMPOSER
   composer.install.prod          Composer: Idem `composer.install` without dev elements.
   composer.update                Composer: Get the latest versions of the dependencies and update the composer.lock file.
   composer.licenses              Composer: List the name, version and license of every package installed.
+  composer.validate              Composer: Check if your composer.json is valid. | https://getcomposer.org/doc/03-cli.md#validate
 
 YARN
   yarn.install                   Yarn: Install all dependencies.

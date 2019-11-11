@@ -23,6 +23,8 @@ install:
 script:
   - docker-compose -v
   - docker-compose pull --ignore-pull-failures
+  - docker-compose build --pull
+  - docker-compose up -d
   - make install
   - curl http://localhost # Client
   - curl -k https://localhost # Client (HTTP/2)

@@ -30,7 +30,7 @@ data: db.create.force ## Project: Install the data (db).
 ##
 
 .PHONY: check
-check: install composer.validate symfony.security.check db.validate tests ## Project: Launch of install, composer, security, db validate & tests
+check: install composer.validate symfony.security.check db.validate tests ## Project: Launch of install, composer, security, db validations & tests
 
 .PHONY: tests
 tests: phpunit ## Project: Launch all tests.

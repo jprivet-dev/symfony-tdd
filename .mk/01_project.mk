@@ -35,6 +35,9 @@ check: install composer.validate symfony.security.check db.validate tests ## Pro
 .PHONY: tests
 tests: phpunit ## Project: Launch all tests.
 
+.PHONY: coverage
+coverage: phpunit.coverage phpunit.coverage.open ## Project: Generate & open all code coverage reports.
+
 .PHONY: cc
 cc: symfony.cc ## Project: Clear all caches.
 

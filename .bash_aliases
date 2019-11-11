@@ -30,6 +30,15 @@ alias ut="make unit-tests"
 alias ft="make functional-tests"
 
 alias chownfix="docker-compose run --rm app chown -R $(id -u):$(id -g) ."
+
+alias project-install="
+docker-compose up --remove-orphans -d;
+docker-compose exec app composer install --verbose;
+docker-compose exec app yarn install;
+docker-compose exec app php bin/console doctrine:database:drop --if-exists --force;
+docker-compose exec app php bin/console doctrine:database:create;
+docker-compose exec app php bin/console doctrine:schema:create;
+"
 ###< aliases
 
 echo -e '\033[1;42msymfony-tdd: aliases loaded\033[0m'

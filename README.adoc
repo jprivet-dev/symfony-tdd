@@ -439,8 +439,7 @@ correctement le *même test unitaire*.
 +
 Ce premier cas simple permet d'illustrer ce que permettent les tests automatiques : *garantir le code*.
 +
-Selon le développeur en charge de l'implémentation, de ses facilités, du temps qu'il lui ait imparti,
-des informations auxquelles il a accès...
+*Qu'importe la stratégie d'implémentation choisie* par le développeur (en fonction du contexte, de ses facilités, du temps qui lui ait imparti, ...),
 ce dernier peut garantir au client que son implémentation *répond bien aux besoins dans le scope testé*,
 et que la fonctionnalité *réagit bien dans les cas limites retenus*.
 

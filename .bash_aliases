@@ -16,7 +16,7 @@ alias ccp="symfony cache:clear --env=prod"
 
 alias tests="phpunit --stop-on-error --stop-on-failure --stop-on-warning"
 alias tests-no-stop="phpunit"
-alias tests-coverage='phpunit --coverage-html build/phpunit/coverage'
+alias tests-coverage="phpunit --coverage-html build/phpunit/coverage"
 alias tests-watch="phpunit-watch"
 alias open-coverage="gio open build/phpunit/coverage/index.html"
 
@@ -24,8 +24,11 @@ alias m="make"
 alias sf="symfony"
 alias t="tests"
 alias tnostop="tests-no-stop"
-alias tc='tests-coverage; open-coverage'
-alias tw='tests-watch'
+alias tc="
+tests-coverage;
+open-coverage;
+"
+alias tw="tests-watch"
 alias ut="make unit-tests"
 alias ft="make functional-tests"
 

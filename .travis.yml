@@ -25,6 +25,7 @@ script:
   - docker-compose pull --ignore-pull-failures
   - docker-compose build --pull
   - docker-compose up -d
+  - sleep 30
   - make install
   - curl http://localhost # Client
   - curl -k https://localhost # Client (HTTP/2)

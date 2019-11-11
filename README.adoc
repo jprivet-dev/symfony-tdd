@@ -147,6 +147,7 @@ PROJECT
 
   check                          Project: Launch of install, composer, security, db validations & tests
   tests                          Project: Launch all tests.
+  coverage                       Project: Generate & open all code coverage reports.
   cc                             Project: Clear all caches.
 
   clean                          Project: [PROMPT Y/n] Remove build, vendor & node_modules folders.
@@ -178,6 +179,8 @@ PHPUNIT
   phpunit                        PHPUnit: Launch all tests (unit, functional, ...).
   phpunit.coverage               PHPUnit: Generate code coverage report in HTML format.
   phpunit.coverage.clover        PHPUnit: Generate code clover style coverage report.
+  phpunit.coverage.open          PHPUnit: Open code coverage report.
+
   phpunit.unit                   PHPUnit: Launch unit tests.
   phpunit.unit.coverage          PHPUnit: Generate code coverage report in HTML format for unit tests.
   phpunit.functional             PHPUnit: Launch functional tests.

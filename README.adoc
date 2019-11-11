@@ -94,21 +94,25 @@ phpMyAdmin: http://localhost:8088
 
 [TIP]
 ====
-Si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible,
-utiliser à la place de `$ make install` les commandes suivantes :
+Des commandes `Makefile` sont à votre disposition (voir <<makefile>>).
+Cependant, si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible,
+exécutez à la place de `$ make install` l'alias suivant :
 
 ```sh
-$ docker-compose up --remove-orphans -d
-$ docker-compose exec app composer install --verbose
-$ docker-compose exec app yarn install
-$ docker-compose exec app php bin/console doctrine:database:create --if-not-exists
-$ docker-compose exec app php bin/console doctrine:schema:create
+$ . .bash_aliases
+symfony-tdd: aliases loaded
+
+$ project-install
 ```
+
+Pour plus d'informations, voir <<aliases>>.
 ====
 
 {BACK_TO_TOP}
 
 === Accéder au site
+
+A la fin de l'installation, vous pourrez avoir accès aux URLs suivantes :
 
 . Site web : https://localhost
 . API : https://localhost/api
@@ -116,7 +120,7 @@ $ docker-compose exec app php bin/console doctrine:schema:create
 
 {BACK_TO_TOP}
 
-== Le *Makefile* du projet
+== Le *Makefile* du projet [[makefile]]
 
 Si vous avez un outil du type https://www.gnu.org/software/make/[GNU Make] disponible sur votre poste,
 vous pouvez acceder à toutes les commandes du fichier {uri-rel-file-base}Makefile[] :
@@ -231,7 +235,7 @@ DOCKER
 
 {BACK_TO_TOP}
 
-== Les *alias* du projet
+== Les *alias* du projet [[aliases]]
 
 Le fichier {uri-rel-file-base}.bash_aliases[] propose quelques *raccourcis* (`php`, `composer`, `yarn`, `sf`, ...) :
 
@@ -267,6 +271,15 @@ alias ut="make unit-tests"
 alias ft="make functional-tests"
 
 alias chownfix="docker-compose run --rm app chown -R $(id -u):$(id -g) ."
+
+alias project-install="
+docker-compose up --remove-orphans -d;
+docker-compose exec app composer install --verbose;
+docker-compose exec app yarn install;
+docker-compose exec app php bin/console doctrine:database:drop --if-exists --force;
+docker-compose exec app php bin/console doctrine:database:create;
+docker-compose exec app php bin/console doctrine:schema:create;
+"
 ```
 // <<< block_aliases
 
@@ -276,7 +289,7 @@ Charger les *alias* du projet :
 $ . .bash_aliases
 ```
 
-IMPORTANT: Le fichier {uri-rel-file-base}.bash_aliases[] ne peut être chargé automatiquement à la commande `start` du {uri-rel-file-base}Makefile[] :(
+IMPORTANT: Le fichier {uri-rel-file-base}.bash_aliases[] ne peut être chargé automatiquement à la commande `start` du {uri-rel-file-base}Makefile[].
 
 {BACK_TO_TOP}
 
@@ -713,7 +726,6 @@ Au prochain `$ docker-compose up`, les éléments seront créés dans le nouveau
 {BACK_TO_TOP}
 
 == Autres ressources
-
 === Symfony
 
 * https://symfony.com/doc/current/best_practices.html#infrastructure-related-configuration

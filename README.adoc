@@ -671,7 +671,7 @@ Dans un premier temps, il est possible de *supprimer tout ce qui n'est plus util
 $ docker system prune --volumes
 ```
 
-TIP: Retrouvez des commandes de suppression `docker.xxx` dans le fichier {uri-rel-file-base}Makefile[] du projet.
+TIP: Retrouvez dans la documentation plus de commandes de suppression sur <<makefile>>.
 
 {BACK_TO_TOP}
 

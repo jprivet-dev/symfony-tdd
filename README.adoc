@@ -148,6 +148,7 @@ PROJECT
   check                          Project: Launch of install, composer, security, db validations & tests
   tests                          Project: Launch all tests.
   coverage                       Project: Generate & open all code coverage reports.
+  fixtures                       Project: Load all fixtures.
   cc                             Project: Clear all caches.
 
   clean                          Project: [PROMPT Y/n] Remove build, vendor & node_modules folders.
@@ -174,6 +175,7 @@ SYMFONY
   symfony.routes                 Symfony: Display current routes.
 
   symfony.security.check         Symfony: Check security of your dependencies. | https://github.com/sensiolabs/security-checker
+  symfony.fixtures.load          Symfony / AliceBundle: load fixtures.
 
 PHPUNIT
   phpunit                        PHPUnit: Launch all tests (unit, functional, ...).

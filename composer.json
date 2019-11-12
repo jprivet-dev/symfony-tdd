@@ -20,6 +20,7 @@
     "symfony/yaml": "4.3.*"
   },
   "require-dev": {
+    "hautelook/alice-bundle": "^2.5",
     "php-coveralls/php-coveralls": "^2.1",
     "phpmd/phpmd": "^2.7",
     "spatie/phpunit-watcher": "^1.12",

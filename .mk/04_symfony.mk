@@ -22,8 +22,6 @@ symfony.routes: ## Symfony: Display current routes.
 symfony.security.check: ## Symfony: Check security of your dependencies. | https://github.com/sensiolabs/security-checker
 	$(SYMFONY) security:check
 
-##
-
 .PHONY: symfony.fixtures.load
 symfony.fixtures.load: ## Symfony / AliceBundle: load fixtures
 	$(SYMFONY) hautelook:fixtures:load

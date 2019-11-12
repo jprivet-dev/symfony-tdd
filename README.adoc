@@ -430,7 +430,7 @@ $ make phpunit.functional.coverage
 
 {BACK_TO_TOP}
 
-=== [!] *Fibonacci* : 4 implémentations pour 1 seul test unitaire
+=== [x] *Fibonacci* : 4 implémentations, 1 seul test
 
 Principe::
 
@@ -450,12 +450,15 @@ Ressoures::
 . https://en.wikipedia.org/wiki/Fibonacci_number
 . http://www.codecodex.com/wiki/Calculate_the_Fibonacci_sequence#PHP
 
-Fichiers d'exemples::
+Fichiers::
 
 . {uri-rel-file-base}src/Util/Example/Fibonacci01.php[]
 . {uri-rel-file-base}src/Util/Example/Fibonacci02.php[]
 . {uri-rel-file-base}src/Util/Example/Fibonacci03.php[]
 . {uri-rel-file-base}src/Util/Example/Fibonacci04.php[]
+
+Tests::
+
 . {uri-rel-file-base}tests/Unit/Util/Example/FibonacciTest.php[]
 
 {BACK_TO_TOP}

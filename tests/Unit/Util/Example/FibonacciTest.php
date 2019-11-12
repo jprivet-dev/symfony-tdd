@@ -36,21 +36,19 @@ class FibonacciTest extends TestCase
 
     public function termProvider()
     {
-        return [
-            [0, 0],
-            [1, 1],
-            [2, 1],
-            [3, 2],
-            [4, 3],
-            [5, 5],
-            [6, 8],
-            [7, 13],
-            [8, 21],
-            [9, 34],
-            [10, 55],
-            [11, 89],
-            [12, 144],
-            //[20, 6765], // Can be used to detect an error with Fibonacci04
-        ];
+            yield [0, 0];
+            yield [1, 1];
+            yield [2, 1];
+            yield [3, 2];
+            yield [4, 3];
+            yield [5, 5];
+            yield [6, 8];
+            yield [7, 13];
+            yield [8, 21];
+            yield [9, 34];
+            yield [10, 55];
+            yield [11, 89];
+            yield [12, 144];
+            //yield [20, 6765]; // Can be used to detect an error with Fibonacci04
     }
 }

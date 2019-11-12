@@ -452,10 +452,10 @@ Ressoures::
 
 Fichiers d'exemples::
 
-. {uri-rel-file-base}src/Util/Fibonacci01Util.php[]
-. {uri-rel-file-base}src/Util/Fibonacci02Util.php[]
-. {uri-rel-file-base}src/Util/Fibonacci03Util.php[]
-. {uri-rel-file-base}src/Util/Fibonacci04Util.php[]
+. {uri-rel-file-base}src/Util/Fibonacci01.php[]
+. {uri-rel-file-base}src/Util/Fibonacci02.php[]
+. {uri-rel-file-base}src/Util/Fibonacci03.php[]
+. {uri-rel-file-base}src/Util/Fibonacci04.php[]
 . {uri-rel-file-base}tests/Unit/Util/FibonacciUtilTest.php[]
 
 {BACK_TO_TOP}

@@ -57,7 +57,7 @@ toc::[]
 
 Ce dépôt *Git*  fraîchement créé est un atelier où je concentre, teste et partage des cas pratiques rencontrés (projets clients, R&D, ...) autour des *tests automatiques*, du *TDD* (Test-Driven Development) et du framework *Symfony*.
 
-J'ai démarré cet atelier _dockerisé_ à partir du dépôt https://github.com/dunglas/symfony-docker de  https://dunglas.fr/[Kevin Dunglas].
+J'ai démarré cet atelier à partir du dépôt https://github.com/dunglas/symfony-docker de https://dunglas.fr/[Kevin Dunglas].
 
 {BACK_TO_TOP}
 

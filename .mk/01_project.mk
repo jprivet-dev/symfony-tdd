@@ -30,10 +30,13 @@ data: db.create.force ## Project: Install the data (db).
 ##
 
 .PHONY: check
-check: install symfony.security.check db.validate tests ## Project: Launch of install, security, db validate & tests
+check: install composer.validate symfony.security.check db.validate tests ## Project: Launch of install, composer, security, db validations & tests
 
 .PHONY: tests
 tests: phpunit ## Project: Launch all tests.
+
+.PHONY: coverage
+coverage: phpunit.coverage phpunit.coverage.open ## Project: Generate & open all code coverage reports.
 
 .PHONY: cc
 cc: symfony.cc ## Project: Clear all caches.

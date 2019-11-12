@@ -3,16 +3,16 @@
 namespace App\Tests\Unit\Util\Example;
 
 use App\Tests\TestCase;
-use App\Util\Example\AbstractClassExample;
+use App\Util\Example\AbstractClass;
 
-class AbstractClassExampleTest extends TestCase
+class AbstractClassTest extends TestCase
 {
     /**
      * @see https://phpunit.readthedocs.io/en/8.4/test-doubles.html#mocking-traits-and-abstract-classes
      */
     public function testConcreteMethodWithMockForAbstractClassMethod()
     {
-        $stub = $this->getMockForAbstractClass(AbstractClassExample::class);
+        $stub = $this->getMockForAbstractClass(AbstractClass::class);
 
         $stub
             ->expects($this->once())
@@ -27,7 +27,7 @@ class AbstractClassExampleTest extends TestCase
      */
     public function testConcreteMethodWithAnonymousClass()
     {
-        $class = new class() extends AbstractClassExample {
+        $class = new class() extends AbstractClass {
             protected function abstractMethod(): string
             {
                 return 'foo';
@@ -44,7 +44,7 @@ class AbstractClassExampleTest extends TestCase
     }
 }
 
-class Dummy extends AbstractClassExample
+class Dummy extends AbstractClass
 {
     protected function abstractMethod(): string
     {

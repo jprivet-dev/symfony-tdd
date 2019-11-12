@@ -57,7 +57,7 @@ toc::[]
 
 Ce dépôt *Git*  fraîchement créé est un atelier où je concentre, teste et partage des cas pratiques rencontrés (projets clients, R&D, ...) autour des *tests automatiques*, du *TDD* (Test-Driven Development) et du framework *Symfony*.
 
-J'ai démarré cet atelier _dockerisé_ à partir du dépôt https://github.com/dunglas/symfony-docker de  https://dunglas.fr/[Kevin Dunglas].
+J'ai démarré cet atelier à partir du dépôt https://github.com/dunglas/symfony-docker de https://dunglas.fr/[Kevin Dunglas].
 
 {BACK_TO_TOP}
 
@@ -94,21 +94,25 @@ phpMyAdmin: http://localhost:8088
 
 [TIP]
 ====
-Si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible,
-utiliser à la place de `$ make install` les commandes suivantes :
+Des commandes `Makefile` sont à votre disposition (voir <<makefile>>).
+Cependant, si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible,
+exécutez à la place de `$ make install` l'alias suivant :
 
 ```sh
-$ docker-compose up --remove-orphans -d
-$ docker-compose exec app composer install --verbose
-$ docker-compose exec app yarn install
-$ docker-compose exec app php bin/console doctrine:database:create --if-not-exists
-$ docker-compose exec app php bin/console doctrine:schema:create
+$ . .bash_aliases
+symfony-tdd: aliases loaded
+
+$ project-install
 ```
+
+Pour plus d'informations, voir <<aliases>>.
 ====
 
 {BACK_TO_TOP}
 
 === Accéder au site
+
+A la fin de l'installation, vous pourrez avoir accès aux URLs suivantes :
 
 . Site web : https://localhost
 . API : https://localhost/api
@@ -116,7 +120,7 @@ $ docker-compose exec app php bin/console doctrine:schema:create
 
 {BACK_TO_TOP}
 
-== Le *Makefile* du projet
+== Le *Makefile* du projet [[makefile]]
 
 Si vous avez un outil du type https://www.gnu.org/software/make/[GNU Make] disponible sur votre poste,
 vous pouvez acceder à toutes les commandes du fichier {uri-rel-file-base}Makefile[] :
@@ -141,8 +145,9 @@ PROJECT
   assets                         Project: Generate all assets (webpack Encore, ...)
   data                           Project: Install the data (db).
 
-  check                          Project: Launch of install, security, db validate & tests
+  check                          Project: Launch of install, composer, security, db validations & tests
   tests                          Project: Launch all tests.
+  coverage                       Project: Generate & open all code coverage reports.
   cc                             Project: Clear all caches.
 
   clean                          Project: [PROMPT Y/n] Remove build, vendor & node_modules folders.
@@ -153,6 +158,7 @@ COMPOSER
   composer.install.prod          Composer: Idem `composer.install` without dev elements.
   composer.update                Composer: Get the latest versions of the dependencies and update the composer.lock file.
   composer.licenses              Composer: List the name, version and license of every package installed.
+  composer.validate              Composer: Check if your composer.json is valid. | https://getcomposer.org/doc/03-cli.md#validate
 
 YARN
   yarn.install                   Yarn: Install all dependencies.
@@ -173,6 +179,8 @@ PHPUNIT
   phpunit                        PHPUnit: Launch all tests (unit, functional, ...).
   phpunit.coverage               PHPUnit: Generate code coverage report in HTML format.
   phpunit.coverage.clover        PHPUnit: Generate code clover style coverage report.
+  phpunit.coverage.open          PHPUnit: Open code coverage report.
+
   phpunit.unit                   PHPUnit: Launch unit tests.
   phpunit.unit.coverage          PHPUnit: Generate code coverage report in HTML format for unit tests.
   phpunit.functional             PHPUnit: Launch functional tests.
@@ -230,7 +238,7 @@ DOCKER
 
 {BACK_TO_TOP}
 
-== Les *alias* du projet
+== Les *alias* du projet [[aliases]]
 
 Le fichier {uri-rel-file-base}.bash_aliases[] propose quelques *raccourcis* (`php`, `composer`, `yarn`, `sf`, ...) :
 
@@ -252,7 +260,7 @@ alias ccp="symfony cache:clear --env=prod"
 
 alias tests="phpunit --stop-on-error --stop-on-failure --stop-on-warning"
 alias tests-no-stop="phpunit"
-alias tests-coverage='phpunit --coverage-html build/phpunit/coverage'
+alias tests-coverage="phpunit --coverage-html build/phpunit/coverage"
 alias tests-watch="phpunit-watch"
 alias open-coverage="gio open build/phpunit/coverage/index.html"
 
@@ -260,12 +268,24 @@ alias m="make"
 alias sf="symfony"
 alias t="tests"
 alias tnostop="tests-no-stop"
-alias tc='tests-coverage; open-coverage'
-alias tw='tests-watch'
+alias tc="
+tests-coverage;
+open-coverage;
+"
+alias tw="tests-watch"
 alias ut="make unit-tests"
 alias ft="make functional-tests"
 
 alias chownfix="docker-compose run --rm app chown -R $(id -u):$(id -g) ."
+
+alias project-install="
+docker-compose up --remove-orphans -d;
+docker-compose exec app composer install --verbose;
+docker-compose exec app yarn install;
+docker-compose exec app php bin/console doctrine:database:drop --if-exists --force;
+docker-compose exec app php bin/console doctrine:database:create;
+docker-compose exec app php bin/console doctrine:schema:create;
+"
 ```
 // <<< block_aliases
 
@@ -275,7 +295,7 @@ Charger les *alias* du projet :
 $ . .bash_aliases
 ```
 
-IMPORTANT: Le fichier {uri-rel-file-base}.bash_aliases[] ne peut être chargé automatiquement à la commande `start` du {uri-rel-file-base}Makefile[] :(
+IMPORTANT: Le fichier {uri-rel-file-base}.bash_aliases[] ne peut être chargé automatiquement à la commande `start` du {uri-rel-file-base}Makefile[].
 
 {BACK_TO_TOP}
 
@@ -410,7 +430,7 @@ $ make phpunit.functional.coverage
 
 {BACK_TO_TOP}
 
-=== [!] *Fibonacci* : 4 implémentations pour 1 seul test unitaire
+=== [x] *Fibonacci* : 4 implémentations, 1 seul test
 
 Principe::
 
@@ -419,8 +439,7 @@ correctement le *même test unitaire*.
 +
 Ce premier cas simple permet d'illustrer ce que permettent les tests automatiques : *garantir le code*.
 +
-Selon le développeur en charge de l'implémentation, de ses facilités, du temps qu'il lui ait imparti,
-des informations auxquelles il a accès...
+*Qu'importe la stratégie d'implémentation choisie* par le développeur (en fonction du contexte, de ses facilités, du temps qui lui ait imparti, ...),
 ce dernier peut garantir au client que son implémentation *répond bien aux besoins dans le scope testé*,
 et que la fonctionnalité *réagit bien dans les cas limites retenus*.
 
@@ -431,13 +450,16 @@ Ressoures::
 . https://en.wikipedia.org/wiki/Fibonacci_number
 . http://www.codecodex.com/wiki/Calculate_the_Fibonacci_sequence#PHP
 
-Fichiers d'exemples::
+Fichiers::
 
-. {uri-rel-file-base}src/Util/Fibonacci01Util.php[]
-. {uri-rel-file-base}src/Util/Fibonacci02Util.php[]
-. {uri-rel-file-base}src/Util/Fibonacci03Util.php[]
-. {uri-rel-file-base}src/Util/Fibonacci04Util.php[]
-. {uri-rel-file-base}tests/Unit/Util/FibonacciUtilTest.php[]
+. {uri-rel-file-base}src/Util/Example/Fibonacci01.php[]
+. {uri-rel-file-base}src/Util/Example/Fibonacci02.php[]
+. {uri-rel-file-base}src/Util/Example/Fibonacci03.php[]
+. {uri-rel-file-base}src/Util/Example/Fibonacci04.php[]
+
+Tests::
+
+. {uri-rel-file-base}tests/Unit/Util/Example/FibonacciTest.php[]
 
 {BACK_TO_TOP}
 
@@ -452,9 +474,12 @@ Ressources::
 
 . https://matthiasnoback.nl/2014/05/inject-a-repository-instead-of-an-entity-manager/
 
-Fichiers d'exemples::
+Fichiers::
 
 . {uri-rel-file-base}src/Repository/AbstractRepository.php[]
+
+Tests::
+
 . {uri-rel-file-base}tests/Unit/Repository/AbstractRepositoryTest.php[]
 
 {BACK_TO_TOP}
@@ -474,10 +499,13 @@ Ressources::
 . https://phpunit.readthedocs.io/en/8.4/test-doubles.html#mocking-traits-and-abstract-classes
 . https://mnapoli.fr/anonymous-classes-in-tests/
 
-Fichiers d'exemples::
+Fichiers::
 
-. {uri-rel-file-base}src/Util/Example/AbstractClassExample.php[]
-. {uri-rel-file-base}tests/Unit/Util/Example/AbstractClassExampleTest.php[]
+. {uri-rel-file-base}src/Util/Example/AbstractClass.php[]
+
+Tests::
+
+. {uri-rel-file-base}tests/Unit/Util/Example/AbstractClassTest.php[]
 
 {BACK_TO_TOP}
 
@@ -494,10 +522,13 @@ Ressources::
 . https://github.com/symfony/validator/blob/master/Test/ConstraintValidatorTestCase.php
 . https://github.com/symfony/validator/blob/master/Tests/Constraints/EmailValidatorTest.php
 
-Fichiers d'exemples::
+Fichiers::
 
 . {uri-rel-file-base}src/Validator/Constraints/Reference.php[]
 . {uri-rel-file-base}src/Validator/Constraints/ReferenceValidator.php[]
+
+Tests::
+
 . {uri-rel-file-base}tests/Unit/Validator/Constraints/ReferenceValidatorTest.php[]
 
 {BACK_TO_TOP}
@@ -521,7 +552,7 @@ Ressources::
 
 . https://symfony.com/doc/current/best_practices.html
 
-Fichiers d'exemples::
+Tests::
 
 . {uri-rel-file-base}tests/Functional/SmokeTest.php[]
 
@@ -583,9 +614,12 @@ Ressources::
 . https://symfony.com/blog/introducing-symfony-panther-a-browser-testing-and-web-scrapping-library-for-php
 . https://github.com/symfony/panther
 
-Fichiers d'exemples::
+Fichiers::
 
 . {uri-rel-file-base}src/Controller/NewsController.php[]
+
+Tests::
+
 . {uri-rel-file-base}tests/Functional/NewsControllerTest.php[]
 
 Autres informations::
@@ -637,7 +671,7 @@ Dans un premier temps, il est possible de *supprimer tout ce qui n'est plus util
 $ docker system prune --volumes
 ```
 
-TIP: Retrouvez des commandes de suppression `docker.xxx` dans le fichier {uri-rel-file-base}Makefile[] du projet.
+TIP: Retrouvez dans la documentation plus de commandes de suppression sur <<makefile>>.
 
 {BACK_TO_TOP}
 
@@ -712,7 +746,6 @@ Au prochain `$ docker-compose up`, les éléments seront créés dans le nouveau
 {BACK_TO_TOP}
 
 == Autres ressources
-
 === Symfony
 
 * https://symfony.com/doc/current/best_practices.html#infrastructure-related-configuration

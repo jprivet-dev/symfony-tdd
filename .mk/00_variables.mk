@@ -3,6 +3,7 @@ GROUP_ID = $(shell id -g)
 
 PROJECT_BUILD = build
 PROJECT_SRC = src
+PHPUNIT_COVERAGE = $(PROJECT_BUILD)/phpunit/coverage
 
 URL_WEBSITE = http://localhost
 URL_API = $(URL_WEBSITE)/api

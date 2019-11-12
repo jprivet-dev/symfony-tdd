@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Util;
+namespace App\Util\Example;
 
-class Fibonacci04Util implements FibonacciUtilInterface
+class Fibonacci04 implements FibonacciInterface
 {
     /**
      * {@inheritdoc}

@@ -2,28 +2,49 @@
 
 namespace App\Repository;
 
-class NewsRepository
+use App\Entity\News;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
+
+/**
+ * @method News|null find($id, $lockMode = null, $lockVersion = null)
+ * @method News|null findOneBy(array $criteria, array $orderBy = null)
+ * @method News[]    findAll()
+ * @method News[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ */
+class NewsRepository extends ServiceEntityRepository
 {
-    private const NEWS = [
-        'week-601' => [
-            'slug' => 'week-601',
-            'title' => 'A week of symfony #601 (2-8 July 2018)',
-            'body' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
-        ],
-        'symfony-live-usa-2018' => [
-            'slug' => 'symfony-live-usa-2018',
-            'title' => 'Join us at SymfonyLive USA 2018!',
-            'body' => 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.'
-        ],
-    ];
-
-    public function findAll(): iterable
+    public function __construct(ManagerRegistry $registry)
     {
-        return array_values(self::NEWS);
+        parent::__construct($registry, News::class);
     }
 
-    public function findOneBySlug(string $slug): ?array
+    // /**
+    //  * @return News[] Returns an array of News objects
+    //  */
+    /*
+    public function findByExampleField($value)
     {
-        return self::NEWS[$slug] ?? null;
+        return $this->createQueryBuilder('n')
+            ->andWhere('n.exampleField = :val')
+            ->setParameter('val', $value)
+            ->orderBy('n.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
     }
+    */
+
+    /*
+    public function findOneBySomeField($value): ?News
+    {
+        return $this->createQueryBuilder('n')
+            ->andWhere('n.exampleField = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+    */
 }

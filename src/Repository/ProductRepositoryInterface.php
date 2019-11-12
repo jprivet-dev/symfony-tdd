@@ -2,8 +2,6 @@
 
 namespace App\Repository;
 
-use Doctrine\Common\Persistence\ObjectRepository;
-
-interface ProductRepositoryInterface extends ObjectRepository
+interface ProductRepositoryInterface extends RepositoryInterface
 {
 }

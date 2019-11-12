@@ -39,7 +39,7 @@ tests: phpunit ## Project: Launch all tests.
 coverage: phpunit.coverage phpunit.coverage.open ## Project: Generate & open all code coverage reports.
 
 .PHONY: fixtures
-fixtures: symfony.fixtures.load ## Project: Load all fixtures.
+fixtures: alice.fixtures.load ## Project: Load all fixtures.
 
 .PHONY: cc
 cc: symfony.cc ## Project: Clear all caches.

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Util;
+namespace App\Util\Example;
 
-interface FibonacciUtilInterface
+interface FibonacciInterface
 {
     /**
      * Returns the rank term `n` from the Fibonacci sequence.

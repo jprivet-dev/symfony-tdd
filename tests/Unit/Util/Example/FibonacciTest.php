@@ -3,10 +3,10 @@
 namespace App\Tests\Unit\Util\Example;
 
 use App\Tests\TestCase;
-use App\Util\Fibonacci01;
-use App\Util\Fibonacci02;
-use App\Util\Fibonacci03;
-use App\Util\Fibonacci04;
+use App\Util\Example\Fibonacci01;
+use App\Util\Example\Fibonacci02;
+use App\Util\Example\Fibonacci03;
+use App\Util\Example\Fibonacci04;
 
 class FibonacciTest extends TestCase
 {

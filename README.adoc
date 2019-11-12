@@ -175,7 +175,9 @@ SYMFONY
   symfony.routes                 Symfony: Display current routes.
 
   symfony.security.check         Symfony: Check security of your dependencies. | https://github.com/sensiolabs/security-checker
-  symfony.fixtures.load          Symfony / AliceBundle: load fixtures.
+
+ALICE BUNDLE
+  alice.fixtures.load            AliceBundle: load fixtures.
 
 PHPUNIT
   phpunit                        PHPUnit: Launch all tests (unit, functional, ...).

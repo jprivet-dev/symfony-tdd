@@ -495,8 +495,8 @@ Ressources::
 
 Fichiers d'exemples::
 
-. {uri-rel-file-base}src/Util/Example/AbstractClassExample.php[]
-. {uri-rel-file-base}tests/Unit/Util/Example/AbstractClassExampleTest.php[]
+. {uri-rel-file-base}src/Util/Example/AbstractClass.php[]
+. {uri-rel-file-base}tests/Unit/Util/Example/AbstractClassTest.php[]
 
 {BACK_TO_TOP}
 

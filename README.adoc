@@ -146,7 +146,7 @@ PROJECT
   data                           Project: Install the data (db).
   fixtures                       Project: Load all fixtures.
 
-  check                          Project: Launch of install / PHP_CodeSniffer, Composer, Security and DB validations / Tests
+  check                          Project: Launch of install / Composer, Security and DB validations / Tests
   tests                          Project: Launch all tests.
   coverage                       Project: Generate & open all code coverage reports.
 

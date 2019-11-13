@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function update_readme_update_makefile_help() {
+function util_readme_update_makefile() {
   readme_file='README.adoc'
   readme_block_start='\/\/ >>> block_makefile'
   readme_block_end='\/\/ <<< block_makefile'
@@ -10,7 +10,8 @@ function update_readme_update_makefile_help() {
 
   sed -i -r "/^$readme_block_start/,/^$readme_block_end/c\\$readme_block_start\n$block_code\n$readme_block_end" $readme_file
 
-  makehelp="$(make help)"
+  # -s: Suppress makefile messages.
+  makehelp="$(make -s help)"
   # Remove colors | https://stackoverflow.com/questions/17998978/removing-colors-from-output
   makehelp=$(echo "${makehelp}" | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g")
   sed -i "/$target/r"<(echo "${makehelp}") $readme_file
@@ -20,7 +21,7 @@ function update_readme_update_makefile_help() {
   echo -e '\033[1;42mReadme.adoc: makefile help updated!\033[0m'
 }
 
-function update_readme_update_aliases() {
+function util_readme_update_aliases() {
   aliases_file='.bash_aliases'
   aliases_block_start='###> aliases'
   aliases_block_end='###< aliases'
@@ -43,5 +44,5 @@ function update_readme_update_aliases() {
   echo -e '\033[1;42mReadme.adoc: aliases updated!\033[0m'
 }
 
-update_readme_update_makefile_help
-update_readme_update_aliases
+util_readme_update_makefile
+util_readme_update_aliases

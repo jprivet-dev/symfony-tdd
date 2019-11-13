@@ -1,11 +1,11 @@
 <template>
     <div>
-        <ol reversed v-if="comments.length">
+        <ol id="comments-list" reversed v-if="comments.length">
             <li v-for="comment in comments" :key="comment['@id']">{{ comment.body }}</li>
         </ol>
         <p v-else>No comments yet 🙁</p>
 
-        <form id="post-comment" @submit.prevent="onSubmit">
+        <form id="new-comment-form" @submit.prevent="onSubmit">
             <textarea
                     v-model="newComment"
                     name="new-comment"

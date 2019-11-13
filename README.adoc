@@ -146,7 +146,7 @@ PROJECT
   data                           Project: Install the data (db).
   fixtures                       Project: Load all fixtures.
 
-  check                          Project: Launch of install, composer, security, db validations & tests
+  check                          Project: Launch of install / PHP_CodeSniffer, Composer, Security and DB validations / Tests
   tests                          Project: Launch all tests.
   coverage                       Project: Generate & open all code coverage reports.
 
@@ -245,7 +245,7 @@ UTIL
 
 MAKEFILE
   help                           Makefile: Print self-documented Makefile.
-  list                           Makefile: List of all included files.
+  list                           Makefile: List all included files.
 ```
 // <<< block_makefile
 

@@ -4,7 +4,7 @@
 start: docker.start ready ## Project: Start the current project.
 
 .PHONY: start.one
-start.one: docker.start.one ready ## Project: Stop all containers, start the current project.
+start.one: docker.start.one ready ## Project: Stop all containers & start the current project.
 
 .PHONY: stop
 stop: docker.stop ## Project: Stop the current project.
@@ -27,6 +27,9 @@ assets: yarn.encore.compile ## Project: Generate all assets (webpack Encore, ...
 .PHONY: data
 data: db.create.force ## Project: Install the data (db).
 
+.PHONY: fixtures
+fixtures: alice.fixtures.load ## Project: Load all fixtures.
+
 ##
 
 .PHONY: check
@@ -38,13 +41,10 @@ tests: phpunit ## Project: Launch all tests.
 .PHONY: coverage
 coverage: phpunit.coverage phpunit.coverage.open ## Project: Generate & open all code coverage reports.
 
-.PHONY: fixtures
-fixtures: alice.fixtures.load ## Project: Load all fixtures.
+##
 
 .PHONY: cc
 cc: symfony.cc ## Project: Clear all caches.
-
-##
 
 .PHONY: clean
 clean: ## Project: [PROMPT Y/n] Remove build, vendor & node_modules folders.
@@ -59,10 +59,6 @@ clean: ## Project: [PROMPT Y/n] Remove build, vendor & node_modules folders.
 		echo -e "\033[1;43mAction cancelled\033[0m"; \
 		exit 1; \
 	fi; \
-
-.PHONY: chown.fix
-chown.fix: ## Project: Editing permissions on Linux. | https://github.com/dunglas/symfony-docker#editing-permissions-on-linux
-	docker-compose run --rm $(SERVICE_APP) chown -R $$(id -u):$$(id -g) .
 
 #
 # "PRIVATE"

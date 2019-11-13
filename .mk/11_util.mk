@@ -1,5 +1,9 @@
 ## UTIL
 
+.PHONY: util.chown.fix
+util.chown.fix: ## Util (Permissions): Editing permissions on Linux. | https://github.com/dunglas/symfony-docker#editing-permissions-on-linux
+	docker-compose run --rm $(SERVICE_APP) chown -R $$(id -u):$$(id -g) .
+
 .PHONY: util.readme.update
 util.readme.update: .mk/bin/util-readme-update ## Util (Readme.adoc): Retrieve and insert the latest makefile commands & aliases in the Readme.adoc.
 	. .mk/bin/util-readme-update

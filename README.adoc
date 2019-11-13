@@ -237,6 +237,9 @@ DOCKER
   docker.ip.all                  Docker: List all containers ip.
   docker.networks                Docker: list networks. | https://docs.docker.com/engine/reference/commandline/network/
   docker.logs                    Docker: Show logs.
+
+IDE
+  ide.phpstorm.templates         PHPStorm: Copy all templates of project in fileTemplates folder of PHPStorm. | https://www.jetbrains.com/help/phpstorm/using-file-and-code-templates.html
 ```
 // <<< block_makefile
 

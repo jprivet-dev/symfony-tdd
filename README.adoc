@@ -136,7 +136,7 @@ Liste des commandes disponibles :
 
 PROJECT
   start                          Project: Start the current project.
-  start.one                      Project: Stop all containers, start the current project.
+  start.one                      Project: Stop all containers & start the current project.
   stop                           Project: Stop the current project.
   sh                             Project: app sh access.
 
@@ -144,15 +144,14 @@ PROJECT
   dependencies                   Project: Install the dependencies (only if there have been changes).
   assets                         Project: Generate all assets (webpack Encore, ...)
   data                           Project: Install the data (db).
+  fixtures                       Project: Load all fixtures.
 
   check                          Project: Launch of install, composer, security, db validations & tests
   tests                          Project: Launch all tests.
   coverage                       Project: Generate & open all code coverage reports.
-  fixtures                       Project: Load all fixtures.
-  cc                             Project: Clear all caches.
 
+  cc                             Project: Clear all caches.
   clean                          Project: [PROMPT Y/n] Remove build, vendor & node_modules folders.
-  chown.fix                      Project: Editing permissions on Linux. | https://github.com/dunglas/symfony-docker#editing-permissions-on-linux
 
 COMPOSER
   composer.install               Composer: Read the composer.json/composer.lock file from the current directory, resolve the dependencies, and install them into vendor.
@@ -239,9 +238,14 @@ DOCKER
   docker.logs                    Docker: Show logs.
 
 UTIL
+  util.chown.fix                 Util (Permissions): Editing permissions on Linux. | https://github.com/dunglas/symfony-docker#editing-permissions-on-linux
   util.readme.update             Util (Readme.adoc): Retrieve and insert the latest makefile commands & aliases in the Readme.adoc.
   util.php.strict                Util (PHP): Insert `<?php declare(strict_types=1);` instead of `<?php` in all PHP files in src/ & tests/ folders.
   util.ide.phpstorm.templates    Util (PHPStorm): Copy templates from .ide/PHPStorm/fileTemplates folder in .idea/fileTemplates folder. | https://www.jetbrains.com/help/phpstorm/using-file-and-code-templates.html
+
+MAKEFILE
+  help                           Makefile: Print self-documented Makefile.
+  list                           Makefile: List of all included files.
 ```
 // <<< block_makefile
 

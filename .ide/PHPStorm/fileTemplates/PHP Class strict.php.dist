@@ -5,5 +5,4 @@ namespace ${NAMESPACE};
 #end
 
 class ${NAME} {
-
 }

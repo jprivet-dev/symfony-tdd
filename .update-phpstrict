@@ -3,9 +3,7 @@
 function udpate_php_strict_types() {
   find='^<\?php\s*$'
   replace='<\?php declare\(strict_types\=1\);'
-
-  find src -type f -name '*.php' -exec sed -i -r "s/${find}/${replace}/g" {} \;
-  find tests -type f -name '*.php' -exec sed -i -r "s/${find}/${replace}/g" {} \;
+  find src tests -type f -name '*.php' -exec sed -i -r "s/${find}/${replace}/g" {} \;
 
   echo -e '\033[1;42mUse declare(strict_types=1) in all PHP files (src/ & tests/)!\033[0m'
 }

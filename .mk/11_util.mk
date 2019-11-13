@@ -9,5 +9,5 @@ util.php.strict: .mk/bin/util-php-strict ## Util (PHP): Insert `<?php declare(st
 	. .mk/bin/util-php-strict
 
 .PHONY: util.ide.phpstorm.templates
-util.ide.phpstorm.templates: .idea ## Util (PHPStorm): Copy all templates of project in fileTemplates/ folder of PHPStorm. | https://www.jetbrains.com/help/phpstorm/using-file-and-code-templates.html
+util.ide.phpstorm.templates: .idea ## Util (PHPStorm): Copy templates from .ide/PHPStorm/fileTemplates folder in .idea/fileTemplates folder. | https://www.jetbrains.com/help/phpstorm/using-file-and-code-templates.html
 	cp -R .ide/PHPStorm/fileTemplates/. .idea/fileTemplates/

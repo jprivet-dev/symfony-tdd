@@ -25,5 +25,5 @@ help: ## Makefile: Print self-documented Makefile.
 		}'
 
 .PHONY: list
-list: $(sort $(wildcard $(MAKEFILES))) ## Makefile: List of all included files.
+list: $(sort $(wildcard $(MAKEFILES))) ## Makefile: List all included files.
 	@printf '%s\n' $^

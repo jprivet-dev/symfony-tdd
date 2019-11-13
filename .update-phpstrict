@@ -6,6 +6,8 @@ function udpate_php_strict_types() {
 
   find src -type f -name '*.php' -exec sed -i -r "s/${find}/${replace}/g" {} \;
   find tests -type f -name '*.php' -exec sed -i -r "s/${find}/${replace}/g" {} \;
+
+  echo -e '\033[1;42mUse declare(strict_types=1) in all PHP files (src/ & tests/)!\033[0m'
 }
 
 udpate_php_strict_types

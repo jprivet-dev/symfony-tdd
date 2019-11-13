@@ -56,7 +56,7 @@
             }
         },
         created() {
-            console.log('CommentSystem created!');
+            console.log('CommentsComponent created!');
             this.fetchComments();
         }
     }

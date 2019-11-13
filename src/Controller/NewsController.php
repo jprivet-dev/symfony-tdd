@@ -7,6 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/news")
+ */
 class NewsController extends AbstractController
 {
     private $newsRepository;
@@ -17,7 +20,7 @@ class NewsController extends AbstractController
     }
 
     /**
-     * @Route("/news", name="news_index")
+     * @Route("/", name="news_index")
      */
     public function index(): Response
     {
@@ -27,7 +30,7 @@ class NewsController extends AbstractController
     }
 
     /**
-     * @Route("/news/{slug}", name="news_item")
+     * @Route("/{slug}", name="news_item")
      */
     public function item(string $slug): Response
     {

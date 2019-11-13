@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function sftdd_readme_update_makefile_help() {
+function update_readme_update_makefile_help() {
   readme_file='README.adoc'
   readme_block_start='\/\/ >>> block_makefile'
   readme_block_end='\/\/ <<< block_makefile'
@@ -20,7 +20,7 @@ function sftdd_readme_update_makefile_help() {
   echo -e '\033[1;42mReadme.adoc: makefile help updated!\033[0m'
 }
 
-function sftdd_readme_update_aliases() {
+function update_readme_update_aliases() {
   aliases_file='.bash_aliases'
   aliases_block_start='###> aliases'
   aliases_block_end='###< aliases'
@@ -43,5 +43,5 @@ function sftdd_readme_update_aliases() {
   echo -e '\033[1;42mReadme.adoc: aliases updated!\033[0m'
 }
 
-sftdd_readme_update_makefile_help
-sftdd_readme_update_aliases
+update_readme_update_makefile_help
+update_readme_update_aliases

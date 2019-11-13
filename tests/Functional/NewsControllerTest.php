@@ -12,6 +12,7 @@ class NewsControllerTest extends WebTestCase
     const NEWS_SYMFONY_LIVE_URL = self::NEWS_URL . '/' . self::NEWS_SYMFONY_LIVE_SLUG;
     const NEWS_SYMFONY_LIVE_TITLE = 'Join us at SymfonyLive USA 2018!';
     const NEWS_COUNT = 2;
+    const NEWS_TITLE_SELECTOR = 'h1';
 
     const COMMENTS_LIST_SELECTOR = '#comments-list';
     const NEW_COMMENT_FORM_SELECTOR = '#new-comment-form';
@@ -23,13 +24,13 @@ class NewsControllerTest extends WebTestCase
         $client = static::createPantherClient();
         $crawler = $client->request('GET', self::NEWS_URL);
 
-        $this->assertCount(self::NEWS_COUNT, $crawler->filter('h1'));
+        $this->assertCount(self::NEWS_COUNT, $crawler->filter(self::NEWS_TITLE_SELECTOR));
         $this->assertSame([self::NEWS_WEEK_601_SLUG, self::NEWS_SYMFONY_LIVE_SLUG], $crawler->filter('article')->extract('id'));
 
         $link = $crawler->selectLink(self::NEWS_SYMFONY_LIVE_TITLE)->link();
         $crawler = $client->click($link);
 
-        $this->assertSame(self::NEWS_SYMFONY_LIVE_TITLE, $crawler->filter('h1')->text());
+        $this->assertSame(self::NEWS_SYMFONY_LIVE_TITLE, $crawler->filter(self::NEWS_TITLE_SELECTOR)->text());
     }
 
     public function testComments()

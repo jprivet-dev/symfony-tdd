@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+function udpate_php_strict_types() {
+  find='^<\?php\s*$'
+  replace='<\?php declare\(strict_types\=1\);'
+
+  find src -type f -name '*.php' -exec sed -i -r "s/${find}/${replace}/g" {} \;
+  find tests -type f -name '*.php' -exec sed -i -r "s/${find}/${replace}/g" {} \;
+}
+
+udpate_php_strict_types

@@ -13,5 +13,7 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('build/js/comments.js') }}"></script>
+    {{ parent() }}
+
+    {{ encore_entry_script_tags('js/comments') }}
 {% endblock %}

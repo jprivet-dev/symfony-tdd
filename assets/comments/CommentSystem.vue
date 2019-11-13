@@ -3,11 +3,13 @@
         <ol reversed v-if="comments.length">
             <li v-for="comment in comments" :key="comment['@id']">{{ comment.body }}</li>
         </ol>
-
         <p v-else>No comments yet 🙁</p>
 
         <form id="post-comment" @submit.prevent="onSubmit">
-            <textarea name="new-comment" v-model="newComment" placeholder="Your opinion matters! Send us your comment.">
+            <textarea
+                    v-model="newComment"
+                    name="new-comment"
+                    placeholder="Your opinion matters! Send us your comment.">
             </textarea>
             <input type="submit" :disabled="!newComment">
         </form>
@@ -22,13 +24,13 @@
                 required: true
             }
         },
+        data() {
+            return {
+                comments: [],
+                newComment: ''
+            };
+        },
         methods: {
-            data() {
-                return {
-                    comments: [],
-                    newComment: '',
-                };
-            },
             fetchComments() {
                 fetch(`/api/comments?news=${encodeURIComponent(this.news)}`)
                     .then((response) => response.json())

@@ -3,7 +3,6 @@
 
 namespace App\Params;
 
-
 class ParamsRoutes
 {
     const HELLO = 'hello';

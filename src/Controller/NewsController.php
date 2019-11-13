@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Repository\NewsRepository;
+use App\Service\NewsServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,32 +12,33 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class NewsController extends AbstractController
 {
-    private $newsRepository;
+    private $newsService;
 
-    public function __construct(NewsRepository $newsRepository)
+    public function __construct(NewsServiceInterface $newsService)
     {
-        $this->newsRepository = $newsRepository;
+        $this->newsService = $newsService;
     }
 
     /**
      * @Route("/", name="news_index")
+     * @return Response
      */
     public function index(): Response
     {
         return $this->render('news/news-index.html.twig', [
-            'collection' => $this->newsRepository->findAll(),
+            'collection' => $this->newsService->collection(),
         ]);
     }
 
     /**
      * @Route("/{slug}", name="news_item")
+     * @param string $slug
+     * @return Response
      */
     public function item(string $slug): Response
     {
-        if (null === $news = $this->newsRepository->findOneBySlug($slug)) {
-            throw $this->createNotFoundException();
-        }
-
-        return $this->render('news/news-item.html.twig', ['item' => $news]);
+        return $this->render('news/news-item.html.twig', [
+            'item' => $this->newsService->item($slug)
+        ]);
     }
 }

@@ -238,8 +238,10 @@ DOCKER
   docker.networks                Docker: list networks. | https://docs.docker.com/engine/reference/commandline/network/
   docker.logs                    Docker: Show logs.
 
-IDE
-  ide.phpstorm.templates         PHPStorm: Copy all templates of project in fileTemplates folder of PHPStorm. | https://www.jetbrains.com/help/phpstorm/using-file-and-code-templates.html
+UTIL
+  util.readme.update             Util (Readme.adoc): Retrieve and insert the latest makefile commands & aliases in the Readme.adoc.
+  util.php.strict                Util (PHP): Insert `<?php declare(strict_types=1);` instead of `<?php` in all PHP files in src/ & tests/ folders.
+  util.ide.phpstorm.templates    Util (PHPStorm): Copy templates from .ide/PHPStorm/fileTemplates folder in .idea/fileTemplates folder. | https://www.jetbrains.com/help/phpstorm/using-file-and-code-templates.html
 ```
 // <<< block_makefile
 

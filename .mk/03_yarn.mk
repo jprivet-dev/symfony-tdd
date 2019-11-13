@@ -18,7 +18,7 @@ yarn.encore.compile: ## Webpack Encore: Compile assets once.
 
 .PHONY: yarn.encore.watch
 yarn.encore.watch: ## Webpack Encore: Recompile assets automatically when files change.
-	$(YARN) encore dev --watch --watch-poll=300
+	$(YARN) encore dev --watch
 
 .PHONY: yarn.encore.deploy
 yarn.encore.deploy: ## Webpack Encore: On deploy, create a production build.

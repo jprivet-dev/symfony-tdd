@@ -33,7 +33,7 @@ fixtures: alice.fixtures.load ## Project: Load all fixtures.
 ##
 
 .PHONY: check
-check: install composer.validate symfony.security.check db.validate tests ## Project: Launch of install, composer, security, db validations & tests
+check: install qa.codesniffer composer.validate symfony.security.check db.validate tests ## Project: Launch of install / PHP_CodeSniffer, Composer, Security and DB validations / Tests
 
 .PHONY: tests
 tests: phpunit ## Project: Launch all tests.

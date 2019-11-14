@@ -30,6 +30,6 @@ class NewsService implements NewsServiceInterface
      */
     public function item(string $slug): News
     {
-        return $this->newsRepository->findOneBySlug($slug);
+        return $this->newsRepository->findOneBy(['slug' => $slug]);
     }
 }

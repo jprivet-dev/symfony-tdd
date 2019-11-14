@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Tests\Shared\Models\Repository;
+namespace App\Tests\Shared\Dummy\Repository;
 
 use App\Repository\AbstractRepository;
 

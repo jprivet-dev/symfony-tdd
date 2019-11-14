@@ -15,6 +15,7 @@ class NewsControllerTest extends WebTestCase
     const NEWS_TITLE_SELECTOR = 'h1';
 
     const COMMENTS_LIST_SELECTOR = '#comments-list';
+    const COMMENTS_LIST_FIRST_CHILD_SELECTOR = '#comments-list li:first-child';
     const NEW_COMMENT_FORM_SELECTOR = '#new-comment-form';
     const NEW_COMMENT_TEXTAREA_NAME = 'new-comment';
     const NEW_COMMENT_TITLE = 'Symfony is so cool!';
@@ -57,6 +58,6 @@ class NewsControllerTest extends WebTestCase
 
         // Assert
         $this->assertSame(self::$baseUri . self::NEWS_SYMFONY_LIVE_URL, $client->getCurrentURL()); // Assert we're still on the same page
-        $this->assertSame(self::NEW_COMMENT_TITLE, $crawler->filter('#comments ol li:first-child')->text());
+        $this->assertSame(self::NEW_COMMENT_TITLE, $crawler->filter(self::COMMENTS_LIST_FIRST_CHILD_SELECTOR)->text());
     }
 }

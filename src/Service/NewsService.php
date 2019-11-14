@@ -28,8 +28,8 @@ class NewsService implements NewsServiceInterface
     /**
      * {@inheritDoc}
      */
-    public function item(string $slug): News
+    public function item(string $slug): ?News
     {
-        return $this->newsRepository->findOneBy(['slug' => $slug]);
+        return $this->newsRepository->findOnePublishedBySlug($slug);
     }
 }

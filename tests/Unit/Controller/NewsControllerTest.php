@@ -18,28 +18,59 @@ class NewsControllerTest extends TestCase
     protected function setUp(): void
     {
         $this->newsService = $this->prophesize(NewsServiceInterface::class);
+
         $this->newsController = new NewsController($this->newsService->reveal());
-        $this->initContainer($this->newsController);
+        $this->newsController->setContainer($this->getContainer());
     }
 
-    public function testIndex()
+    /**
+     * @dataProvider collectionProvider
+     * @param array $collection
+     */
+    public function testIndex(array $collection)
     {
-        $this->newsService->collection()->willReturn([]);
+        // Arrange
+        $this->newsService->collection()->willReturn($collection);
+
+        // Act
         $reponse = $this->newsController->index();
 
+        // Assert
         $this->newsService->collection()->shouldHaveBeenCalledTimes(1);
         $this->assertInstanceOf(Response::class, $reponse);
     }
 
-    public function testItem()
+    /**
+     * @dataProvider itemProvider
+     * @param News|null $news
+     */
+    public function testItem(?News $news)
     {
-        $news = $this->prophesize(News::class);
+        // Arrange
         $this->newsService->item('__SLUG__')->willReturn($news);
 
+        // Act
         $reponse = $this->newsController->item('__SLUG__');
 
+        // Assert
         $this->newsService->item('__SLUG__')->shouldHaveBeenCalledTimes(1);
         $this->assertInstanceOf(Response::class, $reponse);
+    }
+
+    public function collectionProvider()
+    {
+        $news = $this->prophesize(News::class)->reveal();
+
+        yield [[]];
+        yield [[$news]];
+        yield [[$news], [$news]];
+    }
+
+    public function itemProvider()
+    {
+        $news = $this->prophesize(News::class)->reveal();
+
+        yield [$news];
     }
 
     /**
@@ -49,9 +80,9 @@ class NewsControllerTest extends TestCase
      * To find the correspondence between the names of the services and the used classes
      * see vendor/symfony/framework-bundle/Controller/AbstractController.php::getSubscribedServices().
      *
-     * @param NewsController $newsController
+     * @return ContainerInterface
      */
-    private function initContainer(NewsController $newsController)
+    private function getContainer(): ContainerInterface
     {
         $container = $this->prophesize(ContainerInterface::class);
         $twig = $this->prophesize(Environment::class);
@@ -60,6 +91,6 @@ class NewsControllerTest extends TestCase
         $container->has('twig')->willReturn(true);
         $container->get('twig')->willReturn($twig->reveal());
 
-        $newsController->setContainer($container->reveal());
+        return $container->reveal();
     }
 }

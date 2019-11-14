@@ -22,7 +22,7 @@ class NewsService implements NewsServiceInterface
      */
     public function collection(): array
     {
-        return $this->newsRepository->findAll();
+        return $this->newsRepository->findAllPublished();
     }
 
     /**

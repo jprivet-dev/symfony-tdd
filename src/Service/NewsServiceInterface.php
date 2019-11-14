@@ -20,7 +20,7 @@ interface NewsServiceInterface
 
     /**
      * @param string $slug
-     * @return News
+     * @return News|null
      */
-    public function item(string $slug): News;
+    public function item(string $slug): ?News;
 }

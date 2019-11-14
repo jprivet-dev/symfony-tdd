@@ -6,6 +6,20 @@ use App\Entity\News;
 
 class NewsRepository extends AbstractRepository implements NewsRepositoryInterface
 {
+    const PUBLISHED = true;
+
+    /**
+     * {@inheritDoc}
+     */
+    public function findAllPublished(): array
+    {
+        return $this->createQueryBuilder('n')
+            ->where('n.published = :published')
+            ->setParameter('published', self::PUBLISHED)
+            ->getQuery()
+            ->getResult();
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -15,7 +29,7 @@ class NewsRepository extends AbstractRepository implements NewsRepositoryInterfa
             ->where('n.slug = :slug')
             ->andWhere('n.published = :published')
             ->setParameter('slug', $slug)
-            ->setParameter('published', true)
+            ->setParameter('published', self::PUBLISHED)
             ->getQuery()
             ->getOneOrNullResult();
     }

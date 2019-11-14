@@ -36,13 +36,13 @@ class NewsServiceTest extends TestCase
     {
         // Arrange
         $expectedItem = $this->prophesize(News::class)->reveal();
-        $this->newsRepository->findOneBy(['slug' => '__SLUG__'])->willReturn($expectedItem);
+        $this->newsRepository->findOnePublishedBySlug('__SLUG__')->willReturn($expectedItem);
 
         // Act
         $item = $this->newsService->item('__SLUG__');
 
         // Assert
-        $this->newsRepository->findOneBy(['slug' => '__SLUG__'])->shouldHaveBeenCalledTimes(1);
+        $this->newsRepository->findOnePublishedBySlug('__SLUG__')->shouldHaveBeenCalledTimes(1);
         $this->assertSame($expectedItem, $item);
     }
 }

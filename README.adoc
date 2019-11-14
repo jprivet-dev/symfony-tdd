@@ -670,6 +670,13 @@ Autres informations::
 
 === [ ] *Contrôleurs* : peut-on les *tester unitairement* ?
 
+Ressources::
+
+. https://matthiasnoback.nl/2012/06/symfony2-testing-your-controllers/
+. https://softwareengineering.stackexchange.com/questions/338420/why-would-you-write-unit-tests-for-controllers
+. https://symfony.com/doc/current/create_framework/unit_testing.html
+. https://docs.microsoft.com/fr-fr/aspnet/core/mvc/controllers/testing?view=aspnetcore-3.0
+
 {BACK_TO_TOP}
 
 === [!] *Docker* : libérer la mémoire

@@ -19,39 +19,53 @@ class ReferenceValidatorTest extends ConstraintValidatorTestCase
     public function testInvalidConstraint()
     {
         $this->expectException(UnexpectedTypeException::class);
+
+        // Arrange
         $constraint = $this->getMockForAbstractClass(Constraint::class);
+
+        // Act
         $this->validator->validate('abc123', $constraint);
     }
 
     public function testInvalidValue()
     {
         $this->expectException(UnexpectedValueException::class);
+
+        // Act
         $this->validator->validate(123, new Reference());
     }
 
-    public function testValidValueIsNullOrEmpty()
+    /**
+     * @dataProvider validValueProvider
+     * @param $value
+     */
+    public function testValidValue($value)
     {
-        $this->validator->validate(null, new Reference());
-        $this->assertNoViolation();
+        // Act
+        $this->validator->validate($value, new Reference());
 
-        $this->validator->validate('', new Reference());
+        // Assert
         $this->assertNoViolation();
     }
 
-    public function testValidString()
+    public function validValueProvider()
     {
-        $this->validator->validate('abc123', new Reference());
-        $this->assertNoViolation();
+        yield [null];
+        yield [''];
+        yield ['abc123'];
     }
 
     public function testInvalidString()
     {
+        // Arrange
         $reference = new Reference([
             'message' => 'myMessage',
         ]);
 
+        // Act
         $this->validator->validate('abc_123', $reference);
 
+        // Assert
         $this->buildViolation('myMessage')
             ->setParameter('{{ string }}', 'abc_123')
             ->assertRaised();

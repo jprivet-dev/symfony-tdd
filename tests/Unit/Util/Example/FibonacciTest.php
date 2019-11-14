@@ -28,8 +28,12 @@ class FibonacciTest extends TestCase
     public function testChecksAllVersionsWithAllTerms(int $n, int $expectedTerm)
     {
         foreach ($this->fibonacciList as $fibonacci) {
+            // Act
+            $term = $fibonacci->rank($n);
+
+            // Assert
             $message = sprintf('Failed asserting with the class "%s" and the term "%s".', get_class($fibonacci), $n);
-            $this->assertSame($expectedTerm, $fibonacci->rank($n), $message);
+            $this->assertSame($expectedTerm, $term, $message);
         }
     }
 

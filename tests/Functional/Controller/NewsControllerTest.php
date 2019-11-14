@@ -21,30 +21,41 @@ class NewsControllerTest extends WebTestCase
 
     public function testNews()
     {
+        // Arrange
         $client = static::createPantherClient();
+
+        // Act
         $crawler = $client->request('GET', self::NEWS_URL);
 
+        // Assert
         $this->assertCount(self::NEWS_COUNT, $crawler->filter(self::NEWS_TITLE_SELECTOR));
         $this->assertSame([self::NEWS_WEEK_601_SLUG, self::NEWS_SYMFONY_LIVE_SLUG], $crawler->filter('article')->extract('id'));
 
+
+        // Arrange
         $link = $crawler->selectLink(self::NEWS_SYMFONY_LIVE_TITLE)->link();
+
+        // Act
         $crawler = $client->click($link);
 
+        // Assert
         $this->assertSame(self::NEWS_SYMFONY_LIVE_TITLE, $crawler->filter(self::NEWS_TITLE_SELECTOR)->text());
     }
 
     public function testComments()
     {
+        // Arrange
         $client = static::createPantherClient();
-        $crawler = $client->request('GET', self::NEWS_SYMFONY_LIVE_URL);
 
+        // Act
+        $crawler = $client->request('GET', self::NEWS_SYMFONY_LIVE_URL);
         $client->waitFor(self::NEW_COMMENT_FORM_SELECTOR); // Wait for the form to appear, it may take some time because it's done in JS
 
         $form = $crawler->filter(self::NEW_COMMENT_FORM_SELECTOR)->form([self::NEW_COMMENT_TEXTAREA_NAME => self::NEW_COMMENT_TITLE]);
         $client->submit($form);
-
         $client->waitFor(self::COMMENTS_LIST_SELECTOR); // Wait for the comments to appear
 
+        // Assert
         $this->assertSame(self::$baseUri . self::NEWS_SYMFONY_LIVE_URL, $client->getCurrentURL()); // Assert we're still on the same page
         $this->assertSame(self::NEW_COMMENT_TITLE, $crawler->filter('#comments ol li:first-child')->text());
     }

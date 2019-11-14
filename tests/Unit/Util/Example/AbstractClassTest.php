@@ -27,7 +27,8 @@ class AbstractClassTest extends TestCase
      */
     public function testConcreteMethodWithAnonymousClass()
     {
-        $class = new class() extends AbstractClass {
+        $class = new class() extends AbstractClass
+        {
             protected function abstractMethod(): string
             {
                 return 'foo';
@@ -41,13 +42,5 @@ class AbstractClassTest extends TestCase
     {
         $dummy = new Dummy();
         $this->assertSame('foo', $dummy->concreteMethod());
-    }
-}
-
-class Dummy extends AbstractClass
-{
-    protected function abstractMethod(): string
-    {
-        return 'foo';
     }
 }

@@ -3,9 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\News;
+use Doctrine\ORM\QueryBuilder;
 
 class NewsRepository extends AbstractRepository implements NewsRepositoryInterface
 {
+    const ALIAS = 'n';
     const PUBLISHED = true;
 
     /**
@@ -13,11 +15,10 @@ class NewsRepository extends AbstractRepository implements NewsRepositoryInterfa
      */
     public function findAllPublished(): array
     {
-        return $this->createQueryBuilder('n')
-            ->where('n.published = :published')
-            ->setParameter('published', self::PUBLISHED)
-            ->getQuery()
-            ->getResult();
+        $queryBuilder = $this->createQueryBuilder(self::ALIAS);
+        self::isPublished($queryBuilder);
+
+        return $queryBuilder->getQuery()->getResult();
     }
 
     /**
@@ -25,12 +26,24 @@ class NewsRepository extends AbstractRepository implements NewsRepositoryInterfa
      */
     public function findOnePublishedBySlug(string $slug): ?News
     {
-        return $this->createQueryBuilder('n')
-            ->where('n.slug = :slug')
-            ->andWhere('n.published = :published')
-            ->setParameter('slug', $slug)
-            ->setParameter('published', self::PUBLISHED)
-            ->getQuery()
-            ->getOneOrNullResult();
+        $queryBuilder = $this->createQueryBuilder(self::ALIAS);
+        self::isPublished($queryBuilder);
+        self::withSlug($queryBuilder, $slug);
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
+    }
+
+    private static function isPublished(QueryBuilder $queryBuilder): void
+    {
+        $queryBuilder
+            ->andWhere(self::ALIAS . '.published = :published')
+            ->setParameter('published', self::PUBLISHED);
+    }
+
+    private static function withSlug(QueryBuilder $queryBuilder, string $slug): void
+    {
+        $queryBuilder
+            ->andWhere(self::ALIAS . '.slug = :slug')
+            ->setParameter('slug', $slug);
     }
 }

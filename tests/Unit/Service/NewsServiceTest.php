@@ -22,13 +22,13 @@ class NewsServiceTest extends TestCase
     {
         // Arrange
         $expectedCollection = [];
-        $this->newsRepository->findAll()->willReturn($expectedCollection);
+        $this->newsRepository->findAllPublished()->willReturn($expectedCollection);
 
         // Act
         $collection = $this->newsService->collection();
         
         // Assert
-        $this->newsRepository->findAll()->shouldHaveBeenCalledTimes(1);
+        $this->newsRepository->findAllPublished()->shouldHaveBeenCalledTimes(1);
         $this->assertSame($expectedCollection, $collection);
     }
 

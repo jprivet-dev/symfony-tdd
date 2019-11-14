@@ -4,8 +4,8 @@ namespace App\Tests\Unit\Repository;
 
 use App\Exception\EntityDoesNotExistException;
 use App\Repository\AbstractRepository;
-use App\Tests\Shared\Models\Entity\Dummy;
-use App\Tests\Shared\Models\Repository\DummyRepository;
+use App\Tests\Shared\Dummy\Entity\Dummy;
+use App\Tests\Shared\Dummy\Repository\DummyRepository;
 use App\Tests\TestCase;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;

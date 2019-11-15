@@ -73,7 +73,7 @@ _build.clean: # Remove 'build' folder.
 	rm -rf $(PROJECT_BUILD)
 
 .PHONY: ready
-ready:
+ready: symfony.about
 	@echo -e "\033[1;42m"
 	@echo -e "READY!"
 	@echo -e "Website:    \e[4m$(URL_WEBSITE)\\033[24m"

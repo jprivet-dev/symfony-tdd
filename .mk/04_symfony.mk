@@ -22,6 +22,10 @@ symfony.routes: ## Symfony: Display current routes.
 symfony.about: ## Symfony: Display information about the current project (Symfony, Kernel, PHP, Environment, ...).
 	$(SYMFONY) about
 
+.PHONY: symfony.about.light
+symfony.about.light: ## Symfony: Display information about the current project (grep APP_ENV & DATABASE_NAME).
+	$(SYMFONY) about | grep 'APP_ENV\|DATABASE_NAME'
+
 .PHONY: symfony.env.vars
 symfony.env.vars: ## Symfony: List defined environment variables. | https://symfony.com/doc/current/configuration.html#configuration-based-on-environment-variables
 	$(SYMFONY) debug:container --env-vars

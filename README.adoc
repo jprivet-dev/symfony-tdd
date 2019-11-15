@@ -657,7 +657,18 @@ https://symfony.com/blog/introducing-symfony-panther-a-browser-testing-and-web-s
 
 == Tips
 
-=== [!] *Makefile* : Utiliser le fichier *.env* de Symfony
+=== [!] *Makefile* : Utiliser les fichiers *.env* de Symfony
+
+https://symfony.com/doc/current/configuration.html#managing-multiple-env-files :
+
+[%header]
+|===
+| File | Machine | Environment | Commited
+a|`.env` | all machines | all | yes
+a|`.env.local` | machine-specific | all | should not be committed
+a|`.env.<env>` | all machines | <env> | yes
+a|`.env.<env>.local` | machine-specific | <env> | should not be committed
+|===
 
 {BACK_TO_TOP}
 

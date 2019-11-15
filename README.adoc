@@ -637,11 +637,18 @@ pour vérifier *qu'aucune d'entre elles ne retournent d'erreur*.
 
 {BACK_TO_TOP}
 
-=== [!] *Symfony Panther*: les bases
+=== [!] *Symfony Panther* : les bases
 
 ==== Principe
 
-L'idée est d'intégrer et d'étendre les codes en exemple sur la page
+Le principe est de pouvoir tester fonctionnellement une page dans laquelle est utilisé du JavaScript.
+
+==== Exemple
+
+Nous testons fonctionnellement une page qui affiche une news, dont les commentaires
+sont récupérés et affichés dynamiquement avec un composant VueJs.
+
+Les exemples sont entièrement inspirés de ceux présentés dans la page
 https://symfony.com/blog/introducing-symfony-panther-a-browser-testing-and-web-scrapping-library-for-php[Symfony Panther: a Browser Testing and Web Scrapping Library for PHP]
 
 ==== Ressources
@@ -652,6 +659,10 @@ https://symfony.com/blog/introducing-symfony-panther-a-browser-testing-and-web-s
 ==== Fichiers
 
 . {uri-rel-file-base}src/Controller/NewsController.php[]
+. {uri-rel-file-base}src/Service/NewsService.php[]
+. {uri-rel-file-base}src/Repository/NewsRepository.php[]
+. {uri-rel-file-base}assets/comments/CommentsComponent.vue[]
+. {uri-rel-file-base}templates/news/news-item.html.twig[]
 
 ==== Tests
 

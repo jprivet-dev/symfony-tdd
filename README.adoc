@@ -472,6 +472,13 @@ Ce premier cas simple permet d'illustrer ce que permettent les tests automatique
 ce dernier peut garantir au client que son implémentation *répond bien aux besoins dans le scope testé*,
 et que la fonctionnalité *réagit bien dans les cas limites retenus*.
 
+==== Exemple
+
+Pour une application de Planing Poker, nous avons besoins d'une méthode qui puisse nous retourner
+les 12 premiers termes de la suite de Fibonnaci.
+
+Ces termes (1, 2, 3, 5, ..., 55, 89, 144) seront les valeurs de nos cartes agiles.
+
 ==== Ressoures
 
 . https://rosettacode.org/wiki/Fibonacci_sequence#PHP
@@ -499,8 +506,10 @@ et que la fonctionnalité *réagit bien dans les cas limites retenus*.
 Au lieu d'injecter dans un premier temps *l'entity manager* pour récupérer dans un deuxième temps les *repositories* dont nous avons besoin,
 nous pouvons injecter directement les *repositories* concernés.
 
-Dans l'exemple suivant, pour récupérer et traiter les news enregistrées en base de données,
-`NewsService.php` importe et utilise `NewsRepository.php`.
+==== Exemple
+
+Pour récupérer et traiter les news enregistrées en base de données,
+le `NewsService.php` de l'exemple suivant importe et utilise `NewsRepository.php`.
 
 ==== Ressources
 

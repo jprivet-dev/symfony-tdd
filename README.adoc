@@ -474,8 +474,8 @@ et que la fonctionnalité *réagit bien dans les cas limites retenus*.
 
 ==== Exemple
 
-Pour une application de Planing Poker, nous avons besoins d'une méthode qui puisse nous retourner
-les 12 premiers termes de la suite de Fibonnaci.
+Pour une application de Planning Poker, nous avons besoins d'une méthode qui puisse nous retourner
+les 12 premiers termes de la suite de Fibonacci.
 
 Ces termes (1, 2, 3, 5, ..., 55, 89, 144) seront les valeurs de nos cartes agiles.
 

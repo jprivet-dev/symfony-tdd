@@ -217,6 +217,14 @@ DATABASE
   db.bash                        Database: Bash access.
   db.mysql                       Database: MySQL access (mysql> ...).
 
+DOCTRINE
+  doctrine.database.create       Doctrine: Create the configured database.
+  doctrine.database.create.force Doctrine: Drop & create the configured database.
+  doctrine.database.drop         Doctrine: Drop the configured database.
+
+  doctrine.schema.validate       Doctrine: Validate the mapping files.
+  doctrine.mapping.info          Doctrine: List mapped entities.
+
 DOCKER
   docker.start                   Docker: Build, (re)create, start, and attache to containers for a service (detached mode). | https://docs.docker.com/compose/reference/up/
   docker.start.one               Docker: Stop all projects running containers & Start current project.

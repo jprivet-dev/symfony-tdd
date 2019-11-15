@@ -73,10 +73,10 @@ _build.clean: # Remove 'build' folder.
 	rm -rf $(PROJECT_BUILD)
 
 .PHONY: ready
-ready: symfony.about
+ready: symfony.about.light
 	@echo -e "\033[1;42m"
 	@echo -e "READY!"
-	@echo -e "Website:    \e[4m$(URL_WEBSITE)\\033[24m"
-	@echo -e "API:        \e[4m$(URL_API)\\033[24m"
-	@echo -e "phpMyAdmin: \e[4m$(URL_PHPMYADMIN)\\033[24m\033[0m"
+	@echo -e "  Website:    \e[4m$(URL_WEBSITE)\\033[24m"
+	@echo -e "  API:        \e[4m$(URL_API)\\033[24m"
+	@echo -e "  phpMyAdmin: \e[4m$(URL_PHPMYADMIN)\\033[24m\033[0m"
 	@echo

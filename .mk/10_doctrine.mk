@@ -20,3 +20,17 @@ doctrine.schema.validate: ## Doctrine: Validate the mapping files.
 PHONY: doctrine.mapping.info
 doctrine.mapping.info: ## Doctrine: List mapped entities.
 	$(SYMFONY) doctrine:mapping:info
+
+##
+
+PHONY: doctrine.migrations.diff
+doctrine.migrations.diff: ## Doctrine: Generate a migration by comparing your current database to your mapping information.
+	$(SYMFONY) doctrine:migrations:diff
+
+PHONY: doctrine.migrations.migrate
+doctrine.migrations.migrate: ## Doctrine: Execute a migration to the latest available version.
+	$(SYMFONY) doctrine:migrations:migrate
+
+PHONY: doctrine.migrations.migrate.nointeract
+doctrine.migrations.migrate.nointeract: ## Doctrine: Execute a migration to the latest available version.
+	$(SYMFONY) doctrine:migrations:migrate --no-interaction

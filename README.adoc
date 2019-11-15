@@ -847,6 +847,10 @@ Au prochain `$ docker-compose up`, les éléments seront créés dans le nouveau
 . https://github.com/cleverage/eav-manager-starter-kit/blob/master/Makefile
 . https://github.com/torvalds/linux/blob/master/Makefile
 
+=== Badges
+
+. https://shields.io/
+
 {BACK_TO_TOP}
 
 == Licence

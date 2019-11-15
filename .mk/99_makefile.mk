@@ -1,7 +1,9 @@
 .DEFAULT_GOAL := help
 
+## MAKEFILE
+
 .PHONY: help
-help:
+help: ## Makefile: Print self-documented Makefile.
 	@grep -E '(^[a-zA-Z_-.]+[^:]+:.*##.*?$$)|(^#{2})' $(MAKEFILE_LIST) \
 	| awk 'BEGIN {FS = "## "}; \
 		{ \
@@ -21,3 +23,7 @@ help:
 			else \
 				; \
 		}'
+
+.PHONY: list
+list: $(sort $(wildcard $(MAKEFILES))) ## Makefile: List all included files.
+	@printf '%s\n' $^

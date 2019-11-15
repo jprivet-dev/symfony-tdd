@@ -27,7 +27,7 @@ Encore
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 
-    .addEntry('js/comments', './assets/comments/index.js')
+    .addEntry('comments', './assets/comments/comments.js')
     .enableVueLoader()
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.

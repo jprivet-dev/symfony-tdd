@@ -1,26 +1,24 @@
 ## DATABASE
 
 PHONY: db.create
-db.create: db.wait ## Database: Creates the configured database & Executes the SQL needed to generate the database schema.
-	$(SYMFONY) doctrine:database:create --if-not-exists
-	$(SYMFONY) doctrine:schema:create
+db.create: db.wait doctrine.database.create doctrine.migrations.migrate.nointeract ## Database: Creates the configured database & Executes the SQL needed to generate the database schema.
 
 PHONY: db.create.force
-db.create.force: db.wait db.drop db.create ## Database: Drop & create.
+db.create.force: db.wait doctrine.database.create.force doctrine.migrations.migrate.nointeract ## Database: Drop & create.
 
 PHONY: db.drop
-db.drop: db.wait ## Database: Drop.
-	$(SYMFONY) doctrine:database:drop --if-exists --force
+db.drop: db.wait doctrine.database.drop ## Database: Drop.
 
-PHONY: db.validate
-db.validate: db.wait ## Database: Validate the mapping files.
-	$(SYMFONY) doctrine:schema:validate
+.PHONY: db.update
+db.update: db.wait doctrine.migrations.diff doctrine.migrations.migrate ## Database: Generate & execute a Doctrine migration.
 
 ##
 
+PHONY: db.validate
+db.validate: db.wait doctrine.schema.validate ## Database: Validate the mapping files.
+
 PHONY: db.entities
-db.entities: db.wait ## Database: List mapped entities.
-	$(SYMFONY) doctrine:mapping:info
+db.entities: db.wait doctrine.mapping.info ## Database: List mapped entities.
 
 PHONY: db.bash
 db.bash: ## Database: Bash access.

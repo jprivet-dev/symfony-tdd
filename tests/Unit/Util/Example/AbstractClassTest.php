@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Tests\Unit\Util\Example;
 
@@ -12,6 +12,7 @@ class AbstractClassTest extends TestCase
      */
     public function testConcreteMethodWithMockForAbstractClassMethod()
     {
+        // Arrange
         $stub = $this->getMockForAbstractClass(AbstractClass::class);
 
         $stub
@@ -19,7 +20,11 @@ class AbstractClassTest extends TestCase
             ->method('abstractMethod')
             ->willReturn('foo');
 
-        $this->assertSame('foo', $stub->concreteMethod());
+        // Act
+        $result = $stub->concreteMethod();
+
+        // Assert
+        $this->assertSame('foo', $result);
     }
 
     /**
@@ -27,27 +32,31 @@ class AbstractClassTest extends TestCase
      */
     public function testConcreteMethodWithAnonymousClass()
     {
-        $class = new class() extends AbstractClass {
+        // Arrange
+        $class = new class() extends AbstractClass
+        {
             protected function abstractMethod(): string
             {
                 return 'foo';
             }
         };
 
-        $this->assertSame('foo', $class->concreteMethod());
+        // Act
+        $result = $class->concreteMethod();
+
+        // Assert
+        $this->assertSame('foo', $result);
     }
 
     public function testConcreteMethodWithDummyClass()
     {
+        // Arrange
         $dummy = new Dummy();
-        $this->assertSame('foo', $dummy->concreteMethod());
-    }
-}
 
-class Dummy extends AbstractClass
-{
-    protected function abstractMethod(): string
-    {
-        return 'foo';
+        // Act
+        $result = $dummy->concreteMethod();
+
+        // Assert
+        $this->assertSame('foo', $result);
     }
 }

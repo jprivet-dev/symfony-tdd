@@ -4,7 +4,7 @@
 start: docker.start ready ## Project: Start the current project.
 
 .PHONY: start.one
-start.one: docker.start.one ready ## Project: Stop all containers, start the current project.
+start.one: docker.start.one ready ## Project: Stop all containers & start the current project.
 
 .PHONY: stop
 stop: docker.stop ## Project: Stop the current project.
@@ -25,23 +25,26 @@ dependencies: composer.install yarn.install ## Project: Install the dependencies
 assets: yarn.encore.compile ## Project: Generate all assets (webpack Encore, ...)
 
 .PHONY: data
-data: db.create.force ## Project: Install the data (db).
+data: db.create ## Project: Install the data (db).
+
+.PHONY: fixtures
+fixtures: alice.fixtures.load ## Project: Load all fixtures.
 
 ##
 
 .PHONY: check
-check: install composer.validate symfony.security.check db.validate tests ## Project: Launch of install, composer, security, db validations & tests
+check: install composer.validate symfony.security.check db.validate tests ## Project: Launch of install / Composer, Security and DB validations / Tests
 
 .PHONY: tests
-tests: phpunit ## Project: Launch all tests.
+tests: fixtures phpunit ## Project: Launch all tests.
 
 .PHONY: coverage
 coverage: phpunit.coverage phpunit.coverage.open ## Project: Generate & open all code coverage reports.
 
+##
+
 .PHONY: cc
 cc: symfony.cc ## Project: Clear all caches.
-
-##
 
 .PHONY: clean
 clean: ## Project: [PROMPT Y/n] Remove build, vendor & node_modules folders.
@@ -57,10 +60,6 @@ clean: ## Project: [PROMPT Y/n] Remove build, vendor & node_modules folders.
 		exit 1; \
 	fi; \
 
-.PHONY: chown.fix
-chown.fix: ## Project: Editing permissions on Linux. | https://github.com/dunglas/symfony-docker#editing-permissions-on-linux
-	docker-compose run --rm $(SERVICE_APP) chown -R $$(id -u):$$(id -g) .
-
 #
 # "PRIVATE"
 #
@@ -74,7 +73,7 @@ _build.clean: # Remove 'build' folder.
 	rm -rf $(PROJECT_BUILD)
 
 .PHONY: ready
-ready:
+ready: symfony.about
 	@echo -e "\033[1;42m"
 	@echo -e "READY!"
 	@echo -e "Website:    \e[4m$(URL_WEBSITE)\\033[24m"

@@ -1,11 +1,11 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Tests\Unit\Repository;
 
 use App\Exception\EntityDoesNotExistException;
 use App\Repository\AbstractRepository;
-use App\Tests\Shared\Models\Entity\Dummy;
-use App\Tests\Shared\Models\Repository\DummyRepository;
+use App\Tests\Shared\Dummy\Entity\Dummy;
+use App\Tests\Shared\Dummy\Repository\DummyRepository;
 use App\Tests\TestCase;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
@@ -20,14 +20,16 @@ class AbstractRepositoryTest extends TestCase
      */
     public function testRepositoryIntoEntityClassConverter(string $repositoryClass, string $expectedEntityClass)
     {
+        // Arrange
         $abstract = $this->getMockBuilder(AbstractRepository::class)
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
 
-        $this->assertSame(
-            $expectedEntityClass,
-            $abstract->repositoryIntoEntityClassConverter($repositoryClass)
-        );
+        // Act
+        $entityClass = $abstract->repositoryIntoEntityClassConverter($repositoryClass);
+
+        // Assert
+        $this->assertSame($expectedEntityClass, $entityClass);
     }
 
     public function classNameProvider()
@@ -53,12 +55,14 @@ class AbstractRepositoryTest extends TestCase
      */
     public function testRepositoryClassWithEntity()
     {
+        // Arrange
         $abstract = new DummyRepository($this->registry(Dummy::class));
 
-        $this->assertSame(
-            Dummy::class,
-            $abstract->getClassName()
-        );
+        // Act
+        $className = $abstract->getClassName();
+
+        // Assert
+        $this->assertSame(Dummy::class, $className);
     }
 
     /**
@@ -68,11 +72,16 @@ class AbstractRepositoryTest extends TestCase
     {
         $this->expectException(EntityDoesNotExistException::class);
 
+        // Act
         new class($this->registry()) extends AbstractRepository
         {
         };
     }
 
+    /**
+     * @param string|null $entityClass
+     * @return ManagerRegistry
+     */
     private function registry(?string $entityClass = null): ManagerRegistry
     {
         $classMetadata = new ClassMetadata($entityClass);

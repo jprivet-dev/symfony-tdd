@@ -1,29 +1,49 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Repository;
 
-class NewsRepository
-{
-    private const NEWS = [
-        'week-601' => [
-            'slug' => 'week-601',
-            'title' => 'A week of symfony #601 (2-8 July 2018)',
-            'body' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
-        ],
-        'symfony-live-usa-2018' => [
-            'slug' => 'symfony-live-usa-2018',
-            'title' => 'Join us at SymfonyLive USA 2018!',
-            'body' => 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.'
-        ],
-    ];
+use App\Entity\News;
+use Doctrine\ORM\QueryBuilder;
 
-    public function findAll(): iterable
+class NewsRepository extends AbstractRepository implements NewsRepositoryInterface
+{
+    const ALIAS = 'n';
+    const PUBLISHED = true;
+
+    /**
+     * {@inheritDoc}
+     */
+    public function findAllPublished(): array
     {
-        return array_values(self::NEWS);
+        $queryBuilder = $this->createQueryBuilder(self::ALIAS);
+        self::isPublished($queryBuilder);
+
+        return $queryBuilder->getQuery()->getResult();
     }
 
-    public function findOneBySlug(string $slug): ?array
+    /**
+     * {@inheritDoc}
+     */
+    public function findOnePublishedBySlug(string $slug): ?News
     {
-        return self::NEWS[$slug] ?? null;
+        $queryBuilder = $this->createQueryBuilder(self::ALIAS);
+        self::isPublished($queryBuilder);
+        self::withSlug($queryBuilder, $slug);
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
+    }
+
+    private static function isPublished(QueryBuilder $queryBuilder): void
+    {
+        $queryBuilder
+            ->andWhere(self::ALIAS . '.published = :published')
+            ->setParameter('published', self::PUBLISHED);
+    }
+
+    private static function withSlug(QueryBuilder $queryBuilder, string $slug): void
+    {
+        $queryBuilder
+            ->andWhere(self::ALIAS . '.slug = :slug')
+            ->setParameter('slug', $slug);
     }
 }

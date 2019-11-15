@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Tests\Unit\Service;
 
@@ -30,21 +30,25 @@ class ProductServiceTest extends TestCase
 
     public function testCkeckAll()
     {
-        $this->productRepository
-            ->findAll()
-            ->willReturn([]);
+        // Arrange
+        $this->productRepository->findAll()->willReturn([]);
 
-        $this->productRepository->findAll()->shouldBeCalledTimes(1);
+        // Act
         $this->productService->checkAll();
+
+        // Assert
+        $this->productRepository->findAll()->shouldHaveBeenCalledTimes(1);
     }
 
     public function testValidateReference()
     {
+        // Act
+        $this->productService->validateReference(self::FAKE_REFERENCE);
+
+        // Assert
         $this->validator
             ->validate(self::FAKE_REFERENCE, Argument::type(Reference::class))
-            ->shouldBeCalledTimes(1);
-
-        $this->productService->validateReference(self::FAKE_REFERENCE);
+            ->shouldHaveBeenCalledTimes(1);
     }
 
     /**
@@ -53,6 +57,7 @@ class ProductServiceTest extends TestCase
      */
     public function testLegacyValidateReference()
     {
+        // Act
         $this->productService->legacyValidateReference(self::FAKE_REFERENCE);
     }
 
@@ -61,10 +66,12 @@ class ProductServiceTest extends TestCase
      */
     public function testLegacyValidateReferenceDisplayDeprecationNoticeInTerminal()
     {
+        // Act
+        $this->productService->legacyValidateReference(self::FAKE_REFERENCE);
+
+        // Assert
         $this->validator
             ->validate(self::FAKE_REFERENCE, Argument::type(Reference::class))
-            ->shouldBeCalledTimes(1);
-
-        $this->productService->legacyValidateReference(self::FAKE_REFERENCE);
+            ->shouldHaveBeenCalledTimes(1);
     }
 }

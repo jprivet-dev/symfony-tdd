@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Tests\Functional;
 
@@ -13,6 +13,7 @@ class SmokeTest extends WebTestCase
      */
     public function testPageIsSuccessful(string $route)
     {
+        // Arrange
         $client = self::createClient();
 
         /*
@@ -21,8 +22,11 @@ class SmokeTest extends WebTestCase
          * In our context, we have no constraints on public URLs.
          */
         $url = $client->getContainer()->get('router')->generate($route);
+
+        // Act
         $client->request('GET', $url);
 
+        // Assert
         $this->assertResponseIsSuccessful();
     }
 

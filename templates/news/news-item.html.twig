@@ -8,10 +8,11 @@
     {{ item.body }}
 
     <div id="comments">
-        <comment-system news="{{ item.slug }}"></comment-system>
+        <comments-component news="{{ item.slug }}"></comments-component>
     </div>
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('build/js/comments.js') }}"></script>
+    {{ parent() }}
+    {{ encore_entry_script_tags('comments') }}
 {% endblock %}

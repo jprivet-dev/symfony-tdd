@@ -1,9 +1,9 @@
 // settings:
-
 :toc: macro
 :toc-title: Sommaire
-:toclevels: 3
+:toclevels: 2
 :numbered:
+:sectnumlevels: 2
 
 ifndef::env-github[:icons: font]
 ifdef::env-github[]
@@ -136,7 +136,7 @@ Liste des commandes disponibles :
 
 PROJECT
   start                          Project: Start the current project.
-  start.one                      Project: Stop all containers, start the current project.
+  start.one                      Project: Stop all containers & start the current project.
   stop                           Project: Stop the current project.
   sh                             Project: app sh access.
 
@@ -144,14 +144,14 @@ PROJECT
   dependencies                   Project: Install the dependencies (only if there have been changes).
   assets                         Project: Generate all assets (webpack Encore, ...)
   data                           Project: Install the data (db).
+  fixtures                       Project: Load all fixtures.
 
-  check                          Project: Launch of install, composer, security, db validations & tests
+  check                          Project: Launch of install / Composer, Security and DB validations / Tests
   tests                          Project: Launch all tests.
   coverage                       Project: Generate & open all code coverage reports.
-  cc                             Project: Clear all caches.
 
+  cc                             Project: Clear all caches.
   clean                          Project: [PROMPT Y/n] Remove build, vendor & node_modules folders.
-  chown.fix                      Project: Editing permissions on Linux. | https://github.com/dunglas/symfony-docker#editing-permissions-on-linux
 
 COMPOSER
   composer.install               Composer: Read the composer.json/composer.lock file from the current directory, resolve the dependencies, and install them into vendor.
@@ -173,7 +173,13 @@ SYMFONY
   symfony.cchard                 Symfony: Remove all in `var/cache` folder.
   symfony.routes                 Symfony: Display current routes.
 
+  symfony.about                  Symfony: Display information about the current project (Symfony, Kernel, PHP, Environment, ...).
+  symfony.env.vars               Symfony: List defined environment variables. | https://symfony.com/doc/current/configuration.html#configuration-based-on-environment-variables
+
   symfony.security.check         Symfony: Check security of your dependencies. | https://github.com/sensiolabs/security-checker
+
+ALICE BUNDLE
+  alice.fixtures.load            AliceBundle: load fixtures.
 
 PHPUNIT
   phpunit                        PHPUnit: Launch all tests (unit, functional, ...).
@@ -205,11 +211,24 @@ DATABASE
   db.create                      Database: Creates the configured database & Executes the SQL needed to generate the database schema.
   db.create.force                Database: Drop & create.
   db.drop                        Database: Drop.
-  db.validate                    Database: Validate the mapping files.
+  db.update                      Database: Generate & execute a Doctrine migration.
 
+  db.validate                    Database: Validate the mapping files.
   db.entities                    Database: List mapped entities.
   db.bash                        Database: Bash access.
   db.mysql                       Database: MySQL access (mysql> ...).
+
+DOCTRINE
+  doctrine.database.create       Doctrine: Create the configured database.
+  doctrine.database.create.force Doctrine: Drop & create the configured database.
+  doctrine.database.drop         Doctrine: Drop the configured database.
+
+  doctrine.schema.validate       Doctrine: Validate the mapping files.
+  doctrine.mapping.info          Doctrine: List mapped entities.
+
+  doctrine.migrations.diff       Doctrine: Generate a migration by comparing your current database to your mapping information.
+  doctrine.migrations.migrate    Doctrine: Execute a migration to the latest available version.
+  doctrine.migrations.migrate.nointeract Doctrine: Execute a migration to the latest available version (no interaction).
 
 DOCKER
   docker.start                   Docker: Build, (re)create, start, and attache to containers for a service (detached mode). | https://docs.docker.com/compose/reference/up/
@@ -233,6 +252,16 @@ DOCKER
   docker.ip.all                  Docker: List all containers ip.
   docker.networks                Docker: list networks. | https://docs.docker.com/engine/reference/commandline/network/
   docker.logs                    Docker: Show logs.
+
+UTIL
+  util.chown.fix                 Util (Permissions): Editing permissions on Linux. | https://github.com/dunglas/symfony-docker#editing-permissions-on-linux
+  util.readme.update             Util (Readme.adoc): Retrieve and insert the latest makefile commands & aliases in the Readme.adoc.
+  util.php.strict                Util (PHP): Insert `<?php declare(strict_types=1);` instead of `<?php` in all PHP files in src/ & tests/ folders.
+  util.ide.phpstorm.templates    Util (PHPStorm): Copy templates from .ide/PHPStorm/fileTemplates folder in .idea/fileTemplates folder. | https://www.jetbrains.com/help/phpstorm/using-file-and-code-templates.html
+
+MAKEFILE
+  help                           Makefile: Print self-documented Makefile.
+  list                           Makefile: List all included files.
 ```
 // <<< block_makefile
 
@@ -432,32 +461,32 @@ $ make phpunit.functional.coverage
 
 === [x] *Fibonacci* : 4 implémentations, 1 seul test
 
-Principe::
+==== Principe
 
 Le principe est de montrer que *4 implémentations différentes* d'une même fonctionnalité peuvent passer
 correctement le *même test unitaire*.
-+
+
 Ce premier cas simple permet d'illustrer ce que permettent les tests automatiques : *garantir le code*.
-+
+
 *Qu'importe la stratégie d'implémentation choisie* par le développeur (en fonction du contexte, de ses facilités, du temps qui lui ait imparti, ...),
 ce dernier peut garantir au client que son implémentation *répond bien aux besoins dans le scope testé*,
 et que la fonctionnalité *réagit bien dans les cas limites retenus*.
 
-Ressoures::
+==== Ressoures
 
 . https://rosettacode.org/wiki/Fibonacci_sequence#PHP
 . https://en.wikibooks.org/wiki/Algorithm_Implementation/Mathematics/Fibonacci_Number_Program#PHP
 . https://en.wikipedia.org/wiki/Fibonacci_number
 . http://www.codecodex.com/wiki/Calculate_the_Fibonacci_sequence#PHP
 
-Fichiers::
+==== Fichiers
 
 . {uri-rel-file-base}src/Util/Example/Fibonacci01.php[]
 . {uri-rel-file-base}src/Util/Example/Fibonacci02.php[]
 . {uri-rel-file-base}src/Util/Example/Fibonacci03.php[]
 . {uri-rel-file-base}src/Util/Example/Fibonacci04.php[]
 
-Tests::
+==== Tests
 
 . {uri-rel-file-base}tests/Unit/Util/Example/FibonacciTest.php[]
 
@@ -465,20 +494,20 @@ Tests::
 
 === [!] Injecter un *repository* au lieu de *l'entity manager*
 
-Principe::
+==== Principe
 
 Au lieu d'injecter dans un premier temps *l'entity manager* pour récupérer dans un deuxième temps les *repositories* dont nous avons besoin,
 nous pouvons injecter directement les *repositories* concernés.
 
-Ressources::
+==== Ressources
 
 . https://matthiasnoback.nl/2014/05/inject-a-repository-instead-of-an-entity-manager/
 
-Fichiers::
+==== Fichiers
 
 . {uri-rel-file-base}src/Repository/AbstractRepository.php[]
 
-Tests::
+==== Tests
 
 . {uri-rel-file-base}tests/Unit/Repository/AbstractRepositoryTest.php[]
 
@@ -490,20 +519,20 @@ Tests::
 
 === [x] Créer et tester une *classe abstraite*
 
-Principe::
+==== Principe
 
 Le principe est de pouvoir tester unitairement les *méthodes concrètes* d'une classe abstraite.
 
-Ressources::
+==== Ressources
 
 . https://phpunit.readthedocs.io/en/8.4/test-doubles.html#mocking-traits-and-abstract-classes
 . https://mnapoli.fr/anonymous-classes-in-tests/
 
-Fichiers::
+==== Fichiers
 
 . {uri-rel-file-base}src/Util/Example/AbstractClass.php[]
 
-Tests::
+==== Tests
 
 . {uri-rel-file-base}tests/Unit/Util/Example/AbstractClassTest.php[]
 
@@ -511,23 +540,23 @@ Tests::
 
 === [!] Créer et tester un *custom validator*
 
-Principe::
+==== Principe
 
 Le principe est de gérer et de tester facilement *tous les cas limites* auxquels pourrait-être
 exposé notre *custom validator*.
 
-Ressources::
+==== Ressources
 
 . https://symfony.com/doc/current/validation/custom_constraint.html
 . https://github.com/symfony/validator/blob/master/Test/ConstraintValidatorTestCase.php
 . https://github.com/symfony/validator/blob/master/Tests/Constraints/EmailValidatorTest.php
 
-Fichiers::
+==== Fichiers
 
 . {uri-rel-file-base}src/Validator/Constraints/Reference.php[]
 . {uri-rel-file-base}src/Validator/Constraints/ReferenceValidator.php[]
 
-Tests::
+==== Tests
 
 . {uri-rel-file-base}tests/Unit/Validator/Constraints/ReferenceValidatorTest.php[]
 
@@ -543,16 +572,16 @@ Tests::
 
 === [!] Créer un *smoke testing*
 
-Principe::
+==== Principe
 
 Le principe de ce premier niveau de test fonctionnel est *d'appeler chaque page* de l'application
 pour vérifier *qu'aucune d'entre elles ne retournent d'erreur*.
 
-Ressources::
+==== Ressources
 
 . https://symfony.com/doc/current/best_practices.html
 
-Tests::
+==== Tests
 
 . {uri-rel-file-base}tests/Functional/SmokeTest.php[]
 
@@ -604,25 +633,25 @@ Tests::
 
 === [!] *Symfony Panther*: les bases
 
-Principe::
+==== Principe
 
 L'idée est d'intégrer et d'étendre les codes en exemple sur la page
 https://symfony.com/blog/introducing-symfony-panther-a-browser-testing-and-web-scrapping-library-for-php[Symfony Panther: a Browser Testing and Web Scrapping Library for PHP]
 
-Ressources::
+==== Ressources
 
 . https://symfony.com/blog/introducing-symfony-panther-a-browser-testing-and-web-scrapping-library-for-php
 . https://github.com/symfony/panther
 
-Fichiers::
+==== Fichiers
 
 . {uri-rel-file-base}src/Controller/NewsController.php[]
 
-Tests::
+==== Tests
 
 . {uri-rel-file-base}tests/Functional/NewsControllerTest.php[]
 
-Autres informations::
+==== Autres informations
 
 [TIP]
 ====
@@ -643,7 +672,18 @@ Autres informations::
 
 == Tips
 
-=== [!] *Makefile* : Utiliser le fichier *.env* de Symfony
+=== [!] *Makefile* : Utiliser les fichiers *.env* de Symfony
+
+https://symfony.com/doc/current/configuration.html#managing-multiple-env-files :
+
+[%header]
+|===
+| File | Machine | Environment | Commited
+a|`.env` | all machines | all | yes
+a|`.env.local` | machine-specific | all | should not be committed
+a|`.env.<env>` | all machines | <env> | yes
+a|`.env.<env>.local` | machine-specific | <env> | should not be committed
+|===
 
 {BACK_TO_TOP}
 
@@ -656,6 +696,13 @@ Autres informations::
 {BACK_TO_TOP}
 
 === [ ] *Contrôleurs* : peut-on les *tester unitairement* ?
+
+==== Ressources
+
+. https://matthiasnoback.nl/2012/06/symfony2-testing-your-controllers/
+. https://softwareengineering.stackexchange.com/questions/338420/why-would-you-write-unit-tests-for-controllers
+. https://symfony.com/doc/current/create_framework/unit_testing.html
+. https://docs.microsoft.com/fr-fr/aspnet/core/mvc/controllers/testing?view=aspnetcore-3.0
 
 {BACK_TO_TOP}
 

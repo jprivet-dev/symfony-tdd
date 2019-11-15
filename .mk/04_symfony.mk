@@ -18,6 +18,16 @@ symfony.routes: ## Symfony: Display current routes.
 
 ##
 
+.PHONY: symfony.about
+symfony.about: ## Symfony: Display information about the current project (Symfony, Kernel, PHP, Environment, ...).
+	$(SYMFONY) about
+
+.PHONY: symfony.env.vars
+symfony.env.vars: ## Symfony: List defined environment variables. | https://symfony.com/doc/current/configuration.html#configuration-based-on-environment-variables
+	$(SYMFONY) debug:container --env-vars
+
+##
+
 .PHONY: symfony.security.check
 symfony.security.check: ## Symfony: Check security of your dependencies. | https://github.com/sensiolabs/security-checker
 	$(SYMFONY) security:check

@@ -37,19 +37,15 @@ endif::[]
 [#{BACK_TO_TOP_TARGET}]
 = Symfony 4 & TDD (dockerized workshop)
 
-|===
-| Branch 3+| Status
+image:https://img.shields.io/badge/branch-master-green["master", link="https://github.com/jprivet-dev/symfony-tdd]
+image:https://travis-ci.org/jprivet-dev/symfony-tdd.svg?branch=master["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-tdd"]
+image:https://coveralls.io/repos/github/jprivet-dev/symfony-tdd/badge.svg?branch=master["Coverage Status", link="https://coveralls.io/github/jprivet-dev/symfony-tdd?branch=master"]
+image:https://api.codacy.com/project/badge/Grade/d83935eebccc4610870a0b52039914f3?branch=master["Codacy code quality", link="https://www.codacy.com/manual/jprivet-dev/symfony-tdd?utm_source=github.com&utm_medium=referral&utm_content=jprivet-dev/symfony-tdd&utm_campaign=Badge_Grade"]
 
-| https://github.com/jprivet-dev/symfony-tdd[master]
-| image:https://travis-ci.org/jprivet-dev/symfony-tdd.svg?branch=master["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-tdd"]
-| image:https://coveralls.io/repos/github/jprivet-dev/symfony-tdd/badge.svg?branch=master["Coverage Status", link="https://coveralls.io/github/jprivet-dev/symfony-tdd?branch=master"]
-| image:https://api.codacy.com/project/badge/Grade/d83935eebccc4610870a0b52039914f3?branch=master["Codacy code quality", link="https://www.codacy.com/manual/jprivet-dev/symfony-tdd?utm_source=github.com&utm_medium=referral&utm_content=jprivet-dev/symfony-tdd&utm_campaign=Badge_Grade"]
-
-| https://github.com/jprivet-dev/symfony-tdd/tree/dev[dev]
-| image:https://travis-ci.org/jprivet-dev/symfony-tdd.svg?branch=dev["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-tdd"]
-| image:https://coveralls.io/repos/github/jprivet-dev/symfony-tdd/badge.svg?branch=dev["Coverage Status", link="https://coveralls.io/github/jprivet-dev/symfony-tdd?branch=dev"]
-| image:https://api.codacy.com/project/badge/Grade/d83935eebccc4610870a0b52039914f3?branch=dev["Codacy code quality", link="https://www.codacy.com/manual/jprivet-dev/symfony-tdd?utm_source=github.com&utm_medium=referral&utm_content=jprivet-dev/symfony-tdd&utm_campaign=Badge_Grade"]
-|===
+image:https://img.shields.io/badge/branch-dev-green["dev", link="https://github.com/jprivet-dev/symfony-tdd/tree/dev]
+image:https://travis-ci.org/jprivet-dev/symfony-tdd.svg?branch=dev["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-tdd"]
+image:https://coveralls.io/repos/github/jprivet-dev/symfony-tdd/badge.svg?branch=dev["Coverage Status", link="https://coveralls.io/github/jprivet-dev/symfony-tdd?branch=dev"]
+image:https://api.codacy.com/project/badge/Grade/d83935eebccc4610870a0b52039914f3?branch=dev["Codacy code quality", link="https://www.codacy.com/manual/jprivet-dev/symfony-tdd?utm_source=github.com&utm_medium=referral&utm_content=jprivet-dev/symfony-tdd&utm_campaign=Badge_Grade"]
 
 toc::[]
 
@@ -659,7 +655,7 @@ pour vérifier *qu'aucune d'entre elles ne retournent d'erreur*.
 
 {BACK_TO_TOP}
 
-=== [!] *Symfony Panther* : les bases
+=== [!] *Symfony Panther* : les bases (Vue.js, screenshoot, ...)
 
 ==== Principe
 
@@ -668,7 +664,7 @@ Le principe est de pouvoir tester fonctionnellement une page dans laquelle est u
 ==== Exemple
 
 Nous testons fonctionnellement une page qui affiche une news, dont les commentaires
-sont récupérés et affichés dynamiquement avec un composant VueJs.
+sont récupérés et affichés dynamiquement avec un composant Vue.js.
 
 ==== Ressources
 

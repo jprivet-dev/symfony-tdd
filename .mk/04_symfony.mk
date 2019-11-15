@@ -16,8 +16,10 @@ symfony.cchard: ## Symfony: Remove all in `var/cache` folder.
 symfony.routes: ## Symfony: Display current routes.
 	$(SYMFONY) debug:router
 
+##
+
 .PHONY: symfony.about
-symfony.about: ## Symfony: Display information about the current project.
+symfony.about: ## Symfony: Display information about the current project (Symfony, Kernel, PHP, Environment, ...).
 	$(SYMFONY) about
 
 .PHONY: symfony.env.vars

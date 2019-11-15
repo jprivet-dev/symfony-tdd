@@ -49,7 +49,7 @@ image:https://coveralls.io/repos/github/jprivet-dev/symfony-tdd/badge.svg?branch
 image:https://api.codacy.com/project/badge/Grade/d83935eebccc4610870a0b52039914f3?branch=dev["Codacy code quality", link="https://www.codacy.com/manual/jprivet-dev/symfony-tdd?utm_source=github.com&utm_medium=referral&utm_content=jprivet-dev/symfony-tdd&utm_campaign=Badge_Grade"]
 
 image:https://img.shields.io/badge/makefile-yes-blue["Makefile", link="{uri-makefile}"]
-image:https://img.shields.io/github/license/jprivet-dev/symfony-tdd["MIT", link="{uri-license}"]
+image:https://img.shields.io/badge/license-MIT-green["MIT", link="{uri-license}"]
 
 toc::[]
 

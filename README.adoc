@@ -855,6 +855,6 @@ Au prochain `$ docker-compose up`, les éléments seront créés dans le nouveau
 
 == Licence
 
-`symfony-tdd` est publié sous {uri-license}[LICENSE] *MIT*.
+{uri-repo} est publié sous {uri-license}[licence MIT].
 
 {BACK_TO_TOP}

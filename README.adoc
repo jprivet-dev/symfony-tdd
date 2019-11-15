@@ -492,12 +492,15 @@ et que la fonctionnalité *réagit bien dans les cas limites retenus*.
 
 {BACK_TO_TOP}
 
-=== [!] Injecter un *repository* au lieu de *l'entity manager*
+=== [x] Injecter un *repository* au lieu de *l'entity manager*
 
 ==== Principe
 
 Au lieu d'injecter dans un premier temps *l'entity manager* pour récupérer dans un deuxième temps les *repositories* dont nous avons besoin,
 nous pouvons injecter directement les *repositories* concernés.
+
+Dans l'exemple suivant, pour récupérer et traiter les news enregistrées en base de données,
+`NewsService.php` importe et utilise `NewsRepository.php`.
 
 ==== Ressources
 
@@ -505,11 +508,14 @@ nous pouvons injecter directement les *repositories* concernés.
 
 ==== Fichiers
 
-. {uri-rel-file-base}src/Repository/AbstractRepository.php[]
+. {uri-rel-file-base}src/Controller/NewsController.php[]
+. {uri-rel-file-base}src/Service/NewsService.php[]
+. {uri-rel-file-base}src/Repository/NewsRepository.php[]
 
 ==== Tests
 
-. {uri-rel-file-base}tests/Unit/Repository/AbstractRepositoryTest.php[]
+. {uri-rel-file-base}tests/Unit/Service/NewsServiceTest.php[]
+. {uri-rel-file-base}tests/Functional/Controller/NewsControllerTest.php[]
 
 {BACK_TO_TOP}
 

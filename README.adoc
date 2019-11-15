@@ -29,6 +29,7 @@ ifdef::env-site,env-yard[]
 endif::[]
 
 :uri-license: {uri-rel-file-base}LICENSE
+:uri-makefile: {uri-rel-file-base}Makefile
 
 :BACK_TO_TOP_TARGET: top-target
 :BACK_TO_TOP_LABEL: ⬆ Retour au sommaire
@@ -41,11 +42,14 @@ image:https://img.shields.io/badge/branch-master-green["master", link="https://g
 image:https://travis-ci.org/jprivet-dev/symfony-tdd.svg?branch=master["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-tdd"]
 image:https://coveralls.io/repos/github/jprivet-dev/symfony-tdd/badge.svg?branch=master["Coverage Status", link="https://coveralls.io/github/jprivet-dev/symfony-tdd?branch=master"]
 image:https://api.codacy.com/project/badge/Grade/d83935eebccc4610870a0b52039914f3?branch=master["Codacy code quality", link="https://www.codacy.com/manual/jprivet-dev/symfony-tdd?utm_source=github.com&utm_medium=referral&utm_content=jprivet-dev/symfony-tdd&utm_campaign=Badge_Grade"]
-
+ +
 image:https://img.shields.io/badge/branch-dev-green["dev", link="https://github.com/jprivet-dev/symfony-tdd/tree/dev"]
 image:https://travis-ci.org/jprivet-dev/symfony-tdd.svg?branch=dev["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-tdd"]
 image:https://coveralls.io/repos/github/jprivet-dev/symfony-tdd/badge.svg?branch=dev["Coverage Status", link="https://coveralls.io/github/jprivet-dev/symfony-tdd?branch=dev"]
 image:https://api.codacy.com/project/badge/Grade/d83935eebccc4610870a0b52039914f3?branch=dev["Codacy code quality", link="https://www.codacy.com/manual/jprivet-dev/symfony-tdd?utm_source=github.com&utm_medium=referral&utm_content=jprivet-dev/symfony-tdd&utm_campaign=Badge_Grade"]
+
+image:https://img.shields.io/badge/makefile-yes-blue["Makefile", link="{uri-makefile}"]
+image:https://img.shields.io/github/license/jprivet-dev/symfony-tdd["MIT", link="{uri-license}"]
 
 toc::[]
 

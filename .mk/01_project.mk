@@ -25,7 +25,7 @@ dependencies: composer.install yarn.install ## Project: Install the dependencies
 assets: yarn.encore.compile ## Project: Generate all assets (webpack Encore, ...)
 
 .PHONY: data
-data: db.create.force ## Project: Install the data (db).
+data: db.create ## Project: Install the data (db).
 
 .PHONY: fixtures
 fixtures: alice.fixtures.load ## Project: Load all fixtures.

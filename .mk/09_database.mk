@@ -1,18 +1,21 @@
 ## DATABASE
 
 PHONY: db.create
-db.create: db.wait doctrine.database.create ## Database: Creates the configured database & Executes the SQL needed to generate the database schema.
+db.create: db.wait doctrine.database.create doctrine.migrations.migrate.nointeract ## Database: Creates the configured database & Executes the SQL needed to generate the database schema.
 
 PHONY: db.create.force
-db.create.force: db.wait doctrine.database.create.force ## Database: Drop & create.
+db.create.force: db.wait doctrine.database.create.force doctrine.migrations.migrate.nointeract ## Database: Drop & create.
 
 PHONY: db.drop
 db.drop: db.wait doctrine.database.drop ## Database: Drop.
 
-PHONY: db.validate
-db.validate: db.wait doctrine.schema.validate ## Database: Validate the mapping files.
+.PHONY: db.update
+db.update: db.wait doctrine.migrations.diff doctrine.migrations.migrate ## Database: Generate & execute a Doctrine migration.
 
 ##
+
+PHONY: db.validate
+db.validate: db.wait doctrine.schema.validate ## Database: Validate the mapping files.
 
 PHONY: db.entities
 db.entities: db.wait doctrine.mapping.info ## Database: List mapped entities.

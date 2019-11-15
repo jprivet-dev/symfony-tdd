@@ -211,8 +211,9 @@ DATABASE
   db.create                      Database: Creates the configured database & Executes the SQL needed to generate the database schema.
   db.create.force                Database: Drop & create.
   db.drop                        Database: Drop.
-  db.validate                    Database: Validate the mapping files.
+  db.update                      Database: Generate & execute a Doctrine migration.
 
+  db.validate                    Database: Validate the mapping files.
   db.entities                    Database: List mapped entities.
   db.bash                        Database: Bash access.
   db.mysql                       Database: MySQL access (mysql> ...).
@@ -224,6 +225,10 @@ DOCTRINE
 
   doctrine.schema.validate       Doctrine: Validate the mapping files.
   doctrine.mapping.info          Doctrine: List mapped entities.
+
+  doctrine.migrations.diff       Doctrine: Generate a migration by comparing your current database to your mapping information.
+  doctrine.migrations.migrate    Doctrine: Execute a migration to the latest available version.
+  doctrine.migrations.migrate.nointeract Doctrine: Execute a migration to the latest available version (no interaction).
 
 DOCKER
   docker.start                   Docker: Build, (re)create, start, and attache to containers for a service (detached mode). | https://docs.docker.com/compose/reference/up/

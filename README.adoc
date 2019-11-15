@@ -173,6 +173,7 @@ SYMFONY
   symfony.routes                 Symfony: Display current routes.
 
   symfony.about                  Symfony: Display information about the current project (Symfony, Kernel, PHP, Environment, ...).
+  symfony.about.light            Symfony: Display information about the current project (grep APP_ENV & DATABASE_NAME).
   symfony.env.vars               Symfony: List defined environment variables. | https://symfony.com/doc/current/configuration.html#configuration-based-on-environment-variables
 
   symfony.security.check         Symfony: Check security of your dependencies. | https://github.com/sensiolabs/security-checker

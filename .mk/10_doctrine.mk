@@ -32,5 +32,5 @@ doctrine.migrations.migrate: ## Doctrine: Execute a migration to the latest avai
 	$(SYMFONY) doctrine:migrations:migrate
 
 PHONY: doctrine.migrations.migrate.nointeract
-doctrine.migrations.migrate.nointeract: ## Doctrine: Execute a migration to the latest available version.
+doctrine.migrations.migrate.nointeract: ## Doctrine: Execute a migration to the latest available version (no interaction).
 	$(SYMFONY) doctrine:migrations:migrate --no-interaction

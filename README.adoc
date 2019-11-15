@@ -538,10 +538,15 @@ le `NewsService.php` de l'exemple suivant importe et utilise `NewsRepository.php
 
 Le principe est de pouvoir tester unitairement les *méthodes concrètes* d'une classe abstraite.
 
+==== Exemple
+
+Nous partons d'un classe abstraite très simple pour réaliser un test élémentaire.
+
 ==== Ressources
 
 . https://phpunit.readthedocs.io/en/8.4/test-doubles.html#mocking-traits-and-abstract-classes
 . https://mnapoli.fr/anonymous-classes-in-tests/
+. https://www.php.net/manual/en/language.oop5.abstract.php
 
 ==== Fichiers
 
@@ -559,6 +564,10 @@ Le principe est de pouvoir tester unitairement les *méthodes concrètes* d'une 
 
 Le principe est de gérer et de tester facilement *tous les cas limites* auxquels pourrait-être
 exposé notre *custom validator*.
+
+==== Exemple
+
+...
 
 ==== Ressources
 
@@ -591,6 +600,10 @@ exposé notre *custom validator*.
 
 Le principe de ce premier niveau de test fonctionnel est *d'appeler chaque page* de l'application
 pour vérifier *qu'aucune d'entre elles ne retournent d'erreur*.
+
+==== Exemple
+
+...
 
 ==== Ressources
 
@@ -656,9 +669,6 @@ Le principe est de pouvoir tester fonctionnellement une page dans laquelle est u
 
 Nous testons fonctionnellement une page qui affiche une news, dont les commentaires
 sont récupérés et affichés dynamiquement avec un composant VueJs.
-
-Les exemples sont entièrement inspirés de ceux présentés dans la page
-https://symfony.com/blog/introducing-symfony-panther-a-browser-testing-and-web-scrapping-library-for-php[Symfony Panther: a Browser Testing and Web Scrapping Library for PHP]
 
 ==== Ressources
 
@@ -753,32 +763,32 @@ TIP: Retrouvez dans la documentation plus de commandes de suppression sur <<make
 Pour une gestion à long terme, il est préférable *d'orienter Docker vers un espace de travail plus volumineux* sur votre machine,
 avec le fichier de configuration `daemon.json`.
 
-1) *Stopper Docker* :
+===== 1) *Stopper Docker* :
 
 ```sh
 $ sudo service docker stop
 ```
 
-2) *Créer* le nouveau dossier de destination :
+===== 2) *Créer* le nouveau dossier de destination :
 
 ```sh
 $ sudo mkdir /data/home/jprivet/docker
 ```
 
-3) *Vérifier* si `daemon.json` existe :
+===== 3) *Vérifier* si `daemon.json` existe :
 
 ```sh
 $ ls /etc/docker
 key.json
 ```
 
-4) Si `daemon.json` n'existe pas, *le créer* :
+===== 4) Si `daemon.json` n'existe pas, *le créer* :
 
 ```sh
 $ sudo touch /etc/docker/daemon.json
 ```
 
-4 bis) *Injecter* l'option `"data-root": "/data/home/jprivet/docker"` dans le nouveau fichier `daemon.json` :
+===== 4 bis) *Injecter* l'option `"data-root": "/data/home/jprivet/docker"` dans le nouveau fichier `daemon.json` :
 
 ```sh
 $ sudo -- sh -c "echo '{\"data-root\": \"/data/home/jprivet/docker\"}' >> /etc/docker/daemon.json"
@@ -793,7 +803,7 @@ $ sudo vim /etc/docker/daemon.json
 ```
 ====
 
-5) *Vérifier* le contenu du fichier `daemon.json` :
+===== 5) *Vérifier* le contenu du fichier `daemon.json` :
 
 ```sh
 $ cat /etc/docker/daemon.json
@@ -801,7 +811,7 @@ $ cat /etc/docker/daemon.json
 
 ```
 
-6) *Redémarrer Docker* :
+===== 6) *Redémarrer Docker* :
 
 ```sh
 $ sudo service docker start

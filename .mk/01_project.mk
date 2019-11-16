@@ -1,5 +1,28 @@
 ## PROJECT
 
+.PHONY: env.dev
+env.dev: env.clean ## Project (Environment): `env.clean` alias.
+
+.PHONY: env.prod
+env.prod: .env.local.prod.dist ## Project (Environment): Copy `.env.local.prod.dist` into `.env.local` (APP_ENV=prod)
+	cp .env.local.prod.dist .env.local
+	$(MAKE) cc
+	$(MAKE) symfony.about
+
+.PHONY: env.test
+env.test: .env.local.test.dist ## Project (Environment): Copy `.env.local.test.dist` into `.env.local` (APP_ENV=test)
+	cp .env.local.test.dist .env.local
+	$(MAKE) cc
+	$(MAKE) symfony.about
+
+.PHONY: env.clean
+env.clean: .env.local ## Project (Environment): Remove `.env.local` and use default environment of `.env` (APP_ENV=dev)
+	rm .env.local
+	$(MAKE) cc
+	$(MAKE) symfony.about
+
+##
+
 .PHONY: start
 start: docker.start ready ## Project: Start the current project.
 

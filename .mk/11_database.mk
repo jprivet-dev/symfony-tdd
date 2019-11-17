@@ -29,7 +29,7 @@ db.mysql: db.wait ## Database: MySQL access (mysql> ...).
 	$(EXEC_DB) bash -c "mysql -u $(DATABASE_USER) $(DATABASE_NAME)"
 
 #
-# "PRIVATE"
+# INTERNAL
 #
 
 PHONY: db.wait

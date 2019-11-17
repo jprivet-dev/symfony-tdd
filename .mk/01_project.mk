@@ -45,7 +45,7 @@ install: docker.start dependencies assets data ready ## Project: Install all (de
 dependencies: composer.install yarn.install ## Project: Install the dependencies (only if there have been changes).
 
 .PHONY: assets
-assets: yarn.encore.compile ## Project: Generate all assets (webpack Encore, ...)
+assets: encore.compile ## Project: Generate all assets (webpack Encore, ...)
 
 .PHONY: data
 data: db.create ## Project: Install the data (db).

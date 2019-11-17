@@ -24,6 +24,7 @@ symfony.about: ## Symfony: Display information about the current project (Symfon
 
 .PHONY: symfony.about.light
 symfony.about.light: ## Symfony: Display information about the current project (grep APP_ENV & DATABASE_NAME).
+	@echo -e '\033[1;43mSymfony about (light):\033[0m';
 	$(SYMFONY) about | grep 'APP_ENV\|DATABASE_NAME'
 
 .PHONY: symfony.env.vars

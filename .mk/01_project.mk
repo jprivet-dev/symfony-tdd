@@ -72,7 +72,7 @@ clean: ## Project: [PROMPT Y/n] Remove build, vendor & node_modules folders.
 	fi; \
 
 #
-# "PRIVATE"
+# INTERNAL
 #
 
 .PHONY: _build

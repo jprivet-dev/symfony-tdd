@@ -1,23 +1,23 @@
 ## PROJECT
 
-.PHONY: env.dev
-env.dev: env.clean ## Project (Environment): `env.clean` alias.
+.PHONY: env.local.dev
+env.local.dev: env.local.clean ## Project (Environment): Alias of `env.local.clean`.
 
-.PHONY: env.prod
-env.prod: .env.local.prod.dist ## Project (Environment): Copy `.env.local.prod.dist` into `.env.local` (APP_ENV=prod)
+.PHONY: env.local.prod
+env.local.prod: .env.local.prod.dist ## Project (Environment): Copy `.env.local.prod.dist` into `.env.local` (APP_ENV=prod)
 	cp .env.local.prod.dist .env.local
 	$(MAKE) cc
 	$(MAKE) symfony.about
 
-.PHONY: env.test
-env.test: .env.local.test.dist ## Project (Environment): Copy `.env.local.test.dist` into `.env.local` (APP_ENV=test)
+.PHONY: env.local.test
+env.local.test: .env.local.test.dist ## Project (Environment): Copy `.env.local.test.dist` into `.env.local` (APP_ENV=test)
 	cp .env.local.test.dist .env.local
 	$(MAKE) cc
 	$(MAKE) symfony.about
 
-.PHONY: env.clean
-env.clean: .env.local ## Project (Environment): Remove `.env.local` and use default environment of `.env` (APP_ENV=dev)
-	rm .env.local
+.PHONY: env.local.clean
+env.local.clean: ## Project (Environment): Remove `.env.local` and use default vars & environment of `.env` (APP_ENV=dev)
+	rm -f .env.local
 	$(MAKE) cc
 	$(MAKE) symfony.about
 
@@ -39,13 +39,27 @@ sh: ## Project: app sh access.
 ##
 
 .PHONY: install
-install: docker.start dependencies assets data ready ## Project: Install all (dependencies, data, assets, ...).
+install: install.local.dev ## Project: alias of 'install.local.dev'.
+
+.PHONY: install.local.dev
+install.local.dev: docker.start env.local.dev dependencies assets data fixtures ready ## Project: Install all (dependencies, data, assets, ...) (APP_ENV=dev).
+
+.PHONY: install.local.prod
+install.local.prod: docker.start env.local.prod dependencies assets.prod data ready ## Project: Install all (dependencies, data, assets, ...) (APP_ENV=prod).
+
+##
 
 .PHONY: dependencies
 dependencies: composer.install yarn.install ## Project: Install the dependencies (only if there have been changes).
 
 .PHONY: assets
-assets: encore.compile ## Project: Generate all assets (webpack Encore, ...)
+assets: assets.dev ## Project: Alias of `assets.dev`
+
+.PHONY: assets.dev
+assets.dev: encore.compile ## Project: Generate all dev assets (webpack Encore, ...).
+
+.PHONY: assets.prod
+assets.prod: encore.deploy ## Project: Generate all production assets (webpack Encore, ...).
 
 .PHONY: data
 data: db.create ## Project: Install the data (db).
@@ -99,6 +113,8 @@ _build.clean: # Remove 'build' folder.
 ready: symfony.about.light
 	@echo -e "\033[1;42m"
 	@echo -e "READY!"
+	@echo -e "  APP_ENV:    $(APP_ENV) (value in Makefile)"
+	@echo -e
 	@echo -e "  Website:    \e[4m$(URL_WEBSITE)\\033[24m"
 	@echo -e "  API:        \e[4m$(URL_API)\\033[24m"
 	@echo -e "  phpMyAdmin: \e[4m$(URL_PHPMYADMIN)\\033[24m\033[0m"

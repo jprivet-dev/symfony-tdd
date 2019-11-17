@@ -139,9 +139,14 @@ PROJECT
   stop                           Project: Stop the current project.
   sh                             Project: app sh access.
 
-  install                        Project: Install all (dependencies, data, assets, ...).
+  install                        Project: Install all (dependencies, data, assets, ...) according to the current environment (APP_ENV).
+  install.dev                    Project: Force the installation for the "dev" environment.
+  install.prod                   Project: Force the installation for the "prod" environment.
+
   dependencies                   Project: Install the dependencies (only if there have been changes).
-  assets                         Project: Generate all assets (webpack Encore, ...)
+  assets                         Project: Generate all assets according to the current environment (APP_ENV).
+  assets.dev                     Project: Generate all assets (webpack Encore, ...) for the "dev" environment.
+  assets.prod                    Project: Generate all assets (webpack Encore, ...) for the "prod" environment.
   data                           Project: Install the data (db).
   fixtures                       Project: Load all fixtures.
 
@@ -152,19 +157,29 @@ PROJECT
   cc                             Project: Clear all caches.
   clean                          Project: [PROMPT Y/n] Remove build, vendor & node_modules folders.
 
+ENVIRONMENT
+  env.app                        Environment: Print current APP_ENV in Makefile.
+  env.local.dev                  Environment: Alias of `env.local.clean`.
+  env.local.prod                 Environment: Copy `.env.local.prod.dist` into `.env.local` (APP_ENV=prod)
+  env.local.test                 Environment: Copy `.env.local.test.dist` into `.env.local` (APP_ENV=test)
+  env.local.clean                Environment: Remove `.env.local` and use default vars & environment of `.env` (APP_ENV=dev)
+
 COMPOSER
   composer.install               Composer: Read the composer.json/composer.lock file from the current directory, resolve the dependencies, and install them into vendor.
   composer.install.prod          Composer: Idem `composer.install` without dev elements.
   composer.update                Composer: Get the latest versions of the dependencies and update the composer.lock file.
   composer.licenses              Composer: List the name, version and license of every package installed.
   composer.validate              Composer: Check if your composer.json is valid. | https://getcomposer.org/doc/03-cli.md#validate
+  composer.dumpenv.prod          Composer: Dump .env files for "prod".
 
 YARN
   yarn.install                   Yarn: Install all dependencies.
   yarn.upgrade                   Yarn: Upgrade packages to their latest version based on the specified range.
-  yarn.encore.compile            Webpack Encore: Compile assets once.
-  yarn.encore.watch              Webpack Encore: Recompile assets automatically when files change.
-  yarn.encore.deploy             Webpack Encore: On deploy, create a production build.
+
+ENCORE
+  encore.compile                 Webpack Encore: Compile assets once.
+  encore.watch                   Webpack Encore: Recompile assets automatically when files change.
+  encore.deploy                  Webpack Encore: On deploy, create a production build.
 
 SYMFONY
   symfony.cc                     Symfony: Clear cache (current env).

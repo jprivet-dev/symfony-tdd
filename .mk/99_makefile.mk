@@ -1,7 +1,6 @@
-.DEFAULT_GOAL := help
-
 ## MAKEFILE
 
+.DEFAULT_GOAL := help
 .PHONY: help
 help: ## Makefile: Print self-documented Makefile.
 	@grep -E '(^[a-zA-Z_-.]+[^:]+:.*##.*?$$)|(^#{2})' $(MAKEFILE_LIST) \

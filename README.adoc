@@ -37,19 +37,18 @@ endif::[]
 [#{BACK_TO_TOP_TARGET}]
 = Symfony 4 & TDD (dockerized workshop)
 
-|===
-| Branch 3+| Status
+image:https://img.shields.io/badge/branch-master-green["master", link="https://github.com/jprivet-dev/symfony-tdd"]
+image:https://travis-ci.org/jprivet-dev/symfony-tdd.svg?branch=master["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-tdd"]
+image:https://coveralls.io/repos/github/jprivet-dev/symfony-tdd/badge.svg?branch=master["Coverage Status", link="https://coveralls.io/github/jprivet-dev/symfony-tdd?branch=master"]
+image:https://api.codacy.com/project/badge/Grade/d83935eebccc4610870a0b52039914f3?branch=master["Codacy code quality", link="https://www.codacy.com/manual/jprivet-dev/symfony-tdd?utm_source=github.com&utm_medium=referral&utm_content=jprivet-dev/symfony-tdd&utm_campaign=Badge_Grade"]
+ +
+image:https://img.shields.io/badge/branch-dev-green["dev", link="https://github.com/jprivet-dev/symfony-tdd/tree/dev"]
+image:https://travis-ci.org/jprivet-dev/symfony-tdd.svg?branch=dev["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-tdd"]
+image:https://coveralls.io/repos/github/jprivet-dev/symfony-tdd/badge.svg?branch=dev["Coverage Status", link="https://coveralls.io/github/jprivet-dev/symfony-tdd?branch=dev"]
+image:https://api.codacy.com/project/badge/Grade/d83935eebccc4610870a0b52039914f3?branch=dev["Codacy code quality", link="https://www.codacy.com/manual/jprivet-dev/symfony-tdd?utm_source=github.com&utm_medium=referral&utm_content=jprivet-dev/symfony-tdd&utm_campaign=Badge_Grade"]
 
-| https://github.com/jprivet-dev/symfony-tdd[master]
-| image:https://travis-ci.org/jprivet-dev/symfony-tdd.svg?branch=master["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-tdd"]
-| image:https://coveralls.io/repos/github/jprivet-dev/symfony-tdd/badge.svg?branch=master["Coverage Status", link="https://coveralls.io/github/jprivet-dev/symfony-tdd?branch=master"]
-| image:https://api.codacy.com/project/badge/Grade/d83935eebccc4610870a0b52039914f3?branch=master["Codacy code quality", link="https://www.codacy.com/manual/jprivet-dev/symfony-tdd?utm_source=github.com&utm_medium=referral&utm_content=jprivet-dev/symfony-tdd&utm_campaign=Badge_Grade"]
-
-| https://github.com/jprivet-dev/symfony-tdd/tree/dev[dev]
-| image:https://travis-ci.org/jprivet-dev/symfony-tdd.svg?branch=dev["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-tdd"]
-| image:https://coveralls.io/repos/github/jprivet-dev/symfony-tdd/badge.svg?branch=dev["Coverage Status", link="https://coveralls.io/github/jprivet-dev/symfony-tdd?branch=dev"]
-| image:https://api.codacy.com/project/badge/Grade/d83935eebccc4610870a0b52039914f3?branch=dev["Codacy code quality", link="https://www.codacy.com/manual/jprivet-dev/symfony-tdd?utm_source=github.com&utm_medium=referral&utm_content=jprivet-dev/symfony-tdd&utm_campaign=Badge_Grade"]
-|===
+image:https://img.shields.io/badge/makefile-yes-blue[Makefile]
+image:https://img.shields.io/github/license/jprivet-dev/symfony-tdd[GitHub]
 
 toc::[]
 
@@ -140,9 +139,14 @@ PROJECT
   stop                           Project: Stop the current project.
   sh                             Project: app sh access.
 
-  install                        Project: Install all (dependencies, data, assets, ...).
+  install                        Project: Install all (dependencies, data, assets, ...) according to the current environment (APP_ENV).
+  install.dev                    Project: Force the installation for the "dev" environment.
+  install.prod                   Project: Force the installation for the "prod" environment.
+
   dependencies                   Project: Install the dependencies (only if there have been changes).
-  assets                         Project: Generate all assets (webpack Encore, ...)
+  assets                         Project: Generate all assets according to the current environment (APP_ENV).
+  assets.dev                     Project: Generate all assets (webpack Encore, ...) for the "dev" environment.
+  assets.prod                    Project: Generate all assets (webpack Encore, ...) for the "prod" environment.
   data                           Project: Install the data (db).
   fixtures                       Project: Load all fixtures.
 
@@ -153,19 +157,29 @@ PROJECT
   cc                             Project: Clear all caches.
   clean                          Project: [PROMPT Y/n] Remove build, vendor & node_modules folders.
 
+ENVIRONMENT
+  env.app                        Environment: Print current APP_ENV in Makefile.
+  env.local.dev                  Environment: Alias of `env.local.clean`.
+  env.local.prod                 Environment: Copy `.env.local.prod.dist` into `.env.local` (APP_ENV=prod)
+  env.local.test                 Environment: Copy `.env.local.test.dist` into `.env.local` (APP_ENV=test)
+  env.local.clean                Environment: Remove `.env.local` and use default vars & environment of `.env` (APP_ENV=dev)
+
 COMPOSER
   composer.install               Composer: Read the composer.json/composer.lock file from the current directory, resolve the dependencies, and install them into vendor.
   composer.install.prod          Composer: Idem `composer.install` without dev elements.
   composer.update                Composer: Get the latest versions of the dependencies and update the composer.lock file.
   composer.licenses              Composer: List the name, version and license of every package installed.
   composer.validate              Composer: Check if your composer.json is valid. | https://getcomposer.org/doc/03-cli.md#validate
+  composer.dumpenv.prod          Composer: Dump .env files for "prod".
 
 YARN
   yarn.install                   Yarn: Install all dependencies.
   yarn.upgrade                   Yarn: Upgrade packages to their latest version based on the specified range.
-  yarn.encore.compile            Webpack Encore: Compile assets once.
-  yarn.encore.watch              Webpack Encore: Recompile assets automatically when files change.
-  yarn.encore.deploy             Webpack Encore: On deploy, create a production build.
+
+ENCORE
+  encore.compile                 Webpack Encore: Compile assets once.
+  encore.watch                   Webpack Encore: Recompile assets automatically when files change.
+  encore.deploy                  Webpack Encore: On deploy, create a production build.
 
 SYMFONY
   symfony.cc                     Symfony: Clear cache (current env).
@@ -174,6 +188,7 @@ SYMFONY
   symfony.routes                 Symfony: Display current routes.
 
   symfony.about                  Symfony: Display information about the current project (Symfony, Kernel, PHP, Environment, ...).
+  symfony.about.light            Symfony: Display information about the current project (grep APP_ENV & DATABASE_NAME).
   symfony.env.vars               Symfony: List defined environment variables. | https://symfony.com/doc/current/configuration.html#configuration-based-on-environment-variables
 
   symfony.security.check         Symfony: Check security of your dependencies. | https://github.com/sensiolabs/security-checker
@@ -472,6 +487,13 @@ Ce premier cas simple permet d'illustrer ce que permettent les tests automatique
 ce dernier peut garantir au client que son implémentation *répond bien aux besoins dans le scope testé*,
 et que la fonctionnalité *réagit bien dans les cas limites retenus*.
 
+==== Exemple
+
+Pour une application de Planning Poker, nous avons besoins d'une méthode qui puisse nous retourner
+les 12 premiers termes de la suite de Fibonacci.
+
+Ces termes (1, 2, 3, 5, ..., 55, 89, 144) seront les valeurs de nos cartes agiles.
+
 ==== Ressoures
 
 . https://rosettacode.org/wiki/Fibonacci_sequence#PHP
@@ -492,12 +514,17 @@ et que la fonctionnalité *réagit bien dans les cas limites retenus*.
 
 {BACK_TO_TOP}
 
-=== [!] Injecter un *repository* au lieu de *l'entity manager*
+=== [x] Injecter un *repository* au lieu de *l'entity manager*
 
 ==== Principe
 
 Au lieu d'injecter dans un premier temps *l'entity manager* pour récupérer dans un deuxième temps les *repositories* dont nous avons besoin,
 nous pouvons injecter directement les *repositories* concernés.
+
+==== Exemple
+
+Pour récupérer et traiter les news enregistrées en base de données,
+le `NewsService.php` de l'exemple suivant importe et utilise `NewsRepository.php`.
 
 ==== Ressources
 
@@ -505,11 +532,14 @@ nous pouvons injecter directement les *repositories* concernés.
 
 ==== Fichiers
 
-. {uri-rel-file-base}src/Repository/AbstractRepository.php[]
+. {uri-rel-file-base}src/Controller/NewsController.php[]
+. {uri-rel-file-base}src/Service/NewsService.php[]
+. {uri-rel-file-base}src/Repository/NewsRepository.php[]
 
 ==== Tests
 
-. {uri-rel-file-base}tests/Unit/Repository/AbstractRepositoryTest.php[]
+. {uri-rel-file-base}tests/Unit/Service/NewsServiceTest.php[]
+. {uri-rel-file-base}tests/Functional/Controller/NewsControllerTest.php[]
 
 {BACK_TO_TOP}
 
@@ -523,10 +553,15 @@ nous pouvons injecter directement les *repositories* concernés.
 
 Le principe est de pouvoir tester unitairement les *méthodes concrètes* d'une classe abstraite.
 
+==== Exemple
+
+Nous partons d'un classe abstraite très simple pour réaliser un test élémentaire.
+
 ==== Ressources
 
 . https://phpunit.readthedocs.io/en/8.4/test-doubles.html#mocking-traits-and-abstract-classes
 . https://mnapoli.fr/anonymous-classes-in-tests/
+. https://www.php.net/manual/en/language.oop5.abstract.php
 
 ==== Fichiers
 
@@ -544,6 +579,10 @@ Le principe est de pouvoir tester unitairement les *méthodes concrètes* d'une 
 
 Le principe est de gérer et de tester facilement *tous les cas limites* auxquels pourrait-être
 exposé notre *custom validator*.
+
+==== Exemple
+
+...
 
 ==== Ressources
 
@@ -576,6 +615,10 @@ exposé notre *custom validator*.
 
 Le principe de ce premier niveau de test fonctionnel est *d'appeler chaque page* de l'application
 pour vérifier *qu'aucune d'entre elles ne retournent d'erreur*.
+
+==== Exemple
+
+...
 
 ==== Ressources
 
@@ -631,12 +674,16 @@ pour vérifier *qu'aucune d'entre elles ne retournent d'erreur*.
 
 {BACK_TO_TOP}
 
-=== [!] *Symfony Panther*: les bases
+=== [!] *Symfony Panther* : les bases (Vue.js, screenshoot, ...)
 
 ==== Principe
 
-L'idée est d'intégrer et d'étendre les codes en exemple sur la page
-https://symfony.com/blog/introducing-symfony-panther-a-browser-testing-and-web-scrapping-library-for-php[Symfony Panther: a Browser Testing and Web Scrapping Library for PHP]
+Le principe est de pouvoir tester fonctionnellement une page dans laquelle est utilisé du JavaScript.
+
+==== Exemple
+
+Nous testons fonctionnellement une page qui affiche une news, dont les commentaires
+sont récupérés et affichés dynamiquement avec un composant Vue.js.
 
 ==== Ressources
 
@@ -646,6 +693,10 @@ https://symfony.com/blog/introducing-symfony-panther-a-browser-testing-and-web-s
 ==== Fichiers
 
 . {uri-rel-file-base}src/Controller/NewsController.php[]
+. {uri-rel-file-base}src/Service/NewsService.php[]
+. {uri-rel-file-base}src/Repository/NewsRepository.php[]
+. {uri-rel-file-base}assets/comments/CommentsComponent.vue[]
+. {uri-rel-file-base}templates/news/news-item.html.twig[]
 
 ==== Tests
 
@@ -674,16 +725,21 @@ https://symfony.com/blog/introducing-symfony-panther-a-browser-testing-and-web-s
 
 === [!] *Makefile* : Utiliser les fichiers *.env* de Symfony
 
-https://symfony.com/doc/current/configuration.html#managing-multiple-env-files :
-
 [%header]
 |===
-| File | Machine | Environment | Commited
+| File | Scope | Environment | Commited
 a|`.env` | all machines | all | yes
 a|`.env.local` | machine-specific | all | should not be committed
 a|`.env.<env>` | all machines | <env> | yes
 a|`.env.<env>.local` | machine-specific | <env> | should not be committed
 |===
+
+==== Resources
+
+. https://symfony.com/doc/current/configuration.html#managing-multiple-env-files
+. https://symfony.com/doc/current/configuration.html#configuring-environment-variables-in-production
+. https://symfony.com/blog/new-in-symfony-4-2-define-env-vars-per-environment
+. https://symfony.com/doc/current/deployment.html
 
 {BACK_TO_TOP}
 
@@ -727,32 +783,32 @@ TIP: Retrouvez dans la documentation plus de commandes de suppression sur <<make
 Pour une gestion à long terme, il est préférable *d'orienter Docker vers un espace de travail plus volumineux* sur votre machine,
 avec le fichier de configuration `daemon.json`.
 
-1) *Stopper Docker* :
+===== 1) *Stopper Docker* :
 
 ```sh
 $ sudo service docker stop
 ```
 
-2) *Créer* le nouveau dossier de destination :
+===== 2) *Créer* le nouveau dossier de destination :
 
 ```sh
 $ sudo mkdir /data/home/jprivet/docker
 ```
 
-3) *Vérifier* si `daemon.json` existe :
+===== 3) *Vérifier* si `daemon.json` existe :
 
 ```sh
 $ ls /etc/docker
 key.json
 ```
 
-4) Si `daemon.json` n'existe pas, *le créer* :
+===== 4) Si `daemon.json` n'existe pas, *le créer* :
 
 ```sh
 $ sudo touch /etc/docker/daemon.json
 ```
 
-4 bis) *Injecter* l'option `"data-root": "/data/home/jprivet/docker"` dans le nouveau fichier `daemon.json` :
+===== 4 bis) *Injecter* l'option `"data-root": "/data/home/jprivet/docker"` dans le nouveau fichier `daemon.json` :
 
 ```sh
 $ sudo -- sh -c "echo '{\"data-root\": \"/data/home/jprivet/docker\"}' >> /etc/docker/daemon.json"
@@ -767,7 +823,7 @@ $ sudo vim /etc/docker/daemon.json
 ```
 ====
 
-5) *Vérifier* le contenu du fichier `daemon.json` :
+===== 5) *Vérifier* le contenu du fichier `daemon.json` :
 
 ```sh
 $ cat /etc/docker/daemon.json
@@ -775,7 +831,7 @@ $ cat /etc/docker/daemon.json
 
 ```
 
-6) *Redémarrer Docker* :
+===== 6) *Redémarrer Docker* :
 
 ```sh
 $ sudo service docker start
@@ -812,10 +868,14 @@ Au prochain `$ docker-compose up`, les éléments seront créés dans le nouveau
 . https://github.com/cleverage/eav-manager-starter-kit/blob/master/Makefile
 . https://github.com/torvalds/linux/blob/master/Makefile
 
+=== Badges
+
+. https://shields.io/
+
 {BACK_TO_TOP}
 
 == Licence
 
-`symfony-tdd` est publié sous {uri-license}[LICENSE] *MIT*.
+{uri-repo} est publié sous {uri-license}[licence MIT].
 
 {BACK_TO_TOP}

@@ -710,16 +710,21 @@ sont récupérés et affichés dynamiquement avec un composant Vue.js.
 
 === [!] *Makefile* : Utiliser les fichiers *.env* de Symfony
 
-https://symfony.com/doc/current/configuration.html#managing-multiple-env-files :
-
 [%header]
 |===
-| File | Machine | Environment | Commited
+| File | Scope | Environment | Commited
 a|`.env` | all machines | all | yes
 a|`.env.local` | machine-specific | all | should not be committed
 a|`.env.<env>` | all machines | <env> | yes
 a|`.env.<env>.local` | machine-specific | <env> | should not be committed
 |===
+
+==== Resources
+
+. https://symfony.com/doc/current/configuration.html#managing-multiple-env-files
+. https://symfony.com/doc/current/configuration.html#configuring-environment-variables-in-production
+. https://symfony.com/blog/new-in-symfony-4-2-define-env-vars-per-environment
+. https://symfony.com/doc/current/deployment.html
 
 {BACK_TO_TOP}
 

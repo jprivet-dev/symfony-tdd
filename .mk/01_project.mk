@@ -1,28 +1,5 @@
 ## PROJECT
 
-.PHONY: env.local.dev
-env.local.dev: env.local.clean ## Project (Environment): Alias of `env.local.clean`.
-
-.PHONY: env.local.prod
-env.local.prod: .env.local.prod.dist ## Project (Environment): Copy `.env.local.prod.dist` into `.env.local` (APP_ENV=prod)
-	cp .env.local.prod.dist .env.local
-	$(MAKE) cc
-	$(MAKE) symfony.about
-
-.PHONY: env.local.test
-env.local.test: .env.local.test.dist ## Project (Environment): Copy `.env.local.test.dist` into `.env.local` (APP_ENV=test)
-	cp .env.local.test.dist .env.local
-	$(MAKE) cc
-	$(MAKE) symfony.about
-
-.PHONY: env.local.clean
-env.local.clean: ## Project (Environment): Remove `.env.local` and use default vars & environment of `.env` (APP_ENV=dev)
-	rm -f .env.local
-	$(MAKE) cc
-	$(MAKE) symfony.about
-
-##
-
 .PHONY: start
 start: docker.start ready ## Project: Start the current project.
 
@@ -39,27 +16,24 @@ sh: ## Project: app sh access.
 ##
 
 .PHONY: install
-install: install.local.dev ## Project: alias of 'install.local.dev'.
-
-.PHONY: install.local.dev
-install.local.dev: docker.start env.local.dev dependencies assets data fixtures ready ## Project: Install all (dependencies, data, assets, ...) (APP_ENV=dev).
-
-.PHONY: install.local.prod
-install.local.prod: docker.start env.local.prod dependencies assets.prod data ready ## Project: Install all (dependencies, data, assets, ...) (APP_ENV=prod).
-
-##
+install: env.app docker.start dependencies assets data ready ## Project: Install all (dependencies, data, assets, ...) according to the environment (APP_ENV).
 
 .PHONY: dependencies
 dependencies: composer.install yarn.install ## Project: Install the dependencies (only if there have been changes).
 
 .PHONY: assets
-assets: assets.dev ## Project: Alias of `assets.dev`
+assets: env.app ## Project: Generate all assets according to the environment (APP_ENV).
+ifeq ($(APP_ENV),prod)
+	$(MAKE_S) assets.prod
+else
+	$(MAKE_S) assets.dev
+endif
 
 .PHONY: assets.dev
-assets.dev: encore.compile ## Project: Generate all dev assets (webpack Encore, ...).
+assets.dev: encore.compile ## Project: Generate all assets (webpack Encore, ...) for the "dev" environment.
 
 .PHONY: assets.prod
-assets.prod: encore.deploy ## Project: Generate all production assets (webpack Encore, ...).
+assets.prod: encore.deploy ## Project: Generate all assets (webpack Encore, ...) for the "prod" environment.
 
 .PHONY: data
 data: db.create ## Project: Install the data (db).

@@ -1,3 +1,5 @@
+MAKE_S = $(MAKE) -s
+
 USER_ID = $(shell id -u)
 GROUP_ID = $(shell id -g)
 

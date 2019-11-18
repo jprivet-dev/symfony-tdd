@@ -18,8 +18,9 @@ interface WebTestCaseInterface
     /**
      * Generate the file name from the uri of crawler.
      *
+     * @param array $debug
      * @param Crawler $crawler
      * @return string
      */
-    public function getScreenshotFile(Crawler $crawler): string;
+    public function getScreenshotFile(array $debug, Crawler $crawler): string;
 }

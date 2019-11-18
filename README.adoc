@@ -765,6 +765,8 @@ ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/run
 C'est une erreur qui apparait, en particulier, à la toute première installation et qui vous stoppera toute la procédure :
 le `symfony_tdd_db_service` est bien `done`, *mais l'initialisation de `MySQL` n'est qu'en à lui pas encore finie*.
 
+{BACK_TO_TOP}
+
 ==== Solution
 
 C'est pour cela qu'il existe la commande `db.wait` suivante :

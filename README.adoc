@@ -684,7 +684,7 @@ Le principe est de pouvoir tester fonctionnellement une page dans laquelle est u
 Nous testons fonctionnellement une page qui affiche une news, dont les commentaires
 sont récupérés et affichés dynamiquement avec un composant Vue.js.
 
-NOTE: Retrouvez les screenshots réalisés par ces tests dans le dossier `build/screenshots`.
+NOTE: Retrouvez les screenshots réalisés automatiquement par ces tests dans le dossier `build/tests/screenshots`.
 
 ==== Ressources
 

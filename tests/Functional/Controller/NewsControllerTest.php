@@ -3,7 +3,6 @@
 namespace App\Tests\Functional\Controller;
 
 use App\Tests\WebTestCase;
-use Symfony\Bundle\MakerBundle\Str;
 
 class NewsControllerTest extends WebTestCase
 {
@@ -53,6 +52,7 @@ class NewsControllerTest extends WebTestCase
         // Act
         $crawler = $client->request('GET', self::NEWS_SYMFONY_LIVE_URL);
         $client->waitFor(self::NEW_COMMENT_FORM_SELECTOR); // Wait for the form to appear, it may take some time because it's done in JS
+        $this->takeScreenshot($client, $crawler);
 
         $form = $crawler->filter(self::NEW_COMMENT_FORM_SELECTOR)->form([self::NEW_COMMENT_TEXTAREA_NAME => self::NEW_COMMENT_TITLE]);
         $client->submit($form);
@@ -61,5 +61,6 @@ class NewsControllerTest extends WebTestCase
         // Assert
         $this->assertSame(self::$baseUri . self::NEWS_SYMFONY_LIVE_URL, $client->getCurrentURL()); // Assert we're still on the same page
         $this->assertSame(self::NEW_COMMENT_TITLE, $crawler->filter(self::COMMENTS_LIST_FIRST_CHILD_SELECTOR)->text());
+        $this->takeScreenshot($client, $crawler);
     }
 }

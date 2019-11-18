@@ -351,17 +351,16 @@ Le projet utilise le *PHPUnit Bridge* de *Symfony* (https://symfony.com/doc/curr
 Lancez tous les tests avec la commande suivante :
 
 ```sh
-$ make phpunit
+$ make tests
 ...
 ...
 ...
 Testing
-................................                                  32 / 32 (100%)
+.........................................                         41 / 41 (100%)
 
-Time: 483 ms, Memory: 30.00 MB
+Time: 2.25 seconds, Memory: 24.00 MB
 
-OK (32 tests, 74 assertions)
-
+OK (41 tests, 91 assertions)
 ```
 
 [TIP]

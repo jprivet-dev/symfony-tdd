@@ -11,7 +11,10 @@ use Symfony\Component\Panther\PantherTestCase;
 abstract class WebTestCase extends PantherTestCase implements WebTestCaseInterface
 {
     const SCREENSHOT_FOLDER = 'build' . DIRECTORY_SEPARATOR . 'screenshot' . DIRECTORY_SEPARATOR;
-    const SCREENSHOT_EXTENSION = 'png';
+    const SCREENSHOT_EXTENSION = '.png';
+    const UNDERSCORE = '_';
+    const LINE = 'line';
+    const DOUBLE_COLON = '::';
 
     private $filesystem;
 
@@ -19,6 +22,7 @@ abstract class WebTestCase extends PantherTestCase implements WebTestCaseInterfa
     public function __construct($name = null, array $data = [], $dataName = '')
     {
         $this->filesystem = new Filesystem();
+        $this->filesystem->remove(self::SCREENSHOT_FOLDER);
         $this->filesystem->mkdir(self::SCREENSHOT_FOLDER);
 
         parent::__construct($name, $data, $dataName);
@@ -27,16 +31,30 @@ abstract class WebTestCase extends PantherTestCase implements WebTestCaseInterfa
     /** {@inheritDoc} */
     public function takeScreenshot(Client $client, Crawler $crawler): void
     {
-        $file = $this->getScreenshotFile($crawler);
+        $debug = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+        $file = $this->getScreenshotFile($debug, $crawler);
         $client->takeScreenshot($file);
     }
 
     /** {@inheritDoc} */
-    public function getScreenshotFile(Crawler $crawler): string
+    public function getScreenshotFile(array $debug, Crawler $crawler): string
     {
+        $line = $debug[0]['line'];
+        $class = $debug[1]['class'];
+        $function = $debug[1]['function'];
+
+        $count = 0;
         $uri = $crawler->getUri();
-        $filename = Str::asSnakeCase($uri);
-        $file = sprintf('%s%s.%s', self::SCREENSHOT_FOLDER, $filename, self::SCREENSHOT_EXTENSION);
+        $filename = Str::asCamelCase($class)
+            . self::DOUBLE_COLON . $function
+            . self::UNDERSCORE . self::LINE . $line
+            . self::UNDERSCORE . self::UNDERSCORE . Str::asSnakeCase($uri);
+
+        do {
+            $underscoreCount = $count > 0 ? self::UNDERSCORE . $count : '';
+            $file = self::SCREENSHOT_FOLDER . $filename . $underscoreCount . self::SCREENSHOT_EXTENSION;
+            $count++;
+        } while ($this->filesystem->exists($file));
 
         return $file;
     }

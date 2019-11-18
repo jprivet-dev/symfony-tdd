@@ -8,22 +8,52 @@ env.app: ## Environment: Print current APP_ENV in Makefile.
 env.local.dev: env.local.clean ## Environment: Alias of `env.local.clean`.
 
 .PHONY: env.local.prod
-env.local.prod: .env.local.prod.dist ## Environment: Copy `.env.local.prod.dist` into `.env.local` (APP_ENV=prod)
-	cp .env.local.prod.dist .env.local
-	$(MAKE_S) composer.dumpenv.prod
-	$(MAKE_S) env.ready
+env.local.prod: .env.local.prod.dist ## Environment: [PROMPT Y/n] Copy `.env.local.prod.dist` into `.env.local` (APP_ENV=prod)
+	@while [ -z "$$CONTINUE" ]; do \
+		read -r -p "Create .env.local from .env.local.prod.dist ? [Y/n] " CONTINUE; \
+	done ; \
+	if [ $$CONTINUE == "Y" ]; \
+	then \
+		cp .env.local.prod.dist .env.local; \
+		$(MAKE_S) composer.dumpenv.prod; \
+		$(MAKE_S) env.ready; \
+		echo -e "\033[1;42m.env.local and .env.local.php created.\033[0m"; \
+	else \
+		echo -e "\033[1;43mAction cancelled.\033[0m"; \
+		exit 1; \
+	fi
 
 .PHONY: env.local.test
 env.local.test: .env.local.test.dist ## Environment: Copy `.env.local.test.dist` into `.env.local` (APP_ENV=test)
-	cp .env.local.test.dist .env.local
-	$(MAKE_S) env.ready
+	@while [ -z "$$CONTINUE" ]; do \
+		read -r -p "Create .env.local from .env.local.test.dist ? [Y/n] " CONTINUE; \
+	done ; \
+	if [ $$CONTINUE == "Y" ]; \
+	then \
+		cp .env.local.test.dist .env.local; \
+		$(MAKE_S) env.ready; \
+		echo -e "\033[1;42m.env.local created.\033[0m"; \
+	else \
+		echo -e "\033[1;43mAction cancelled.\033[0m"; \
+		exit 1; \
+	fi
 
 .PHONY: env.local.clean
 env.local.clean: ## Environment: Remove `.env.local` and use default vars & environment of `.env` (APP_ENV=dev)
-	rm -f .env.local.php
-	rm -f .env.local
-	rm -f .env.*.local
-	$(MAKE_S) env.ready
+	@while [ -z "$$CONTINUE" ]; do \
+		read -r -p "Remove .env.local and use .env by default ? [Y/n] " CONTINUE; \
+	done ; \
+	if [ $$CONTINUE == "Y" ]; \
+	then \
+		rm -f .env.local; \
+		rm -f .env.local.php; \
+		rm -f .env.*.local; \
+		$(MAKE_S) env.ready; \
+		echo -e "\033[1;42m.env.local, .env.local.php and .env.*.local removed.\033[0m"; \
+	else \
+		echo -e "\033[1;43mAction cancelled.\033[0m"; \
+		exit 1; \
+	fi
 
 #
 # INTERNAL

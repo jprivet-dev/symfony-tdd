@@ -69,17 +69,16 @@ coverage: phpunit.coverage phpunit.coverage.open ## Project: Generate & open all
 cc: symfony.cc ## Project: Clear all caches.
 
 .PHONY: clean
-clean: ## Project: [PROMPT Y/n] Remove build, vendor & node_modules folders.
+clean: ## Project: [PROMPT yN] Remove build, vendor & node_modules folders.
 	@while [ -z "$$CONTINUE" ]; do \
-		read -r -p "Remove build, vendor & node_modules folders? [Y/n] " CONTINUE; \
+		read -r -p "Remove build, vendor & node_modules folders? [yN] " CONTINUE; \
 	done ; \
-	if [ $$CONTINUE == "Y" ]; \
+	if [ $$CONTINUE == "y" ]; \
 	then \
 		rm -rf build vendor node_modules; \
 		echo -e "\033[1;42mbuild, vendor & node_modules removed\033[0m"; \
 	else \
-		echo -e "\033[1;43mAction cancelled\033[0m"; \
-		exit 1; \
+		$(MAKE_S) cancelled; \
 	fi; \
 
 #
@@ -103,3 +102,8 @@ ready: symfony.about
 	@echo -e "  phpMyAdmin: \e[4m$(URL_PHPMYADMIN)\\033[24m\033[0m"
 	@echo
 	@$(MAKE_S) env.app
+
+.PHONY: cancelled
+cancelled:
+	echo -e "\033[1;41mAction cancelled.\033[0m"
+	exit 1

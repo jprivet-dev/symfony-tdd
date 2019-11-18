@@ -3,6 +3,7 @@
 namespace App\Tests\Functional\Controller;
 
 use App\Tests\WebTestCase;
+use Symfony\Bundle\MakerBundle\Str;
 
 class NewsControllerTest extends WebTestCase
 {
@@ -31,7 +32,7 @@ class NewsControllerTest extends WebTestCase
         // Assert
         $this->assertCount(self::NEWS_COUNT, $crawler->filter(self::NEWS_TITLE_SELECTOR));
         $this->assertSame([self::NEWS_WEEK_601_SLUG, self::NEWS_SYMFONY_LIVE_SLUG], $crawler->filter('article')->extract('id'));
-
+        $this->takeScreenshot($client, $crawler);
 
         // Arrange
         $link = $crawler->selectLink(self::NEWS_SYMFONY_LIVE_TITLE)->link();
@@ -41,6 +42,7 @@ class NewsControllerTest extends WebTestCase
 
         // Assert
         $this->assertSame(self::NEWS_SYMFONY_LIVE_TITLE, $crawler->filter(self::NEWS_TITLE_SELECTOR)->text());
+        $this->takeScreenshot($client, $crawler);
     }
 
     public function testComments()

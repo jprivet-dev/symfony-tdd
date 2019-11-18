@@ -735,6 +735,8 @@ a|`.env.<env>.local` | machine-specific | <env> | should not be committed
 
 ==== Resources
 
+. @see https://www.gnu.org/software/make/manual/html_node/Environment.html
+. @see https://github.com/symfony/recipes/issues/18
 . https://symfony.com/doc/current/configuration.html#managing-multiple-env-files
 . https://symfony.com/doc/current/configuration.html#configuring-environment-variables-in-production
 . https://symfony.com/blog/new-in-symfony-4-2-define-env-vars-per-environment

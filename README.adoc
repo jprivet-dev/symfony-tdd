@@ -744,6 +744,8 @@ a|`.env.<env>.local` | machine-specific | <env> | should not be committed
 
 === [x] *Makefile* : *Script* d'attente de disponibilité de la base de données
 
+==== Problématique rencontrée
+
 Après avoir démarré les conteneurs avec, par exemple, `$ make install` :
 
 ```
@@ -761,7 +763,9 @@ ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/run
 ```
 
 C'est une erreur qui apparait, en particulier, à la toute première installation et qui vous stoppera toute la procédure :
-le `symfony_tdd_db_service` est bien `done`, *mais l'initialisation de `MySQL` n'est qu'en à lui pas encore fini*.
+le `symfony_tdd_db_service` est bien `done`, *mais l'initialisation de `MySQL` n'est qu'en à lui pas encore finie*.
+
+==== Solution
 
 C'est pour cela qu'il existe la commande `db.wait` suivante :
 

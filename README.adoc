@@ -742,7 +742,45 @@ a|`.env.<env>.local` | machine-specific | <env> | should not be committed
 
 {BACK_TO_TOP}
 
-=== [!] *Makefile* : *Script* d'attente de disponibilité de la BD pendant l'installation
+=== [x] *Makefile* : *Script* d'attente de disponibilité de la base de données
+
+Après avoir démarré les conteneurs avec, par exemple, `$ make install` :
+
+```
+Starting symfony_tdd_db_service    ... done
+Starting symfony_tdd_app_service ... done
+Starting symfony_tdd_nginx_service      ... done
+Starting symfony_tdd_phpmyadmin_service ... done
+Starting symfony_tdd_h2_proxy_service   ... done
+```
+
+Vous pouvez avoir, tout juste après, *l'erreur suivante* qui s'affiche au moment de la création de la base :
+
+```
+ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)
+```
+
+C'est une erreur qui apparait, en particulier, à la toute première installation et qui vous stoppera toute la procédure :
+le `symfony_tdd_db_service` est bien `done`, *mais l'initialisation de `MySQL` n'est qu'en à lui pas encore fini*.
+
+C'est pour cela qu'il existe la commande `db.wait` suivante :
+
+```
+PHONY: db.wait
+db.wait: # Database: Wait database...
+	@$(PHP) -r 'echo "\e[0;43mWait database $(DATABASE_HOST):$(DATABASE_PORT)...\e[0m\n"; \
+	set_time_limit(15); for(;;) { if(@fsockopen($(DATABASE_HOST), $(DATABASE_PORT))) { break; }}; echo "\e[0;42mDatabase ready!\e[0m\n";'
+```
+
+Cette commande peut être *couplée à toutes les commandes Makefile ayant une action avec la base*.
+Comme dans le cas suivant par exemple, où l'on attend que la base soit disponible avant
+de vouloir s'y connecter avec le terminal :
+
+```
+PHONY: db.mysql
+db.mysql: db.wait ## Database: MySQL access (mysql> ...).
+	$(EXEC_DB) bash -c "mysql -u $(DATABASE_USER) $(DATABASE_NAME)"
+```
 
 {BACK_TO_TOP}
 

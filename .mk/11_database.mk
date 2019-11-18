@@ -37,6 +37,7 @@ PHONY: db.wait
 # Error at the very first execution of '$ docker-compose exec db bash -c "mysql -u root symfony_tdd_db"'
 # ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)
 # The second time the command is executed, everything works !
+#
 # SOLUTION:
 # This error occurs when the initialization of MySQL is not complete.
 # See 'No connections until MySQL init completes' on https://hub.docker.com/_/mysql

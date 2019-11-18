@@ -155,14 +155,14 @@ PROJECT
   coverage                       Project: Generate & open all code coverage reports.
 
   cc                             Project: Clear all caches.
-  clean                          Project: [PROMPT Y/n] Remove build, vendor & node_modules folders.
+  clean                          Project: [PROMPT yN] Remove build, vendor & node_modules folders.
 
 ENVIRONMENT
   env.app                        Environment: Print current APP_ENV in Makefile.
   env.local.dev                  Environment: Alias of `env.local.clean`.
-  env.local.prod                 Environment: Copy `.env.local.prod.dist` into `.env.local` (APP_ENV=prod)
-  env.local.test                 Environment: Copy `.env.local.test.dist` into `.env.local` (APP_ENV=test)
-  env.local.clean                Environment: Remove `.env.local` and use default vars & environment of `.env` (APP_ENV=dev)
+  env.local.prod                 Environment: [PROMPT yN] Copy '.env.local.prod.dist' into '.env.local' (APP_ENV=prod)
+  env.local.test                 Environment: [PROMPT yN] Copy '.env.local.test.dist' into '.env.local' (APP_ENV=test)
+  env.local.clean                Environment: [PROMPT yN] Remove '.env.local' and use default vars & environment of '.env' (APP_ENV=dev)
 
 COMPOSER
   composer.install               Composer: Read the composer.json/composer.lock file from the current directory, resolve the dependencies, and install them into vendor.
@@ -188,7 +188,6 @@ SYMFONY
   symfony.routes                 Symfony: Display current routes.
 
   symfony.about                  Symfony: Display information about the current project (Symfony, Kernel, PHP, Environment, ...).
-  symfony.about.light            Symfony: Display information about the current project (grep APP_ENV & DATABASE_NAME).
   symfony.env.vars               Symfony: List defined environment variables. | https://symfony.com/doc/current/configuration.html#configuration-based-on-environment-variables
 
   symfony.security.check         Symfony: Check security of your dependencies. | https://github.com/sensiolabs/security-checker
@@ -252,15 +251,15 @@ DOCKER
   docker.build.force             Docker: Stop, remove & rebuild current containers.
   docker.stop                    Docker: Stop running containers without removing them. | https://docs.docker.com/compose/reference/stop/
   docker.stop.all                Docker: Stop all projects running containers without removing them. | https://docs.docker.com/compose/reference/stop/
-  docker.down                    Docker: [PROMPT Y/n] Stop containers and remove containers, networks, volumes, and images created by up. | https://docs.docker.com/compose/reference/down/
+  docker.down                    Docker: [PROMPT yN] Stop containers and remove containers, networks, volumes, and images created by up. | https://docs.docker.com/compose/reference/down/
 
   docker.list                    Docker: List containers. | https://docs.docker.com/engine/reference/commandline/ps/
   docker.list.stopped            Docker: List all stopped containers.
-  docker.remove                  Docker: [PROMPT Y/n] Stop & Remove service containers (only current project). | https://docs.docker.com/compose/reference/rm/
-  docker.remove.all              Docker: [PROMPT Y/n] Remove all stopped service containers. | https://docs.docker.com/compose/reference/rm/
+  docker.remove                  Docker: [PROMPT yN] Stop & Remove service containers (only current project). | https://docs.docker.com/compose/reference/rm/
+  docker.remove.all              Docker: [PROMPT yN] Remove all stopped service containers. | https://docs.docker.com/compose/reference/rm/
   docker.images                  Docker: List images. | https://docs.docker.com/engine/reference/commandline/images/
-  docker.images.remove.all       Docker: [PROMPT Y/n] Remove all unused images (for all projects!).
-  docker.clean                   Docker: [PROMPT Y/n] Remove unused data. | https://docs.docker.com/engine/reference/commandline/system_prune/
+  docker.images.remove.all       Docker: [PROMPT yN] Remove all unused images (for all projects!).
+  docker.clean                   Docker: [PROMPT yN] Remove unused data. | https://docs.docker.com/engine/reference/commandline/system_prune/
 
   docker.env                     Docker: Show environment variables.
   docker.ip                      Docker: Get ip Gateway.

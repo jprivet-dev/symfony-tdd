@@ -10,7 +10,7 @@ use Symfony\Component\Panther\PantherTestCase;
 
 abstract class WebTestCase extends PantherTestCase implements WebTestCaseInterface
 {
-    const SCREENSHOT_FOLDER = 'build' . DIRECTORY_SEPARATOR . 'screenshots' . DIRECTORY_SEPARATOR;
+    const SCREENSHOT_FOLDER = 'build' . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'screenshots' . DIRECTORY_SEPARATOR;
     const SCREENSHOT_EXTENSION = '.png';
     const UNDERSCORE = '_';
     const LINE = 'line';

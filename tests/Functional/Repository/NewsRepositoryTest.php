@@ -5,12 +5,9 @@ namespace App\Tests\Functional\Repository;
 use App\Entity\News;
 use App\Repository\NewsRepository;
 use App\Tests\Functional\RepositoryWebTestCase;
-use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 
 class NewsRepositoryTest extends RepositoryWebTestCase
 {
-    use RefreshDatabaseTrait;
-
     const COUNT_ALL = 3;
     const COUNT_PUBLISHED = 2;
     const SLUG = 'symfony-live-usa-2018';

@@ -86,9 +86,11 @@ $ make install
 ...
 ...
 READY!
-Website:    http://localhost
-API:        http://localhost/api
-phpMyAdmin: http://localhost:8088
+  Website:    http://localhost
+  API:        http://localhost/api
+  phpMyAdmin: http://localhost:8088
+
+APP_ENV=dev
 ```
 
 [TIP]

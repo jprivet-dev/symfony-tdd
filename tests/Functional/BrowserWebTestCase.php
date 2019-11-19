@@ -8,7 +8,7 @@ use Symfony\Component\Panther\Client;
 use Symfony\Component\Panther\DomCrawler\Crawler;
 use Symfony\Component\Panther\PantherTestCase;
 
-abstract class WebTestCase extends PantherTestCase implements WebTestCaseInterface
+abstract class BrowserWebTestCase extends PantherTestCase implements WebTestCaseInterface
 {
     const SHORT_TIMEOUT_IN_SECOND = 3;
 

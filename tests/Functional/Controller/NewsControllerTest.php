@@ -2,10 +2,10 @@
 
 namespace App\Tests\Functional\Controller;
 
-use App\Tests\Functional\WebTestCase;
+use App\Tests\Functional\BrowserWebTestCase;
 use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 
-class NewsControllerTest extends WebTestCase
+class NewsControllerTest extends BrowserWebTestCase
 {
     use RefreshDatabaseTrait;
 

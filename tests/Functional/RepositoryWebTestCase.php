@@ -2,8 +2,12 @@
 
 namespace App\Tests\Functional;
 
+use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
+
 abstract class RepositoryWebTestCase extends WebTestCase
 {
+    use RefreshDatabaseTrait;
+
     protected $repository;
     protected $entityManager;
 

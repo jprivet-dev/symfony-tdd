@@ -555,9 +555,17 @@ le `NewsService.php` de l'exemple suivant importe et utilise `NewsRepository.php
 === [!] Créer et tester un *repository*
 
 ==== Principe
+
 ==== Exemple
+
 ==== Fichiers
+
+. {uri-rel-file-base}src/Repository/NewsRepository.php[]
+
 ==== Tests
+
+. {uri-rel-file-base}tests/Functional/Repository/NewsRepositoryTest.php[]
+
 ==== Resources
 
 . https://symfony.com/doc/current/testing/database.html#functional-testing-of-a-doctrine-repository

@@ -3,7 +3,6 @@
 namespace App\Tests\Functional;
 
 use App\Params\ParamsRoutes;
-use App\Tests\WebTestCase;
 
 class SmokeTest extends WebTestCase
 {

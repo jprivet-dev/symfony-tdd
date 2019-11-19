@@ -4,7 +4,7 @@ namespace App\Tests\Functional\Repository;
 
 use App\Entity\News;
 use App\Repository\NewsRepository;
-use App\Tests\RepositoryWebTestCase;
+use App\Tests\Functional\RepositoryWebTestCase;
 use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 
 class NewsRepositoryTest extends RepositoryWebTestCase

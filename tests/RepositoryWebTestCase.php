@@ -2,7 +2,9 @@
 
 namespace App\Tests;
 
-abstract class RepositoryTestCase extends WebTestCase
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as SymfonyWebTestCase;
+
+abstract class RepositoryTestCase extends SymfonyWebTestCase
 {
     protected $repository;
     protected $entityManager;

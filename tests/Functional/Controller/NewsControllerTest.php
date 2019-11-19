@@ -3,9 +3,12 @@
 namespace App\Tests\Functional\Controller;
 
 use App\Tests\WebTestCase;
+use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 
 class NewsControllerTest extends WebTestCase
 {
+    use RefreshDatabaseTrait;
+
     const NEWS_URL = '/news';
     const NEWS_WEEK_601_SLUG = 'week-601';
     const NEWS_SYMFONY_LIVE_SLUG = 'symfony-live-usa-2018';
@@ -51,12 +54,12 @@ class NewsControllerTest extends WebTestCase
 
         // Act
         $crawler = $client->request('GET', self::NEWS_SYMFONY_LIVE_URL);
-        $client->waitFor(self::NEW_COMMENT_FORM_SELECTOR); // Wait for the form to appear, it may take some time because it's done in JS
+        $client->waitFor(self::NEW_COMMENT_FORM_SELECTOR, self::SHORT_TIMEOUT_IN_SECOND); // Wait for the form to appear, it may take some time because it's done in JS
         $this->takeScreenshot($client, $crawler);
 
         $form = $crawler->filter(self::NEW_COMMENT_FORM_SELECTOR)->form([self::NEW_COMMENT_TEXTAREA_NAME => self::NEW_COMMENT_TITLE]);
         $client->submit($form);
-        $client->waitFor(self::COMMENTS_LIST_SELECTOR); // Wait for the comments to appear
+        $client->waitFor(self::COMMENTS_LIST_SELECTOR, self::SHORT_TIMEOUT_IN_SECOND); // Wait for the comments to appear
 
         // Assert
         $this->assertSame(self::$baseUri . self::NEWS_SYMFONY_LIVE_URL, $client->getCurrentURL()); // Assert we're still on the same page

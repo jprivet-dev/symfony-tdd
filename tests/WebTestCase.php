@@ -14,9 +14,9 @@ abstract class WebTestCase extends PantherTestCase implements WebTestCaseInterfa
 
     const SCREENSHOT_FOLDER = 'build' . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'screenshots' . DIRECTORY_SEPARATOR;
     const SCREENSHOT_EXTENSION = '.png';
+    const DOUBLE_COLON = '::';
     const UNDERSCORE = '_';
     const LINE = 'line';
-    const DOUBLE_COLON = '::';
 
     private $filesystem;
 

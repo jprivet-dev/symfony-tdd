@@ -543,7 +543,17 @@ le `NewsService.php` de l'exemple suivant importe et utilise `NewsRepository.php
 
 {BACK_TO_TOP}
 
-=== [ ] Créer et tester un *repository*
+=== [!] Créer et tester un *repository*
+
+==== Principe
+==== Exemple
+==== Fichiers
+==== Tests
+==== Resources
+
+. https://symfony.com/doc/current/testing/database.html#functional-testing-of-a-doctrine-repository
+. https://matthiasnoback.nl/2018/09/test-driving-repository-classes-part-1-queries/
+. https://matthiasnoback.nl/2018/10/test-driving-repository-classes-part-2-storing-and-retrieving-entities/
 
 {BACK_TO_TOP}
 

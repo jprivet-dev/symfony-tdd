@@ -2,13 +2,10 @@
 
 namespace App\Tests\Functional\Controller;
 
-use App\Tests\Functional\RealBrowserWebTestCase;
-use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
+use App\Tests\Functional\ControllerWebTestCase;
 
-class NewsControllerTest extends RealBrowserWebTestCase
+class NewsControllerTest extends ControllerWebTestCase
 {
-    use RefreshDatabaseTrait;
-
     const NEWS_URL = '/news';
     const NEWS_WEEK_601_SLUG = 'week-601';
     const NEWS_SYMFONY_LIVE_SLUG = 'symfony-live-usa-2018';

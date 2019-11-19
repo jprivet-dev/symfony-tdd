@@ -350,9 +350,15 @@ IMPORTANT: Le fichier {uri-rel-file-base}.bash_aliases[] ne peut être chargé a
 
 Le projet utilise le *PHPUnit Bridge* de *Symfony* (https://symfony.com/doc/current/testing.html).
 
-Lancez tous les tests avec la commande suivante :
+Pour lancer les tests, chargez d'abord les fixtures :
 
-```sh
+```
+$ make fixtures
+```
+
+Ensuite exécutez les tests :
+
+```
 $ make phpunit
 ...
 ...
@@ -367,12 +373,15 @@ OK (41 tests, 91 assertions)
 
 [TIP]
 ====
-Si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible, lancer les tests avec la commande  suivante :
+Si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible, lancer les tests avec les commandes  suivantes :
 
 ```sh
+$ docker-compose exec app php bin/console hautelook:fixtures:load
 $ docker-compose exec app ./vendor/bin/simple-phpunit
 ```
 ====
+
+NOTE: La commande `$ make tests` charge les fixtures et lance tous les tests disponibles.
 
 {BACK_TO_TOP}
 

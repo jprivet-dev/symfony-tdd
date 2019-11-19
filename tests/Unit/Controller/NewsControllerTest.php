@@ -5,7 +5,7 @@ namespace App\Tests\Unit\Controller;
 use App\Controller\NewsController;
 use App\Entity\News;
 use App\Service\NewsServiceInterface;
-use App\Tests\TestCase;
+use App\Tests\Unit\TestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;

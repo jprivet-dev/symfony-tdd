@@ -2,7 +2,7 @@
 
 namespace App\Tests\Unit\Util\Example;
 
-use App\Tests\TestCase;
+use App\Tests\Unit\TestCase;
 use App\Util\Example\AbstractClass;
 
 class AbstractClassTest extends TestCase

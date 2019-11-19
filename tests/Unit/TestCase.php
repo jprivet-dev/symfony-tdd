@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Tests;
+namespace App\Tests\Unit;
 
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase as SymfonyTestCase;
 

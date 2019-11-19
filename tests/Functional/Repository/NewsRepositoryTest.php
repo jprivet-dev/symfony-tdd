@@ -10,7 +10,10 @@ class NewsRepositoryTest extends RepositoryWebTestCase
 {
     const COUNT_ALL = 3;
     const COUNT_PUBLISHED = 2;
-    const SLUG = 'symfony-live-usa-2018';
+
+    const SLUG_WRONG = '__x_x_x__';
+    const SLUG_PUBLISHED = 'symfony-live-usa-2018';
+    const SLUG_NOT_PUBLISHED = 'not-published-news';
 
     protected function getRepositoryClass()
     {
@@ -38,7 +41,7 @@ class NewsRepositoryTest extends RepositoryWebTestCase
     public function testFindOnePublishedBySlug()
     {
         // Arrange
-        $slug = self::SLUG;
+        $slug = self::SLUG_PUBLISHED;
 
         // Act
         $news = $this->repository->findOnePublishedBySlug($slug);
@@ -48,15 +51,22 @@ class NewsRepositoryTest extends RepositoryWebTestCase
         $this->assertSame($slug, $news->getSlug());
     }
 
-    public function testFindOnePublishedBySlugWrongSlug()
+    /**
+     * @dataProvider slugProvider
+     * @param string $slug
+     */
+    public function testFindOnePublishedReturnsNull(string $slug)
     {
-        // Arrange
-        $slug = '_x_x_x_';
-
         // Act
         $news = $this->repository->findOnePublishedBySlug($slug);
 
         // Assert
         $this->assertNull($news);
+    }
+
+    public function slugProvider()
+    {
+        yield 'Wrong slug' => [self::SLUG_WRONG];
+        yield 'Good slug but news does not published' => [self::SLUG_NOT_PUBLISHED];
     }
 }

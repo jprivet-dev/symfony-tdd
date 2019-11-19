@@ -10,6 +10,8 @@ use Symfony\Component\Panther\PantherTestCase;
 
 abstract class WebTestCase extends PantherTestCase implements WebTestCaseInterface
 {
+    const SHORT_TIMEOUT_IN_SECOND = 3;
+
     const SCREENSHOT_FOLDER = 'build' . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'screenshots' . DIRECTORY_SEPARATOR;
     const SCREENSHOT_EXTENSION = '.png';
     const UNDERSCORE = '_';

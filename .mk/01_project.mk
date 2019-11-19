@@ -58,7 +58,7 @@ fixtures: alice.fixtures.load ## Project: Load all fixtures.
 check: install.dev composer.validate symfony.security.check db.validate tests ## Project: Launch of install / Composer, Security and DB validations / Tests
 
 .PHONY: tests
-tests: phpunit ## Project: Launch all tests.
+tests: fixtures phpunit ## Project: Launch all tests.
 
 .PHONY: coverage
 coverage: phpunit.coverage phpunit.coverage.open ## Project: Generate & open all code coverage reports.

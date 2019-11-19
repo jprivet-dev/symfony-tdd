@@ -344,7 +344,7 @@ IMPORTANT: Le fichier {uri-rel-file-base}.bash_aliases[] ne peut être chargé a
 
 {BACK_TO_TOP}
 
-== *PHPUnit* : gérer les tests automatiques PHP
+== *PHPUnit* : gérer les tests automatiques PHP [[phpunit]]
 
 === Lancer les tests avec *PHPUnit*
 
@@ -356,7 +356,7 @@ Pour lancer les tests, chargez d'abord les fixtures :
 $ make fixtures
 ```
 
-Ensuite exécutez les tests :
+Exécutez ensuite les tests :
 
 ```
 $ make phpunit
@@ -556,7 +556,19 @@ le `NewsService.php` de l'exemple suivant importe et utilise `NewsRepository.php
 
 ==== Principe
 
+Le principe est de pouvoir vérifier la construction et le comportement des requêtes
+d'un repository, en les testant directement sur la base de données.
+
 ==== Exemple
+
+Le repository `NewsRepository` permet de traiter des news. Nous voulons vérifier les points suivants :
+
+. Récupérer toutes les news
+. Récupérer uniquement celles qui sont publiées
+. Récupérer par son slug une news publiée
+. Retourner une valeur null si le slug est inconnu ou si la news n'est pas publiée
+
+TIP: Nous devons injecter des fixtures dans la base de données pour réaliser ces tests. Voir <<phpunit>>.
 
 ==== Fichiers
 
@@ -826,7 +838,7 @@ db.mysql: db.wait ## Database: MySQL access (mysql> ...).
 
 {BACK_TO_TOP}
 
-=== [ ] *Contrôleurs* : peut-on les *tester unitairement* ?
+=== [!] *Contrôleurs* : doit-on les *tester unitairement* ?
 
 ==== Ressources
 

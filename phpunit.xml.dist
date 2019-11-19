@@ -27,6 +27,9 @@
     <filter>
         <whitelist>
             <directory>src</directory>
+            <exclude>
+                <directory>src/Migrations</directory>
+            </exclude>
         </whitelist>
     </filter>
 

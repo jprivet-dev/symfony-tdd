@@ -5,7 +5,7 @@ namespace App\Tests\Functional;
 use Symfony\Component\Panther\Client;
 use Symfony\Component\Panther\DomCrawler\Crawler;
 
-interface WebTestCaseInterface
+interface BrowserWebTestCaseInterface
 {
     /**
      * Takes a screenshot.

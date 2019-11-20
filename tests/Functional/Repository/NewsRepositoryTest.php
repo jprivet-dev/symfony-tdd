@@ -38,7 +38,7 @@ class NewsRepositoryTest extends RepositoryWebTestCase
     public function testFindOnePublishedBySlug()
     {
         // Arrange
-        $news = $this->getNewsByFixtureId('news_published_1');
+        $news = $this->fixtures()->news('news_published_1');
         $slug = $news->getSlug();
 
         // Act
@@ -64,7 +64,7 @@ class NewsRepositoryTest extends RepositoryWebTestCase
     public function testFindOnePublishedWithNotPublishedNewsReturnsNull()
     {
         // Arrange
-        $news = $this->getNewsByFixtureId('news_not_published_1');
+        $news = $this->fixtures()->news('news_not_published_1');
         $slug = $news->getSlug();
 
         // Act

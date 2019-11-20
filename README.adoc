@@ -935,7 +935,7 @@ Au prochain `$ docker-compose up`, les éléments seront créés dans le nouveau
 
 {BACK_TO_TOP}
 
-=== [!] *Fixtures* : comment les récupérer dans vos tests par leur ids ?
+=== [!] *Fixtures* : comment, dans son test, en récupérer une avec son id ?
 
 ==== Exemple : récupérer le slug d'une news
 

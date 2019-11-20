@@ -3,6 +3,7 @@
 namespace App\Tests\Functional;
 
 use App\Tests\Shared\Fixtures\FixturesTrait;
+use App\Tests\Shared\Functional\WebTestCase;
 use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 
 abstract class RepositoryWebTestCase extends WebTestCase

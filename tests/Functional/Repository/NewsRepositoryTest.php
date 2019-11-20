@@ -10,7 +10,7 @@ class NewsRepositoryTest extends RepositoryWebTestCase
 {
     const COUNT_ALL = 3;
     const COUNT_PUBLISHED = 2;
-    const SLUG_WRONG = '__x_x_x__';
+    const WRONG_SLUG = '__x_x_x__';
 
     protected function getRepositoryClass()
     {
@@ -52,7 +52,7 @@ class NewsRepositoryTest extends RepositoryWebTestCase
     public function testFindOnePublishedWithWrongSlugReturnsNull()
     {
         // Arrange
-        $slug = self::SLUG_WRONG;
+        $slug = self::WRONG_SLUG;
 
         // Act
         $news = $this->repository->findOnePublishedBySlug($slug);

@@ -3,6 +3,7 @@
 namespace App\Tests\Functional;
 
 use App\Params\ParamsRoutes;
+use App\Tests\Shared\Functional\RealBrowserWebTestCase;
 
 class SmokeTest extends RealBrowserWebTestCase
 {

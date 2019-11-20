@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Tests\Functional;
+namespace App\Tests\Shared\Functional;
 
 use Symfony\Bundle\MakerBundle\Str;
 use Symfony\Component\Filesystem\Filesystem;

@@ -2,8 +2,7 @@
 
 namespace App\Tests\Functional;
 
-use App\Entity\News;
-use App\Tests\Shared\Exception\FixtureNotFoundException;
+use App\Tests\Shared\Fixtures\FixturesDecorator;
 use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 
 abstract class RepositoryWebTestCase extends WebTestCase
@@ -12,6 +11,7 @@ abstract class RepositoryWebTestCase extends WebTestCase
 
     protected $repository;
     protected $entityManager;
+    protected $_fixtures;
 
     abstract protected function getRepositoryClass();
 
@@ -23,6 +23,12 @@ abstract class RepositoryWebTestCase extends WebTestCase
 
         $repositoryClass = $this->getRepositoryClass();
         $this->repository = new $repositoryClass($managerRegistry);
+        $this->_fixtures = new FixturesDecorator(self::$fixtures);
+    }
+
+    public function fixtures(): FixturesDecorator
+    {
+        return $this->_fixtures;
     }
 
     public function tearDown(): void
@@ -31,19 +37,5 @@ abstract class RepositoryWebTestCase extends WebTestCase
 
         $this->entityManager->close();
         $this->entityManager = null;
-    }
-
-    public function getFixtureById(string $id)
-    {
-        if (key_exists($id, self::$fixtures)) {
-            return self::$fixtures[$id];
-        }
-
-        throw new FixtureNotFoundException($id);
-    }
-
-    public function getNewsByFixtureId(string $id): News
-    {
-        return $this->getFixtureById($id);
     }
 }

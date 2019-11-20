@@ -523,7 +523,7 @@ Ces termes (1, 2, 3, 5, ..., 55, 89, 144) seront les valeurs de nos cartes agile
 
 {BACK_TO_TOP}
 
-=== [x] Injecter un *repository* au lieu de *l'entity manager*
+=== [x] Injecter un *repository* au lieu de *l'entity manager* [[injecter-repository]]
 
 ==== Principe
 
@@ -592,9 +592,11 @@ TIP: Nous devons injecter des fixtures dans la base de données pour réaliser c
 
 Le principe est de pouvoir tester unitairement les *méthodes concrètes* d'une classe abstraite.
 
-==== Exemple
+==== Exemples
 
-Nous partons d'un classe abstraite très simple pour réaliser un test élémentaire.
+Le premier exemple est réalisé avec une classe abstraite très simple `AbstractClass`, pour présenter un test élémentaire.
+
+Le deuxième exemple est réalisé avec la classe `AbstractRepository`, utiliser dans <<injecter-repository>>.
 
 ==== Ressources
 
@@ -605,10 +607,12 @@ Nous partons d'un classe abstraite très simple pour réaliser un test élément
 ==== Fichiers
 
 . {uri-rel-file-base}src/Util/Example/AbstractClass.php[]
+. {uri-rel-file-base}src/Repository/AbstractRepository.php[]
 
 ==== Tests
 
 . {uri-rel-file-base}tests/Unit/Util/Example/AbstractClassTest.php[]
+. {uri-rel-file-base}tests/Unit/Repository/AbstractRepositoryTest.php[]
 
 {BACK_TO_TOP}
 

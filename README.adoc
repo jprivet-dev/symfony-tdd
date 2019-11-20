@@ -597,17 +597,11 @@ Le principe est de pouvoir tester unitairement les *méthodes concrètes* d'une 
 Le premier exemple est réalisé avec une classe abstraite très simple `AbstractClass`,
 pour présenter 3 méthodes de tests élémentaires :
 
-. avec `getMockForAbstractClass()`.
-. avec une classe anonyme.
-. avec une simple classe `Dummy`.
+. Avec `getMockForAbstractClass()`.
+. Avec une classe anonyme.
+. Avec une simple classe `Dummy`.
 
 Le deuxième exemple est réalisé avec la classe abstraite `AbstractRepository`, utiliser dans <<injecter-repository>>.
-
-==== Ressources
-
-. https://phpunit.readthedocs.io/en/8.4/test-doubles.html#mocking-traits-and-abstract-classes
-. https://mnapoli.fr/anonymous-classes-in-tests/
-. https://www.php.net/manual/en/language.oop5.abstract.php
 
 ==== Fichiers
 
@@ -618,6 +612,12 @@ Le deuxième exemple est réalisé avec la classe abstraite `AbstractRepository`
 
 . {uri-rel-file-base}tests/Unit/Util/Example/AbstractClassTest.php[]
 . {uri-rel-file-base}tests/Unit/Repository/AbstractRepositoryTest.php[]
+
+==== Ressources
+
+. https://phpunit.readthedocs.io/en/8.4/test-doubles.html#mocking-traits-and-abstract-classes
+. https://mnapoli.fr/anonymous-classes-in-tests/
+. https://www.php.net/manual/en/language.oop5.abstract.php
 
 {BACK_TO_TOP}
 

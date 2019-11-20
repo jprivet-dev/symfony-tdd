@@ -1009,6 +1009,10 @@ class NewsRepositoryTest extends RepositoryWebTestCase
 
 {BACK_TO_TOP}
 
+=== [ ] *Symfony Panther* : activer la couverture de code
+
+{BACK_TO_TOP}
+
 == Autres ressources
 
 === Symfony

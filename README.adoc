@@ -71,7 +71,7 @@ J'ai démarré cet atelier à partir du dépôt https://github.com/dunglas/symfo
 
 === Cloner
 
-```sh
+```
 $ git clone git@github.com:jprivet-dev/symfony-tdd.git
 ```
 
@@ -79,7 +79,7 @@ $ git clone git@github.com:jprivet-dev/symfony-tdd.git
 
 === Installer
 
-```sh
+```
 $ cd symfony-tdd
 $ make install
 ...
@@ -99,7 +99,7 @@ Des commandes `Makefile` sont à votre disposition (voir <<makefile>>).
 Cependant, si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible,
 exécutez à la place de `$ make install` l'alias suivant :
 
-```sh
+```
 $ . .bash_aliases
 symfony-tdd: aliases loaded
 
@@ -126,7 +126,7 @@ A la fin de l'installation, vous pourrez avoir accès aux URLs suivantes :
 Si vous avez un outil du type https://www.gnu.org/software/make/[GNU Make] disponible sur votre poste,
 vous pouvez acceder à toutes les commandes du fichier {uri-rel-file-base}Makefile[] :
 
-```sh
+```
 $ make
 ```
 
@@ -336,7 +336,7 @@ docker-compose exec app php bin/console doctrine:schema:create;
 
 Charger les *alias* du projet :
 
-```sh
+```
 $ . .bash_aliases
 ```
 
@@ -375,7 +375,7 @@ OK (41 tests, 91 assertions)
 ====
 Si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible, lancer les tests avec les commandes  suivantes :
 
-```sh
+```
 $ docker-compose exec app php bin/console hautelook:fixtures:load
 $ docker-compose exec app ./vendor/bin/simple-phpunit
 ```
@@ -389,7 +389,7 @@ NOTE: La commande `$ make tests` charge les fixtures et lance tous les tests dis
 
 Le projet utilise *PHPUnit Watcher* (https://github.com/spatie/phpunit-watcher) que vous pouvez lancer avec la commande suivante :
 
-```sh
+```
 $ make phpunit.watch
 ```
 
@@ -397,7 +397,7 @@ $ make phpunit.watch
 ====
 Si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible, lancer le watcher avec la commande  suivante :
 
-```sh
+```
 $ docker-compose exec app ./vendor/bin/phpunit-watcher watch
 ```
 ====
@@ -410,7 +410,7 @@ WARNING: *Xdebug* est nécessaire pour générer la couverture de code, mais *au
 
 Exécution *avec Xdebug* => *1.52 secondes* :
 
-```sh
+```
 $ docker-compose exec app ./vendor/bin/simple-phpunit
 stty: standard input
 PHPUnit 8.4.1 by Sebastian Bergmann and contributors.
@@ -425,7 +425,7 @@ OK (32 tests, 74 assertions)
 
 Exécution *sans Xdebug* => *153 ms* :
 
-```sh
+```
 $ docker-compose exec app ./vendor/bin/simple-phpunit
 stty: standard input
 PHPUnit 8.4.1 by Sebastian Bergmann and contributors.
@@ -444,7 +444,7 @@ OK (32 tests, 74 assertions)
 ====
 *Xdebug* peut être activé et désactivé à chaud avec les commandes suivantes :
 
-```sh
+```
 $ make xdebug.on
 $ make xdebug.off
 ```
@@ -454,7 +454,7 @@ $ make xdebug.off
 
 Exemple de commandes avec *Xdebug désactivé automatiquement* :
 
-```sh
+```
 $ make phpunit
 $ make phpunit.unit
 $ make phpunit.functional
@@ -463,7 +463,7 @@ $ make phpunit.watch
 ```
 Exemple de commandes *avec Xdebug activé automatiquement* :
 
-```sh
+```
 $ make phpunit.coverage
 $ make phpunit.coverage.clover
 $ make phpunit.unit.coverage
@@ -866,7 +866,7 @@ On peut facilement *être saturé de plusieurs dizaines de Go* de données cré�
 
 Dans un premier temps, il est possible de *supprimer tout ce qui n'est plus utilisé par Docker* :
 
-```sh
+```
 $ docker system prune --volumes
 ```
 
@@ -881,32 +881,32 @@ avec le fichier de configuration `daemon.json`.
 
 ===== 1) *Stopper Docker* :
 
-```sh
+```
 $ sudo service docker stop
 ```
 
 ===== 2) *Créer* le nouveau dossier de destination :
 
-```sh
+```
 $ sudo mkdir /data/home/jprivet/docker
 ```
 
 ===== 3) *Vérifier* si `daemon.json` existe :
 
-```sh
+```
 $ ls /etc/docker
 key.json
 ```
 
 ===== 4) Si `daemon.json` n'existe pas, *le créer* :
 
-```sh
+```
 $ sudo touch /etc/docker/daemon.json
 ```
 
 ===== 4 bis) *Injecter* l'option `"data-root": "/data/home/jprivet/docker"` dans le nouveau fichier `daemon.json` :
 
-```sh
+```
 $ sudo -- sh -c "echo '{\"data-root\": \"/data/home/jprivet/docker\"}' >> /etc/docker/daemon.json"
 ```
 
@@ -914,14 +914,14 @@ $ sudo -- sh -c "echo '{\"data-root\": \"/data/home/jprivet/docker\"}' >> /etc/d
 ====
 Si le fichier `daemon.json` existe déjà, *le modifier* directement :
 
-```sh
+```
 $ sudo vim /etc/docker/daemon.json
 ```
 ====
 
 ===== 5) *Vérifier* le contenu du fichier `daemon.json` :
 
-```sh
+```
 $ cat /etc/docker/daemon.json
 {"data-root": "/data/home/jprivet/docker"}
 
@@ -929,7 +929,7 @@ $ cat /etc/docker/daemon.json
 
 ===== 6) *Redémarrer Docker* :
 
-```sh
+```
 $ sudo service docker start
 ```
 

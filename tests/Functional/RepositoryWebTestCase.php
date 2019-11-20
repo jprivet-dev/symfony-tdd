@@ -2,16 +2,16 @@
 
 namespace App\Tests\Functional;
 
-use App\Tests\Shared\Fixtures\FixturesDecorator;
+use App\Tests\Shared\Fixtures\FixturesTrait;
 use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 
 abstract class RepositoryWebTestCase extends WebTestCase
 {
     use RefreshDatabaseTrait;
+    use FixturesTrait;
 
     protected $repository;
     protected $entityManager;
-    protected $_fixtures;
 
     abstract protected function getRepositoryClass();
 
@@ -23,12 +23,6 @@ abstract class RepositoryWebTestCase extends WebTestCase
 
         $repositoryClass = $this->getRepositoryClass();
         $this->repository = new $repositoryClass($managerRegistry);
-        $this->_fixtures = new FixturesDecorator(self::$fixtures);
-    }
-
-    public function fixtures(): FixturesDecorator
-    {
-        return $this->_fixtures;
     }
 
     public function tearDown(): void

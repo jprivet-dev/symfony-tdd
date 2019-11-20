@@ -2,7 +2,7 @@
 
 namespace App\Tests\Unit\Validator\Constraints;
 
-use App\Tests\Unit\ConstraintValidatorTestCase;
+use App\Tests\Shared\Unit\ConstraintValidatorTestCase;
 use App\Validator\Constraints\Reference;
 use App\Validator\Constraints\ReferenceValidator;
 use Symfony\Component\Validator\Constraint;

@@ -5,7 +5,7 @@ namespace App\Tests\Unit\Service;
 use App\Entity\News;
 use App\Repository\NewsRepositoryInterface;
 use App\Service\NewsService;
-use App\Tests\Unit\TestCase;
+use App\Tests\Shared\Unit\TestCase;
 
 class NewsServiceTest extends TestCase
 {

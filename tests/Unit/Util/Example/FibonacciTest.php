@@ -2,7 +2,7 @@
 
 namespace App\Tests\Unit\Util\Example;
 
-use App\Tests\Unit\TestCase;
+use App\Tests\Shared\Unit\TestCase;
 use App\Util\Example\Fibonacci01;
 use App\Util\Example\Fibonacci02;
 use App\Util\Example\Fibonacci03;

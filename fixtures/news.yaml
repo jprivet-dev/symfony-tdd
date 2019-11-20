@@ -1,15 +1,15 @@
 App\Entity\News:
-  published_1:
+  news_published_1:
     slug: 'week-601'
     title: 'A week of symfony #601 (2-8 July 2018)'
     body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.'
     published: true
-  published_2:
+  news_published_2:
     slug: 'symfony-live-usa-2018'
     title: 'Join us at SymfonyLive USA 2018!'
     body: 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.'
     published: true
-  not_published_1:
+  news_not_published_1:
     slug: 'not-published-news'
     title: 'Not published news'
     body: 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.'

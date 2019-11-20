@@ -552,21 +552,21 @@ le `NewsService.php` de l'exemple suivant importe et utilise `NewsRepository.php
 
 {BACK_TO_TOP}
 
-=== [!] Créer et tester un *repository*
+=== [x] Créer et tester un *repository*
 
 ==== Principe
 
-Le principe est de pouvoir vérifier la construction et le comportement des requêtes
-d'un repository, en les testant directement sur la base de données.
+Le principe est de pouvoir *vérifier les requêtes d'un repository*,
+en les testant directement sur la base de données.
 
 ==== Exemple
 
 Le repository `NewsRepository` permet de traiter des news. Nous voulons vérifier les points suivants :
 
-. Récupérer toutes les news
-. Récupérer uniquement celles qui sont publiées
-. Récupérer par son slug une news publiée
-. Retourner une valeur null si le slug est inconnu ou si la news n'est pas publiée
+. Récupérer *toutes les news*.
+. Récupérer uniquement celles qui sont *publiées*.
+. Récupérer *par son slug* une news publiée.
+. Retourner une valeur null si le *slug est inconnu*, ou si la *news n'est pas publiée*.
 
 TIP: Nous devons injecter des fixtures dans la base de données pour réaliser ces tests. Voir <<phpunit>>.
 
@@ -849,7 +849,7 @@ db.mysql: db.wait ## Database: MySQL access (mysql> ...).
 
 {BACK_TO_TOP}
 
-=== [!] *Docker* : libérer la mémoire
+=== [x] *Docker* : libérer la mémoire
 
 On peut facilement *être saturé de plusieurs dizaines de Go* de données créées par Docker.
 
@@ -935,7 +935,74 @@ Au prochain `$ docker-compose up`, les éléments seront créés dans le nouveau
 
 {BACK_TO_TOP}
 
+=== [!] *Fixtures* : comment les récupérer dans vos tests par leur ids ?
+
+==== Exemple : récupérer le slug d'une news
+
+Nous avons des fixtures dans le fichier `news.yaml` suivant :
+
+```yaml
+App\Entity\News:
+  news_published_1:
+    slug: 'week-601'
+    title: 'A week of symfony #601 (2-8 July 2018)'
+    body: '...'
+  news_published_2:
+    slug: 'symfony-live-usa-2018'
+    title: 'Join us at SymfonyLive USA 2018!'
+    body: '...'
+  news_not_published_1:
+    slug: 'not-published-news'
+    title: 'Not published news'
+    body: '...'
+```
+
+Dans le test `PHP`, il est possible d'avoir *accès par défaut à la liste des fixtures* chargées
+et de pointer la news `news_published_1` :
+
+```php
+class NewsRepositoryTest extends RepositoryWebTestCase
+{
+    public function testFindOnePublishedBySlug()
+    {
+        // Arrange
+        $news = self::$fixtures['news_published_1']; // (1)
+        $slug = $news->getSlug();
+
+        // Act
+        $news = $this->repository->findOnePublishedBySlug($slug);
+
+        // Assert
+        $this->assertInstanceOf(News::class, $news);
+        $this->assertSame($slug, $news->getSlug());
+    }
+}
+```
+<1> Accès par défaut au tableau des fixtures (sans typage de la donnée récupérée).
+
+Avec le `FixturesDecoration` de ce repo, il est possible de récupérer directement une fixture typée,
+ce qui *facilie l'autocomplétion dans votre IDE* :
+
+```php
+class NewsRepositoryTest extends RepositoryWebTestCase
+{
+    public function testFindOnePublishedBySlug()
+    {
+        // Arrange
+        $news = $this->fixtures()->news('news_published_1'); // (1)
+        $slug = $news->getSlug();
+
+        /* ... */
+    }
+}
+```
+<1> Récupération d'une fixture typée.
+
+
+{BACK_TO_TOP}
+
 == Autres ressources
+
 === Symfony
 
 * https://symfony.com/doc/current/best_practices.html#infrastructure-related-configuration

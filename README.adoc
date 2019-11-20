@@ -71,7 +71,7 @@ J'ai démarré cet atelier à partir du dépôt https://github.com/dunglas/symfo
 
 === Cloner
 
-```sh
+```
 $ git clone git@github.com:jprivet-dev/symfony-tdd.git
 ```
 
@@ -79,16 +79,18 @@ $ git clone git@github.com:jprivet-dev/symfony-tdd.git
 
 === Installer
 
-```sh
+```
 $ cd symfony-tdd
 $ make install
 ...
 ...
 ...
 READY!
-Website:    http://localhost
-API:        http://localhost/api
-phpMyAdmin: http://localhost:8088
+  Website:    http://localhost
+  API:        http://localhost/api
+  phpMyAdmin: http://localhost:8088
+
+APP_ENV=dev
 ```
 
 [TIP]
@@ -97,7 +99,7 @@ Des commandes `Makefile` sont à votre disposition (voir <<makefile>>).
 Cependant, si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible,
 exécutez à la place de `$ make install` l'alias suivant :
 
-```sh
+```
 $ . .bash_aliases
 symfony-tdd: aliases loaded
 
@@ -124,7 +126,7 @@ A la fin de l'installation, vous pourrez avoir accès aux URLs suivantes :
 Si vous avez un outil du type https://www.gnu.org/software/make/[GNU Make] disponible sur votre poste,
 vous pouvez acceder à toutes les commandes du fichier {uri-rel-file-base}Makefile[] :
 
-```sh
+```
 $ make
 ```
 
@@ -155,14 +157,14 @@ PROJECT
   coverage                       Project: Generate & open all code coverage reports.
 
   cc                             Project: Clear all caches.
-  clean                          Project: [PROMPT Y/n] Remove build, vendor & node_modules folders.
+  clean                          Project: [PROMPT yN] Remove build, vendor & node_modules folders.
 
 ENVIRONMENT
   env.app                        Environment: Print current APP_ENV in Makefile.
   env.local.dev                  Environment: Alias of `env.local.clean`.
-  env.local.prod                 Environment: Copy `.env.local.prod.dist` into `.env.local` (APP_ENV=prod)
-  env.local.test                 Environment: Copy `.env.local.test.dist` into `.env.local` (APP_ENV=test)
-  env.local.clean                Environment: Remove `.env.local` and use default vars & environment of `.env` (APP_ENV=dev)
+  env.local.prod                 Environment: [PROMPT yN] Copy '.env.local.prod.dist' into '.env.local' (APP_ENV=prod)
+  env.local.test                 Environment: [PROMPT yN] Copy '.env.local.test.dist' into '.env.local' (APP_ENV=test)
+  env.local.clean                Environment: [PROMPT yN] Remove '.env.local' and use default vars & environment of '.env' (APP_ENV=dev)
 
 COMPOSER
   composer.install               Composer: Read the composer.json/composer.lock file from the current directory, resolve the dependencies, and install them into vendor.
@@ -188,7 +190,6 @@ SYMFONY
   symfony.routes                 Symfony: Display current routes.
 
   symfony.about                  Symfony: Display information about the current project (Symfony, Kernel, PHP, Environment, ...).
-  symfony.about.light            Symfony: Display information about the current project (grep APP_ENV & DATABASE_NAME).
   symfony.env.vars               Symfony: List defined environment variables. | https://symfony.com/doc/current/configuration.html#configuration-based-on-environment-variables
 
   symfony.security.check         Symfony: Check security of your dependencies. | https://github.com/sensiolabs/security-checker
@@ -252,15 +253,15 @@ DOCKER
   docker.build.force             Docker: Stop, remove & rebuild current containers.
   docker.stop                    Docker: Stop running containers without removing them. | https://docs.docker.com/compose/reference/stop/
   docker.stop.all                Docker: Stop all projects running containers without removing them. | https://docs.docker.com/compose/reference/stop/
-  docker.down                    Docker: [PROMPT Y/n] Stop containers and remove containers, networks, volumes, and images created by up. | https://docs.docker.com/compose/reference/down/
+  docker.down                    Docker: [PROMPT yN] Stop containers and remove containers, networks, volumes, and images created by up. | https://docs.docker.com/compose/reference/down/
 
   docker.list                    Docker: List containers. | https://docs.docker.com/engine/reference/commandline/ps/
   docker.list.stopped            Docker: List all stopped containers.
-  docker.remove                  Docker: [PROMPT Y/n] Stop & Remove service containers (only current project). | https://docs.docker.com/compose/reference/rm/
-  docker.remove.all              Docker: [PROMPT Y/n] Remove all stopped service containers. | https://docs.docker.com/compose/reference/rm/
+  docker.remove                  Docker: [PROMPT yN] Stop & Remove service containers (only current project). | https://docs.docker.com/compose/reference/rm/
+  docker.remove.all              Docker: [PROMPT yN] Remove all stopped service containers. | https://docs.docker.com/compose/reference/rm/
   docker.images                  Docker: List images. | https://docs.docker.com/engine/reference/commandline/images/
-  docker.images.remove.all       Docker: [PROMPT Y/n] Remove all unused images (for all projects!).
-  docker.clean                   Docker: [PROMPT Y/n] Remove unused data. | https://docs.docker.com/engine/reference/commandline/system_prune/
+  docker.images.remove.all       Docker: [PROMPT yN] Remove all unused images (for all projects!).
+  docker.clean                   Docker: [PROMPT yN] Remove unused data. | https://docs.docker.com/engine/reference/commandline/system_prune/
 
   docker.env                     Docker: Show environment variables.
   docker.ip                      Docker: Get ip Gateway.
@@ -335,7 +336,7 @@ docker-compose exec app php bin/console doctrine:schema:create;
 
 Charger les *alias* du projet :
 
-```sh
+```
 $ . .bash_aliases
 ```
 
@@ -343,36 +344,44 @@ IMPORTANT: Le fichier {uri-rel-file-base}.bash_aliases[] ne peut être chargé a
 
 {BACK_TO_TOP}
 
-== *PHPUnit* : gérer les tests automatiques PHP
+== *PHPUnit* : gérer les tests automatiques PHP [[phpunit]]
 
 === Lancer les tests avec *PHPUnit*
 
 Le projet utilise le *PHPUnit Bridge* de *Symfony* (https://symfony.com/doc/current/testing.html).
 
-Lancez tous les tests avec la commande suivante :
+Pour lancer les tests, chargez d'abord les fixtures :
 
-```sh
+```
+$ make fixtures
+```
+
+Exécutez ensuite les tests :
+
+```
 $ make phpunit
 ...
 ...
 ...
 Testing
-................................                                  32 / 32 (100%)
+.........................................                         41 / 41 (100%)
 
-Time: 483 ms, Memory: 30.00 MB
+Time: 2.25 seconds, Memory: 24.00 MB
 
-OK (32 tests, 74 assertions)
-
+OK (41 tests, 91 assertions)
 ```
 
 [TIP]
 ====
-Si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible, lancer les tests avec la commande  suivante :
+Si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible, lancer les tests avec les commandes  suivantes :
 
-```sh
+```
+$ docker-compose exec app php bin/console hautelook:fixtures:load
 $ docker-compose exec app ./vendor/bin/simple-phpunit
 ```
 ====
+
+NOTE: La commande `$ make tests` charge les fixtures et lance tous les tests disponibles.
 
 {BACK_TO_TOP}
 
@@ -380,7 +389,7 @@ $ docker-compose exec app ./vendor/bin/simple-phpunit
 
 Le projet utilise *PHPUnit Watcher* (https://github.com/spatie/phpunit-watcher) que vous pouvez lancer avec la commande suivante :
 
-```sh
+```
 $ make phpunit.watch
 ```
 
@@ -388,7 +397,7 @@ $ make phpunit.watch
 ====
 Si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible, lancer le watcher avec la commande  suivante :
 
-```sh
+```
 $ docker-compose exec app ./vendor/bin/phpunit-watcher watch
 ```
 ====
@@ -401,7 +410,7 @@ WARNING: *Xdebug* est nécessaire pour générer la couverture de code, mais *au
 
 Exécution *avec Xdebug* => *1.52 secondes* :
 
-```sh
+```
 $ docker-compose exec app ./vendor/bin/simple-phpunit
 stty: standard input
 PHPUnit 8.4.1 by Sebastian Bergmann and contributors.
@@ -416,7 +425,7 @@ OK (32 tests, 74 assertions)
 
 Exécution *sans Xdebug* => *153 ms* :
 
-```sh
+```
 $ docker-compose exec app ./vendor/bin/simple-phpunit
 stty: standard input
 PHPUnit 8.4.1 by Sebastian Bergmann and contributors.
@@ -435,7 +444,7 @@ OK (32 tests, 74 assertions)
 ====
 *Xdebug* peut être activé et désactivé à chaud avec les commandes suivantes :
 
-```sh
+```
 $ make xdebug.on
 $ make xdebug.off
 ```
@@ -445,7 +454,7 @@ $ make xdebug.off
 
 Exemple de commandes avec *Xdebug désactivé automatiquement* :
 
-```sh
+```
 $ make phpunit
 $ make phpunit.unit
 $ make phpunit.functional
@@ -454,7 +463,7 @@ $ make phpunit.watch
 ```
 Exemple de commandes *avec Xdebug activé automatiquement* :
 
-```sh
+```
 $ make phpunit.coverage
 $ make phpunit.coverage.clover
 $ make phpunit.unit.coverage
@@ -514,7 +523,7 @@ Ces termes (1, 2, 3, 5, ..., 55, 89, 144) seront les valeurs de nos cartes agile
 
 {BACK_TO_TOP}
 
-=== [x] Injecter un *repository* au lieu de *l'entity manager*
+=== [x] Injecter un *repository* au lieu de *l'entity manager* [[injecter-repository]]
 
 ==== Principe
 
@@ -543,7 +552,37 @@ le `NewsService.php` de l'exemple suivant importe et utilise `NewsRepository.php
 
 {BACK_TO_TOP}
 
-=== [ ] Créer et tester un *repository*
+=== [x] Créer et tester un *repository*
+
+==== Principe
+
+Le principe est de pouvoir *vérifier les requêtes d'un repository*,
+en les testant directement sur la base de données.
+
+==== Exemple
+
+Le repository `NewsRepository` permet de traiter des news. Nous voulons vérifier les points suivants :
+
+. Récupérer *toutes les news*.
+. Récupérer uniquement celles qui sont *publiées*.
+. Récupérer *par son slug* une news publiée.
+. Retourner une valeur null si le *slug est inconnu*, ou si la *news n'est pas publiée*.
+
+TIP: Nous devons injecter des fixtures dans la base de données pour réaliser ces tests. Voir <<phpunit>>.
+
+==== Fichiers
+
+. {uri-rel-file-base}src/Repository/NewsRepository.php[]
+
+==== Tests
+
+. {uri-rel-file-base}tests/Functional/Repository/NewsRepositoryTest.php[]
+
+==== Resources
+
+. https://symfony.com/doc/current/testing/database.html#functional-testing-of-a-doctrine-repository
+. https://matthiasnoback.nl/2018/09/test-driving-repository-classes-part-1-queries/
+. https://matthiasnoback.nl/2018/10/test-driving-repository-classes-part-2-storing-and-retrieving-entities/
 
 {BACK_TO_TOP}
 
@@ -553,23 +592,32 @@ le `NewsService.php` de l'exemple suivant importe et utilise `NewsRepository.php
 
 Le principe est de pouvoir tester unitairement les *méthodes concrètes* d'une classe abstraite.
 
-==== Exemple
+==== Exemples
 
-Nous partons d'un classe abstraite très simple pour réaliser un test élémentaire.
+Le premier exemple est réalisé avec une classe abstraite très simple `AbstractClass`,
+pour *présenter 3 méthodes de tests* élémentaires :
+
+. Avec `getMockForAbstractClass()`.
+. Avec une classe anonyme `new class()`.
+. Avec une simple classe `Dummy`.
+
+Le deuxième exemple est réalisé avec la classe abstraite `AbstractRepository`, utiliser dans <<injecter-repository>>.
+
+==== Fichiers
+
+. {uri-rel-file-base}src/Util/Example/AbstractClass.php[]
+. {uri-rel-file-base}src/Repository/AbstractRepository.php[]
+
+==== Tests
+
+. {uri-rel-file-base}tests/Unit/Util/Example/AbstractClassTest.php[]
+. {uri-rel-file-base}tests/Unit/Repository/AbstractRepositoryTest.php[]
 
 ==== Ressources
 
 . https://phpunit.readthedocs.io/en/8.4/test-doubles.html#mocking-traits-and-abstract-classes
 . https://mnapoli.fr/anonymous-classes-in-tests/
 . https://www.php.net/manual/en/language.oop5.abstract.php
-
-==== Fichiers
-
-. {uri-rel-file-base}src/Util/Example/AbstractClass.php[]
-
-==== Tests
-
-. {uri-rel-file-base}tests/Unit/Util/Example/AbstractClassTest.php[]
 
 {BACK_TO_TOP}
 
@@ -674,7 +722,7 @@ pour vérifier *qu'aucune d'entre elles ne retournent d'erreur*.
 
 {BACK_TO_TOP}
 
-=== [!] *Symfony Panther* : les bases (Vue.js, screenshoot, ...)
+=== [x] *Symfony Panther* : les bases (Vue.js, screenshots, ...)
 
 ==== Principe
 
@@ -684,6 +732,8 @@ Le principe est de pouvoir tester fonctionnellement une page dans laquelle est u
 
 Nous testons fonctionnellement une page qui affiche une news, dont les commentaires
 sont récupérés et affichés dynamiquement avec un composant Vue.js.
+
+NOTE: Retrouvez les screenshots réalisés automatiquement par ces tests dans le dossier `build/tests/screenshots`.
 
 ==== Ressources
 
@@ -700,7 +750,7 @@ sont récupérés et affichés dynamiquement avec un composant Vue.js.
 
 ==== Tests
 
-. {uri-rel-file-base}tests/Functional/NewsControllerTest.php[]
+. {uri-rel-file-base}tests/Functional/Controller/NewsControllerTest.php[]
 
 ==== Autres informations
 
@@ -723,7 +773,7 @@ sont récupérés et affichés dynamiquement avec un composant Vue.js.
 
 == Tips
 
-=== [!] *Makefile* : Utiliser les fichiers *.env* de Symfony
+=== [!] *Makefile* : En local, utiliser les fichiers *.env* de Symfony
 
 [%header]
 |===
@@ -736,6 +786,8 @@ a|`.env.<env>.local` | machine-specific | <env> | should not be committed
 
 ==== Resources
 
+. https://www.gnu.org/software/make/manual/html_node/Environment.html
+. https://github.com/symfony/recipes/issues/18
 . https://symfony.com/doc/current/configuration.html#managing-multiple-env-files
 . https://symfony.com/doc/current/configuration.html#configuring-environment-variables-in-production
 . https://symfony.com/blog/new-in-symfony-4-2-define-env-vars-per-environment
@@ -743,7 +795,51 @@ a|`.env.<env>.local` | machine-specific | <env> | should not be committed
 
 {BACK_TO_TOP}
 
-=== [!] *Makefile* : *Script* d'attente de disponibilité de la BD pendant l'installation
+=== [x] *Makefile* : *Script* d'attente de disponibilité de la base de données
+
+==== Problématique rencontrée
+
+Après avoir démarré les conteneurs avec, par exemple, `$ make install` :
+
+```
+Starting symfony_tdd_db_service    ... done
+Starting symfony_tdd_app_service ... done
+Starting symfony_tdd_nginx_service      ... done
+Starting symfony_tdd_phpmyadmin_service ... done
+Starting symfony_tdd_h2_proxy_service   ... done
+```
+
+Vous pouvez avoir, tout juste après, *l'erreur suivante* qui s'affiche au moment de la création de la base :
+
+```
+ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)
+```
+
+C'est une erreur qui apparait, en particulier, à la toute première installation et qui vous stoppera toute la procédure :
+le `symfony_tdd_db_service` est bien `done`, *mais l'initialisation de `MySQL` n'est qu'en à lui pas encore finie*.
+
+{BACK_TO_TOP}
+
+==== Solution
+
+C'est pour cela qu'il existe la commande `db.wait` suivante :
+
+```
+PHONY: db.wait
+db.wait: # Database: Wait database...
+	@$(PHP) -r 'echo "\e[0;43mWait database $(DATABASE_HOST):$(DATABASE_PORT)...\e[0m\n"; \
+	set_time_limit(15); for(;;) { if(@fsockopen($(DATABASE_HOST), $(DATABASE_PORT))) { break; }}; echo "\e[0;42mDatabase ready!\e[0m\n";'
+```
+
+Cette commande peut être *couplée à toutes les commandes Makefile ayant une action avec la base*.
+Comme dans le cas suivant par exemple, où l'on attend que la base soit disponible avant
+de vouloir s'y connecter avec le terminal :
+
+```
+PHONY: db.mysql
+db.mysql: db.wait ## Database: MySQL access (mysql> ...).
+	$(EXEC_DB) bash -c "mysql -u $(DATABASE_USER) $(DATABASE_NAME)"
+```
 
 {BACK_TO_TOP}
 
@@ -751,7 +847,7 @@ a|`.env.<env>.local` | machine-specific | <env> | should not be committed
 
 {BACK_TO_TOP}
 
-=== [ ] *Contrôleurs* : peut-on les *tester unitairement* ?
+=== [!] *Contrôleurs* : doit-on les *tester unitairement* ?
 
 ==== Ressources
 
@@ -762,7 +858,7 @@ a|`.env.<env>.local` | machine-specific | <env> | should not be committed
 
 {BACK_TO_TOP}
 
-=== [!] *Docker* : libérer la mémoire
+=== [x] *Docker* : libérer la mémoire
 
 On peut facilement *être saturé de plusieurs dizaines de Go* de données créées par Docker.
 
@@ -770,7 +866,7 @@ On peut facilement *être saturé de plusieurs dizaines de Go* de données cré�
 
 Dans un premier temps, il est possible de *supprimer tout ce qui n'est plus utilisé par Docker* :
 
-```sh
+```
 $ docker system prune --volumes
 ```
 
@@ -785,32 +881,32 @@ avec le fichier de configuration `daemon.json`.
 
 ===== 1) *Stopper Docker* :
 
-```sh
+```
 $ sudo service docker stop
 ```
 
 ===== 2) *Créer* le nouveau dossier de destination :
 
-```sh
+```
 $ sudo mkdir /data/home/jprivet/docker
 ```
 
 ===== 3) *Vérifier* si `daemon.json` existe :
 
-```sh
+```
 $ ls /etc/docker
 key.json
 ```
 
 ===== 4) Si `daemon.json` n'existe pas, *le créer* :
 
-```sh
+```
 $ sudo touch /etc/docker/daemon.json
 ```
 
 ===== 4 bis) *Injecter* l'option `"data-root": "/data/home/jprivet/docker"` dans le nouveau fichier `daemon.json` :
 
-```sh
+```
 $ sudo -- sh -c "echo '{\"data-root\": \"/data/home/jprivet/docker\"}' >> /etc/docker/daemon.json"
 ```
 
@@ -818,14 +914,14 @@ $ sudo -- sh -c "echo '{\"data-root\": \"/data/home/jprivet/docker\"}' >> /etc/d
 ====
 Si le fichier `daemon.json` existe déjà, *le modifier* directement :
 
-```sh
+```
 $ sudo vim /etc/docker/daemon.json
 ```
 ====
 
 ===== 5) *Vérifier* le contenu du fichier `daemon.json` :
 
-```sh
+```
 $ cat /etc/docker/daemon.json
 {"data-root": "/data/home/jprivet/docker"}
 
@@ -833,7 +929,7 @@ $ cat /etc/docker/daemon.json
 
 ===== 6) *Redémarrer Docker* :
 
-```sh
+```
 $ sudo service docker start
 ```
 
@@ -848,7 +944,77 @@ Au prochain `$ docker-compose up`, les éléments seront créés dans le nouveau
 
 {BACK_TO_TOP}
 
+=== [!] *Fixtures* : comment, dans son test, en récupérer une avec son id ?
+
+==== Exemple : récupérer le slug d'une news
+
+Nous avons des fixtures dans le fichier `news.yaml` suivant :
+
+```yaml
+App\Entity\News:
+  news_published_1:
+    slug: 'week-601'
+    title: 'A week of symfony #601 (2-8 July 2018)'
+    body: '...'
+  news_published_2:
+    slug: 'symfony-live-usa-2018'
+    title: 'Join us at SymfonyLive USA 2018!'
+    body: '...'
+  news_not_published_1:
+    slug: 'not-published-news'
+    title: 'Not published news'
+    body: '...'
+```
+
+Dans le test `NewsRepositoryTest`, il est possible d'avoir *accès par défaut à la liste des fixtures* chargées
+et de pointer la news `news_published_1` :
+
+```php
+class NewsRepositoryTest extends RepositoryWebTestCase
+{
+    public function testFindOnePublishedBySlug()
+    {
+        // Arrange
+        $news = self::$fixtures['news_published_1']; // (1)
+        $slug = $news->getSlug();
+
+        // Act
+        $news = $this->repository->findOnePublishedBySlug($slug);
+
+        // Assert
+        $this->assertInstanceOf(News::class, $news);
+        $this->assertSame($slug, $news->getSlug());
+    }
+}
+```
+<1> Accès par défaut au tableau des fixtures (sans typage de la donnée récupérée).
+
+Avec le fichier {uri-rel-file-base}tests/Shared/Fixtures/FixturesDecorator.php[] de ce repo, il est possible de récupérer directement une fixture typée,
+ce qui *facilite l'autocomplétion dans votre IDE* :
+
+```php
+class NewsRepositoryTest extends RepositoryWebTestCase
+{
+    public function testFindOnePublishedBySlug()
+    {
+        // Arrange
+        $news = $this->fixtures()->news('news_published_1'); // (1)
+        $slug = $news->getSlug();
+
+        /* ... */
+    }
+}
+```
+<1> Récupération d'une fixture typée.
+
+{BACK_TO_TOP}
+
+=== [ ] *Symfony Panther* : activer la couverture de code
+
+{BACK_TO_TOP}
+
 == Autres ressources
+
 === Symfony
 
 * https://symfony.com/doc/current/best_practices.html#infrastructure-related-configuration

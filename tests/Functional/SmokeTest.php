@@ -3,9 +3,9 @@
 namespace App\Tests\Functional;
 
 use App\Params\ParamsRoutes;
-use App\Tests\WebTestCase;
+use App\Tests\Shared\Functional\RealBrowserWebTestCase;
 
-class SmokeTest extends WebTestCase
+class SmokeTest extends RealBrowserWebTestCase
 {
     /**
      * @dataProvider routeProvider

@@ -28,17 +28,16 @@ docker.stop.all: ## Docker: Stop all projects running containers without removin
 
 .PHONY: docker.down
 # --remove-orphans: Remove containers for services not defined in the Compose file.
-docker.down: ## Docker: [PROMPT Y/n] Stop containers and remove containers, networks, volumes, and images created by up. | https://docs.docker.com/compose/reference/down/
+docker.down: ## Docker: [PROMPT yN] Stop containers and remove containers, networks, volumes, and images created by up. | https://docs.docker.com/compose/reference/down/
 	@while [ -z "$$CONTINUE" ]; do \
-		read -r -p "Stop containers and remove containers, networks, volumes, and images created by up? [Y/n] " CONTINUE; \
+		read -r -p "Stop containers and remove containers, networks, volumes, and images created by up? [yN] " CONTINUE; \
 	done ; \
-	if [ $$CONTINUE == "Y" ]; \
+	if [ $$CONTINUE == "y" ]; \
 	then \
 		docker-compose down --remove-orphans; \
 		echo -e "\033[1;42mContainers, networks, volumes, and images created by up removed\033[0m"; \
 	else \
-		echo -e "\033[1;43mAction cancelled\033[0m"; \
-		exit 1; \
+		$(MAKE_S) cancelled; \
 	fi; \
 
 ##
@@ -56,31 +55,29 @@ docker.list.stopped: ## Docker: List all stopped containers.
 .PHONY: docker.remove
 # --stop: Stop the containers, if required, before removing.
 # -v: Remove any anonymous volumes attached to containers.
-docker.remove: ## Docker: [PROMPT Y/n] Stop & Remove service containers (only current project). | https://docs.docker.com/compose/reference/rm/
+docker.remove: ## Docker: [PROMPT yN] Stop & Remove service containers (only current project). | https://docs.docker.com/compose/reference/rm/
 	@while [ -z "$$CONTINUE" ]; do \
-		read -r -p "Stop & Remove service containers (only current project)? [Y/n] " CONTINUE; \
+		read -r -p "Stop & Remove service containers (only current project)? [yN] " CONTINUE; \
 	done ; \
-	if [ $$CONTINUE == "Y" ]; \
+	if [ $$CONTINUE == "y" ]; \
 	then \
 		docker-compose rm --stop -v; \
 		echo -e "\033[1;42mStopped service containers removed\033[0m"; \
 	else \
-		echo -e "\033[1;43mAction cancelled\033[0m"; \
-		exit 1; \
+		$(MAKE_S) cancelled; \
 	fi; \
 
 .PHONY: docker.remove.all
-docker.remove.all: ## Docker: [PROMPT Y/n] Remove all stopped service containers. | https://docs.docker.com/compose/reference/rm/
+docker.remove.all: ## Docker: [PROMPT yN] Remove all stopped service containers. | https://docs.docker.com/compose/reference/rm/
 	@while [ -z "$$CONTINUE" ]; do \
-		read -r -p "Remove all stopped service containers? [Y/n] " CONTINUE; \
+		read -r -p "Remove all stopped service containers? [yN] " CONTINUE; \
 	done ; \
-	if [ $$CONTINUE == "Y" ]; \
+	if [ $$CONTINUE == "y" ]; \
 	then \
 		docker rm -f $$(docker ps -a -q); \
 		echo -e "\033[1;42mAll stopped service containers removed\033[0m"; \
 	else \
-		echo -e "\033[1;43mAction cancelled\033[0m"; \
-		exit 1; \
+		$(MAKE_S) cancelled; \
 	fi; \
 
 .PHONY: docker.images
@@ -88,32 +85,30 @@ docker.images: ## Docker: List images. | https://docs.docker.com/engine/referenc
 	docker images
 
 .PHONY: docker.images.remove.all
-docker.images.remove.all: ## Docker: [PROMPT Y/n] Remove all unused images (for all projects!).
+docker.images.remove.all: ## Docker: [PROMPT yN] Remove all unused images (for all projects!).
 	@while [ -z "$$CONTINUE" ]; do \
-		read -r -p "Remove all unused images (for all projects!)? [Y/n] " CONTINUE; \
+		read -r -p "Remove all unused images (for all projects!)? [yN] " CONTINUE; \
 	done ; \
-	if [ $$CONTINUE == "Y" ]; \
+	if [ $$CONTINUE == "y" ]; \
 	then \
 		docker rmi -f $$(docker images -q); \
 		echo -e "\033[1;42mAll unused images removed\033[0m"; \
 	else \
-		echo -e "\033[1;43mAction cancelled\033[0m"; \
-		exit 1; \
+		$(MAKE_S) cancelled; \
 	fi; \
 
 
 .PHONY: docker.clean
-docker.clean: ## Docker: [PROMPT Y/n] Remove unused data. | https://docs.docker.com/engine/reference/commandline/system_prune/
+docker.clean: ## Docker: [PROMPT yN] Remove unused data. | https://docs.docker.com/engine/reference/commandline/system_prune/
 	@while [ -z "$$CONTINUE" ]; do \
-		read -r -p "Remove unused data? [Y/n] " CONTINUE; \
+		read -r -p "Remove unused data? [yN] " CONTINUE; \
 	done ; \
-	if [ $$CONTINUE == "Y" ]; \
+	if [ $$CONTINUE == "y" ]; \
 	then \
 		docker system prune --volumes; \
 		echo -e "\033[1;42mUnused data removed\033[0m"; \
 	else \
-		echo -e "\033[1;43mAction cancelled\033[0m"; \
-		exit 1; \
+		$(MAKE_S) cancelled; \
 	fi; \
 
 ##

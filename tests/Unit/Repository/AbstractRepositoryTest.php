@@ -6,7 +6,7 @@ use App\Exception\EntityDoesNotExistException;
 use App\Repository\AbstractRepository;
 use App\Tests\Shared\Dummy\Entity\Dummy;
 use App\Tests\Shared\Dummy\Repository\DummyRepository;
-use App\Tests\TestCase;
+use App\Tests\Shared\Unit\TestCase;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Symfony\Bridge\Doctrine\ManagerRegistry;

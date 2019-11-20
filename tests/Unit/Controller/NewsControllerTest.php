@@ -5,7 +5,7 @@ namespace App\Tests\Unit\Controller;
 use App\Controller\NewsController;
 use App\Entity\News;
 use App\Service\NewsServiceInterface;
-use App\Tests\TestCase;
+use App\Tests\Shared\Unit\TestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
@@ -20,7 +20,7 @@ class NewsControllerTest extends TestCase
         $this->newsService = $this->prophesize(NewsServiceInterface::class);
 
         $this->newsController = new NewsController($this->newsService->reveal());
-        $this->newsController->setContainer($this->getContainer());
+        $this->newsController->setContainer($this->getContainerWithConfiguredTwig());
     }
 
     /**
@@ -82,7 +82,7 @@ class NewsControllerTest extends TestCase
      *
      * @return ContainerInterface
      */
-    private function getContainer(): ContainerInterface
+    private function getContainerWithConfiguredTwig(): ContainerInterface
     {
         $container = $this->prophesize(ContainerInterface::class);
         $twig = $this->prophesize(Environment::class);

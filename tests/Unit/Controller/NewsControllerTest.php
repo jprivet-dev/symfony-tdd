@@ -20,7 +20,7 @@ class NewsControllerTest extends TestCase
         $this->newsService = $this->prophesize(NewsServiceInterface::class);
 
         $this->newsController = new NewsController($this->newsService->reveal());
-        $this->newsController->setContainer($this->getContainer());
+        $this->newsController->setContainer($this->getContainerWithConfiguredTwig());
     }
 
     /**
@@ -82,7 +82,7 @@ class NewsControllerTest extends TestCase
      *
      * @return ContainerInterface
      */
-    private function getContainer(): ContainerInterface
+    private function getContainerWithConfiguredTwig(): ContainerInterface
     {
         $container = $this->prophesize(ContainerInterface::class);
         $twig = $this->prophesize(Environment::class);

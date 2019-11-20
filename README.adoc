@@ -595,10 +595,10 @@ Le principe est de pouvoir tester unitairement les *méthodes concrètes* d'une 
 ==== Exemples
 
 Le premier exemple est réalisé avec une classe abstraite très simple `AbstractClass`,
-pour présenter 3 méthodes de tests élémentaires :
+pour *présenter 3 méthodes de tests* élémentaires :
 
 . Avec `getMockForAbstractClass()`.
-. Avec une classe anonyme.
+. Avec une classe anonyme `new class()`.
 . Avec une simple classe `Dummy`.
 
 Le deuxième exemple est réalisé avec la classe abstraite `AbstractRepository`, utiliser dans <<injecter-repository>>.

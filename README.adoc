@@ -966,7 +966,7 @@ App\Entity\News:
     body: '...'
 ```
 
-Dans le test `PHP`, il est possible d'avoir *accès par défaut à la liste des fixtures* chargées
+Dans le test `NewsRepositoryTest`, il est possible d'avoir *accès par défaut à la liste des fixtures* chargées
 et de pointer la news `news_published_1` :
 
 ```php

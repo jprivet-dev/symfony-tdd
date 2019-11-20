@@ -714,7 +714,12 @@ pour vérifier *qu'aucune d'entre elles ne retournent d'erreur*.
 
 {BACK_TO_TOP}
 
-=== [ ] Créer et tester un *composant Vue.js*
+=== [!] Créer et tester un *composant Vue.js*
+
+==== Resources
+
+. https://github.com/vuejs/vue-test-utils
+. https://dev.to/therealdanvega/everything-you-need-to-get-up-and-running-with-vuejs-8c4
 
 {BACK_TO_TOP}
 

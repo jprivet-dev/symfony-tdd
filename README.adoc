@@ -980,8 +980,8 @@ class NewsRepositoryTest extends RepositoryWebTestCase
 ```
 <1> Accès par défaut au tableau des fixtures (sans typage de la donnée récupérée).
 
-Avec le `FixturesDecoration` de ce repo, il est possible de récupérer directement une fixture typée,
-ce qui *facilie l'autocomplétion dans votre IDE* :
+Avec le fichier {uri-rel-file-base}tests/Shared/Fixtures/FixturesDecorator.php[] de ce repo, il est possible de récupérer directement une fixture typée,
+ce qui *facilite l'autocomplétion dans votre IDE* :
 
 ```php
 class NewsRepositoryTest extends RepositoryWebTestCase
@@ -997,7 +997,6 @@ class NewsRepositoryTest extends RepositoryWebTestCase
 }
 ```
 <1> Récupération d'une fixture typée.
-
 
 {BACK_TO_TOP}
 

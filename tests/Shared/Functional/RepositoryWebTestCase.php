@@ -1,9 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Tests\Functional;
+namespace App\Tests\Shared\Functional;
 
 use App\Tests\Shared\Fixtures\FixturesTrait;
-use App\Tests\Shared\Functional\WebTestCase;
 use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 
 abstract class RepositoryWebTestCase extends WebTestCase

@@ -2,7 +2,7 @@
 
 namespace App\Tests\Functional\Controller;
 
-use App\Tests\Functional\ControllerWebTestCase;
+use App\Tests\Shared\Functional\ControllerWebTestCase;
 
 class NewsControllerTest extends ControllerWebTestCase
 {

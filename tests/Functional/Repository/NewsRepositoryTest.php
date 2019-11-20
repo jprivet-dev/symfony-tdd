@@ -4,7 +4,7 @@ namespace App\Tests\Functional\Repository;
 
 use App\Entity\News;
 use App\Repository\NewsRepository;
-use App\Tests\Functional\RepositoryWebTestCase;
+use App\Tests\Shared\Functional\RepositoryWebTestCase;
 
 class NewsRepositoryTest extends RepositoryWebTestCase
 {

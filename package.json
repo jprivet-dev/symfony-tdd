@@ -3,6 +3,7 @@
         "@symfony/webpack-encore": "^0.28.0",
         "@vue/test-utils": "^1.0.0-beta.29",
         "core-js": "^3.0.0",
+        "jest": "^24.9.0",
         "regenerator-runtime": "^0.13.2",
         "vue": "^2.6.10",
         "vue-loader": "^15.7.1",

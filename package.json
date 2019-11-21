@@ -23,5 +23,19 @@
         "watch": "encore dev --watch",
         "build": "encore production --progress",
         "test": "jest"
+    },
+    "jest": {
+        "moduleFileExtensions": [
+            "js",
+            "json",
+            "vue"
+        ],
+        "transform": {
+            ".*\\.(vue)$": "vue-jest",
+            "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
+        },
+        "moduleNameMapper": {
+            "^@/(.*)$": "<rootDir>/asset/$1"
+        }
     }
 }

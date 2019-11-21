@@ -93,22 +93,6 @@ READY!
 APP_ENV=dev
 ```
 
-[TIP]
-====
-Des commandes `Makefile` sont à votre disposition (voir <<makefile>>).
-Cependant, si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible,
-exécutez à la place de `$ make install` l'alias suivant :
-
-```
-$ . .bash_aliases
-symfony-tdd: aliases loaded
-
-$ project-install
-```
-
-Pour plus d'informations, voir <<aliases>>.
-====
-
 {BACK_TO_TOP}
 
 === Accéder au site
@@ -347,7 +331,7 @@ IMPORTANT: Le fichier {uri-rel-file-base}.bash_aliases[] ne peut être chargé a
 
 == *PHPUnit* : gérer les tests automatiques PHP [[phpunit]]
 
-=== Lancer les tests avec *PHPUnit*
+=== Lancer les tests
 
 Le projet utilise le *PHPUnit Bridge* de *Symfony* (https://symfony.com/doc/current/testing.html).
 
@@ -361,28 +345,23 @@ Exécutez ensuite les tests :
 
 ```
 $ make phpunit
-...
-...
-...
+
+Xdebug OFF
+docker-compose exec app ./vendor/bin/simple-phpunit
+stty: standard input
+PHPUnit 8.4.3 by Sebastian Bergmann and contributors.
+
+Error:         No code coverage driver is available
+
 Testing
-.........................................                         41 / 41 (100%)
+..............................................                    46 / 46 (100%)
 
-Time: 2.25 seconds, Memory: 24.00 MB
+Time: 2.88 seconds, Memory: 34.25 MB
 
-OK (41 tests, 91 assertions)
+OK (46 tests, 97 assertions)
 ```
 
-[TIP]
-====
-Si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible, lancer les tests avec les commandes  suivantes :
-
-```
-$ docker-compose exec app php bin/console hautelook:fixtures:load
-$ docker-compose exec app ./vendor/bin/simple-phpunit
-```
-====
-
-NOTE: La commande `$ make tests` charge les fixtures et lance tous les tests disponibles.
+TIP: La commande `$ make tests` charge les fixtures et lance tous les tests disponibles (PHPUnit, Jest, ...).
 
 {BACK_TO_TOP}
 
@@ -393,15 +372,6 @@ Le projet utilise *PHPUnit Watcher* (https://github.com/spatie/phpunit-watcher) 
 ```
 $ make phpunit.watch
 ```
-
-[TIP]
-====
-Si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible, lancer le watcher avec la commande  suivante :
-
-```
-$ docker-compose exec app ./vendor/bin/phpunit-watcher watch
-```
-====
 
 {BACK_TO_TOP}
 
@@ -471,6 +441,44 @@ $ make phpunit.unit.coverage
 $ make phpunit.functional.coverage
 ...
 ```
+
+{BACK_TO_TOP}
+
+== *Vue.js* : gérer les tests automatiques avec *Jest*
+
+=== Lancer les tests
+
+Le projet utilise *Jest* avec la librarie *Vue Test Utils* (https://vue-test-utils.vuejs.org/).
+
+Lancez les tests avec la commande suivante :
+
+```
+$ make yarn.test
+
+docker-compose exec app yarn test
+yarn run v1.16.0
+$ jest
+ PASS  assets/vue-test-utils/counter.spec.js
+  Counter
+    ✓ renders the correct markup (4ms)
+    ✓ has a button (8ms)
+    ✓ button should increment the count (4ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       3 passed, 3 total
+Snapshots:   0 total
+Time:        1.44s
+Ran all test suites.
+Done in 2.29s.
+```
+
+TIP: La commande `$ make tests` charge les fixtures et lance tous les tests disponibles (PHPUnit, Jest, ...).
+
+=== Ressources
+
+. https://vue-test-utils.vuejs.org/
+. https://jestjs.io/
+. Voir aussi <<creer-tester-composant-vue-js>>
 
 {BACK_TO_TOP}
 
@@ -715,12 +723,13 @@ pour vérifier *qu'aucune d'entre elles ne retournent d'erreur*.
 
 {BACK_TO_TOP}
 
-=== [!] Créer et tester un *composant Vue.js*
+=== [!] Créer et tester un *composant Vue.js* [[creer-tester-composant-vue-js]]
 
 ==== Ressources
 
 . https://github.com/vuejs/vue-test-utils
 . https://github.com/vuejs/vue-test-utils-getting-started
+. https://jestjs.io/
 . https://vue-test-utils.vuejs.org/
 . https://vue-test-utils.vuejs.org/guides/choosing-a-test-runner.html
 . https://vue-test-utils.vuejs.org/guides/testing-single-file-components-with-jest.html

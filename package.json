@@ -29,6 +29,9 @@
         ],
         "transform": {
             ".*\\.(vue)$": "vue-jest"
+        },
+        "moduleNameMapper": {
+            "^@/(.*)$": "<rootDir>/assets/$1"
         }
     }
 }

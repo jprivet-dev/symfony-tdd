@@ -1,5 +1,3 @@
-// counter.js
-
 export default {
   template: `
     <div>

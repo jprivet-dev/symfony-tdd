@@ -11,7 +11,8 @@
         "vue-jest": "^3.0.5",
         "vue-loader": "^15.7.1",
         "vue-template-compiler": "^2.6.10",
-        "webpack-notifier": "^1.6.0"
+        "webpack-notifier": "^1.6.0",
+        "babel-preset-env": "^1.6.0"
     },
     "license": "UNLICENSED",
     "private": true,
@@ -21,18 +22,5 @@
         "watch": "encore dev --watch",
         "build": "encore production --progress",
         "test": "jest"
-    },
-    "jest": {
-        "moduleFileExtensions": [
-            "js",
-            "json",
-            "vue"
-        ],
-        "transform": {
-            ".*\\.(vue)$": "vue-jest"
-        },
-        "moduleNameMapper": {
-            "^@/(.*)$": "<rootDir>/assets/$1"
-        }
     }
 }

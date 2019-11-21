@@ -153,7 +153,7 @@ PROJECT
   fixtures                       Project: Load all fixtures.
 
   check                          Project: Launch of install / Composer, Security and DB validations / Tests
-  tests                          Project: Launch all tests.
+  tests                          Project: Launch all tests (PHPUnit, Jest, ...).
   coverage                       Project: Generate & open all code coverage reports.
 
   cc                             Project: Clear all caches.
@@ -177,6 +177,7 @@ COMPOSER
 YARN
   yarn.install                   Yarn: Install all dependencies.
   yarn.upgrade                   Yarn: Upgrade packages to their latest version based on the specified range.
+  yarn.test                      Yarn: Launch test package script (Jest).
 
 ENCORE
   encore.compile                 Webpack Encore: Compile assets once.

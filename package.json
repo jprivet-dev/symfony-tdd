@@ -3,6 +3,7 @@
         "@symfony/webpack-encore": "^0.28.0",
         "@vue/server-test-utils": "^1.0.0-beta.29",
         "@vue/test-utils": "^1.0.0-beta.29",
+        "babel-core": "^6.26.3",
         "babel-jest": "^24.9.0",
         "babel-preset-env": "^1.6.0",
         "core-js": "^3.0.0",

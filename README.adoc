@@ -58,7 +58,7 @@ toc::[]
 
 Ce dépôt *Git*  fraîchement créé est un atelier où je concentre, teste et partage des cas pratiques rencontrés (projets clients, R&D, ...) autour des *tests automatiques*, du *TDD* (Test-Driven Development) et du framework *Symfony*.
 
-J'intègre aussi les *tests JS autour des composants Vue.js* qui viennent dynamiser certaines pages générées par *Symfony*.
+J'intègre aussi les *tests JS autour des composants Vue.js* qui viennent dynamiser les pages créées par *Symfony*.
 
 J'ai démarré cet atelier à partir du dépôt https://github.com/dunglas/symfony-docker de https://dunglas.fr/[Kevin Dunglas].
 

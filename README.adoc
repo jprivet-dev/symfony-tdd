@@ -56,17 +56,16 @@ toc::[]
 
 === L'atelier
 
-Ce dépôt *Git*  fraîchement créé est un atelier où je concentre, teste et partage des cas pratiques rencontrés (projets clients, R&D, ...) autour des *tests automatiques*, du *TDD* (Test-Driven Development) et du framework *Symfony*.
-
-J'intègre aussi les *tests JS autour des composants Vue.js* qui viennent dynamiser les pages créées par *Symfony*.
+Ce dépôt *Git*  fraîchement créé est un atelier où je concentre, teste et partage des cas pratiques rencontrés (projets clients, R&D, ...)
+autour des *tests automatiques PHP & JavaScript (Vue.js)*, du *TDD* (Test-Driven Development) et du framework *Symfony*.
 
 J'ai démarré cet atelier à partir du dépôt https://github.com/dunglas/symfony-docker de https://dunglas.fr/[Kevin Dunglas].
 
 {BACK_TO_TOP}
 
-=== Avancé des sujets
+=== L'avancé des sujets
 
-Pour repérer facilement l'avancé des sujets traités dans ce repo, *les titres sont tagués* de la façon suivante :
+*Les titres de la doc sont tagués* de la façon suivante :
 
 . [ ] A faire
 . [!] En cours
@@ -111,7 +110,7 @@ APP_ENV=dev
 
 === Accéder au site
 
-A la fin de l'installation, vous pourrez avoir accès aux URLs suivantes :
+A la fin de l'installation, vous pourrez avoir accès aux *URLs suivantes* :
 
 . Site web : https://localhost
 . API : https://localhost/api

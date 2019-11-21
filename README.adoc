@@ -54,9 +54,23 @@ toc::[]
 
 == Présentation
 
+=== L'atelier
+
 Ce dépôt *Git*  fraîchement créé est un atelier où je concentre, teste et partage des cas pratiques rencontrés (projets clients, R&D, ...) autour des *tests automatiques*, du *TDD* (Test-Driven Development) et du framework *Symfony*.
 
+J'intègre aussi les *tests JS autour des composants Vue.js* qui viennent dynamiser certaines pages générées par *Symfony*.
+
 J'ai démarré cet atelier à partir du dépôt https://github.com/dunglas/symfony-docker de https://dunglas.fr/[Kevin Dunglas].
+
+{BACK_TO_TOP}
+
+=== Avancé des sujets
+
+Pour repérer facilement l'avancé des sujets traités dans ce repo, *les titres sont tagués* de la façon suivante :
+
+. [ ] A faire
+. [!] En cours
+. [x] Fait
 
 {BACK_TO_TOP}
 
@@ -331,7 +345,7 @@ IMPORTANT: Le fichier {uri-rel-file-base}.bash_aliases[] ne peut être chargé a
 
 == *PHPUnit* : gérer les tests automatiques PHP [[phpunit]]
 
-=== Lancer les tests
+=== Lancer les tests PHP
 
 Le projet utilise le *PHPUnit Bridge* de *Symfony* (https://symfony.com/doc/current/testing.html).
 
@@ -444,9 +458,9 @@ $ make phpunit.functional.coverage
 
 {BACK_TO_TOP}
 
-== *Vue.js* : gérer les tests automatiques avec *Jest*
+== *Vue.js* : gérer les tests automatiques JS avec *Jest*
 
-=== Lancer les tests
+=== Lancer les tests JS
 
 Le projet utilise *Jest* avec la librarie *Vue Test Utils* (https://vue-test-utils.vuejs.org/).
 
@@ -478,19 +492,11 @@ TIP: La commande `$ make tests` charge les fixtures et lance tous les tests disp
 
 . https://vue-test-utils.vuejs.org/
 . https://jestjs.io/
-. Voir aussi <<creer-tester-composant-vue-js>>
+. Voir aussi dans cette doc : <<creer-tester-composant-vue-js>>
 
 {BACK_TO_TOP}
 
 == Sujets traités
-
-=== Nomenclature
-
-. *[ ]* A faire
-. *[!]* En cours
-. *[x]* Fait
-
-{BACK_TO_TOP}
 
 === [x] *Fibonacci* : 4 implémentations, 1 seul test
 

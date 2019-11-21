@@ -35,7 +35,7 @@ endif::[]
 :BACK_TO_TOP: <<{BACK_TO_TOP_TARGET},{BACK_TO_TOP_LABEL}>>
 
 [#{BACK_TO_TOP_TARGET}]
-= Symfony 4 & TDD (dockerized workshop)
+= Symfony 4 & TDD - PHPUnit - Vue.js & Jest - (dockerized workshop)
 
 image:https://img.shields.io/badge/branch-master-green["master", link="https://github.com/jprivet-dev/symfony-tdd"]
 image:https://travis-ci.org/jprivet-dev/symfony-tdd.svg?branch=master["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-tdd"]

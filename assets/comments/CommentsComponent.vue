@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ol id="comments-list" reversed v-if="comments.length">
+        <ol id="comments-list" reversed v-if="comments && comments.length">
             <li v-for="comment in comments" :key="comment['@id']">{{ comment.body }}</li>
         </ol>
         <p v-else>No comments yet 🙁</p>
@@ -18,16 +18,15 @@
 
 <script>
     export default {
-        props: {
-            news: {
-                type: String,
-                required: true
-            }
-        },
+        props: {},
         data() {
             return {
                 comments: [],
-                newComment: ''
+                newComment: '',
+                news: {
+                    type: String,
+                    required: true
+                }
             };
         },
         methods: {

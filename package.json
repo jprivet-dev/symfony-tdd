@@ -1,9 +1,17 @@
 {
     "devDependencies": {
         "@symfony/webpack-encore": "^0.28.0",
+        "@vue/server-test-utils": "^1.0.0-beta.29",
+        "@vue/test-utils": "^1.0.0-beta.29",
+        "babel-core": "^6.26.3",
+        "babel-jest": "^24.9.0",
+        "babel-preset-env": "^1.6.0",
         "core-js": "^3.0.0",
+        "jest": "^24.9.0",
+        "jest-fetch-mock": "^2.1.2",
         "regenerator-runtime": "^0.13.2",
         "vue": "^2.6.10",
+        "vue-jest": "^3.0.5",
         "vue-loader": "^15.7.1",
         "vue-template-compiler": "^2.6.10",
         "webpack-notifier": "^1.6.0"
@@ -14,6 +22,25 @@
         "dev-server": "encore dev-server",
         "dev": "encore dev",
         "watch": "encore dev --watch",
-        "build": "encore production --progress"
+        "build": "encore production --progress",
+        "test": "jest"
+    },
+    "jest": {
+        "moduleFileExtensions": [
+            "js",
+            "json",
+            "vue"
+        ],
+        "transform": {
+            ".*\\.(vue)$": "vue-jest",
+            "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
+        },
+        "moduleNameMapper": {
+            "^@/(.*)$": "<rootDir>/asset/$1"
+        },
+        "automock": false,
+        "setupFiles": [
+            "./setupJest.js"
+        ]
     }
 }

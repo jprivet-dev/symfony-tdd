@@ -35,7 +35,7 @@ endif::[]
 :BACK_TO_TOP: <<{BACK_TO_TOP_TARGET},{BACK_TO_TOP_LABEL}>>
 
 [#{BACK_TO_TOP_TARGET}]
-= Symfony 4 & TDD (dockerized workshop)
+= Symfony 4 & TDD - PHPUnit - Vue.js & Jest - (dockerized workshop)
 
 image:https://img.shields.io/badge/branch-master-green["master", link="https://github.com/jprivet-dev/symfony-tdd"]
 image:https://travis-ci.org/jprivet-dev/symfony-tdd.svg?branch=master["Build Status", link="https://travis-ci.org/jprivet-dev/symfony-tdd"]
@@ -54,9 +54,22 @@ toc::[]
 
 == Présentation
 
-Ce dépôt *Git*  fraîchement créé est un atelier où je concentre, teste et partage des cas pratiques rencontrés (projets clients, R&D, ...) autour des *tests automatiques*, du *TDD* (Test-Driven Development) et du framework *Symfony*.
+=== L'atelier
+
+Ce dépôt *Git*  fraîchement créé est un atelier où je concentre, teste et partage des cas pratiques rencontrés (projets clients, R&D, ...)
+autour des *tests automatiques PHP & JavaScript (Vue.js)*, du *TDD* (Test-Driven Development) et du framework *Symfony*.
 
 J'ai démarré cet atelier à partir du dépôt https://github.com/dunglas/symfony-docker de https://dunglas.fr/[Kevin Dunglas].
+
+{BACK_TO_TOP}
+
+=== L'avancé des sujets
+
+*Les titres de la doc sont tagués* de la façon suivante :
+
+. [ ] A faire
+. [!] En cours
+. [x] Fait
 
 {BACK_TO_TOP}
 
@@ -93,27 +106,11 @@ READY!
 APP_ENV=dev
 ```
 
-[TIP]
-====
-Des commandes `Makefile` sont à votre disposition (voir <<makefile>>).
-Cependant, si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible,
-exécutez à la place de `$ make install` l'alias suivant :
-
-```
-$ . .bash_aliases
-symfony-tdd: aliases loaded
-
-$ project-install
-```
-
-Pour plus d'informations, voir <<aliases>>.
-====
-
 {BACK_TO_TOP}
 
 === Accéder au site
 
-A la fin de l'installation, vous pourrez avoir accès aux URLs suivantes :
+A la fin de l'installation, vous pourrez avoir accès aux *URLs suivantes* :
 
 . Site web : https://localhost
 . API : https://localhost/api
@@ -122,6 +119,8 @@ A la fin de l'installation, vous pourrez avoir accès aux URLs suivantes :
 {BACK_TO_TOP}
 
 == Le *Makefile* du projet [[makefile]]
+
+=== Les commandes disponibles
 
 Si vous avez un outil du type https://www.gnu.org/software/make/[GNU Make] disponible sur votre poste,
 vous pouvez acceder à toutes les commandes du fichier {uri-rel-file-base}Makefile[] :
@@ -153,7 +152,7 @@ PROJECT
   fixtures                       Project: Load all fixtures.
 
   check                          Project: Launch of install / Composer, Security and DB validations / Tests
-  tests                          Project: Launch all tests.
+  tests                          Project: Launch all tests (PHPUnit, Jest, ...).
   coverage                       Project: Generate & open all code coverage reports.
 
   cc                             Project: Clear all caches.
@@ -177,6 +176,7 @@ COMPOSER
 YARN
   yarn.install                   Yarn: Install all dependencies.
   yarn.upgrade                   Yarn: Upgrade packages to their latest version based on the specified range.
+  yarn.test                      Yarn: Launch test package script (Jest).
 
 ENCORE
   encore.compile                 Webpack Encore: Compile assets once.
@@ -283,6 +283,19 @@ MAKEFILE
 
 {BACK_TO_TOP}
 
+=== Ressources
+
+La construction du fichier {uri-rel-file-base}Makefile[] de ce repo est grandement inspirée des ressources suivantes :
+
+. https://blog.theodo.fr/2018/05/why-you-need-a-makefile-on-your-project/
+. https://github.com/mykiwi/symfony-bootstrapped/blob/master/Makefile
+. https://github.com/Elao/symfony-standard/blob/master/Makefile
+. https://github.com/Elao/tricot/blob/master/Makefile
+. https://github.com/cleverage/eav-manager-starter-kit/blob/master/Makefile
+. https://github.com/torvalds/linux/blob/master/Makefile
+
+{BACK_TO_TOP}
+
 == Les *alias* du projet [[aliases]]
 
 Le fichier {uri-rel-file-base}.bash_aliases[] propose quelques *raccourcis* (`php`, `composer`, `yarn`, `sf`, ...) :
@@ -346,7 +359,7 @@ IMPORTANT: Le fichier {uri-rel-file-base}.bash_aliases[] ne peut être chargé a
 
 == *PHPUnit* : gérer les tests automatiques PHP [[phpunit]]
 
-=== Lancer les tests avec *PHPUnit*
+=== Lancer les tests PHP
 
 Le projet utilise le *PHPUnit Bridge* de *Symfony* (https://symfony.com/doc/current/testing.html).
 
@@ -360,28 +373,23 @@ Exécutez ensuite les tests :
 
 ```
 $ make phpunit
-...
-...
-...
+
+Xdebug OFF
+docker-compose exec app ./vendor/bin/simple-phpunit
+stty: standard input
+PHPUnit 8.4.3 by Sebastian Bergmann and contributors.
+
+Error:         No code coverage driver is available
+
 Testing
-.........................................                         41 / 41 (100%)
+..............................................                    46 / 46 (100%)
 
-Time: 2.25 seconds, Memory: 24.00 MB
+Time: 2.88 seconds, Memory: 34.25 MB
 
-OK (41 tests, 91 assertions)
+OK (46 tests, 97 assertions)
 ```
 
-[TIP]
-====
-Si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible, lancer les tests avec les commandes  suivantes :
-
-```
-$ docker-compose exec app php bin/console hautelook:fixtures:load
-$ docker-compose exec app ./vendor/bin/simple-phpunit
-```
-====
-
-NOTE: La commande `$ make tests` charge les fixtures et lance tous les tests disponibles.
+TIP: La commande `$ make tests` charge les fixtures et lance tous les tests disponibles (PHPUnit, Jest, ...).
 
 {BACK_TO_TOP}
 
@@ -392,15 +400,6 @@ Le projet utilise *PHPUnit Watcher* (https://github.com/spatie/phpunit-watcher) 
 ```
 $ make phpunit.watch
 ```
-
-[TIP]
-====
-Si vous n'avez pas un outil du type https://www.gnu.org/software/make/[GNU Make] disponible, lancer le watcher avec la commande  suivante :
-
-```
-$ docker-compose exec app ./vendor/bin/phpunit-watcher watch
-```
-====
 
 {BACK_TO_TOP}
 
@@ -452,7 +451,7 @@ $ make xdebug.off
 
 *Xdebug* est automatiquement désactivé pour les tests qui ne nécessitent pas de couverture de code et réactivé dans le cas contraire.
 
-Exemple de commandes avec *Xdebug désactivé automatiquement* :
+Exemples de commandes avec *Xdebug désactivé automatiquement* :
 
 ```
 $ make phpunit
@@ -461,7 +460,7 @@ $ make phpunit.functional
 $ make phpunit.watch
 ...
 ```
-Exemple de commandes *avec Xdebug activé automatiquement* :
+Exemples de commandes *avec Xdebug activé automatiquement* :
 
 ```
 $ make phpunit.coverage
@@ -473,15 +472,45 @@ $ make phpunit.functional.coverage
 
 {BACK_TO_TOP}
 
-== Sujets traités
+== *Vue.js* : gérer les tests automatiques JS avec *Jest*
 
-=== Nomenclature
+=== Lancer les tests JS
 
-. *[ ]* A faire
-. *[!]* En cours
-. *[x]* Fait
+Le projet utilise *Jest* avec la librarie *Vue Test Utils* (https://vue-test-utils.vuejs.org/).
+
+Lancez les tests avec la commande suivante :
+
+```
+$ make yarn.test
+
+docker-compose exec app yarn test
+yarn run v1.16.0
+$ jest
+ PASS  assets/vue-test-utils/counter.spec.js
+  Counter
+    ✓ renders the correct markup (4ms)
+    ✓ has a button (8ms)
+    ✓ button should increment the count (4ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       3 passed, 3 total
+Snapshots:   0 total
+Time:        1.44s
+Ran all test suites.
+Done in 2.29s.
+```
+
+TIP: La commande `$ make tests` charge les fixtures et lance tous les tests disponibles (PHPUnit, Jest, ...).
+
+=== Ressources
+
+. https://vue-test-utils.vuejs.org/
+. https://jestjs.io/
+. Voir aussi dans cette doc : <<creer-tester-composant-vue-js>>
 
 {BACK_TO_TOP}
+
+== Sujets traités
 
 === [x] *Fibonacci* : 4 implémentations, 1 seul test
 
@@ -496,19 +525,12 @@ Ce premier cas simple permet d'illustrer ce que permettent les tests automatique
 ce dernier peut garantir au client que son implémentation *répond bien aux besoins dans le scope testé*,
 et que la fonctionnalité *réagit bien dans les cas limites retenus*.
 
-==== Exemple
+==== Exemples
 
 Pour une application de Planning Poker, nous avons besoins d'une méthode qui puisse nous retourner
 les 12 premiers termes de la suite de Fibonacci.
 
 Ces termes (1, 2, 3, 5, ..., 55, 89, 144) seront les valeurs de nos cartes agiles.
-
-==== Ressoures
-
-. https://rosettacode.org/wiki/Fibonacci_sequence#PHP
-. https://en.wikibooks.org/wiki/Algorithm_Implementation/Mathematics/Fibonacci_Number_Program#PHP
-. https://en.wikipedia.org/wiki/Fibonacci_number
-. http://www.codecodex.com/wiki/Calculate_the_Fibonacci_sequence#PHP
 
 ==== Fichiers
 
@@ -520,6 +542,13 @@ Ces termes (1, 2, 3, 5, ..., 55, 89, 144) seront les valeurs de nos cartes agile
 ==== Tests
 
 . {uri-rel-file-base}tests/Unit/Util/Example/FibonacciTest.php[]
+
+==== Ressources
+
+. https://rosettacode.org/wiki/Fibonacci_sequence#PHP
+. https://en.wikibooks.org/wiki/Algorithm_Implementation/Mathematics/Fibonacci_Number_Program#PHP
+. https://en.wikipedia.org/wiki/Fibonacci_number
+. http://www.codecodex.com/wiki/Calculate_the_Fibonacci_sequence#PHP
 
 {BACK_TO_TOP}
 
@@ -535,10 +564,6 @@ nous pouvons injecter directement les *repositories* concernés.
 Pour récupérer et traiter les news enregistrées en base de données,
 le `NewsService.php` de l'exemple suivant importe et utilise `NewsRepository.php`.
 
-==== Ressources
-
-. https://matthiasnoback.nl/2014/05/inject-a-repository-instead-of-an-entity-manager/
-
 ==== Fichiers
 
 . {uri-rel-file-base}src/Controller/NewsController.php[]
@@ -549,6 +574,10 @@ le `NewsService.php` de l'exemple suivant importe et utilise `NewsRepository.php
 
 . {uri-rel-file-base}tests/Unit/Service/NewsServiceTest.php[]
 . {uri-rel-file-base}tests/Functional/Controller/NewsControllerTest.php[]
+
+==== Ressources
+
+. https://matthiasnoback.nl/2014/05/inject-a-repository-instead-of-an-entity-manager/
 
 {BACK_TO_TOP}
 
@@ -630,13 +659,7 @@ exposé notre *custom validator*.
 
 ==== Exemple
 
-...
-
-==== Ressources
-
-. https://symfony.com/doc/current/validation/custom_constraint.html
-. https://github.com/symfony/validator/blob/master/Test/ConstraintValidatorTestCase.php
-. https://github.com/symfony/validator/blob/master/Tests/Constraints/EmailValidatorTest.php
+[ WIP ]
 
 ==== Fichiers
 
@@ -646,6 +669,12 @@ exposé notre *custom validator*.
 ==== Tests
 
 . {uri-rel-file-base}tests/Unit/Validator/Constraints/ReferenceValidatorTest.php[]
+
+==== Ressources
+
+. https://symfony.com/doc/current/validation/custom_constraint.html
+. https://github.com/symfony/validator/blob/master/Test/ConstraintValidatorTestCase.php
+. https://github.com/symfony/validator/blob/master/Tests/Constraints/EmailValidatorTest.php
 
 {BACK_TO_TOP}
 
@@ -661,20 +690,20 @@ exposé notre *custom validator*.
 
 ==== Principe
 
-Le principe de ce premier niveau de test fonctionnel est *d'appeler chaque page* de l'application
+Le principe de ce premier niveau de test fonctionnel est *d'appeler simplement chaque page* de l'application
 pour vérifier *qu'aucune d'entre elles ne retournent d'erreur*.
 
 ==== Exemple
 
-...
-
-==== Ressources
-
-. https://symfony.com/doc/current/best_practices.html
+[ WIP ]
 
 ==== Tests
 
 . {uri-rel-file-base}tests/Functional/SmokeTest.php[]
+
+==== Ressources
+
+. https://symfony.com/doc/current/best_practices.html
 
 {BACK_TO_TOP}
 
@@ -714,31 +743,22 @@ pour vérifier *qu'aucune d'entre elles ne retournent d'erreur*.
 
 {BACK_TO_TOP}
 
-=== [ ] Créer et tester un *composant Vue.js*
-
-{BACK_TO_TOP}
-
 === [ ] Créer et tester des *éléments asynchrones PHP*
 
 {BACK_TO_TOP}
 
-=== [x] *Symfony Panther* : les bases (Vue.js, screenshots, ...)
+=== [x] *Symfony Panther* : les bases (Vue.js, screenshots, ...) [[panther-bases]]
 
 ==== Principe
 
-Le principe est de pouvoir tester fonctionnellement une page dans laquelle est utilisé du JavaScript.
+Le principe est de pouvoir tester fonctionnellement une *page qui interprète du JavaScript*.
 
 ==== Exemple
 
 Nous testons fonctionnellement une page qui affiche une news, dont les commentaires
-sont récupérés et affichés dynamiquement avec un composant Vue.js.
+sont récupérés et affichés dynamiquement avec un *composant Vue.js*.
 
 NOTE: Retrouvez les screenshots réalisés automatiquement par ces tests dans le dossier `build/tests/screenshots`.
-
-==== Ressources
-
-. https://symfony.com/blog/introducing-symfony-panther-a-browser-testing-and-web-scrapping-library-for-php
-. https://github.com/symfony/panther
 
 ==== Fichiers
 
@@ -751,6 +771,11 @@ NOTE: Retrouvez les screenshots réalisés automatiquement par ces tests dans le
 ==== Tests
 
 . {uri-rel-file-base}tests/Functional/Controller/NewsControllerTest.php[]
+
+==== Ressources
+
+. https://symfony.com/blog/introducing-symfony-panther-a-browser-testing-and-web-scrapping-library-for-php
+. https://github.com/symfony/panther
 
 ==== Autres informations
 
@@ -767,13 +792,53 @@ NOTE: Retrouvez les screenshots réalisés automatiquement par ces tests dans le
 
 . https://github.com/symfony/panther/issues/8
 . https://github.com/jprivet-dev/symfony-tdd/issues/2
+. Voir aussi dans la doc <<panther-code-coverage>>
 ====
+
+{BACK_TO_TOP}
+
+=== [!] Créer et tester un *composant Vue.js* avec *Jest* [[creer-tester-composant-vue-js]]
+
+==== Principe
+
+Le principe est de pouvoir *tester les composants Vue.js* indépendamment de leur usage dans les pages générées avec *Symfony & Twig*.
+
+==== Exemples
+
+Le premier exemple est une *intégration simple* de https://github.com/vuejs/vue-test-utils-getting-started
+pour établir une base.
+
+Le deuxième exemple est une *extension des tests PHP réalisés avec Panther* dans https://symfony.com/blog/introducing-symfony-panther-a-browser-testing-and-web-scrapping-library-for-php
+(Voir aussi dans la doc <<panther-bases>>) : nous utilisons en complément les *outils JavaScript dédiés aux tests des composants Vue.js* (https://github.com/vuejs/vue-test-utils).
+
+==== Fichiers
+
+. {uri-rel-file-base}assets/vue-test-utils/counter.js[]
+. {uri-rel-file-base}assets/comments/CommentsComponent.vue[]
+
+==== Tests
+
+. {uri-rel-file-base}assets/vue-test-utils/counter.spec.js[]
+. {uri-rel-file-base}assets/comments/CommentsComponent.spec.js[]
+
+==== Ressources
+
+. https://github.com/vuejs/vue-test-utils
+. https://github.com/vuejs/vue-test-utils-getting-started
+. https://jestjs.io/
+. https://vue-test-utils.vuejs.org/
+. https://vue-test-utils.vuejs.org/guides/choosing-a-test-runner.html
+. https://vue-test-utils.vuejs.org/guides/testing-single-file-components-with-jest.html
+. https://www.npmjs.com/package/jest-fetch-mock
+. https://github.com/facebook/jest/issues/2071
 
 {BACK_TO_TOP}
 
 == Tips
 
-=== [!] *Makefile* : En local, utiliser les fichiers *.env* de Symfony
+=== [!] *Makefile* : en local, utiliser les fichiers *.env* de Symfony
+
+==== Récapitulatif
 
 [%header]
 |===
@@ -783,6 +848,30 @@ a|`.env.local` | machine-specific | all | should not be committed
 a|`.env.<env>` | all machines | <env> | yes
 a|`.env.<env>.local` | machine-specific | <env> | should not be committed
 |===
+
+==== Exemple
+
+Structuration du fichier {uri-rel-file-base}Makefile[] :
+
+```make
+SHELL:=/bin/bash
+
+-include .env                               # (1)
+-include .env.local
+-include .env.$(APP_ENV)                    # (2)
+-include .env.$(APP_ENV).local
+
+MAKEFILES = .mk/*.mk
+include $(sort $(wildcard $(MAKEFILES)))    # (3)
+```
+<1> Importation du fichier `.env` (s'il existe).
+<2> La variable `APP_ENV` provient du fichier `.env` ou `.env.local`.
+<3> Importation par ordre alphabétique de tous les fichiers `.mk/*.mk`.
+
+==== Fichiers
+
+. {uri-rel-file-base}Makefile[]
+. {uri-rel-file-base}/.mk[]
 
 ==== Resources
 
@@ -795,7 +884,7 @@ a|`.env.<env>.local` | machine-specific | <env> | should not be committed
 
 {BACK_TO_TOP}
 
-=== [x] *Makefile* : *Script* d'attente de disponibilité de la base de données
+=== [x] *Makefile* : *script* d'attente de disponibilité de la base de données
 
 ==== Problématique rencontrée
 
@@ -843,11 +932,26 @@ db.mysql: db.wait ## Database: MySQL access (mysql> ...).
 
 {BACK_TO_TOP}
 
-=== [ ] *Tests unitaires* : Utiliser les *yield*
+=== [ ] *Tests unitaires* : utiliser les *yield*
 
 {BACK_TO_TOP}
 
-=== [!] *Contrôleurs* : doit-on les *tester unitairement* ?
+=== [!] *Contrôleurs* : est-ce pertinent de les *tester unitairement* ?
+
+==== Principe
+
+Un contrôleur est à la base *une simple classe connectée au routeur de Symfony*.
+
+Techniquement il est tout à faire *possible de tester unitairement* cette classe comme les autres (services, repositories, validateur, ...),
+*mais est-ce pour autant pertinent de le faire ?*
+
+==== Fichier
+
+. {uri-rel-file-base}src/Controller/NewsController.php[]
+
+==== Test
+
+. {uri-rel-file-base}tests/Unit/Controller/NewsControllerTest.php[]
 
 ==== Ressources
 
@@ -858,7 +962,7 @@ db.mysql: db.wait ## Database: MySQL access (mysql> ...).
 
 {BACK_TO_TOP}
 
-=== [x] *Docker* : libérer la mémoire
+=== [x] *Docker* : libérer la *mémoire*
 
 On peut facilement *être saturé de plusieurs dizaines de Go* de données créées par Docker.
 
@@ -867,10 +971,16 @@ On peut facilement *être saturé de plusieurs dizaines de Go* de données cré�
 Dans un premier temps, il est possible de *supprimer tout ce qui n'est plus utilisé par Docker* :
 
 ```
-$ docker system prune --volumes
+$ docker system prune
 ```
 
-TIP: Retrouvez dans la documentation plus de commandes de suppression sur <<makefile>>.
+[NOTE]
+====
+https://docs.docker.com/engine/reference/commandline/system_prune/ : +
+"Remove all unused containers, networks, images (both dangling and unreferenced), and optionally, volumes."
+====
+
+TIP: Retrouvez dans la doc d'autres commandes de suppression sur <<makefile>>.
 
 {BACK_TO_TOP}
 
@@ -941,14 +1051,15 @@ Au prochain `$ docker-compose up`, les éléments seront créés dans le nouveau
 
 . https://medium.com/developer-space/how-to-change-docker-data-folder-configuration-33d372669056
 . https://docs.docker.com/engine/reference/commandline/dockerd/
+. https://docs.docker.com/engine/reference/commandline/system_prune/
 
 {BACK_TO_TOP}
 
-=== [!] *Fixtures* : comment, dans son test, en récupérer une avec son id ?
+=== [!] *Fixtures* : dans son test, comment en récupérer une avec son *id* ?
 
 ==== Exemple : récupérer le slug d'une news
 
-Nous avons des fixtures dans le fichier `news.yaml` suivant :
+Nous avons des fixtures dans le fichier {uri-rel-file-base}fixtures/news.yaml[] suivant :
 
 ```yaml
 App\Entity\News:
@@ -966,7 +1077,7 @@ App\Entity\News:
     body: '...'
 ```
 
-Dans le test `NewsRepositoryTest`, il est possible d'avoir *accès par défaut à la liste des fixtures* chargées
+Dans le test {uri-rel-file-base}tests/Functional/Repository/NewsRepositoryTest.php[], il est possible d'avoir *accès par défaut à la liste des fixtures* chargées
 et de pointer la news `news_published_1` :
 
 ```php
@@ -989,8 +1100,8 @@ class NewsRepositoryTest extends RepositoryWebTestCase
 ```
 <1> Accès par défaut au tableau des fixtures (sans typage de la donnée récupérée).
 
-Avec le fichier {uri-rel-file-base}tests/Shared/Fixtures/FixturesDecorator.php[] de ce repo, il est possible de récupérer directement une fixture typée,
-ce qui *facilite l'autocomplétion dans votre IDE* :
+Le fichier `NewsRepositoryTest` exploite {uri-rel-file-base}tests/Shared/Fixtures/FixturesDecorator.php[],
+ce qui permet de récupérer une fixture typée, et *d'activer l'autocomplétion de votre IDE* :
 
 ```php
 class NewsRepositoryTest extends RepositoryWebTestCase
@@ -1009,7 +1120,66 @@ class NewsRepositoryTest extends RepositoryWebTestCase
 
 {BACK_TO_TOP}
 
-=== [ ] *Symfony Panther* : activer la couverture de code
+=== [ ] *Symfony Panther* : activer la *couverture de code* [[panther-code-coverage]]
+
+Voir aussi dans la doc <<panther-bases>>
+
+{BACK_TO_TOP}
+
+=== [x] *Repositories & QueryBuilder* : organisez la construction de vos *requêtes*
+
+==== Présentation
+
+Au cours du https://paris2019.live.symfony.com/[Symfony Live Paris 2019], https://twitter.com/romaricdrigon[@romaricdrigon] présentait quelques astuces pour organiser les repositories.
+
+==== Exemple
+
+Ici, j'utilise pour mon fichier {uri-rel-file-base}src/Repository/NewsRepository.php[] son https://speakerdeck.com/romaricdrigon/doctrine-en-dehors-des-sentiers-battus-7020e5ed-33a1-4f1d-9bf1-ea9062bdf5ed?slide=33[Astuce 3 : organiser ses repositories...] :
+je découpe mon `QueryBuilder` *en sous-portions*.
+
+Ces portions peuvent ensuite *être réexploitées dans d'autres méthodes* :
+
+```php
+class NewsRepository extends AbstractRepository implements NewsRepositoryInterface
+{
+    // ...
+
+    public function findAllPublished(): array
+    {
+        $queryBuilder = $this->createQueryBuilder(self::ALIAS);
+        self::isPublished($queryBuilder); // (1)
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    public function findOnePublishedBySlug(string $slug): ?News
+    {
+        $queryBuilder = $this->createQueryBuilder(self::ALIAS);
+        self::isPublished($queryBuilder); // (1)
+        self::withSlug($queryBuilder, $slug);
+        // ...
+    }
+
+    private static function isPublished(QueryBuilder $queryBuilder): void
+    {
+        $queryBuilder
+            ->andWhere(self::ALIAS . '.published = :published')
+            ->setParameter('published', self::IS_PUBLISHED);
+    }
+
+    // withSlug(), ...
+}
+```
+<1> Surcharge de `$queryBuilder` avec la méthode `isPublished()`.
+
+==== Fichier
+
+. {uri-rel-file-base}src/Repository/NewsRepository.php[]
+
+==== Ressources
+
+. https://github.com/SymfonyLive/paris-2019-talks
+. https://speakerdeck.com/romaricdrigon/doctrine-en-dehors-des-sentiers-battus-7020e5ed-33a1-4f1d-9bf1-ea9062bdf5ed?slide=33
 
 {BACK_TO_TOP}
 
@@ -1024,15 +1194,6 @@ class NewsRepositoryTest extends RepositoryWebTestCase
 === Docker
 
 * https://gist.github.com/bastman/5b57ddb3c11942094f8d0a97d461b430
-
-=== Makefile
-
-. https://blog.theodo.fr/2018/05/why-you-need-a-makefile-on-your-project/
-. https://github.com/mykiwi/symfony-bootstrapped/blob/master/Makefile
-. https://github.com/Elao/symfony-standard/blob/master/Makefile
-. https://github.com/Elao/tricot/blob/master/Makefile
-. https://github.com/cleverage/eav-manager-starter-kit/blob/master/Makefile
-. https://github.com/torvalds/linux/blob/master/Makefile
 
 === Badges
 

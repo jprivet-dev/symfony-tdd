@@ -8,7 +8,7 @@ use Doctrine\ORM\QueryBuilder;
 class NewsRepository extends AbstractRepository implements NewsRepositoryInterface
 {
     const ALIAS = 'n';
-    const PUBLISHED = true;
+    const IS_PUBLISHED = true;
 
     /**
      * {@inheritDoc}
@@ -37,7 +37,7 @@ class NewsRepository extends AbstractRepository implements NewsRepositoryInterfa
     {
         $queryBuilder
             ->andWhere(self::ALIAS . '.published = :published')
-            ->setParameter('published', self::PUBLISHED);
+            ->setParameter('published', self::IS_PUBLISHED);
     }
 
     private static function withSlug(QueryBuilder $queryBuilder, string $slug): void

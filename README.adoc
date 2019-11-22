@@ -361,6 +361,8 @@ IMPORTANT: Le fichier {uri-rel-file-base}.bash_aliases[] ne peut être chargé a
 
 === Pourquoi tester ?
 
+- - -
+
 [quote, Symfony, 'https://symfony.com/doc/current/testing.html']
 ____
 Whenever you write a new line of code, you also potentially add new bugs. To build better and more reliable applications, you should test your code using both functional and unit tests.
@@ -370,13 +372,12 @@ ____
 
 [quote, Vue.js, 'https://vuejs.org/v2/cookbook/unit-testing-vue-components.html#Why-test']
 ____
-Why test?
-
-* Provide documentation on how the component should behave
-* Save time over testing manually
-* Reduce bugs in new features
-* Improve design
-* Facilitate refactoring
+Why test? +
+- Provide documentation on how the component should behave +
+- Save time over testing manually +
+- Reduce bugs in new features +
+- Improve design +
+- Facilitate refactoring
 ____
 
 - - -
@@ -401,7 +402,11 @@ ____
 Code is like humor. When you *have* to explain it, it’s bad.
 ____
 
+- - -
+
 [ WIP ]
+
+{BACK_TO_TOP}
 
 === Sommes-nous vraiment obligé de tester ?
 
@@ -422,6 +427,8 @@ It can be more expensive if +
 - team does not change during the entirety of the project's lifecycle +
 - project is small, well known scope and domain, has short known TTL
 ____
+
+- - -
 
 [ WIP ]
 

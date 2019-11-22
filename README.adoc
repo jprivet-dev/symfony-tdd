@@ -1102,6 +1102,57 @@ Voir aussi dans la doc <<panther-bases>>
 
 {BACK_TO_TOP}
 
+=== [x] *Repositories & QueryBuilder* : organisez la construction de vos requêtes
+
+==== Présentation
+
+Au cours du https://paris2019.live.symfony.com/[Symfony Live Paris 2019], https://twitter.com/romaricdrigon[@romaricdrigon] présentait quelques astuces pour organiser les repositories.
+
+==== Exemple
+
+Ici, j'utilise pour mon fichier {uri-rel-file-base}src/Repository/NewsRepository.php[] son https://speakerdeck.com/romaricdrigon/doctrine-en-dehors-des-sentiers-battus-7020e5ed-33a1-4f1d-9bf1-ea9062bdf5ed?slide=33[Astuce 3 : organiser ses repositories...] :
+Je découpe mon `QueryBuilder` *en sous-portions*.
+
+Ces portions peuvent ensuite *être réexploitées dans d'autres méthodes* :
+
+```php
+class NewsRepository extends AbstractRepository implements NewsRepositoryInterface
+{
+    // ...
+
+    public function findAllPublished(): array
+    {
+        $queryBuilder = $this->createQueryBuilder(self::ALIAS);
+        self::isPublished($queryBuilder); // (1)
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    // ...
+
+    private static function isPublished(QueryBuilder $queryBuilder): void
+    {
+        $queryBuilder
+            ->andWhere(self::ALIAS . '.published = :published')
+            ->setParameter('published', self::IS_PUBLISHED);
+    }
+
+    // withSlug(), ...
+}
+```
+<1> Surcharge de `$queryBuilder` avec la méthode `isPublished()`
+
+==== Fichier
+
+. {uri-rel-file-base}src/Repository/NewsRepository.php[]
+
+==== Ressources
+
+. https://github.com/SymfonyLive/paris-2019-talks
+. https://speakerdeck.com/romaricdrigon/doctrine-en-dehors-des-sentiers-battus-7020e5ed-33a1-4f1d-9bf1-ea9062bdf5ed?slide=33
+
+{BACK_TO_TOP}
+
 == Autres ressources
 
 === Symfony

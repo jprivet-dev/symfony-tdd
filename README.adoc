@@ -357,6 +357,64 @@ IMPORTANT: Le fichier {uri-rel-file-base}.bash_aliases[] ne peut être chargé a
 
 {BACK_TO_TOP}
 
+== Tester son application
+
+=== Pourquoi tester ?
+
+[quote, Symfony, 'https://symfony.com/doc/current/testing.html']
+____
+Whenever you write a new line of code, you also potentially add new bugs. To build better and more reliable applications, you should test your code using both functional and unit tests.
+____
+
+[quote, Vue.js, 'https://vuejs.org/v2/cookbook/unit-testing-vue-components.html#Why-test']
+____
+Why test?
+
+* Provide documentation on how the component should behave
+* Save time over testing manually
+* Reduce bugs in new features
+* Improve design
+* Facilitate refactoring
+____
+
+[quote, 'François Zaninotto, https://twitter.com/francoisz[@francoisz], CEO at https://twitter.com/marmelab[@marmelab]', 'https://twitter.com/francoisz/status/1125366853713444864']
+____
+TDD (Test-Driven Development) eradicates the fear of change and teaches you to write better code
+____
+
+[quote, 'Uncle Bob Martin, https://twitter.com/unclebobmartin[@unclebobmartin]', 'https://twitter.com/unclebobmartin/status/1193524605283164160']
+____
+Quality is the key to speed. You go fastest when you go well. +
+And never ask for permission to go well; that’s your responsibility and no one else’s.
+____
+
+[quote, 'Cory House, https://twitter.com/housecor[@housecor]', 'https://twitter.com/housecor/status/400479246713229312']
+____
+Code is like humor. When you *have* to explain it, it’s bad.
+____
+
+[ WIP ]
+
+=== Sommes-nous vraiment obligé de tester ?
+
+[quote, 'Matthias Noback, https://twitter.com/matthiasnoback[@matthiasnoback]', 'https://matthiasnoback.nl/2019/09/is-not-writing-tests-unprofessional']
+____
+Is not writing tests unprofessional?
+____
+
+[quote, 'Dalibor Karlović, https://twitter.com/dkarlovi[@dkarlovi]', 'https://twitter.com/dkarlovi/status/1177199358531571713']
+____
+It can be more expensive if +
+- you don't know how to actually test so you're inefficient +
+- you're testing the wrong things / in a wrong way +
+- team does not change during the entirety of the project's lifecycle +
+- project is small, well known scope and domain, has short known TTL
+____
+
+[ WIP ]
+
+{BACK_TO_TOP}
+
 == *PHPUnit* : gérer les tests automatiques PHP [[phpunit]]
 
 === Lancer les tests PHP

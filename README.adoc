@@ -451,7 +451,7 @@ $ make xdebug.off
 
 *Xdebug* est automatiquement désactivé pour les tests qui ne nécessitent pas de couverture de code et réactivé dans le cas contraire.
 
-Exemple de commandes avec *Xdebug désactivé automatiquement* :
+Exemples de commandes avec *Xdebug désactivé automatiquement* :
 
 ```
 $ make phpunit
@@ -460,7 +460,7 @@ $ make phpunit.functional
 $ make phpunit.watch
 ...
 ```
-Exemple de commandes *avec Xdebug activé automatiquement* :
+Exemples de commandes *avec Xdebug activé automatiquement* :
 
 ```
 $ make phpunit.coverage
@@ -525,19 +525,12 @@ Ce premier cas simple permet d'illustrer ce que permettent les tests automatique
 ce dernier peut garantir au client que son implémentation *répond bien aux besoins dans le scope testé*,
 et que la fonctionnalité *réagit bien dans les cas limites retenus*.
 
-==== Exemple
+==== Exemples
 
 Pour une application de Planning Poker, nous avons besoins d'une méthode qui puisse nous retourner
 les 12 premiers termes de la suite de Fibonacci.
 
 Ces termes (1, 2, 3, 5, ..., 55, 89, 144) seront les valeurs de nos cartes agiles.
-
-==== Ressoures
-
-. https://rosettacode.org/wiki/Fibonacci_sequence#PHP
-. https://en.wikibooks.org/wiki/Algorithm_Implementation/Mathematics/Fibonacci_Number_Program#PHP
-. https://en.wikipedia.org/wiki/Fibonacci_number
-. http://www.codecodex.com/wiki/Calculate_the_Fibonacci_sequence#PHP
 
 ==== Fichiers
 
@@ -549,6 +542,13 @@ Ces termes (1, 2, 3, 5, ..., 55, 89, 144) seront les valeurs de nos cartes agile
 ==== Tests
 
 . {uri-rel-file-base}tests/Unit/Util/Example/FibonacciTest.php[]
+
+==== Ressoures
+
+. https://rosettacode.org/wiki/Fibonacci_sequence#PHP
+. https://en.wikibooks.org/wiki/Algorithm_Implementation/Mathematics/Fibonacci_Number_Program#PHP
+. https://en.wikipedia.org/wiki/Fibonacci_number
+. http://www.codecodex.com/wiki/Calculate_the_Fibonacci_sequence#PHP
 
 {BACK_TO_TOP}
 

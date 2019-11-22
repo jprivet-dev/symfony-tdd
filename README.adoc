@@ -543,7 +543,7 @@ Ces termes (1, 2, 3, 5, ..., 55, 89, 144) seront les valeurs de nos cartes agile
 
 . {uri-rel-file-base}tests/Unit/Util/Example/FibonacciTest.php[]
 
-==== Ressoures
+==== Ressources
 
 . https://rosettacode.org/wiki/Fibonacci_sequence#PHP
 . https://en.wikibooks.org/wiki/Algorithm_Implementation/Mathematics/Fibonacci_Number_Program#PHP
@@ -952,8 +952,7 @@ $ docker system prune
 
 [NOTE]
 ====
-https://docs.docker.com/engine/reference/commandline/system_prune/ :
-
+https://docs.docker.com/engine/reference/commandline/system_prune/ : +
 "Remove all unused containers, networks, images (both dangling and unreferenced), and optionally, volumes."
 ====
 

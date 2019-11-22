@@ -836,7 +836,7 @@ Le deuxième exemple est une *extension des tests PHP réalisés avec Panther* d
 
 == Tips
 
-=== [!] *Makefile* : En local, utiliser les fichiers *.env* de Symfony
+=== [!] *Makefile* : en local, utiliser les fichiers *.env* de Symfony
 
 ==== Récapitulatif
 
@@ -868,9 +868,10 @@ include $(sort $(wildcard $(MAKEFILES)))    # (3)
 <2> La variable `APP_ENV` provient du fichier `.env` ou `.env.local`.
 <3> Importation par ordre alphabétique de tous les fichiers `.mk/*.mk`.
 
-==== Fichier
+==== Fichiers
 
 . {uri-rel-file-base}Makefile[]
+. {uri-rel-file-base}/.mk[]
 
 ==== Resources
 
@@ -883,7 +884,7 @@ include $(sort $(wildcard $(MAKEFILES)))    # (3)
 
 {BACK_TO_TOP}
 
-=== [x] *Makefile* : *Script* d'attente de disponibilité de la base de données
+=== [x] *Makefile* : *script* d'attente de disponibilité de la base de données
 
 ==== Problématique rencontrée
 
@@ -931,7 +932,7 @@ db.mysql: db.wait ## Database: MySQL access (mysql> ...).
 
 {BACK_TO_TOP}
 
-=== [ ] *Tests unitaires* : Utiliser les *yield*
+=== [ ] *Tests unitaires* : utiliser les *yield*
 
 {BACK_TO_TOP}
 

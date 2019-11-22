@@ -738,6 +738,8 @@ pour vérifier *qu'aucune d'entre elles ne retournent d'erreur*.
 . https://vue-test-utils.vuejs.org/
 . https://vue-test-utils.vuejs.org/guides/choosing-a-test-runner.html
 . https://vue-test-utils.vuejs.org/guides/testing-single-file-components-with-jest.html
+. https://www.npmjs.com/package/jest-fetch-mock
+. https://github.com/facebook/jest/issues/2071
 
 {BACK_TO_TOP}
 

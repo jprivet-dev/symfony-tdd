@@ -809,7 +809,7 @@ Le premier exemple est une *intégration simple* de https://github.com/vuejs/vue
 pour établir une base.
 
 Le deuxième exemple est une *extension des tests PHP réalisés avec Panther* dans https://symfony.com/blog/introducing-symfony-panther-a-browser-testing-and-web-scrapping-library-for-php
-(Voir aussi dans la doc <<panther-bases>>) : nous utilisons en complément les *outils JavaScript dédiés aux tests des composants Vue.js*.
+(Voir aussi dans la doc <<panther-bases>>) : nous utilisons en complément les *outils JavaScript dédiés aux tests des composants Vue.js* (https://github.com/vuejs/vue-test-utils).
 
 ==== Fichiers
 

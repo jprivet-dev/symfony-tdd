@@ -938,7 +938,7 @@ Techniquement il est tout à faire *possible de tester unitairement* cette class
 
 {BACK_TO_TOP}
 
-=== [x] *Docker* : libérer la mémoire
+=== [x] *Docker* : libérer la *mémoire*
 
 On peut facilement *être saturé de plusieurs dizaines de Go* de données créées par Docker.
 
@@ -1031,7 +1031,7 @@ Au prochain `$ docker-compose up`, les éléments seront créés dans le nouveau
 
 {BACK_TO_TOP}
 
-=== [!] *Fixtures* : dans son test, comment en récupérer une avec son id ?
+=== [!] *Fixtures* : dans son test, comment en récupérer une avec son *id* ?
 
 ==== Exemple : récupérer le slug d'une news
 
@@ -1096,13 +1096,13 @@ class NewsRepositoryTest extends RepositoryWebTestCase
 
 {BACK_TO_TOP}
 
-=== [ ] *Symfony Panther* : activer la couverture de code [[panther-code-coverage]]
+=== [ ] *Symfony Panther* : activer la *couverture de code* [[panther-code-coverage]]
 
 Voir aussi dans la doc <<panther-bases>>
 
 {BACK_TO_TOP}
 
-=== [x] *Repositories & QueryBuilder* : organisez la construction de vos requêtes
+=== [x] *Repositories & QueryBuilder* : organisez la construction de vos *requêtes*
 
 ==== Présentation
 
@@ -1111,7 +1111,7 @@ Au cours du https://paris2019.live.symfony.com/[Symfony Live Paris 2019], https:
 ==== Exemple
 
 Ici, j'utilise pour mon fichier {uri-rel-file-base}src/Repository/NewsRepository.php[] son https://speakerdeck.com/romaricdrigon/doctrine-en-dehors-des-sentiers-battus-7020e5ed-33a1-4f1d-9bf1-ea9062bdf5ed?slide=33[Astuce 3 : organiser ses repositories...] :
-Je découpe mon `QueryBuilder` *en sous-portions*.
+je découpe mon `QueryBuilder` *en sous-portions*.
 
 Ces portions peuvent ensuite *être réexploitées dans d'autres méthodes* :
 
@@ -1128,7 +1128,13 @@ class NewsRepository extends AbstractRepository implements NewsRepositoryInterfa
         return $queryBuilder->getQuery()->getResult();
     }
 
-    // ...
+    public function findOnePublishedBySlug(string $slug): ?News
+    {
+        $queryBuilder = $this->createQueryBuilder(self::ALIAS);
+        self::isPublished($queryBuilder); // (1)
+        self::withSlug($queryBuilder, $slug);
+        // ...
+    }
 
     private static function isPublished(QueryBuilder $queryBuilder): void
     {

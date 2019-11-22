@@ -8,6 +8,7 @@
         "babel-preset-env": "^1.6.0",
         "core-js": "^3.0.0",
         "jest": "^24.9.0",
+        "jest-fetch-mock": "^2.1.2",
         "regenerator-runtime": "^0.13.2",
         "vue": "^2.6.10",
         "vue-jest": "^3.0.5",

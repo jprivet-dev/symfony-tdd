@@ -37,6 +37,10 @@
         },
         "moduleNameMapper": {
             "^@/(.*)$": "<rootDir>/asset/$1"
-        }
+        },
+        "automock": false,
+        "setupFiles": [
+            "./setupJest.js"
+        ]
     }
 }

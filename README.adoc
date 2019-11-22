@@ -120,6 +120,8 @@ A la fin de l'installation, vous pourrez avoir accès aux *URLs suivantes* :
 
 == Le *Makefile* du projet [[makefile]]
 
+=== Les commandes disponibles
+
 Si vous avez un outil du type https://www.gnu.org/software/make/[GNU Make] disponible sur votre poste,
 vous pouvez acceder à toutes les commandes du fichier {uri-rel-file-base}Makefile[] :
 
@@ -278,6 +280,19 @@ MAKEFILE
   list                           Makefile: List all included files.
 ```
 // <<< block_makefile
+
+{BACK_TO_TOP}
+
+=== Ressources
+
+La construction du fichier {uri-rel-file-base}Makefile[] de ce repo est grandement inspirée des ressources suivantes :
+
+. https://blog.theodo.fr/2018/05/why-you-need-a-makefile-on-your-project/
+. https://github.com/mykiwi/symfony-bootstrapped/blob/master/Makefile
+. https://github.com/Elao/symfony-standard/blob/master/Makefile
+. https://github.com/Elao/tricot/blob/master/Makefile
+. https://github.com/cleverage/eav-manager-starter-kit/blob/master/Makefile
+. https://github.com/torvalds/linux/blob/master/Makefile
 
 {BACK_TO_TOP}
 
@@ -549,10 +564,6 @@ nous pouvons injecter directement les *repositories* concernés.
 Pour récupérer et traiter les news enregistrées en base de données,
 le `NewsService.php` de l'exemple suivant importe et utilise `NewsRepository.php`.
 
-==== Ressources
-
-. https://matthiasnoback.nl/2014/05/inject-a-repository-instead-of-an-entity-manager/
-
 ==== Fichiers
 
 . {uri-rel-file-base}src/Controller/NewsController.php[]
@@ -563,6 +574,10 @@ le `NewsService.php` de l'exemple suivant importe et utilise `NewsRepository.php
 
 . {uri-rel-file-base}tests/Unit/Service/NewsServiceTest.php[]
 . {uri-rel-file-base}tests/Functional/Controller/NewsControllerTest.php[]
+
+==== Ressources
+
+. https://matthiasnoback.nl/2014/05/inject-a-repository-instead-of-an-entity-manager/
 
 {BACK_TO_TOP}
 
@@ -644,13 +659,7 @@ exposé notre *custom validator*.
 
 ==== Exemple
 
-...
-
-==== Ressources
-
-. https://symfony.com/doc/current/validation/custom_constraint.html
-. https://github.com/symfony/validator/blob/master/Test/ConstraintValidatorTestCase.php
-. https://github.com/symfony/validator/blob/master/Tests/Constraints/EmailValidatorTest.php
+[ WIP ]
 
 ==== Fichiers
 
@@ -660,6 +669,12 @@ exposé notre *custom validator*.
 ==== Tests
 
 . {uri-rel-file-base}tests/Unit/Validator/Constraints/ReferenceValidatorTest.php[]
+
+==== Ressources
+
+. https://symfony.com/doc/current/validation/custom_constraint.html
+. https://github.com/symfony/validator/blob/master/Test/ConstraintValidatorTestCase.php
+. https://github.com/symfony/validator/blob/master/Tests/Constraints/EmailValidatorTest.php
 
 {BACK_TO_TOP}
 
@@ -675,20 +690,20 @@ exposé notre *custom validator*.
 
 ==== Principe
 
-Le principe de ce premier niveau de test fonctionnel est *d'appeler chaque page* de l'application
+Le principe de ce premier niveau de test fonctionnel est *d'appeler simplement chaque page* de l'application
 pour vérifier *qu'aucune d'entre elles ne retournent d'erreur*.
 
 ==== Exemple
 
-...
-
-==== Ressources
-
-. https://symfony.com/doc/current/best_practices.html
+[ WIP ]
 
 ==== Tests
 
 . {uri-rel-file-base}tests/Functional/SmokeTest.php[]
+
+==== Ressources
+
+. https://symfony.com/doc/current/best_practices.html
 
 {BACK_TO_TOP}
 
@@ -728,42 +743,22 @@ pour vérifier *qu'aucune d'entre elles ne retournent d'erreur*.
 
 {BACK_TO_TOP}
 
-=== [!] Créer et tester un *composant Vue.js* [[creer-tester-composant-vue-js]]
-
-==== Ressources
-
-. https://github.com/vuejs/vue-test-utils
-. https://github.com/vuejs/vue-test-utils-getting-started
-. https://jestjs.io/
-. https://vue-test-utils.vuejs.org/
-. https://vue-test-utils.vuejs.org/guides/choosing-a-test-runner.html
-. https://vue-test-utils.vuejs.org/guides/testing-single-file-components-with-jest.html
-. https://www.npmjs.com/package/jest-fetch-mock
-. https://github.com/facebook/jest/issues/2071
-
-{BACK_TO_TOP}
-
 === [ ] Créer et tester des *éléments asynchrones PHP*
 
 {BACK_TO_TOP}
 
-=== [x] *Symfony Panther* : les bases (Vue.js, screenshots, ...)
+=== [x] *Symfony Panther* : les bases (Vue.js, screenshots, ...) [[panther-bases]]
 
 ==== Principe
 
-Le principe est de pouvoir tester fonctionnellement une page dans laquelle est utilisé du JavaScript.
+Le principe est de pouvoir tester fonctionnellement une *page qui interprète du JavaScript*.
 
 ==== Exemple
 
 Nous testons fonctionnellement une page qui affiche une news, dont les commentaires
-sont récupérés et affichés dynamiquement avec un composant Vue.js.
+sont récupérés et affichés dynamiquement avec un *composant Vue.js*.
 
 NOTE: Retrouvez les screenshots réalisés automatiquement par ces tests dans le dossier `build/tests/screenshots`.
-
-==== Ressources
-
-. https://symfony.com/blog/introducing-symfony-panther-a-browser-testing-and-web-scrapping-library-for-php
-. https://github.com/symfony/panther
 
 ==== Fichiers
 
@@ -776,6 +771,11 @@ NOTE: Retrouvez les screenshots réalisés automatiquement par ces tests dans le
 ==== Tests
 
 . {uri-rel-file-base}tests/Functional/Controller/NewsControllerTest.php[]
+
+==== Ressources
+
+. https://symfony.com/blog/introducing-symfony-panther-a-browser-testing-and-web-scrapping-library-for-php
+. https://github.com/symfony/panther
 
 ==== Autres informations
 
@@ -792,13 +792,53 @@ NOTE: Retrouvez les screenshots réalisés automatiquement par ces tests dans le
 
 . https://github.com/symfony/panther/issues/8
 . https://github.com/jprivet-dev/symfony-tdd/issues/2
+. Voir aussi dans la doc <<panther-code-coverage>>
 ====
+
+{BACK_TO_TOP}
+
+=== [!] Créer et tester un *composant Vue.js* avec *Jest* [[creer-tester-composant-vue-js]]
+
+==== Principe
+
+Le principe est de pouvoir *tester les composants Vue.js* indépendamment de leur usage dans les pages générées avec *Symfony & Twig*.
+
+==== Exemples
+
+Le premier exemple est une *intégration simple* de https://github.com/vuejs/vue-test-utils-getting-started
+pour établir une base.
+
+Le deuxième exemple est une *extension des tests PHP réalisés avec Panther* dans https://symfony.com/blog/introducing-symfony-panther-a-browser-testing-and-web-scrapping-library-for-php
+(Voir aussi dans la doc <<panther-bases>>) : nous utilisons en complément les *outils JavaScript dédiés aux tests des composants Vue.js*.
+
+==== Fichiers
+
+. {uri-rel-file-base}assets/vue-test-utils/counter.js[]
+. {uri-rel-file-base}assets/comments/CommentsComponent.vue[]
+
+==== Tests
+
+. {uri-rel-file-base}assets/vue-test-utils/counter.spec.js[]
+. {uri-rel-file-base}assets/comments/CommentsComponent.spec.js[]
+
+==== Ressources
+
+. https://github.com/vuejs/vue-test-utils
+. https://github.com/vuejs/vue-test-utils-getting-started
+. https://jestjs.io/
+. https://vue-test-utils.vuejs.org/
+. https://vue-test-utils.vuejs.org/guides/choosing-a-test-runner.html
+. https://vue-test-utils.vuejs.org/guides/testing-single-file-components-with-jest.html
+. https://www.npmjs.com/package/jest-fetch-mock
+. https://github.com/facebook/jest/issues/2071
 
 {BACK_TO_TOP}
 
 == Tips
 
 === [!] *Makefile* : En local, utiliser les fichiers *.env* de Symfony
+
+==== Récapitulatif
 
 [%header]
 |===
@@ -872,7 +912,22 @@ db.mysql: db.wait ## Database: MySQL access (mysql> ...).
 
 {BACK_TO_TOP}
 
-=== [!] *Contrôleurs* : doit-on les *tester unitairement* ?
+=== [!] *Contrôleurs* : est-ce pertinent de les *tester unitairement* ?
+
+==== Principe
+
+Un contrôleur est à la base *une simple classe connectée au routeur de Symfony*.
+
+Techniquement il est tout à faire *possible de tester unitairement* cette classe comme les autres (services, repositories, validateur, ...),
+*mais est-ce pour autant pertinent de le faire ?*
+
+==== Fichier
+
+. {uri-rel-file-base}src/Controller/NewsController.php[]
+
+==== Test
+
+. {uri-rel-file-base}tests/Unit/Controller/NewsControllerTest.php[]
 
 ==== Ressources
 
@@ -892,10 +947,17 @@ On peut facilement *être saturé de plusieurs dizaines de Go* de données cré�
 Dans un premier temps, il est possible de *supprimer tout ce qui n'est plus utilisé par Docker* :
 
 ```
-$ docker system prune --volumes
+$ docker system prune
 ```
 
-TIP: Retrouvez dans la documentation plus de commandes de suppression sur <<makefile>>.
+[NOTE]
+====
+https://docs.docker.com/engine/reference/commandline/system_prune/ :
+
+"Remove all unused containers, networks, images (both dangling and unreferenced), and optionally, volumes."
+====
+
+TIP: Retrouvez dans la doc d'autres commandes de suppression sur <<makefile>>.
 
 {BACK_TO_TOP}
 
@@ -966,14 +1028,15 @@ Au prochain `$ docker-compose up`, les éléments seront créés dans le nouveau
 
 . https://medium.com/developer-space/how-to-change-docker-data-folder-configuration-33d372669056
 . https://docs.docker.com/engine/reference/commandline/dockerd/
+. https://docs.docker.com/engine/reference/commandline/system_prune/
 
 {BACK_TO_TOP}
 
-=== [!] *Fixtures* : comment, dans son test, en récupérer une avec son id ?
+=== [!] *Fixtures* : dans son test, comment en récupérer une avec son id ?
 
 ==== Exemple : récupérer le slug d'une news
 
-Nous avons des fixtures dans le fichier `news.yaml` suivant :
+Nous avons des fixtures dans le fichier {uri-rel-file-base}fixtures/news.yaml[] suivant :
 
 ```yaml
 App\Entity\News:
@@ -991,7 +1054,7 @@ App\Entity\News:
     body: '...'
 ```
 
-Dans le test `NewsRepositoryTest`, il est possible d'avoir *accès par défaut à la liste des fixtures* chargées
+Dans le test {uri-rel-file-base}tests/Functional/Repository/NewsRepositoryTest.php[], il est possible d'avoir *accès par défaut à la liste des fixtures* chargées
 et de pointer la news `news_published_1` :
 
 ```php
@@ -1014,8 +1077,8 @@ class NewsRepositoryTest extends RepositoryWebTestCase
 ```
 <1> Accès par défaut au tableau des fixtures (sans typage de la donnée récupérée).
 
-Avec le fichier {uri-rel-file-base}tests/Shared/Fixtures/FixturesDecorator.php[] de ce repo, il est possible de récupérer directement une fixture typée,
-ce qui *facilite l'autocomplétion dans votre IDE* :
+Le fichier `NewsRepositoryTest` exploite {uri-rel-file-base}tests/Shared/Fixtures/FixturesDecorator.php[],
+ce qui permet de récupérer une fixture typée, et *d'activer l'autocomplétion de votre IDE* :
 
 ```php
 class NewsRepositoryTest extends RepositoryWebTestCase
@@ -1034,7 +1097,9 @@ class NewsRepositoryTest extends RepositoryWebTestCase
 
 {BACK_TO_TOP}
 
-=== [ ] *Symfony Panther* : activer la couverture de code
+=== [ ] *Symfony Panther* : activer la couverture de code [[panther-code-coverage]]
+
+Voir aussi dans la doc <<panther-bases>>
 
 {BACK_TO_TOP}
 
@@ -1049,15 +1114,6 @@ class NewsRepositoryTest extends RepositoryWebTestCase
 === Docker
 
 * https://gist.github.com/bastman/5b57ddb3c11942094f8d0a97d461b430
-
-=== Makefile
-
-. https://blog.theodo.fr/2018/05/why-you-need-a-makefile-on-your-project/
-. https://github.com/mykiwi/symfony-bootstrapped/blob/master/Makefile
-. https://github.com/Elao/symfony-standard/blob/master/Makefile
-. https://github.com/Elao/tricot/blob/master/Makefile
-. https://github.com/cleverage/eav-manager-starter-kit/blob/master/Makefile
-. https://github.com/torvalds/linux/blob/master/Makefile
 
 === Badges
 
